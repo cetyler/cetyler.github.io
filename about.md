@@ -1,7 +1,7 @@
 ---
 layout: page
 title: "About Christopher Tyler"
-permalink: /resume/
+permalink: /about/
 ---
 
 ## About
