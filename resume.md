@@ -35,12 +35,12 @@ ISO 9001:2001.
 
 ### R&D Test Engineer
 
-Dynamic Manufacturing
+#### Dynamic Manufacturing
 Nov 2018 - Present
 
 ### R&D Test Engineer
 
-Inventus Power
+#### Inventus Power
 Mar 2014 – Nov 2018
 Woodridge, IL
 
@@ -78,7 +78,7 @@ Internal auditor to ensure compliance to ISO 9001 and ISO 14001.
 
 ### R&D Test Engineer
 
-IMI Cornelius
+#### IMI Cornelius
 Apr 2006 – Sep 2013
 Glendale Heights, IL
 
@@ -121,3 +121,28 @@ results.
 
 - Mentored and trained on test procedures (Internal, Customer, UL, and CE) as 
   well as product portfolio to increase skill set
+
+## Education 
+
+### Carnegie Mellon University
+
+#### Bachelor of Science in Mechanical Engineering
+
+Researcher on the MDMS project (Modular Distributed Manipulated System which was
+an array of motor setups, each setup have two motors to move an object in 2D
+motion with a video camera to locate the object.
+Shower Temperature Regulator to maintain uniform water was my senior design
+team project.
+Ford Mustang Analysis Senior Case Study examined three prototype Mustangs to
+determine which one would be the most cost effective and quickest to fix.
+
+- Researcher: Redesigned the motor setup to accommodate larger motors and added
+  a suspension system on MDMS project using ProEngineer to create 
+  professional-grade CAD drawings for the machinists
+
+- Ford Mustang Analysis Case Study: Researched and ranked 14 different
+  changeable settings and analyzed skid pad data to determine which prototype
+  exhibited over-steer
+
+- Shower Temperature Regulator: Analyzed fluid flow and water mixing properties
+  with Mathcad and designed user interface
