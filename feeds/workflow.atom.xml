@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Christopher Tyler R&amp;D Test Engineer - Workflow</title><link href="https://cetyler.github.io/" rel="alternate"></link><link href="https://cetyler.github.io/feeds/workflow.atom.xml" rel="self"></link><id>https://cetyler.github.io/</id><updated>2021-04-10T14:28:00-05:00</updated><entry><title>Workflow Using Git</title><link href="https://cetyler.github.io/workflow-using-git.html" rel="alternate"></link><published>2021-03-25T00:00:00-05:00</published><updated>2021-04-10T14:28:00-05:00</updated><author><name>Christopher Tyler</name></author><id>tag:cetyler.github.io,2021-03-25:/workflow-using-git.html</id><summary type="html">&lt;p&gt;How I use Git.&lt;/p&gt;</summary><content type="html">&lt;p&gt;My goal of this post is to help someone get started with Git by sharing some
+useful resources and talking about my workflow.&lt;/p&gt;
+&lt;p&gt;Source control is not just for programmers.
+For example, writers source control can be extremely useful by working on a 
+novel and can try different versions of a story line without need version1.doc,
+good_version.doc, bear.doc, etc.
+Instead you can have a main branch of your story and create a separate branch
+to try out a different story line or try a concept and can also go back to a
+previous version/commit without losing anything.
+For example &lt;a href="https://standardebooks.org/"&gt;Standard Ebooks&lt;/a&gt; use GitHub.&lt;/p&gt;
+&lt;h2&gt;Resources&lt;/h2&gt;
+&lt;p&gt;First of all I have found these books very useful in getting up to speed with
+Git.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="https://cbx33.github.io/gitt/"&gt;Git in the Trenches&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="https://git-scm.com/book/en/v2"&gt;Pro Git&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;If you don't know much of Git, Git in the Trenches is a pretty good start as it
+is not very long and is actually a good read.
+Peter Savage created a fictional company using proper source control for the
+first time as a way to introduce git.&lt;/p&gt;
+&lt;p&gt;Pro Git goes through more of the details and is a great reference.&lt;/p&gt;
+&lt;h2&gt;My Workflow&lt;/h2&gt;
+&lt;p&gt;I will go through my workflow for work and personal projects.
+The focus is on the Git portion.
+I plan on doing separate posts describing the other tools, thought process and
+so on.&lt;/p&gt;
+&lt;h3&gt;Data Analysis&lt;/h3&gt;
+&lt;p&gt;I will go through how I use Jupyter Notebooks, Cookiecutter, etc. later and
+will focus on Git for now.
+I use &lt;a href="https://github.com/petervanderdoes/gitflow-avh"&gt;Git Flow&lt;/a&gt; which is based
+on an article from
+&lt;a href="https://nvie.com/posts/a-successful-git-branching-model/"&gt;Vincent Driessen&lt;/a&gt;.
+You don't need Git Flow to use this model.
+I have &lt;code&gt;master&lt;/code&gt; and &lt;code&gt;develop&lt;/code&gt; branches.
+The &lt;code&gt;master&lt;/code&gt; branch only has my releases where I shared information with my
+team.
+The &lt;code&gt;develop&lt;/code&gt; branch is where I do most of my work and I may have &lt;code&gt;feature&lt;/code&gt;
+branches where I am trying out a concept or working on a specific problem.
+My releases I just use a simple timestamp tag with maybe a key phrase to help
+me search if I need to go back.&lt;/p&gt;
+&lt;p&gt;My main plan is to keep it simple since my data analysis projects I typically
+short lived.
+I mainly want to keep track of what I am working on and be able to replicate
+my results.&lt;/p&gt;
+&lt;p&gt;However I don't commit any data.
+I also don't commit Jupyter Notebook files (ipynb).
+I create percent scripts (py) which I commit.&lt;/p&gt;
+&lt;p&gt;I do create a &lt;code&gt;README.md&lt;/code&gt; so that I can replicate my analysis.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;Using .gitignore makes it easy to not commit items you don&amp;#39;t want to.
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h3&gt;Programming Projects&lt;/h3&gt;
+&lt;p&gt;Very similar to my Data Analysis but I do some additional things.
+I start with the same branches and I also use &lt;code&gt;feature&lt;/code&gt; branches.
+However I also use &lt;code&gt;bugfix&lt;/code&gt; branches for problems that come up that I want to
+branch off of &lt;code&gt;master&lt;/code&gt; instead of &lt;code&gt;develop&lt;/code&gt; because it is to fix a critical
+bug and I don't want to introduce new features at that time.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;Note it seems to be a bug in Git Flow which bugfix merges to develop
+instead of merging to master.
+I would do bugfix branches manually.
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;I use xx.xx.xx for my releases and I go through and describe features and
+changes.
+I also provide at least a &lt;code&gt;README.md&lt;/code&gt; but I usually include much more
+documentation.
+There is a &lt;code&gt;CHANGELOG.md&lt;/code&gt; so that it is not required to have git access to
+know all the changes.&lt;/p&gt;
+&lt;h3&gt;Documentation Projects&lt;/h3&gt;
+&lt;p&gt;Creating manuals, my resume, this website, etc. I also use git.
+It is similar to how I do my Data Analysis but simpler in some ways.
+I use the branches in a similar way.
+My release also typically more of the timestamp for things like my resume but
+I use xx.xx.xx release for manuals, reports and the like.&lt;/p&gt;
+&lt;p&gt;I try to avoid using something like MS Word or
+&lt;a href="https://www.libreoffice.org/"&gt;Libreoffice&lt;/a&gt; and use either
+&lt;a href="https://www.markdownguide.org/"&gt;Markdown&lt;/a&gt; or 
+&lt;a href="https://docutils.sourceforge.io/rst.html"&gt;RestructuredText&lt;/a&gt;.
+RestructuredText I tend to use 
+&lt;a href="https://www.sphinx-doc.org/en/master/index.html"&gt;Sphinx&lt;/a&gt; which can create
+wonderful web pages and pdfs.&lt;/p&gt;
+&lt;p&gt;For example with my resume I can have a base resume that includes everything.
+Then I can create a branch that is focused for a particular job or a branch
+where I reformat my resume to focus a particular industry, skillset, so on.&lt;/p&gt;
+&lt;h2&gt;Git Alias&lt;/h2&gt;
+&lt;p&gt;Below are the contents from my &lt;code&gt;.gitconfig&lt;/code&gt; file.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;[user]                                                                                                                                                
+        email = christopher@tyler.com                                                                                                         
+        name = Christopher Tyler                                                                                                                      
+[core]                                                                                                                                                
+        editor = micro                                                                                                                                
+[alias]                                                                                                                                               
+        st = status --short -uno                                                                                                                      
+        ci = commit                                                                                                                                   
+        ca = commit --amend                                                                                                                           
+        caa = commit -a --amend                                                                                                                       
+        br = branch                                                                                                                                   
+        co = checkout                                                                                                                                 
+        df = diff                                                                                                                                     
+        lg = log -p --pretty=fuller --abbrev-commit                                                                                                   
+        lgg = log --pretty=fuller --abbrev-commit --stat                                                                                              
+        up = pull --rebase                                                                                                                            
+        over = log --pretty=format:&amp;#39;%h: %an at %ad %n%b&amp;#39; --abbrev-commit --grep=&amp;#39;Overview&amp;#39;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;I have been adding as I realize I keep using the same command over and over.
+&lt;code&gt;over&lt;/code&gt; is what I use to create my &lt;code&gt;CHANGELOG.md&lt;/code&gt; as all my release tags include
+an Overview title.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;Note that email is not my actual email.
+Also for the editor in Windows for example you need to use the full path.
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;To make it easier since I use multiple machines, I keep my &lt;code&gt;.gitconfig&lt;/code&gt; file in
+a Git Repository with my other config files so that I can keep everything up to
+date.&lt;/p&gt;
+&lt;h2&gt;GitHub/GitLab/Gitea&lt;/h2&gt;
+&lt;p&gt;Git does not require using an online server but it can be very useful to work
+with others and share repositories.
+It can also be useful for projects that you are the sole contributor as it
+makes it easy to share things between work and home for example.&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://github.com/"&gt;GitHub&lt;/a&gt; is probably the most popular.
+I use it for this website and any projects that I don't mind sharing publicly.
+In the past prior to Microsoft's acquisition you were limited on the number of
+private repositories but wow I don't believe there is a limitation.&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://about.gitlab.com/"&gt;GitLab&lt;/a&gt; is another popular online server.
+I use it for all my private repositories.&lt;/p&gt;
+&lt;p&gt;Finally I use &lt;a href="https://gitea.io/en-us/"&gt;Gitea&lt;/a&gt; in a Docker container.
+I have one at work for all my work projects and one at home for my personal
+projects.
+In theory you can also self host GitLab but it has some hefty hardware
+requirements.
+Gitea Docker container was easy to setup and run.&lt;/p&gt;
+&lt;p&gt;Beyond just using them as a remote Git server, I use it to track issues,
+milestones and project tracking.
+Gitea for example you can include a wiki to put information about a particular
+project.&lt;/p&gt;
+&lt;h2&gt;Summary&lt;/h2&gt;
+&lt;p&gt;Post is a little long but Git is a great tool.
+At work we use &lt;a href="https://subversion.apache.org/"&gt;SVN&lt;/a&gt; and while any source control is better
+than no source control, I greatly prefer Git.
+I usually use Git and only put my releases in SVN.&lt;/p&gt;
+&lt;p&gt;Also if you are on Windows, consider using
+&lt;a href="https://tortoisegit.org/"&gt;Tortoise Git&lt;/a&gt;.
+I try to do as much of my work as possible either in a Ubuntu virtual machine
+and Windows Subsystem for Linux (WSL) before I do anything on Windows
+proper.&lt;/p&gt;
+&lt;p&gt;Hope this post helps get you started with Git.&lt;/p&gt;</content><category term="git"></category><category term="workflow"></category></entry></feed>

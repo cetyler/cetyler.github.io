@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Christopher Tyler R&amp;D Test Engineer - Python</title><link href="https://cetyler.github.io/" rel="alternate"></link><link href="https://cetyler.github.io/feeds/python.atom.xml" rel="self"></link><id>https://cetyler.github.io/</id><updated>2021-04-10T14:23:00-05:00</updated><entry><title>Sidetable</title><link href="https://cetyler.github.io/sidetable.html" rel="alternate"></link><published>2021-02-26T00:00:00-06:00</published><updated>2021-04-10T14:23:00-05:00</updated><author><name>Christopher</name></author><id>tag:cetyler.github.io,2021-02-26:/sidetable.html</id><summary type="html">&lt;p&gt;Use Sidetable to summarize data.&lt;/p&gt;</summary><content type="html">&lt;p&gt;Chris Moffit at &lt;a href="https://pbpython.com"&gt;Practical Business Pyton&lt;/a&gt; created a
+pandas utility library called &lt;a href="https://pbpython.com/sidetable.html"&gt;sidetable&lt;/a&gt;.
+I have played with it a little bit not with any real project yet.&lt;/p&gt;
+&lt;p&gt;The benefit I can see is that if it can accelerate my initial analysis.
+My plan is to do a personal project before using for a work project.&lt;/p&gt;
+&lt;p&gt;I plan on updating this post once I use it at some point.&lt;/p&gt;</content><category term="python"></category><category term="pbpython"></category><category term="sidetable"></category><category term="Chris Moffit"></category></entry></feed>
