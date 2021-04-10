@@ -1,3 +1,26 @@
+545636e: Christopher Tyler at Fri Feb 26 21:19:47 2021 -0600 
+0.3.0
+
+Overview
+========
+
+Fix a variety of issues that was causing some pages to show the theme and some
+that did not.
+Also updated some of the pages.
+
+Features
+========
+
+- Took the slate github theme and used that as a basis for my website.
+
+- Started to verify how my website looks first locally before pusing it up.
+
+- Update the index to show my most recent blog posts.
+
+- Update resume page by adding an education section.
+
+- Add a CHANGELOG.
+
 91834ba: Christopher Tyler at Thu Feb 25 21:06:52 2021 -0600 
 0.2.2
 
