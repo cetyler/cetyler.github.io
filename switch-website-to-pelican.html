@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" prefix="og: http://ogp.me/ns# fb: https://www.facebook.com/2008/fbml">
 <head>
-    <title>Christopher Tyler R&D Test Engineer</title>
+    <title>Switch Website to Pelican - Christopher Tyler R&D Test Engineer</title>
     <!-- Using the latest rendering mode for IE -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta charset="utf-8">
@@ -9,15 +9,23 @@
 
 
 
-<link rel="canonical" href="https://cetyler.github.io">
-        <meta name="author" content="Christopher Tyler" />
+<link rel="canonical" href="https://cetyler.github.io/switch-website-to-pelican.html">
 
-    <!-- Open Graph tags -->
+        <meta name="author" content="Christopher" />
+        <meta name="keywords" content="website,pelican,jekyll" />
+        <meta name="description" content="Switch from Jekyll to Pelican." />
+
         <meta property="og:site_name" content="Christopher Tyler R&D Test Engineer" />
-        <meta property="og:type" content="website"/>
-        <meta property="og:title" content="Christopher Tyler R&D Test Engineer"/>
-        <meta property="og:url" content="https://cetyler.github.io"/>
-        <meta property="og:description" content="Christopher Tyler R&D Test Engineer"/>
+        <meta property="og:type" content="article"/>
+        <meta property="og:title" content="Switch Website to Pelican"/>
+        <meta property="og:url" content="https://cetyler.github.io/switch-website-to-pelican.html"/>
+        <meta property="og:description" content="Switch from Jekyll to Pelican."/>
+        <meta property="article:published_time" content="2021-04-10" />
+            <meta property="article:section" content="Blog" />
+            <meta property="article:tag" content="website" />
+            <meta property="article:tag" content="pelican" />
+            <meta property="article:tag" content="jekyll" />
+            <meta property="article:author" content="Christopher" />
 
 
 
@@ -31,7 +39,8 @@
         <link href="https://cetyler.github.io/feeds/all.atom.xml" type="application/atom+xml" rel="alternate"
               title="Christopher Tyler R&D Test Engineer ATOM Feed"/>
 
-
+        <link href="https://cetyler.github.io/feeds/blog.atom.xml" type="application/atom+xml" rel="alternate"
+              title="Christopher Tyler R&D Test Engineer Blog ATOM Feed"/>
 </head>
 <body>
 
@@ -55,7 +64,7 @@ Christopher Tyler R&D Test Engineer            </a>
                          <li><a href="https://cetyler.github.io/pages/my-resume.html">
                              My Resume
                           </a></li>
-                        <li >
+                        <li class="active">
                             <a href="https://cetyler.github.io/category/blog.html">Blog</a>
                         </li>
                         <li >
@@ -79,34 +88,70 @@ Christopher Tyler R&D Test Engineer            </a>
 <div class="container">
     <div class="row">
         <div class="col-sm-9">
-            <article>
-                <h2><a href="https://cetyler.github.io/switch-website-to-pelican.html">Switch Website to Pelican</a></h2>
-                <div class="summary"><p>Switch from Jekyll to Pelican.</p>
-                    <a class="btn btn-default btn-xs" href="https://cetyler.github.io/switch-website-to-pelican.html">more ...</a>
+    <section id="content">
+        <article>
+            <header class="page-header">
+                <h1>
+                    <a href="https://cetyler.github.io/switch-website-to-pelican.html"
+                       rel="bookmark"
+                       title="Permalink to Switch Website to Pelican">
+                        Switch Website to Pelican
+                    </a>
+                </h1>
+            </header>
+            <div class="entry-content">
+                <div class="panel">
+                    <div class="panel-body">
+<footer class="post-info">
+    <span class="label label-default">Date</span>
+    <span class="published">
+        <i class="fa fa-calendar"></i><time datetime="2021-04-10T14:30:00-05:00"> Sat 10 April 2021</time>
+    </span>
+
+
+
+
+
+<span class="label label-default">Tags</span>
+	<a href="https://cetyler.github.io/tag/website.html">website</a>
+        /
+	<a href="https://cetyler.github.io/tag/pelican.html">pelican</a>
+        /
+	<a href="https://cetyler.github.io/tag/jekyll.html">jekyll</a>
+    
+</footer><!-- /.post-info -->                    </div>
                 </div>
-            </article>
-            <hr/>
-            <article>
-                <h2><a href="https://cetyler.github.io/workflow-using-git.html">Workflow Using Git</a></h2>
-                <div class="summary"><p>How I use Git.</p>
-                    <a class="btn btn-default btn-xs" href="https://cetyler.github.io/workflow-using-git.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2><a href="https://cetyler.github.io/sidetable.html">Sidetable</a></h2>
-                <div class="summary"><p>Use Sidetable to summarize data.</p>
-                    <a class="btn btn-default btn-xs" href="https://cetyler.github.io/sidetable.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2><a href="https://cetyler.github.io/introduction.html">Introduction</a></h2>
-                <div class="summary"><p>My first post.</p>
-                    <a class="btn btn-default btn-xs" href="https://cetyler.github.io/introduction.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
+                <h2>Why I Changed</h2>
+<p>My initial website was done using the default for GitHub Pages using Jekyll.
+Jekyll would probably have been fine but I knew that I wanted to use Jupyter
+Notebooks.
+Also I know Python a lot more than Ruby so I thought it made sense to make the
+change sooner rather than waiting until I have problems with different kinds of
+content.</p>
+<h2>Changing to Pelican</h2>
+<p>Initially I used
+<a href="https://justinnaldzin.github.io/create-a-website-using-github-pages-and-pelican.html">Justin Naldzin</a>
+blog post but it was not up to date but was a good start.
+I then went to <a href="https://blog.getpelican.com/">Pelican</a> and used a combo of both
+to get up and going.
+After getting the theme to work and trying some test pages, I moved the handful
+of my posts and was able to get things to work using <code>make devserver</code> and
+viewing my website locally.
+I did had to add in <code>pelicanconf.py</code> the option <code>BIND = ''</code> so that I could see
+my website on my local network as I work on a remote VM.</p>
+<h2>Updating My GitHub Page</h2>
+<p>First I clone my GitHub page repo to <code>other</code> folder which is where my published
+website is generated by Pelican.
+Also I set <code>DELETE_OUTPUT_DIRECTORY</code> to <code>False</code>.
+Finally I run <code>make publish</code> to publish my website and commit that to master on
+my GitHub page repo.</p>
+<h2>Conclusion</h2>
+<p>I now have my website to the same level as I had using Jekyll.
+Later I will add and verify using Jupyter Notebooks.</p>
+            </div>
+            <!-- /.entry-content -->
+        </article>
+    </section>
 
         </div>
         <div class="col-sm-3" id="sidebar">
