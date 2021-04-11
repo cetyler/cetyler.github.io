@@ -5,42 +5,42 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>https://cetyler.github.io/</loc>
-<lastmod>2021-04-10T18:32:11-00:00</lastmod>
+<lastmod>2021-04-11T16:46:15-00:00</lastmod>
 <changefreq>hourly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>https://cetyler.github.io/tags.html</loc>
-<lastmod>2021-04-10T18:32:11-00:00</lastmod>
+<lastmod>2021-04-11T16:46:15-00:00</lastmod>
 <changefreq>hourly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>https://cetyler.github.io/categories.html</loc>
-<lastmod>2021-04-10T18:32:11-00:00</lastmod>
+<lastmod>2021-04-11T16:46:15-00:00</lastmod>
 <changefreq>hourly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>https://cetyler.github.io/authors.html</loc>
-<lastmod>2021-04-10T18:32:11-00:00</lastmod>
+<lastmod>2021-04-11T16:46:15-00:00</lastmod>
 <changefreq>hourly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>https://cetyler.github.io/archives.html</loc>
-<lastmod>2021-04-10T18:32:11-00:00</lastmod>
+<lastmod>2021-04-11T16:46:15-00:00</lastmod>
 <changefreq>hourly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>https://cetyler.github.io/pages/about-me.html</loc>
-<lastmod>2021-04-10T18:32:11-00:00</lastmod>
+<lastmod>2021-04-11T16:46:15-00:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
@@ -54,9 +54,16 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>https://cetyler.github.io/pages/my-resume.html</loc>
-<lastmod>2021-04-10T18:32:11-00:00</lastmod>
+<lastmod>2021-04-11T16:46:15-00:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
+</url>
+
+<url>
+<loc>https://cetyler.github.io/hvac-review-using-sidetable.html</loc>
+<lastmod>2021-04-11T16:00:00-05:00</lastmod>
+<changefreq>always</changefreq>
+<priority>1</priority>
 </url>
 
 <url>
@@ -96,7 +103,7 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>https://cetyler.github.io/category/python.html</loc>
-<lastmod>2021-04-10T14:23:00-05:51</lastmod>
+<lastmod>2021-04-11T16:00:00-05:51</lastmod>
 <changefreq>hourly</changefreq>
 <priority>0.5</priority>
 </url>
@@ -104,6 +111,34 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
 <loc>https://cetyler.github.io/category/workflow.html</loc>
 <lastmod>2021-04-10T14:28:00-05:51</lastmod>
+<changefreq>hourly</changefreq>
+<priority>0.5</priority>
+</url>
+
+<url>
+<loc>https://cetyler.github.io/tag/hvac.html</loc>
+<lastmod>2021-04-11T16:00:00-05:51</lastmod>
+<changefreq>hourly</changefreq>
+<priority>0.5</priority>
+</url>
+
+<url>
+<loc>https://cetyler.github.io/tag/python.html</loc>
+<lastmod>2021-04-11T16:00:00-05:51</lastmod>
+<changefreq>hourly</changefreq>
+<priority>0.5</priority>
+</url>
+
+<url>
+<loc>https://cetyler.github.io/tag/notebook.html</loc>
+<lastmod>2021-04-11T16:00:00-05:51</lastmod>
+<changefreq>hourly</changefreq>
+<priority>0.5</priority>
+</url>
+
+<url>
+<loc>https://cetyler.github.io/tag/sidetable.html</loc>
+<lastmod>2021-04-11T16:00:00-05:51</lastmod>
 <changefreq>hourly</changefreq>
 <priority>0.5</priority>
 </url>
@@ -144,21 +179,7 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 </url>
 
 <url>
-<loc>https://cetyler.github.io/tag/python.html</loc>
-<lastmod>2021-04-10T14:23:00-05:51</lastmod>
-<changefreq>hourly</changefreq>
-<priority>0.5</priority>
-</url>
-
-<url>
 <loc>https://cetyler.github.io/tag/pbpython.html</loc>
-<lastmod>2021-04-10T14:23:00-05:51</lastmod>
-<changefreq>hourly</changefreq>
-<priority>0.5</priority>
-</url>
-
-<url>
-<loc>https://cetyler.github.io/tag/sidetable.html</loc>
 <lastmod>2021-04-10T14:23:00-05:51</lastmod>
 <changefreq>hourly</changefreq>
 <priority>0.5</priority>
@@ -180,7 +201,7 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>https://cetyler.github.io/author/christopher.html</loc>
-<lastmod>2021-04-10T14:30:00-05:51</lastmod>
+<lastmod>2021-04-11T16:00:00-05:51</lastmod>
 <changefreq>hourly</changefreq>
 <priority>0.5</priority>
 </url>
