@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Christopher Tyler R&amp;D Test Engineer - Workflow</title><link href="https://cetyler.github.io/" rel="alternate"></link><link href="https://cetyler.github.io/feeds/workflow.atom.xml" rel="self"></link><id>https://cetyler.github.io/</id><updated>2021-04-10T14:28:00-05:00</updated><entry><title>Workflow Using Git</title><link href="https://cetyler.github.io/workflow-using-git.html" rel="alternate"></link><published>2021-03-25T00:00:00-05:00</published><updated>2021-04-10T14:28:00-05:00</updated><author><name>Christopher Tyler</name></author><id>tag:cetyler.github.io,2021-03-25:/workflow-using-git.html</id><summary type="html">&lt;p&gt;How I use Git.&lt;/p&gt;</summary><content type="html">&lt;p&gt;My goal of this post is to help someone get started with Git by sharing some
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Christopher Tyler R&amp;D Test Engineer - Workflow</title><link href="https://cetyler.github.io/" rel="alternate"></link><link href="https://cetyler.github.io/feeds/workflow.atom.xml" rel="self"></link><id>https://cetyler.github.io/</id><updated>2021-04-20T20:30:00-05:00</updated><entry><title>Workflow Using Git</title><link href="https://cetyler.github.io/workflow-using-git.html" rel="alternate"></link><published>2021-03-25T00:00:00-05:00</published><updated>2021-04-20T20:30:00-05:00</updated><author><name>Christopher Tyler</name></author><id>tag:cetyler.github.io,2021-03-25:/workflow-using-git.html</id><summary type="html">&lt;p&gt;How I use Git.&lt;/p&gt;</summary><content type="html">&lt;p&gt;My goal of this post is to help someone get started with Git by sharing some
 useful resources and talking about my workflow.&lt;/p&gt;
 &lt;p&gt;Source control is not just for programmers.
 For example, writers source control can be extremely useful by working on a 
@@ -63,7 +63,7 @@ branch off of &lt;code&gt;master&lt;/code&gt; instead of &lt;code&gt;develop&lt;
 bug and I don't want to introduce new features at that time.&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="nv"&gt;Note&lt;/span&gt; &lt;span class="nv"&gt;it&lt;/span&gt; &lt;span class="nv"&gt;seems&lt;/span&gt; &lt;span class="nv"&gt;to&lt;/span&gt; &lt;span class="nv"&gt;be&lt;/span&gt; &lt;span class="nv"&gt;a&lt;/span&gt; &lt;span class="nv"&gt;bug&lt;/span&gt; &lt;span class="nv"&gt;in&lt;/span&gt; &lt;span class="nv"&gt;Git&lt;/span&gt; &lt;span class="nv"&gt;Flow&lt;/span&gt; &lt;span class="nv"&gt;which&lt;/span&gt; &lt;span class="nv"&gt;bugfix&lt;/span&gt; &lt;span class="nv"&gt;merges&lt;/span&gt; &lt;span class="nv"&gt;to&lt;/span&gt; &lt;span class="nv"&gt;develop&lt;/span&gt;
 &lt;span class="nv"&gt;instead&lt;/span&gt; &lt;span class="nv"&gt;of&lt;/span&gt; &lt;span class="nv"&gt;merging&lt;/span&gt; &lt;span class="nv"&gt;to&lt;/span&gt; &lt;span class="nv"&gt;master&lt;/span&gt;.
-&lt;span class="nv"&gt;I&lt;/span&gt; &lt;span class="nv"&gt;would&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt; &lt;span class="nv"&gt;bugfix&lt;/span&gt; &lt;span class="nv"&gt;branches&lt;/span&gt; &lt;span class="nv"&gt;manually&lt;/span&gt;.
+&lt;span class="nv"&gt;I&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt; &lt;span class="nv"&gt;bugfix&lt;/span&gt; &lt;span class="nv"&gt;branches&lt;/span&gt; &lt;span class="nv"&gt;manually&lt;/span&gt;.
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;I use xx.xx.xx for my releases and I go through and describe features and
@@ -142,8 +142,8 @@ Gitea for example you can include a wiki to put information about a particular
 project.&lt;/p&gt;
 &lt;h2&gt;Summary&lt;/h2&gt;
 &lt;p&gt;Post is a little long but Git is a great tool.
-At work we use &lt;a href="https://subversion.apache.org/"&gt;SVN&lt;/a&gt; and while any source control is better
-than no source control, I greatly prefer Git.
+At work we use &lt;a href="https://subversion.apache.org/"&gt;SVN&lt;/a&gt; and while any source
+control is better than no source control, I greatly prefer Git.
 I usually use Git and only put my releases in SVN.&lt;/p&gt;
 &lt;p&gt;Also if you are on Windows, consider using
 &lt;a href="https://tortoisegit.org/"&gt;Tortoise Git&lt;/a&gt;.

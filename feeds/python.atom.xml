@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Christopher Tyler R&amp;D Test Engineer - Python</title><link href="https://cetyler.github.io/" rel="alternate"></link><link href="https://cetyler.github.io/feeds/python.atom.xml" rel="self"></link><id>https://cetyler.github.io/</id><updated>2021-04-17T00:00:00-05:00</updated><entry><title>How to Create a Python Package</title><link href="https://cetyler.github.io/how-to-create-a-python-package.html" rel="alternate"></link><published>2021-04-17T00:00:00-05:00</published><updated>2021-04-17T00:00:00-05:00</updated><author><name>Christopher</name></author><id>tag:cetyler.github.io,2021-04-17:/how-to-create-a-python-package.html</id><summary type="html">&lt;p&gt;How to create a Python package and have a local repository.&lt;/p&gt;</summary><content type="html">&lt;p&gt;While I was listening
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Christopher Tyler R&amp;D Test Engineer - Python</title><link href="https://cetyler.github.io/" rel="alternate"></link><link href="https://cetyler.github.io/feeds/python.atom.xml" rel="self"></link><id>https://cetyler.github.io/</id><updated>2021-04-20T20:30:00-05:00</updated><entry><title>How to Create a Python Package</title><link href="https://cetyler.github.io/how-to-create-a-python-package.html" rel="alternate"></link><published>2021-04-17T00:00:00-05:00</published><updated>2021-04-20T20:30:00-05:00</updated><author><name>Christopher</name></author><id>tag:cetyler.github.io,2021-04-17:/how-to-create-a-python-package.html</id><summary type="html">&lt;p&gt;How to create a Python package and have a local repository.&lt;/p&gt;</summary><content type="html">&lt;p&gt;While I was listening
 &lt;a href="https://pythonbytes.fm/episodes/show/228/supreme-court-decides-api-copyright-battle"&gt;PythonBytes&lt;/a&gt;
 episode #228 and they mentioned an
 &lt;a href="https://antonz.org/python-packaging"&gt;article&lt;/a&gt; from Anton Zhiyanov on creating
@@ -19,7 +19,18 @@ $ &lt;span class="nb"&gt;cd&lt;/span&gt; /git-repo-of-package
 $ pip3 install .
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-&lt;p&gt;I know that you can also use &lt;code&gt;pip3 install /git-repo-of-package&lt;/code&gt; as well.&lt;/p&gt;
+&lt;p&gt;I know that you can also use &lt;code&gt;pip3 install /git-repo-of-package&lt;/code&gt; as well.
+The problem with this method is that I need to make sure that I am installing
+the right version.
+So prior to installing, I need to make sure the following:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Verify that I am in the &lt;code&gt;master&lt;/code&gt; branch.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Make sure that I want the latest version, otherwise checkout an earlier.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
 &lt;h2&gt;Create Python Package&lt;/h2&gt;
 &lt;p&gt;For the most part will follow along what Anton did.
 Create a minimal package.
@@ -74,6 +85,8 @@ on PyPi, after searching your directory, pip will then search PyPi.&lt;/p&gt;
 packages.
 This is the method I plan on using at work since I am the only Python
 developer.&lt;/p&gt;
+&lt;p&gt;The downside is that this may not work with a team unless you use a network
+drive/location.&lt;/p&gt;
 &lt;h2&gt;Miscellaneous&lt;/h2&gt;
 &lt;p&gt;I normally add the following in my package repository:&lt;/p&gt;
 &lt;ul&gt;
@@ -2024,9 +2037,10 @@ Jupyter Notebook.&lt;/p&gt;
     (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
 }
 &lt;/script&gt;
-</content><category term="Python"></category><category term="hvac"></category><category term="python"></category><category term="notebook"></category><category term="sidetable"></category></entry><entry><title>Sidetable</title><link href="https://cetyler.github.io/sidetable.html" rel="alternate"></link><published>2021-02-26T00:00:00-06:00</published><updated>2021-04-10T14:23:00-05:00</updated><author><name>Christopher</name></author><id>tag:cetyler.github.io,2021-02-26:/sidetable.html</id><summary type="html">&lt;p&gt;Use Sidetable to summarize data.&lt;/p&gt;</summary><content type="html">&lt;p&gt;Chris Moffit at &lt;a href="https://pbpython.com"&gt;Practical Business Pyton&lt;/a&gt; created a
+</content><category term="Python"></category><category term="hvac"></category><category term="python"></category><category term="notebook"></category><category term="sidetable"></category></entry><entry><title>Sidetable</title><link href="https://cetyler.github.io/sidetable.html" rel="alternate"></link><published>2021-02-26T00:00:00-06:00</published><updated>2021-04-20T20:16:00-05:00</updated><author><name>Christopher</name></author><id>tag:cetyler.github.io,2021-02-26:/sidetable.html</id><summary type="html">&lt;p&gt;Use Sidetable to summarize data.&lt;/p&gt;</summary><content type="html">&lt;p&gt;Chris Moffit at &lt;a href="https://pbpython.com"&gt;Practical Business Pyton&lt;/a&gt; created a
 pandas utility library called &lt;a href="https://pbpython.com/sidetable.html"&gt;sidetable&lt;/a&gt;.
 I have played with it a little bit not with any real project yet.&lt;/p&gt;
 &lt;p&gt;The benefit I can see is that if it can accelerate my initial analysis.
 My plan is to do a personal project before using for a work project.&lt;/p&gt;
-&lt;p&gt;I plan on updating this post once I use it at some point.&lt;/p&gt;</content><category term="Python"></category><category term="python"></category><category term="pbpython"></category><category term="sidetable"></category><category term="Chris Moffit"></category></entry></feed>
+&lt;p&gt;See my
+&lt;a href="https://cetyler.github.io/hvac-review-using-sidetable.html"&gt;HVAC Review Using Sidetable&lt;/a&gt;.&lt;/p&gt;</content><category term="Python"></category><category term="python"></category><category term="pbpython"></category><category term="sidetable"></category><category term="Chris Moffit"></category></entry></feed>

@@ -141,7 +141,18 @@ $ <span class="nb">cd</span> /git-repo-of-package
 $ pip3 install .
 </code></pre></div>
 
-<p>I know that you can also use <code>pip3 install /git-repo-of-package</code> as well.</p>
+<p>I know that you can also use <code>pip3 install /git-repo-of-package</code> as well.
+The problem with this method is that I need to make sure that I am installing
+the right version.
+So prior to installing, I need to make sure the following:</p>
+<ul>
+<li>
+<p>Verify that I am in the <code>master</code> branch.</p>
+</li>
+<li>
+<p>Make sure that I want the latest version, otherwise checkout an earlier.</p>
+</li>
+</ul>
 <h2>Create Python Package</h2>
 <p>For the most part will follow along what Anton did.
 Create a minimal package.
@@ -196,6 +207,8 @@ on PyPi, after searching your directory, pip will then search PyPi.</p>
 packages.
 This is the method I plan on using at work since I am the only Python
 developer.</p>
+<p>The downside is that this may not work with a team unless you use a network
+drive/location.</p>
 <h2>Miscellaneous</h2>
 <p>I normally add the following in my package repository:</p>
 <ul>

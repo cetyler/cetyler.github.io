@@ -134,7 +134,7 @@ content.</p>
 <h2>Changing to Pelican</h2>
 <p>Initially I used
 <a href="https://justinnaldzin.github.io/create-a-website-using-github-pages-and-pelican.html">Justin Naldzin</a>
-blog post but it was not up to date but was a good start.
+blog post but it was not up to date however, it was a good start.
 I then went to <a href="https://blog.getpelican.com/">Pelican</a> and used a combo of both
 to get up and going.
 After getting the theme to work and trying some test pages, I moved the handful
@@ -144,17 +144,27 @@ I did had to add in <code>pelicanconf.py</code> the option <code>BIND = ''</code
 my website on my local network as I work on a remote VM.</p>
 <h2>Updating My GitHub Page</h2>
 <p>First I open <code>MakeFile</code> and do the following:</p>
-<div class="highlight"><pre><span></span><code><span class="nv">ONELEVELUPDIR</span> <span class="o">=</span> <span class="k">$(</span>subst <span class="k">$(</span>notdir <span class="k">$(</span>CURDIR<span class="k">))</span>,,<span class="k">$(</span>CURDIR<span class="k">))</span>
-<span class="nv">OUTPUTDIR</span> <span class="o">=</span> <span class="k">$(</span>ONELEVELUPDIR<span class="k">)</span>/github_page
+<div class="highlight"><pre><span></span><code>DELETE_OUTPUT_DIRECTORY = False
 </code></pre></div>
 
-<p>I did this instead of doing a git submodule but I may change that later.</p>
-<p>Also I set <code>DELETE_OUTPUT_DIRECTORY</code> to <code>False</code>.
-Finally I run <code>make publish</code> to publish my website and commit that to master on
-my GitHub page repo.</p>
+<p>I then do a git submodule of my GitHub Page repo to the <code>output</code> folder.
+For now I am not using any pre-commits to automatically apply the same commit
+message to my git submodule at this time.</p>
+<p>Finally I run <code>make publish</code> to publish my website and go into the <code>output</code>
+folder and commit that as well.</p>
+<h2>Add Jupyter Notebook Support</h2>
+<p>I wanted to have the ability to write a post using Jupyter Notebooks.
+That way if I had any tables/charts/analysis, I can do everything in the
+notebook instead of using Markdown or RestructuredText.</p>
+<p>I followed the instructions to install
+<a href="https://github.com/danielfrg/pelican-jupyter">Pelican Jupyter</a>.</p>
+<p>Now all I need to do is work on my post using Jupyter Notebook and when I
+publish, the notebook will be generated as a html page.
+This enables me to work on a notebook in a separate directory and I just need to
+copy to my <code>content</code> folder.</p>
 <h2>Conclusion</h2>
 <p>I now have my website to the same level as I had using Jekyll.
-Later I will add and verify using Jupyter Notebooks.</p>
+I was able to pretty easily add Jupyter Notebook support.</p>
             </div>
             <!-- /.entry-content -->
         </article>
