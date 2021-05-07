@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en" prefix="og: http://ogp.me/ns# fb: https://www.facebook.com/2008/fbml">
+<head>
+    <title>How to Setup Local PyPi Repository - Christopher Tyler R&D Test Engineer</title>
+    <!-- Using the latest rendering mode for IE -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+
+<link rel="canonical" href="/how-to-setup-local-pypi-repository.html">
+
+        <meta name="author" content="Christopher" />
+        <meta name="keywords" content="python,package,pypi" />
+        <meta name="description" content="How to setup a local PyPi repository to host local packages." />
+
+        <meta property="og:site_name" content="Christopher Tyler R&D Test Engineer" />
+        <meta property="og:type" content="article"/>
+        <meta property="og:title" content="How to Setup Local PyPi Repository"/>
+        <meta property="og:url" content="/how-to-setup-local-pypi-repository.html"/>
+        <meta property="og:description" content="How to setup a local PyPi repository to host local packages."/>
+        <meta property="article:published_time" content="2021-05-08" />
+            <meta property="article:section" content="Python" />
+            <meta property="article:tag" content="python" />
+            <meta property="article:tag" content="package" />
+            <meta property="article:tag" content="pypi" />
+            <meta property="article:author" content="Christopher" />
+
+
+
+    <!-- Bootstrap -->
+        <link rel="stylesheet" href="/theme/css/bootstrap.min.css" type="text/css"/>
+    <link href="/theme/css/font-awesome.min.css" rel="stylesheet">
+
+    <link href="/theme/css/pygments/native.css" rel="stylesheet">
+    <link rel="stylesheet" href="/theme/css/style.css" type="text/css"/>
+
+
+
+</head>
+<body>
+
+<div class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="/" class="navbar-brand">
+Christopher Tyler R&D Test Engineer            </a>
+        </div>
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav">
+                         <li><a href="/pages/about-me.html">
+                             About Me
+                          </a></li>
+                         <li><a href="/pages/my-resume.html">
+                             My Resume
+                          </a></li>
+                         <li><a href="/pages/resources.html">
+                             Resources
+                          </a></li>
+                        <li >
+                            <a href="/category/blog.html">Blog</a>
+                        </li>
+                        <li class="active">
+                            <a href="/category/python.html">Python</a>
+                        </li>
+                        <li >
+                            <a href="/category/workflow.html">Workflow</a>
+                        </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+</div> <!-- /.navbar -->
+
+<!-- Banner -->
+<!-- End Banner -->
+
+<!-- Content Container -->
+<div class="container">
+    <div class="row">
+        <div class="col-sm-9">
+    <section id="content">
+        <article>
+            <header class="page-header">
+                <h1>
+                    <a href="/how-to-setup-local-pypi-repository.html"
+                       rel="bookmark"
+                       title="Permalink to How to Setup Local PyPi Repository">
+                        How to Setup Local PyPi Repository
+                    </a>
+                </h1>
+            </header>
+            <div class="entry-content">
+                <div class="panel">
+                    <div class="panel-body">
+<footer class="post-info">
+    <span class="label label-default">Date</span>
+    <span class="published">
+        <i class="fa fa-calendar"></i><time datetime="2021-05-08T20:00:00-05:00"> Sat 08 May 2021</time>
+    </span>
+
+
+
+
+
+<span class="label label-default">Tags</span>
+	<a href="/tag/python.html">python</a>
+        /
+	<a href="/tag/package.html">package</a>
+        /
+	<a href="/tag/pypi.html">pypi</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                </div>
+                <p>My previous <a href="/how-to-create-a-python-package.html">post</a> I went
+through created and built a Python package.
+Then I put that package in a local directory and showed how to install that
+package from pip.</p>
+<p>This post will go through and create a local PyPi for packages that I don't or
+can't post publicly on PyPi.
+If you are looking to host PyPi locally due to slow or unreliable internet, I
+suggest
+<a href="https://www.builtinafrica.io/blog-post/vuyisile-ndlovu-pypi">Built in Africa's article</a>.</p>
+<h2>Setup</h2>
+<p>The plan is to use Docker and utilize 
+<a href="https://hub.docker.com/r/pypiserver/pypiserver/tags/">pypiserver's Docker image</a>.
+Also the intent is to host 10's or 100's of packages, not to host all of PyPi.
+I will be using <a href="https://testdriven.io/blog/private-pypi/">Michael's article</a> as
+a guide.</p>
+<h2>Docker without Authentication</h2>
+<p>I will be using <a href="https://docs.docker.com/engine/install/">Docker</a>
+and <a href="https://docs.docker.com/compose/">Docker Compose</a> as this will make it easy
+to replicate at home and at work.</p>
+<p>Create the following <code>docker-compose.yml</code>:</p>
+<div class="highlight"><pre><span></span><code>version: &#39;3.7&#39;
+
+services:
+    pypi-server:
+        image: pypiserver/pypiserver:latest
+        ports:
+            - 8081:8080
+        volumes:
+            - type: volume
+              source: pypi-server
+              target: /data/packages
+        command:  -P . -a . /data/packages
+        restart: always
+
+volumes:
+    pypi-server:
+</code></pre></div>
+
+<p>This will create a PyPi server without authentication.
+Let's spin up the container:</p>
+<div class="highlight"><pre><span></span><code>$ docker-compose up -d --build
+</code></pre></div>
+
+<p>Now go to <code>http://localhost:8086</code> in your browser and you should see
+<em>Welcome to pypiserver!</em>.</p>
+<p>To verify that this works, I will use <code>flit</code> as I did in my previous 
+<a href="/how-to-create-a-python-package.html">post</a>.</p>
+<h3>Push Package to Private PyPi</h3>
+<p>I will use <code>podsearch</code> to push a new version to my private PyPi.
+Create <code>~/.pypirc</code> and add the following:</p>
+<div class="highlight"><pre><span></span><code><span class="k">[distutils]</span>
+<span class="na">index-servers</span><span class="o">=</span>
+    <span class="na">pypi</span>
+    <span class="na">private</span>
+
+<span class="k">[pypi]</span>
+<span class="na">username: user</span>
+<span class="na">password: password</span>
+
+<span class="k">[private]</span>
+<span class="na">repository: http://localhost:8081</span>
+</code></pre></div>
+
+<p>I included PyPi but that is not required if you are not pushing packages to
+PyPi.
+Now do the following to upload <code>podsearch</code> to the private PyPi.</p>
+<div class="highlight"><pre><span></span><code>$ flit publish --repository rose
+</code></pre></div>
+
+<p>Now create a dummy directory and install <code>podsearch</code>.</p>
+<div class="highlight"><pre><span></span><code>$ mkdir <span class="nb">test</span>
+$ <span class="nb">cd</span> <span class="nb">test</span>
+$ python3 -m venv venv
+$ <span class="nb">source</span> activate venv/bin/activate
+$ pip install --index-url http://localhost:8081 --trusted-host localhost
+</code></pre></div>
+
+<h2>Docker with Authentication</h2>
+<p>For authentication, I will use 
+<a href="https://github.com/pypiserver/pypiserver#apache-like-authentication-htpasswd">htpasswd</a>.</p>
+<div class="highlight"><pre><span></span><code>$ apt install htpasswd
+$ htpasswd -sc htpasswd.txt username
+</code></pre></div>
+
+<p><strong>Note</strong> that <code>username</code> is the name how the user how needs access.
+Repeat this for any additional users.
+Update <code>docker-compose.yml</code> to:</p>
+<div class="highlight"><pre><span></span><code><span class="n">version</span><span class="p">:</span> <span class="s1">&#39;3.7&#39;</span>
+
+<span class="n">services</span><span class="p">:</span>
+    <span class="n">pypi</span><span class="o">-</span><span class="n">server</span><span class="p">:</span>
+        <span class="n">image</span><span class="p">:</span> <span class="n">pypiserver</span><span class="o">/</span><span class="n">pypiserver</span><span class="p">:</span><span class="n">latest</span>
+        <span class="n">ports</span><span class="p">:</span>
+            <span class="o">-</span> <span class="mi">8081</span><span class="p">:</span><span class="mi">8080</span>
+        <span class="n">volumes</span><span class="p">:</span>
+            <span class="o">-</span> <span class="n">type</span><span class="p">:</span> <span class="n">volume</span>
+            <span class="n">source</span><span class="p">:</span> <span class="n">pypi</span><span class="o">-</span><span class="n">server</span>
+            <span class="n">target</span><span class="p">:</span> <span class="o">/</span><span class="n">data</span><span class="o">/</span><span class="n">packages</span>
+            <span class="o">-</span> <span class="n">type</span><span class="p">:</span> <span class="n">bind</span>
+            <span class="n">source</span><span class="p">:</span> <span class="o">/</span><span class="n">location_of_file</span><span class="o">/</span>
+            <span class="n">target</span><span class="p">:</span> <span class="o">/</span><span class="n">data</span><span class="o">/</span><span class="n">auth</span>
+        <span class="n">command</span><span class="p">:</span> <span class="o">-</span><span class="n">P</span> <span class="o">/</span><span class="n">data</span><span class="o">/</span><span class="n">auth</span><span class="o">/</span><span class="n">htpasswd</span><span class="o">.</span><span class="n">txt</span> <span class="o">-</span><span class="n">a</span> <span class="n">update</span><span class="p">,</span><span class="n">download</span><span class="p">,</span><span class="n">list</span> <span class="o">/</span><span class="n">data</span><span class="o">/</span><span class="n">packages</span>
+        <span class="n">restart</span><span class="p">:</span> <span class="n">always</span>
+<span class="n">volumes</span><span class="p">:</span>
+    <span class="n">pypi</span><span class="o">-</span><span class="n">server</span><span class="p">:</span>
+</code></pre></div>
+
+<p>Notice that I am using a bind instead of a Docker volume for <code>htpasswd.txt</code>.
+This will help to add users in the future.
+Also for command, the <code>htpasswd.txt</code> will be used to authenticate and users will
+be able to update, download and list packages.</p>
+<h3>Push Package to Private PyPi</h3>
+<p>Now prior to push a new <code>podsearch</code> update, we need to update <code>~/.pypirc</code> to
+include the username and password for our private PyPi server.</p>
+<div class="highlight"><pre><span></span><code><span class="k">[distutils]</span>
+<span class="na">index-servers</span><span class="o">=</span>
+    <span class="na">pypi</span>
+    <span class="na">private</span>
+
+<span class="k">[pypi]</span>
+<span class="na">username: user</span>
+<span class="na">password: password</span>
+
+<span class="k">[private]</span>
+<span class="na">repository</span> <span class="o">=</span> <span class="s">http://localhost:8081</span>
+<span class="na">username</span> <span class="o">=</span> <span class="s">user</span>
+<span class="na">password</span> <span class="o">=</span> <span class="s">pass</span>
+</code></pre></div>
+
+<p>Now change the revision and do <code>flit publish</code> to verify that it works.</p>
+<h2>Setup Pip</h2>
+<p>Now that I have setup my private PyPi server, let's make it easier to download
+the private packages.
+Create/open <code>~/.pip/pip.conf</code></p>
+<div class="highlight"><pre><span></span><code><span class="k">[global]</span>
+<span class="na">extra-index-url</span> <span class="o">=</span> <span class="s">http://localhost:8081</span>
+<span class="na">trusted-host</span> <span class="o">=</span> <span class="s">localhost</span>
+</code></pre></div>
+
+<p>Instead of <code>localhost</code> put the hostname or IP address.</p>
+<h2>Conclusion</h2>
+<p>Having a private PyPi server, I can put my packages in a centralize server and
+have all my computers on my network push/pull packages.
+This is a improvement over a local directory and once setup feels no different
+to installing packages from PyPi.</p>
+            </div>
+            <!-- /.entry-content -->
+        </article>
+    </section>
+
+        </div>
+        <div class="col-sm-3" id="sidebar">
+            <aside>
+<!-- Sidebar -->
+<section class="well well-sm">
+  <ul class="list-group list-group-flush">
+
+<!-- Sidebar/Social -->
+<li class="list-group-item">
+  <h4><i class="fa fa-home fa-lg"></i><span class="icon-label">Social</span></h4>
+  <ul class="list-group" id="social">
+    <li class="list-group-item"><a href="https://www.linkedin.com/in/christopheretyler"><i class="fa fa-linkedin-square fa-lg"></i> LinkedIn</a></li>
+    <li class="list-group-item"><a href="https://github.com/cetyler"><i class="fa fa-github-square fa-lg"></i> GitHub</a></li>
+  </ul>
+</li>
+<!-- End Sidebar/Social -->
+
+<!-- Sidebar/Links -->
+<li class="list-group-item">
+  <h4><i class="fa fa-external-link-square fa-lg"></i><span class="icon-label">Links</span></h4>
+  <ul class="list-group" id="links">
+    <li class="list-group-item">
+      <a href="https://automatetheboringstuff.com/" target="_blank">Automate the Boring Stuff</a>
+    </li>
+    <li class="list-group-item">
+      <a href="https://pbpython.com" target="_blank">Practical Business Python</a>
+    </li>
+    <li class="list-group-item">
+      <a href="https://realpython.com" target="_blank">Real Python</a>
+    </li>
+    <li class="list-group-item">
+      <a href="https://talkpython.fm/" target="_blank">Talk Python to Me</a>
+    </li>
+    <li class="list-group-item">
+      <a href="http://getpelican.com/" target="_blank">Pelican</a>
+    </li>
+    <li class="list-group-item">
+      <a href="http://python.org/" target="_blank">Python.org</a>
+    </li>
+    <li class="list-group-item">
+      <a href="http://jinja.pocoo.org/" target="_blank">Jinja2</a>
+    </li>
+  </ul>
+</li>
+<!-- End Sidebar/Links -->
+  </ul>
+</section>
+<!-- End Sidebar -->            </aside>
+        </div>
+    </div>
+</div>
+<!-- End Content Container -->
+
+<footer>
+   <div class="container">
+      <hr>
+      <div class="row">
+         <div class="col-xs-10">&copy; 2021 Christopher Tyler
+            &middot; Powered by <a href="https://github.com/getpelican/pelican-themes/tree/master/pelican-bootstrap3" target="_blank">pelican-bootstrap3</a>,
+            <a href="http://docs.getpelican.com/" target="_blank">Pelican</a>,
+            <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>         </div>
+         <div class="col-xs-2"><p class="pull-right"><i class="fa fa-arrow-up"></i> <a href="#">Back to top</a></p></div>
+      </div>
+   </div>
+</footer>
+<script src="/theme/js/jquery.min.js"></script>
+
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="/theme/js/bootstrap.min.js"></script>
+
+<!-- Enable responsive features in IE8 with Respond.js (https://github.com/scottjehl/Respond) -->
+<script src="/theme/js/respond.min.js"></script>
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en" prefix="og: http://ogp.me/ns# fb: https://www.facebook.com/2008/fbml">
+<head>
+    <title>Python Workflow - Christopher Tyler R&D Test Engineer</title>
+    <!-- Using the latest rendering mode for IE -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+
+<link rel="canonical" href="/python-workflow.html">
+
+        <meta name="author" content="Christopher Tyler" />
+        <meta name="keywords" content="python,workflow" />
+        <meta name="description" content="My python project workflow." />
+
+        <meta property="og:site_name" content="Christopher Tyler R&D Test Engineer" />
+        <meta property="og:type" content="article"/>
+        <meta property="og:title" content="Python Workflow"/>
+        <meta property="og:url" content="/python-workflow.html"/>
+        <meta property="og:description" content="My python project workflow."/>
+        <meta property="article:published_time" content="2021-05-08" />
+            <meta property="article:section" content="Workflow" />
+            <meta property="article:tag" content="python" />
+            <meta property="article:tag" content="workflow" />
+            <meta property="article:author" content="Christopher Tyler" />
+
+
+
+    <!-- Bootstrap -->
+        <link rel="stylesheet" href="/theme/css/bootstrap.min.css" type="text/css"/>
+    <link href="/theme/css/font-awesome.min.css" rel="stylesheet">
+
+    <link href="/theme/css/pygments/native.css" rel="stylesheet">
+    <link rel="stylesheet" href="/theme/css/style.css" type="text/css"/>
+
+
+
+</head>
+<body>
+
+<div class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="/" class="navbar-brand">
+Christopher Tyler R&D Test Engineer            </a>
+        </div>
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav">
+                         <li><a href="/pages/about-me.html">
+                             About Me
+                          </a></li>
+                         <li><a href="/pages/my-resume.html">
+                             My Resume
+                          </a></li>
+                         <li><a href="/pages/resources.html">
+                             Resources
+                          </a></li>
+                        <li >
+                            <a href="/category/blog.html">Blog</a>
+                        </li>
+                        <li >
+                            <a href="/category/python.html">Python</a>
+                        </li>
+                        <li class="active">
+                            <a href="/category/workflow.html">Workflow</a>
+                        </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+</div> <!-- /.navbar -->
+
+<!-- Banner -->
+<!-- End Banner -->
+
+<!-- Content Container -->
+<div class="container">
+    <div class="row">
+        <div class="col-sm-9">
+    <section id="content">
+        <article>
+            <header class="page-header">
+                <h1>
+                    <a href="/python-workflow.html"
+                       rel="bookmark"
+                       title="Permalink to Python Workflow">
+                        Python Workflow
+                    </a>
+                </h1>
+            </header>
+            <div class="entry-content">
+                <div class="panel">
+                    <div class="panel-body">
+<footer class="post-info">
+    <span class="label label-default">Date</span>
+    <span class="published">
+        <i class="fa fa-calendar"></i><time datetime="2021-05-08T19:00:00-05:00"> Sat 08 May 2021</time>
+    </span>
+
+
+
+
+
+<span class="label label-default">Tags</span>
+	<a href="/tag/python.html">python</a>
+        /
+	<a href="/tag/workflow.html">workflow</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                </div>
+                <p>After listening to
+<a href="https://talkpython.fm/episodes/show/314/ask-us-about-modern-python-projects-and-tools">Talk Python to Me #314</a>,
+I decided that I need to update my Python workflow.
+I am leaning towards buying
+<a href="https://training.talkpython.fm/courses/modern-python-projects">Modern Python Projects Course</a>
+but will probably wait until later in the year when I have some more time.</p>
+<p>This post will focus on my workflow on Python projects and packages.
+I have a separate workflow for my data analysis.</p>
+<h2>History</h2>
+<p>When I started using Python more regularly, I realized that I needed a process
+so that I could create consistent folder structure, keep track of my packages,
+etc.
+I was already using Git but I started using
+<a href="https://cookiecutter.readthedocs.io">cookiecutter</a> and Python venv virtual
+environments.
+However I went crazy on my cookiecutter template and made it overly complicated
+and I had difficulty upgrading packages without breaking something.
+The last 6 months I have really started to look at my tools and make
+improvements.</p>
+<p>I believe my biggest issue was that I did not really sit down and figure out my
+requirements and the minimum I need to get a project going.
+I am hoping that documenting will help me continuously improve my workflow.</p>
+<h2>Cookiecutter</h2>
+<h2>Code Editor</h2>
+<p>I actually use couple different IDEs/editors.
+With all my editors, I put my settings/config file in a git repo so that I can
+share with all my computers.</p>
+<h3><a href="https://code.visualstudio.com/">VS Code</a></h3>
+<p>There is a lot of momentum with a lot of people using VS Code.
+There is great Python support and more importantly VS Code works on Windows,
+Linux and Mac. VS Code supports a variety of languages as well.
+This makes learning one IDE that works everywhere and with most languages.</p>
+<p>I use VS Code mainly at work and not much at home despite that I can use it
+everywhere.
+VS Code is a little heavy and can get slow if you use too many plugins.
+Also I lean more towards more to the command-line.
+VS Code does have a neat feature to sync settings across multiple computers.</p>
+<p>However I readily suggest VS Code when others ask since it is pretty easy to use
+and it is pretty popular.</p>
+<h3><a href="https://micro-editor.github.io">micro</a></h3>
+<p>This replaced vim for me.
+Micro is as easy as nano and almost as powerful as vim.
+Micro is a terminal-based editor which could be a turn off to some.
+Micro does support plugins and with Python it supports syntax highlighting,
+linting, auto indenting, etc.</p>
+<p>I use micro at home and at work though at work only on my Ubuntu VM.
+Micro for Windows is slow while using in Windows Terminal.
+Using micro under WSL works fine though.</p>
+<p><strong>Note</strong> that micro is not an IDE but with plugin could be consider a
+lightweight IDE.</p>
+<h2>Running Multiple Python Versions</h2>
+<p>I currently have different methods based on OS.</p>
+<h3>Windows</h3>
+<p>For right now, I download packages from https://python.org and install 
+<code>c:\python\pythonXX-VV</code> with <code>XX</code> being the Python version and <code>VV</code> whether it is
+32-bit or 64-bit.
+The problem with this is that I need to keep on top of minor Python updates.</p>
+<h3>Linux</h3>
+<p>I primarily use Debian based distros.
+Right now I am using the versions that are in the package manager.
+My plan is to migrate to <a href="https://github.com/pyenv/pyenv">pyenv</a> though I don't
+have a current use.</p>
+<h2>Python Environment</h2>
+            </div>
+            <!-- /.entry-content -->
+        </article>
+    </section>
+
+        </div>
+        <div class="col-sm-3" id="sidebar">
+            <aside>
+<!-- Sidebar -->
+<section class="well well-sm">
+  <ul class="list-group list-group-flush">
+
+<!-- Sidebar/Social -->
+<li class="list-group-item">
+  <h4><i class="fa fa-home fa-lg"></i><span class="icon-label">Social</span></h4>
+  <ul class="list-group" id="social">
+    <li class="list-group-item"><a href="https://www.linkedin.com/in/christopheretyler"><i class="fa fa-linkedin-square fa-lg"></i> LinkedIn</a></li>
+    <li class="list-group-item"><a href="https://github.com/cetyler"><i class="fa fa-github-square fa-lg"></i> GitHub</a></li>
+  </ul>
+</li>
+<!-- End Sidebar/Social -->
+
+<!-- Sidebar/Links -->
+<li class="list-group-item">
+  <h4><i class="fa fa-external-link-square fa-lg"></i><span class="icon-label">Links</span></h4>
+  <ul class="list-group" id="links">
+    <li class="list-group-item">
+      <a href="https://automatetheboringstuff.com/" target="_blank">Automate the Boring Stuff</a>
+    </li>
+    <li class="list-group-item">
+      <a href="https://pbpython.com" target="_blank">Practical Business Python</a>
+    </li>
+    <li class="list-group-item">
+      <a href="https://realpython.com" target="_blank">Real Python</a>
+    </li>
+    <li class="list-group-item">
+      <a href="https://talkpython.fm/" target="_blank">Talk Python to Me</a>
+    </li>
+    <li class="list-group-item">
+      <a href="http://getpelican.com/" target="_blank">Pelican</a>
+    </li>
+    <li class="list-group-item">
+      <a href="http://python.org/" target="_blank">Python.org</a>
+    </li>
+    <li class="list-group-item">
+      <a href="http://jinja.pocoo.org/" target="_blank">Jinja2</a>
+    </li>
+  </ul>
+</li>
+<!-- End Sidebar/Links -->
+  </ul>
+</section>
+<!-- End Sidebar -->            </aside>
+        </div>
+    </div>
+</div>
+<!-- End Content Container -->
+
+<footer>
+   <div class="container">
+      <hr>
+      <div class="row">
+         <div class="col-xs-10">&copy; 2021 Christopher Tyler
+            &middot; Powered by <a href="https://github.com/getpelican/pelican-themes/tree/master/pelican-bootstrap3" target="_blank">pelican-bootstrap3</a>,
+            <a href="http://docs.getpelican.com/" target="_blank">Pelican</a>,
+            <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>         </div>
+         <div class="col-xs-2"><p class="pull-right"><i class="fa fa-arrow-up"></i> <a href="#">Back to top</a></p></div>
+      </div>
+   </div>
+</footer>
+<script src="/theme/js/jquery.min.js"></script>
+
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="/theme/js/bootstrap.min.js"></script>
+
+<!-- Enable responsive features in IE8 with Respond.js (https://github.com/scottjehl/Respond) -->
+<script src="/theme/js/respond.min.js"></script>
+
+
+
+
+</body>
+</html>

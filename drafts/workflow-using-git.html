@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en" prefix="og: http://ogp.me/ns# fb: https://www.facebook.com/2008/fbml">
+<head>
+    <title>Workflow Using Git - Christopher Tyler R&D Test Engineer</title>
+    <!-- Using the latest rendering mode for IE -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+
+<link rel="canonical" href="/drafts/workflow-using-git.html">
+
+        <meta name="author" content="Christopher Tyler" />
+        <meta name="keywords" content="git,workflow" />
+        <meta name="description" content="How I use Git." />
+
+        <meta property="og:site_name" content="Christopher Tyler R&D Test Engineer" />
+        <meta property="og:type" content="article"/>
+        <meta property="og:title" content="Workflow Using Git"/>
+        <meta property="og:url" content="/drafts/workflow-using-git.html"/>
+        <meta property="og:description" content="How I use Git."/>
+        <meta property="article:published_time" content="2021-03-25" />
+            <meta property="article:section" content="Workflow" />
+            <meta property="article:tag" content="git" />
+            <meta property="article:tag" content="workflow" />
+            <meta property="article:author" content="Christopher Tyler" />
+
+
+
+    <!-- Bootstrap -->
+        <link rel="stylesheet" href="/theme/css/bootstrap.min.css" type="text/css"/>
+    <link href="/theme/css/font-awesome.min.css" rel="stylesheet">
+
+    <link href="/theme/css/pygments/native.css" rel="stylesheet">
+    <link rel="stylesheet" href="/theme/css/style.css" type="text/css"/>
+
+
+
+</head>
+<body>
+
+<div class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="/" class="navbar-brand">
+Christopher Tyler R&D Test Engineer            </a>
+        </div>
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav">
+                         <li><a href="/pages/about-me.html">
+                             About Me
+                          </a></li>
+                         <li><a href="/pages/my-resume.html">
+                             My Resume
+                          </a></li>
+                         <li><a href="/pages/resources.html">
+                             Resources
+                          </a></li>
+                        <li >
+                            <a href="/category/blog.html">Blog</a>
+                        </li>
+                        <li >
+                            <a href="/category/python.html">Python</a>
+                        </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+</div> <!-- /.navbar -->
+
+<!-- Banner -->
+<!-- End Banner -->
+
+<!-- Content Container -->
+<div class="container">
+    <div class="row">
+        <div class="col-sm-9">
+    <section id="content">
+        <article>
+            <header class="page-header">
+                <h1>
+                    <a href="/drafts/workflow-using-git.html"
+                       rel="bookmark"
+                       title="Permalink to Workflow Using Git">
+                        Workflow Using Git
+                    </a>
+                </h1>
+            </header>
+            <div class="entry-content">
+                <div class="panel">
+                    <div class="panel-body">
+<footer class="post-info">
+    <span class="label label-default">Date</span>
+    <span class="published">
+        <i class="fa fa-calendar"></i><time datetime="2021-03-25T00:00:00-05:00"> Thu 25 March 2021</time>
+    </span>
+
+
+
+
+
+<span class="label label-default">Tags</span>
+	<a href="/tag/git.html">git</a>
+        /
+	<a href="/tag/workflow.html">workflow</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                </div>
+                <p>My goal of this post is to help someone get started with Git by sharing some
+useful resources and talking about my workflow.</p>
+<p>Source control is not just for programmers.
+For example, writers source control can be extremely useful by working on a 
+novel and can try different versions of a story line without need version1.doc,
+good_version.doc, bear.doc, etc.
+Instead you can have a main branch of your story and create a separate branch
+to try out a different story line or try a concept and can also go back to a
+previous version/commit without losing anything.
+For example <a href="https://standardebooks.org/">Standard Ebooks</a> use GitHub.</p>
+<h2>Resources</h2>
+<p>First of all I have found these books very useful in getting up to speed with
+Git.</p>
+<ul>
+<li>
+<p><a href="https://cbx33.github.io/gitt/">Git in the Trenches</a></p>
+</li>
+<li>
+<p><a href="https://git-scm.com/book/en/v2">Pro Git</a></p>
+</li>
+</ul>
+<p>If you don't know much of Git, Git in the Trenches is a pretty good start as it
+is not very long and is actually a good read.
+Peter Savage created a fictional company using proper source control for the
+first time as a way to introduce git.</p>
+<p>Pro Git goes through more of the details and is a great reference.</p>
+<h2>My Workflow</h2>
+<p>I will go through my workflow for work and personal projects.
+The focus is on the Git portion.
+I plan on doing separate posts describing the other tools, thought process and
+so on.</p>
+<h3>Data Analysis</h3>
+<p>I will go through how I use Jupyter Notebooks, Cookiecutter, etc. later and
+will focus on Git for now.
+I use <a href="https://github.com/petervanderdoes/gitflow-avh">Git Flow</a> which is based
+on an article from
+<a href="https://nvie.com/posts/a-successful-git-branching-model/">Vincent Driessen</a>.
+You don't need Git Flow to use this model.
+I have <code>master</code> and <code>develop</code> branches.
+The <code>master</code> branch only has my releases where I shared information with my
+team.
+The <code>develop</code> branch is where I do most of my work and I may have <code>feature</code>
+branches where I am trying out a concept or working on a specific problem.
+My releases I just use a simple timestamp tag with maybe a key phrase to help
+me search if I need to go back.</p>
+<p>My main plan is to keep it simple since my data analysis projects I typically
+short lived.
+I mainly want to keep track of what I am working on and be able to replicate
+my results.</p>
+<p>However I don't commit any data.
+I also don't commit Jupyter Notebook files (ipynb).
+I create percent scripts (py) which I commit.</p>
+<p>I do create a <code>README.md</code> so that I can replicate my analysis.</p>
+<div class="highlight"><pre><span></span><code>Using .gitignore makes it easy to not commit items you don&#39;t want to.
+</code></pre></div>
+
+<h3>Programming Projects</h3>
+<p>Very similar to my Data Analysis but I do some additional things.
+I start with the same branches and I also use <code>feature</code> branches.
+However I also use <code>bugfix</code> branches for problems that come up that I want to
+branch off of <code>master</code> instead of <code>develop</code> because it is to fix a critical
+bug and I don't want to introduce new features at that time.</p>
+<div class="highlight"><pre><span></span><code><span class="nv">Note</span> <span class="nv">it</span> <span class="nv">seems</span> <span class="nv">to</span> <span class="nv">be</span> <span class="nv">a</span> <span class="nv">bug</span> <span class="nv">in</span> <span class="nv">Git</span> <span class="nv">Flow</span> <span class="nv">which</span> <span class="nv">bugfix</span> <span class="nv">merges</span> <span class="nv">to</span> <span class="nv">develop</span>
+<span class="nv">instead</span> <span class="nv">of</span> <span class="nv">merging</span> <span class="nv">to</span> <span class="nv">master</span>.
+<span class="nv">I</span> <span class="nv">would</span> <span class="k">do</span> <span class="nv">bugfix</span> <span class="nv">branches</span> <span class="nv">manually</span>.
+</code></pre></div>
+
+<p>I use xx.xx.xx for my releases and I go through and describe features and
+changes.
+I also provide at least a <code>README.md</code> but I usually include much more
+documentation.
+There is a <code>CHANGELOG.md</code> so that it is not required to have git access to
+know all the changes.</p>
+<h3>Documentation Projects</h3>
+<p>Creating manuals, my resume, this website, etc. I also use git.
+It is similar to how I do my Data Analysis but simpler in some ways.
+I use the branches in a similar way.
+My release also typically more of the timestamp for things like my resume but
+I use xx.xx.xx release for manuals, reports and the like.</p>
+<p>I try to avoid using something like MS Word or
+<a href="https://www.libreoffice.org/">Libreoffice</a> and use either
+<a href="https://www.markdownguide.org/">Markdown</a> or 
+<a href="https://docutils.sourceforge.io/rst.html">RestructuredText</a>.
+RestructuredText I tend to use 
+<a href="https://www.sphinx-doc.org/en/master/index.html">Sphinx</a> which can create
+wonderful web pages and pdfs.</p>
+<p>For example with my resume I can have a base resume that includes everything.
+Then I can create a branch that is focused for a particular job or a branch
+where I reformat my resume to focus a particular industry, skillset, so on.</p>
+<h2>Git Alias</h2>
+<p>Below are the contents from my <code>.gitconfig</code> file.</p>
+<div class="highlight"><pre><span></span><code><span class="o">[</span><span class="n">user</span><span class="o">]</span><span class="w">                                                                                                                                                </span>
+<span class="w">        </span><span class="n">email</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">christopher</span><span class="nv">@tyler</span><span class="p">.</span><span class="n">com</span><span class="w">                                                                                                         </span>
+<span class="w">        </span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Christopher</span><span class="w"> </span><span class="n">Tyler</span><span class="w">                                                                                                                      </span>
+<span class="o">[</span><span class="n">core</span><span class="o">]</span><span class="w">                                                                                                                                                </span>
+<span class="w">        </span><span class="n">editor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">micro</span><span class="w">                                                                                                                                </span>
+<span class="o">[</span><span class="n">alias</span><span class="o">]</span><span class="w">                                                                                                                                               </span>
+<span class="w">        </span><span class="n">st</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">status</span><span class="w"> </span><span class="o">--</span><span class="n">short</span><span class="w"> </span><span class="o">-</span><span class="n">uno</span><span class="w">                                                                                                                      </span>
+<span class="w">        </span><span class="n">ci</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">commit</span><span class="w">                                                                                                                                   </span>
+<span class="w">        </span><span class="n">ca</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">commit</span><span class="w"> </span><span class="o">--</span><span class="n">amend</span><span class="w">                                                                                                                           </span>
+<span class="w">        </span><span class="n">caa</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">commit</span><span class="w"> </span><span class="o">-</span><span class="n">a</span><span class="w"> </span><span class="o">--</span><span class="n">amend</span><span class="w">                                                                                                                       </span>
+<span class="w">        </span><span class="n">br</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">branch</span><span class="w">                                                                                                                                   </span>
+<span class="w">        </span><span class="n">co</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">checkout</span><span class="w">                                                                                                                                 </span>
+<span class="w">        </span><span class="n">df</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">diff</span><span class="w">                                                                                                                                     </span>
+<span class="w">        </span><span class="n">lg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">log</span><span class="w"> </span><span class="o">-</span><span class="n">p</span><span class="w"> </span><span class="o">--</span><span class="n">pretty</span><span class="o">=</span><span class="n">fuller</span><span class="w"> </span><span class="o">--</span><span class="n">abbrev</span><span class="o">-</span><span class="k">commit</span><span class="w">                                                                                                   </span>
+<span class="w">        </span><span class="n">lgg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">log</span><span class="w"> </span><span class="o">--</span><span class="n">pretty</span><span class="o">=</span><span class="n">fuller</span><span class="w"> </span><span class="o">--</span><span class="n">abbrev</span><span class="o">-</span><span class="k">commit</span><span class="w"> </span><span class="o">--</span><span class="n">stat</span><span class="w">                                                                                              </span>
+<span class="w">        </span><span class="n">up</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">pull</span><span class="w"> </span><span class="o">--</span><span class="n">rebase</span><span class="w">                                                                                                                            </span>
+<span class="w">        </span><span class="k">over</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">log</span><span class="w"> </span><span class="c1">--pretty=format:&#39;%h: %an at %ad %n%b&#39; --abbrev-commit --grep=&#39;Overview&#39;</span>
+</code></pre></div>
+
+<p>I have been adding as I realize I keep using the same command over and over.
+<code>over</code> is what I use to create my <code>CHANGELOG.md</code> as all my release tags include
+an Overview title.</p>
+<div class="highlight"><pre><span></span><code><span class="nv">Note</span> <span class="nv">that</span> <span class="nv">email</span> <span class="nv">is</span> <span class="nv">not</span> <span class="nv">my</span> <span class="nv">actual</span> <span class="nv">email</span>.
+<span class="nv">Also</span> <span class="k">for</span> <span class="nv">the</span> <span class="nv">editor</span> <span class="nv">in</span> <span class="nv">Windows</span> <span class="k">for</span> <span class="nv">example</span> <span class="nv">you</span> <span class="nv">need</span> <span class="nv">to</span> <span class="nv">use</span> <span class="nv">the</span> <span class="nv">full</span> <span class="nv">path</span>.
+</code></pre></div>
+
+<p>To make it easier since I use multiple machines, I keep my <code>.gitconfig</code> file in
+a Git Repository with my other config files so that I can keep everything up to
+date.</p>
+<h2>GitHub/GitLab/Gitea</h2>
+<p>Git does not require using an online server but it can be very useful to work
+with others and share repositories.
+It can also be useful for projects that you are the sole contributor as it
+makes it easy to share things between work and home for example.</p>
+<p><a href="https://github.com/">GitHub</a> is probably the most popular.
+I use it for this website and any projects that I don't mind sharing publicly.
+In the past prior to Microsoft's acquisition you were limited on the number of
+private repositories but wow I don't believe there is a limitation.</p>
+<p><a href="https://about.gitlab.com/">GitLab</a> is another popular online server.
+I use it for all my private repositories.</p>
+<p>Finally I use <a href="https://gitea.io/en-us/">Gitea</a> in a Docker container.
+I have one at work for all my work projects and one at home for my personal
+projects.
+In theory you can also self host GitLab but it has some hefty hardware
+requirements.
+Gitea Docker container was easy to setup and run.</p>
+<p>Beyond just using them as a remote Git server, I use it to track issues,
+milestones and project tracking.
+Gitea for example you can include a wiki to put information about a particular
+project.</p>
+<h2>Summary</h2>
+<p>Post is a little long but Git is a great tool.
+At work we use <a href="https://subversion.apache.org/">SVN</a> and while any source control is better
+than no source control, I greatly prefer Git.
+I usually use Git and only put my releases in SVN.</p>
+<p>Also if you are on Windows, consider using
+<a href="https://tortoisegit.org/">Tortoise Git</a>.
+I try to do as much of my work as possible either in a Ubuntu virtual machine
+and Windows Subsystem for Linux (WSL) before I do anything on Windows
+proper.</p>
+<p>Hope this post helps get you started with Git.</p>
+            </div>
+            <!-- /.entry-content -->
+        </article>
+    </section>
+
+        </div>
+        <div class="col-sm-3" id="sidebar">
+            <aside>
+<!-- Sidebar -->
+<section class="well well-sm">
+  <ul class="list-group list-group-flush">
+
+<!-- Sidebar/Social -->
+<li class="list-group-item">
+  <h4><i class="fa fa-home fa-lg"></i><span class="icon-label">Social</span></h4>
+  <ul class="list-group" id="social">
+    <li class="list-group-item"><a href="https://www.linkedin.com/in/christopheretyler"><i class="fa fa-linkedin-square fa-lg"></i> LinkedIn</a></li>
+    <li class="list-group-item"><a href="https://github.com/cetyler"><i class="fa fa-github-square fa-lg"></i> GitHub</a></li>
+    <li class="list-group-item"><a href="https://cetyler.github.io/feeds/all.atom.xml"><i class="fa fa-rss-square fa-lg"></i> RSS</a></li>
+  </ul>
+</li>
+<!-- End Sidebar/Social -->
+
+<!-- Sidebar/Links -->
+<li class="list-group-item">
+  <h4><i class="fa fa-external-link-square fa-lg"></i><span class="icon-label">Links</span></h4>
+  <ul class="list-group" id="links">
+    <li class="list-group-item">
+      <a href="https://automatetheboringstuff.com/" target="_blank">Automate the Boring Stuff</a>
+    </li>
+    <li class="list-group-item">
+      <a href="https://pbpython.com" target="_blank">Practical Business Python</a>
+    </li>
+    <li class="list-group-item">
+      <a href="https://realpython.com" target="_blank">Real Python</a>
+    </li>
+    <li class="list-group-item">
+      <a href="https://talkpython.fm/" target="_blank">Talk Python to Me</a>
+    </li>
+    <li class="list-group-item">
+      <a href="http://getpelican.com/" target="_blank">Pelican</a>
+    </li>
+    <li class="list-group-item">
+      <a href="http://python.org/" target="_blank">Python.org</a>
+    </li>
+    <li class="list-group-item">
+      <a href="http://jinja.pocoo.org/" target="_blank">Jinja2</a>
+    </li>
+  </ul>
+</li>
+<!-- End Sidebar/Links -->
+  </ul>
+</section>
+<!-- End Sidebar -->            </aside>
+        </div>
+    </div>
+</div>
+<!-- End Content Container -->
+
+<footer>
+   <div class="container">
+      <hr>
+      <div class="row">
+         <div class="col-xs-10">&copy; 2021 Christopher Tyler
+            &middot; Powered by <a href="https://github.com/getpelican/pelican-themes/tree/master/pelican-bootstrap3" target="_blank">pelican-bootstrap3</a>,
+            <a href="http://docs.getpelican.com/" target="_blank">Pelican</a>,
+            <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>         </div>
+         <div class="col-xs-2"><p class="pull-right"><i class="fa fa-arrow-up"></i> <a href="#">Back to top</a></p></div>
+      </div>
+   </div>
+</footer>
+<script src="/theme/js/jquery.min.js"></script>
+
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="/theme/js/bootstrap.min.js"></script>
+
+<!-- Enable responsive features in IE8 with Respond.js (https://github.com/scottjehl/Respond) -->
+<script src="/theme/js/respond.min.js"></script>
+
+
+
+
+</body>
+</html>
