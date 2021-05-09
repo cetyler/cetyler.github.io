@@ -12,11 +12,11 @@
 <meta name="keywords" content="python, package, pypi, Python, " />
 
 <meta property="og:title" content="How to Setup Local PyPi Repository "/>
-<meta property="og:url" content="https://cetyler.github.io/drafts/how-to-setup-local-pypi-repository.html" />
+<meta property="og:url" content="https://cetyler.github.io/how-to-setup-local-pypi-repository.html" />
 <meta property="og:description" content="How to setup a local PyPi repository to host local packages." />
 <meta property="og:site_name" content="Christopher Tyler R&amp;D Test Engineer" />
 <meta property="og:article:author" content="Christopher" />
-<meta property="og:article:published_time" content="2021-05-08T20:00:00-05:00" />
+<meta property="og:article:published_time" content="2021-05-09T15:00:00-05:00" />
 <meta name="twitter:title" content="How to Setup Local PyPi Repository ">
 <meta name="twitter:description" content="How to setup a local PyPi repository to host local packages.">
 
@@ -68,7 +68,7 @@
 <div class="row-fluid">
     <header class="page-header span10 offset2">
         <h1>
-            <a href="https://cetyler.github.io/drafts/how-to-setup-local-pypi-repository.html">
+            <a href="https://cetyler.github.io/how-to-setup-local-pypi-repository.html">
                 How to Setup Local PyPi Repository
             </a>
         </h1>
@@ -78,7 +78,7 @@
 <div class="row-fluid">
         <div class="span8 offset2 article-content">
             
-            <p>My previous <a href="https://cetyler.github.io/how-to-create-a-python-package.html">post</a> I went
+            <p>My previous <a href="https://cetyler.github.io/how-to-create-a-python-package.html">post</a>, I went
 through created and built a Python package.
 Then I put that package in a local directory and showed how to install that
 package from pip.</p>
@@ -121,7 +121,7 @@ Let's spin up the container:</p>
 <div class="highlight"><pre><span></span><code>$ docker-compose up -d --build
 </code></pre></div>
 
-<p>Now go to <code>http://localhost:8086</code> in your browser and you should see
+<p>Now go to <code>http://localhost:8081</code> in your browser and you should see
 <em>Welcome to pypiserver!</em>.</p>
 <p>To verify that this works, I will use <code>flit</code> as I did in my previous 
 <a href="https://cetyler.github.io/how-to-create-a-python-package.html">post</a>.</p>
@@ -162,7 +162,7 @@ $ pip install --index-url http://localhost:8081 --trusted-host localhost
 $ htpasswd -sc htpasswd.txt username
 </code></pre></div>
 
-<p><strong>Note</strong> that <code>username</code> is the name how the user how needs access.
+<p><strong>Note</strong> that <code>username</code> is the name of the user how needs access.
 Repeat this for any additional users.
 Update <code>docker-compose.yml</code> to:</p>
 <div class="highlight"><pre><span></span><code><span class="n">version</span><span class="p">:</span> <span class="s1">&#39;3.7&#39;</span>
@@ -190,7 +190,7 @@ This will help to add users in the future.
 Also for command, the <code>htpasswd.txt</code> will be used to authenticate and users will
 be able to update, download and list packages.</p>
 <h3>Push Package to Private PyPi</h3>
-<p>Now prior to push a new <code>podsearch</code> update, we need to update <code>~/.pypirc</code> to
+<p>Now prior to pushing a new <code>podsearch</code> update, we need to update <code>~/.pypirc</code> to
 include the username and password for our private PyPi server.</p>
 <div class="highlight"><pre><span></span><code><span class="k">[distutils]</span>
 <span class="na">index-servers</span><span class="o">=</span>
@@ -221,7 +221,7 @@ Create/open <code>~/.pip/pip.conf</code></p>
 <h2>Conclusion</h2>
 <p>Having a private PyPi server, I can put my packages in a centralize server and
 have all my computers on my network push/pull packages.
-This is a improvement over a local directory and once setup feels no different
+This is a improvement over a local directory and once set up feels no different
 to installing packages from PyPi.</p>
 
 
@@ -236,22 +236,58 @@ to installing packages from PyPi.</p>
 
 
 
+<section>
+    <h6 style="display:none;">Comments</h6>
+    <p id="comment-message">Leave your comments below. </p>
+
+    <div class="accordion" id="accordion2">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                <a class="accordion-toggle disqus-comment-count comment-count"
+                   data-toggle="collapse"
+                   data-parent="#accordion2"
+                   href="https://cetyler.github.io/how-to-setup-local-pypi-repository.html#comment_thread"
+                   id="comment-accordion-toggle">
+                    Comments
+                </a>
+            </div>
+            <div id="comment_thread" class="accordion-body collapse">
+                <div class="accordion-inner">
+                    <div class="comments">
+
+                        <script src="https://utteranc.es/client.js"
+        data-repo="cetyler/cetyler.github.io"
+        data-issue-term="local-pypi"
+        data-label="Comments"
+        data-theme="github-light"
+        crossorigin="anonymous"
+        async>
+</script>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
             <hr/>
         </div>
         <section id="article-sidebar" class="span2">
             <h4>Published</h4>
-            <time itemprop="dateCreated" datetime="2021-05-08T20:00:00-05:00">May 8, 2021</time>
+            <time itemprop="dateCreated" datetime="2021-05-09T15:00:00-05:00">May 9, 2021</time>
             <h4>Category</h4>
             <a class="category-link" href="https://cetyler.github.io/categories.html#python-ref">Python</a>
             <h4>Tags</h4>
             <ul class="list-of-tags tags-in-article">
                 <li><a href="https://cetyler.github.io/tags.html#package-ref">package
-                    <span>1</span>
+                    <span>2</span>
 </a></li>
                 <li><a href="https://cetyler.github.io/tags.html#pypi-ref">pypi
+                    <span>1</span>
 </a></li>
                 <li><a href="https://cetyler.github.io/tags.html#python-ref">python
-                    <span>2</span>
+                    <span>4</span>
 </a></li>
             </ul>
 <h4>Contact</h4>
