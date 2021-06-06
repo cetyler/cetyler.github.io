@@ -1,5 +1,404 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Christopher Tyler R&amp;D Test Engineer</title><link href="https://cetyler.github.io/" rel="alternate"></link><link href="https://cetyler.github.io/feeds/all.atom.xml" rel="self"></link><id>https://cetyler.github.io/</id><updated>2021-05-09T15:00:00-05:00</updated><entry><title>How to Setup Local PyPi Repository</title><link href="https://cetyler.github.io/how-to-setup-local-pypi-repository.html" rel="alternate"></link><published>2021-05-09T15:00:00-05:00</published><updated>2021-05-09T15:00:00-05:00</updated><author><name>Christopher</name></author><id>tag:cetyler.github.io,2021-05-09:/how-to-setup-local-pypi-repository.html</id><summary type="html">&lt;p&gt;How to setup a local PyPi repository to host local packages.&lt;/p&gt;</summary><content type="html">&lt;p&gt;My previous &lt;a href="https://cetyler.github.io/how-to-create-a-python-package.html"&gt;post&lt;/a&gt;, I went
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Christopher Tyler R&amp;D Test Engineer</title><link href="https://cetyler.github.io/" rel="alternate"></link><link href="https://cetyler.github.io/feeds/all.atom.xml" rel="self"></link><id>https://cetyler.github.io/</id><updated>2021-06-05T21:00:00-05:00</updated><entry><title>Python Workflow</title><link href="https://cetyler.github.io/python-workflow.html" rel="alternate"></link><published>2021-06-05T21:00:00-05:00</published><updated>2021-06-05T21:00:00-05:00</updated><author><name>Christopher Tyler</name></author><id>tag:cetyler.github.io,2021-06-05:/python-workflow.html</id><summary type="html">&lt;p&gt;My python project workflow.&lt;/p&gt;</summary><content type="html">&lt;p&gt;After listening to
+&lt;a href="https://talkpython.fm/episodes/show/314/ask-us-about-modern-python-projects-and-tools"&gt;Talk Python to Me #314&lt;/a&gt;,
+I decided that I need to update my Python workflow.
+I am leaning towards buying
+&lt;a href="https://training.talkpython.fm/courses/modern-python-projects"&gt;Modern Python Projects Course&lt;/a&gt;
+but will probably wait until later in the year when I have some more time.&lt;/p&gt;
+&lt;p&gt;This post will focus on my workflow on Python projects and packages.
+I have a separate workflow for my data analysis.&lt;/p&gt;
+&lt;h2&gt;History&lt;/h2&gt;
+&lt;p&gt;When I started using Python more regularly, I realized that I needed a process
+so that I could create consistent folder structure, keep track of my packages,
+etc.
+I was already using Git but I started using
+&lt;a href="https://cookiecutter.readthedocs.io"&gt;cookiecutter&lt;/a&gt; and Python venv virtual
+environments.
+However I went crazy on my cookiecutter template and made it overly complicated
+and I had difficulty upgrading packages without breaking something.
+The last 6 months I have really started to look at my tools and make
+improvements.&lt;/p&gt;
+&lt;p&gt;I believe my biggest issue was that I did not really sit down and figure out my
+requirements and the minimum I need to get a project going.
+I am hoping that documenting will help me continuously improve my workflow.&lt;/p&gt;
+&lt;h2&gt;Tools&lt;/h2&gt;
+&lt;h3&gt;Cookiecutter&lt;/h3&gt;
+&lt;p&gt;For right now I only use Cookiecutter when I do my Jupyter Notebook projects.
+I currently don't use it for my Python projects.
+Instead I just manually build out my project folder, .gitignore, etc.&lt;/p&gt;
+&lt;h3&gt;Code Editor&lt;/h3&gt;
+&lt;p&gt;I actually use couple different IDEs/editors.
+With all my editors, I put my settings/config file in a git repo so that I can
+share with all my computers.&lt;/p&gt;
+&lt;h4&gt;&lt;a href="https://code.visualstudio.com/"&gt;VS Code&lt;/a&gt;&lt;/h4&gt;
+&lt;p&gt;There is a lot of momentum with a lot of people using VS Code.
+VS Code has great Python support and more importantly it works on Windows,
+Linux and Mac.
+VS Code supports a variety of languages as well.
+This makes learning one IDE that works everywhere and with most languages.&lt;/p&gt;
+&lt;p&gt;I use VS Code mainly at work and not much at home despite that I can use it
+everywhere.
+VS Code is a little heavy and can get slow if you use too many plugins.
+Also I lean more towards more to the command-line.
+VS Code does have a neat feature to sync settings across multiple computers.&lt;/p&gt;
+&lt;p&gt;However I readily suggest VS Code when others ask since it is pretty easy to use
+and it is pretty popular.&lt;/p&gt;
+&lt;h4&gt;&lt;a href="https://micro-editor.github.io"&gt;micro&lt;/a&gt;&lt;/h4&gt;
+&lt;p&gt;This replaced vim for me.
+Micro is as easy as nano and almost as powerful as vim.
+Micro is a terminal-based editor which could be a turn off to some.
+Micro does support plugins and with Python it supports syntax highlighting,
+linting, auto indenting, etc.&lt;/p&gt;
+&lt;p&gt;I use micro at home and at work though at work only on my Ubuntu VM.
+Micro for Windows is slow while using in Windows Terminal.
+Using micro under WSL works fine though.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt; that micro is not an IDE but with plugins could be consider a
+lightweight IDE.&lt;/p&gt;
+&lt;h3&gt;Running Multiple Python Versions&lt;/h3&gt;
+&lt;p&gt;I currently have different methods based on OS.&lt;/p&gt;
+&lt;h4&gt;Windows&lt;/h4&gt;
+&lt;p&gt;For right now, I download packages from https://python.org and install 
+&lt;code&gt;c:\python\pythonXX-VV&lt;/code&gt; with &lt;code&gt;XX&lt;/code&gt; being the Python version and &lt;code&gt;VV&lt;/code&gt; whether it is
+32-bit or 64-bit.
+The problem with this is that I need to keep on top of minor Python updates.&lt;/p&gt;
+&lt;h4&gt;Linux&lt;/h4&gt;
+&lt;p&gt;I primarily use Debian based distros.
+Right now I am using the versions that are in the package manager.
+My plan is to migrate to &lt;a href="https://github.com/pyenv/pyenv"&gt;pyenv&lt;/a&gt; though I don't
+have a current use.&lt;/p&gt;
+&lt;h3&gt;Python Environment&lt;/h3&gt;
+&lt;p&gt;I use Python's standard &lt;code&gt;venv&lt;/code&gt; for my virtual environments.
+I initially tried use to &lt;a href="https://docs.conda.io/en/latest/miniconda.html"&gt;miniconda&lt;/a&gt;
+for my Python projects but I encounter a couple of issues.
+While conda works well for my data analysis (think Jupyter Notebooks), I ran
+into problems getting 
+&lt;a href="https://docs.conda.io/en/latest/miniconda.html"&gt;PyInstaller&lt;/a&gt; to work.
+Also conda did not have all the packages I needed so I was still needing to use
+pip.&lt;/p&gt;
+&lt;p&gt;At work, I name my virtual environments &lt;code&gt;venvXX-VV&lt;/code&gt; to denote the python version
+and whether it is 32-bit or 64-bit.
+I also typically don't upgrade the packages unless I need to add a new package.
+Keep in mind that all my projects at work stay within the intranet.&lt;/p&gt;
+&lt;p&gt;At home all my virtual environment folders are &lt;code&gt;venv&lt;/code&gt;.
+While I may use Python that comes with the OS, I don't use &lt;code&gt;apt&lt;/code&gt; to install
+packages since it tends to be quite out of date.&lt;/p&gt;
+&lt;p&gt;For my &lt;code&gt;requirements.txt&lt;/code&gt; I normally just use &lt;code&gt;pip freeze&lt;/code&gt;.
+I plan to start using &lt;a href="https://github.com/jgonggrijp/pip-review"&gt;pip-review&lt;/a&gt; to
+help with package upgrades.&lt;/p&gt;
+&lt;p&gt;I plan on using &lt;a href="https://pipxproject.github.io/pipx/"&gt;pipx&lt;/a&gt; for my global
+packages like black or flake8.&lt;/p&gt;
+&lt;h3&gt;Personal Packages&lt;/h3&gt;
+&lt;p&gt;I run a private &lt;a href="https://cetyler.github.io/how-to-setup-local-pypi-repository.html"&gt;PyPi server&lt;/a&gt; and
+create packages using flit
+(see &lt;a href="https://cetyler.github.io/how-to-create-a-python-package.html"&gt;my post&lt;/a&gt;).
+This has been more recent but my plan is to create more packages.&lt;/p&gt;
+&lt;p&gt;The problem I have at work is that I have one large package that tries to have
+everything and I need to break it up.
+This was due to learning how to create packages and my previous method was a
+little tedious.&lt;/p&gt;
+&lt;h3&gt;Testing&lt;/h3&gt;
+&lt;p&gt;I use &lt;a href="https://docs.pytest.org/"&gt;pytest&lt;/a&gt; for testing.
+However, I don't use the test driven development.
+Due to the nature of my work, I typically don't get good requirements so at
+least initially, it is an iterative process.&lt;/p&gt;
+&lt;p&gt;For my home projects, I have been attempting to do a more test driven
+development cycle.&lt;/p&gt;
+&lt;h2&gt;Requirements Gathering&lt;/h2&gt;
+&lt;p&gt;My work projects I typically don't get clear requirements.
+My Python projects typically spring from some data analysis project and it may
+be more useful to create a program or package.
+I will create some initial requirements.
+As I get more feedback, I will circle back and update my requirements.&lt;/p&gt;
+&lt;h2&gt;Execution&lt;/h2&gt;
+&lt;p&gt;I use Gitea (see &lt;a href="https://cetyler.github.io/workflow-using-git.html"&gt;my post&lt;/a&gt;) which
+is nice since I have access to an issue tracker and wiki.
+I will then create a project for my 1.0 release and milestones for the interim
+release.
+Then I create issues so I know what I need to work on to meet my milestones.&lt;/p&gt;
+&lt;p&gt;I use git and git flow to create feature and release branches and work towards
+creating a program that meets the minimum requirements.
+Then as I start working on 2.0, 3.0, etc. I start adding features.&lt;/p&gt;
+&lt;p&gt;Prior to a 1.0 release, anything goes.
+If I have to make breaking changes, I will as I try to meet the initial
+requirements.
+After 1.0, minor releases (ex. 1.1) will be minor new features.
+Bug fixes (ex. 1.1.1) are usually off the main or master branch.
+Major new features, breaking changes, etc. (ex. 2.0).&lt;/p&gt;
+&lt;h2&gt;Summary&lt;/h2&gt;
+&lt;p&gt;This is what I currently do and will be updating the post throughout this year.
+Based on my initial research, I can see using make files to automate some of my
+tasks and using tools to help with python packages and python version support.&lt;/p&gt;</content><category term="Workflow"></category><category term="python"></category><category term="workflow"></category></entry><entry><title>Using SQL for Exploratory Data Analysis (EDA)</title><link href="https://cetyler.github.io/using-sql-for-exploratory-data-analysis-eda.html" rel="alternate"></link><published>2021-05-22T14:30:00-05:00</published><updated>2021-05-22T14:30:00-05:00</updated><author><name>Christopher</name></author><id>tag:cetyler.github.io,2021-05-22:/using-sql-for-exploratory-data-analysis-eda.html</id><summary type="html">&lt;p&gt;Some use SQL commands that can help with EDA.&lt;/p&gt;</summary><content type="html">&lt;p&gt;While I do use &lt;a href="https://pandas.pydata.org"&gt;pandas&lt;/a&gt; to do most of my initial
+exploratory data analysis (EDA), I do also use SQL.
+I started using pandas for EDA at work and quickly started to hit the memory
+limits.
+I then for various ways to more efficiently use my memory
+(chunking, data types, etc.) but was still having issues.
+Finally I started using SQL which made it much easier to do analysis on
+larger datasets.&lt;/p&gt;
+&lt;p&gt;This article will focus on some useful SQL commands that can help with initial
+EDA.
+&lt;strong&gt;Note&lt;/strong&gt; I highly recommend reading Memorable SQL.
+I will be using PostgreSQL in my examples.
+I also was able to get some additional ideas from
+&lt;a href="https://appsilon.com/intermediate-sql"&gt;Appsilon&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;I plan on using my existing data.&lt;/p&gt;
+&lt;h2&gt;Initial Data View&lt;/h2&gt;
+&lt;p&gt;Initially I look at the first 10 rows or so of a table to get an idea of what I
+am working with.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;SELECT * FROM hvac LIMIT 10;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;This will get the first 10 rows from &lt;code&gt;hvac&lt;/code&gt; table.
+Now I know the column names, potentially what kind of data that I have.
+If I want to look at the last 10 rows for example, I will use the timestamp to
+reverse the order.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;SELECT * FROM hvac ORDER BY timestamp DESC LIMIT 10;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Now I have the last 10 rows.&lt;/p&gt;
+&lt;p&gt;If I have multiple tables, I would do the same thing with each table.
+Usually ahead of time I know which tables are related to each other and if I
+need to do a join.&lt;/p&gt;
+&lt;p&gt;Now I may want to know how much data I am dealing with.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;SELECT COUNT(timestamp) FROM hvac;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;This will return the number of rows.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;SELECT column_name, data_type
+FROM infromation_schema.columns
+WHERE table_name = &amp;#39;hvac&amp;#39;;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;This will return a list of column names and the data type for each column for
+&lt;code&gt;hvac&lt;/code&gt; table.&lt;/p&gt;
+&lt;p&gt;I could also get the unique values for &lt;code&gt;location&lt;/code&gt;.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;SELECT DISTINCT(location) FROM hvac;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Within a few minutes, I have an idea of the size of data and what type of
+data I have.
+If this was done in pandas, I would have had to load all the data first, then
+do my EDA.
+Actually that is not completely correct as you can read SQL in pandas which
+would be similar to what I just did.
+My workflow is to do the following:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;If the data is not in a database (ex. csv, xlsx, etc.) put it in a database.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;SQLite can be really useful especially if you don't need concurrent
+  users.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Do some initial EDA in SQL to determine if it makes sense to do everything in
+  pandas or to use a mix of pandas and SQL queries.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Clean the data.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Perform some analysis to get some initial insights.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Share findings and next steps.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;Cleaning Data&lt;/h2&gt;
+&lt;p&gt;Sometimes it makes sense to do certain kinds of cleaning in SQL prior to
+loading the data into pandas.
+With the &lt;code&gt;hvac&lt;/code&gt; table there are a couple of things I would want to do&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Convert timestamp from EPOCH to date and time.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;I think name and location may be confusing and want to change the column
+  names.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Changing the column names is straightforward if I only care about when I
+display the data.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;SELECT timestamp
+    ,location AS sensor_location
+    ,name AS sensor_position
+    ,humidity
+FROM hvac
+LIMIT 10;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;I prefer to use snake_case especially if I will load this data into pandas.
+If I was going to export the table from PostgreSQL to say a csv file, then
+I would change &lt;code&gt;sensor_location&lt;/code&gt; to &lt;code&gt;"Sensor Location"&lt;/code&gt; for example.&lt;/p&gt;
+&lt;p&gt;Changing &lt;code&gt;timestamp&lt;/code&gt; from epoch, use &lt;code&gt;TO_TIMESTAMP()&lt;/code&gt;.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;SELECT TO_TIMESTAMP(timestamp) AS &amp;quot;Timestamp&amp;quot;
+    ,location AS &amp;quot;Sensor Location&amp;quot;
+    ,name AS &amp;quot;Sensor Position&amp;quot;
+    ,humidity AS &amp;quot;Humidity&amp;quot;
+FROM hvac
+LIMIT 10;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Let's say I had a problem with the case of &lt;code&gt;location&lt;/code&gt;, I could use &lt;code&gt;LOWER()&lt;/code&gt; to
+make &lt;code&gt;location&lt;/code&gt; lowercase of &lt;code&gt;UPPER()&lt;/code&gt; for uppercase.
+I can also use &lt;code&gt;CONCAT()&lt;/code&gt; if I want to combine &lt;code&gt;location&lt;/code&gt; and &lt;code&gt;name&lt;/code&gt;.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;SELECT TO_TIMESTAMP(timestamp) AS timestamp
+    ,location AS sensor_location
+    ,name AS sensor_name
+    ,UPPER(CONCAT(location, &amp;#39; &amp;#39;, name)) AS sensor
+FROM hvac
+LIMIT 10;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;This will combine &lt;code&gt;location&lt;/code&gt; and &lt;code&gt;name&lt;/code&gt; with a space between them.&lt;/p&gt;
+&lt;p&gt;There is more things that I could do but this should give you an idea of what
+you can do with this kind of data.&lt;/p&gt;
+&lt;h2&gt;Using GROUP BY&lt;/h2&gt;
+&lt;p&gt;Aggregating data can be very useful, especially if you have lots of data and
+can't fit that data in memory to use pandas.
+Let's get the total number of rows if we combine &lt;code&gt;location&lt;/code&gt; and &lt;code&gt;name&lt;/code&gt; together.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;SELECT CONCAT(location, &amp;#39; &amp;#39;, name) AS sensor
+    ,COUNT(CONCAT(location, &amp;#39; &amp;#39;, name)) AS number_of_rows
+FROM hvac
+GROUP BY CONCAT(location, &amp;#39; &amp;#39;, name);
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt; that if you include a column in the &lt;code&gt;SELECT&lt;/code&gt; statement, you must use
+it in an aggregation or you must include it in the &lt;code&gt;GROUP BY&lt;/code&gt;.
+With &lt;code&gt;GROUP BY&lt;/code&gt; you can use &lt;code&gt;WHERE&lt;/code&gt;.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;SELECT CONCAT(location, &amp;#39; &amp;#39;, name) AS sensor
+    ,COUNT(CONCAT(location, &amp;#39; &amp;#39;, name)) AS number_of_rows
+FROM hvac
+WHERE temperature &amp;lt; 90
+GROUP BY CONCAT(location, &amp;#39; &amp;#39;, name);
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;This will only count if the temperature is less than 90F.
+Using &lt;code&gt;HAVING&lt;/code&gt; will be like &lt;code&gt;WHERE&lt;/code&gt; but after &lt;code&gt;GROUP BY&lt;/code&gt; was done.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;SELET name
+    ,ROUND(AVG(temperature), 2) AS average_temperature
+FROM hvac
+GROUP BY name
+HAVING AVG(temperature) &amp;lt; 80;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;This will get the average temperature by &lt;code&gt;name&lt;/code&gt; but only include data if the
+average temperature is less than 80F.&lt;/p&gt;
+&lt;p&gt;The syntax is a little different than in pandas but you can do similar things.
+If I am doing more complex aggregation and I can fit the data in memory, then
+I would use pandas. &lt;/p&gt;
+&lt;h2&gt;Math Functions&lt;/h2&gt;
+&lt;p&gt;With this data, let's say that I would want to convert Fahrenheit to Celsius.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;SELECT *
+    ,(temperature - 32.0) * (5.0/9.0) AS Celsius
+FROM hvac
+LIMIT 10;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Keep in mind that if you don't want the result to return as an integer, then at
+least one value with each math function will need to be a float.
+I have found that if I want my result to be a float, I make all my numbers floats.
+Also know that if you do keep it as an integer, the result will not round up.&lt;/p&gt;
+&lt;p&gt;The math functions in general are what you would expect.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;addition &lt;code&gt;+&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;subtraction &lt;code&gt;-&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;multiplication &lt;code&gt;*&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;division &lt;code&gt;/&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;modulo &lt;code&gt;%&lt;/code&gt; which will return the remainder of dividing two numbers.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;exponent &lt;code&gt;^&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Functions like &lt;code&gt;COUNT()&lt;/code&gt;, &lt;code&gt;SUM()&lt;/code&gt;, &lt;code&gt;AVG()&lt;/code&gt;, &lt;code&gt;MAX()&lt;/code&gt; and &lt;code&gt;MIN()&lt;/code&gt;.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;This is not an exhaustive list but should give you an idea of what you can do.&lt;/p&gt;
+&lt;h2&gt;First/Last/Nth Values&lt;/h2&gt;
+&lt;p&gt;You can use &lt;code&gt;FIRST_VALUE&lt;/code&gt; function to return the value of a specified column
+from the first row of the window frame.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;SELECT *
+    ,TO_TIMESTAMP(timestamp) AS date_time
+    ,temperature - FIRST_VALUE(temperature) OVER (
+        PARITION BY temperature
+        ORDER BY timestamp
+    ) AS diff_temp_from_1st
+FROM hvac
+LIMIT 10;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Above will return all columns and add &lt;code&gt;date_time&lt;/code&gt; to convert EPOCH to date and
+time.
+Will also add &lt;code&gt;diff_temp_from_1st&lt;/code&gt; column that will subract a given row to the
+first row's temperature.
+It doesn't make much sense with our current data but hope it helps understand
+what you can do.&lt;/p&gt;
+&lt;h2&gt;Getting the Leading or Preceding Value&lt;/h2&gt;
+&lt;p&gt;&lt;code&gt;LEAD&lt;/code&gt; function will fetch the value of a specific attribute from the next row
+and return it in the current row.
+It takes two arguments:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Column name to fetch the next value.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;The number of rows relative to the current row.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;As expected, &lt;code&gt;LAG&lt;/code&gt; function does the opposite.
+With our data, I would like know the difference between my HVAC inlet and
+outlet temperatures.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;SELECT *
+    ,temperature - LAG(temperature, 1) OVER (
+        ORDER BY timestamp
+    ) AS temp_diff
+FROM hvac
+WHERE location = &amp;#39;HVAC&amp;#39;
+LIMIT 10;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;A bit ugly but it does subtract the current row's temperature with the previous
+temperature.&lt;/p&gt;
+&lt;p&gt;This can be useful to create an elapse time by subtracting the timestamp from
+the previous row or create a cumulative of sales.&lt;/p&gt;
+&lt;h2&gt;Ranking&lt;/h2&gt;
+&lt;p&gt;Lastly, I want to rank the temperature.
+The difference between &lt;code&gt;RANK&lt;/code&gt; and &lt;code&gt;DENSE_RANK&lt;/code&gt; functions is that &lt;code&gt;DENSE_RANK&lt;/code&gt;
+will return consecutive ranks, while &lt;code&gt;RANK&lt;/code&gt; will return ranking that if there
+are ties, a rank is skipped.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;SELECT temperature
+    ,DENSE_RANK () OVER (
+        ORDER BY timestamp
+    ) AS rank
+FROM hvac
+ORDER BY timestamp
+LIMIT 10;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Then if for example, I wanted the to filter the temperatures by rank, I can.&lt;/p&gt;
+&lt;h2&gt;Conclusion&lt;/h2&gt;
+&lt;p&gt;Hopefully so far you are starting to get an idea of how useful it can be to
+start your analysis with SQL queries first.
+Generally speaking all of what I have done above can be done with a small and
+large data set.
+While you may have to wait longer with a larger data set, it is not done in
+memory and will return a result quicker than you would expect.&lt;/p&gt;
+&lt;p&gt;Make sure comment and save your SQL statements.
+TODO put a link to how to structure your statements.
+The other reason to save your statement is that you can use those queries in
+pandas or recreate it in pandas to match the SQL statement.&lt;/p&gt;
+&lt;p&gt;I became much more productive using SQL beyond just dumping a table in pandas
+and using pandas to do my analysis.&lt;/p&gt;</content><category term="Blog"></category><category term="sql"></category><category term="eda"></category></entry><entry><title>How to Setup Local PyPi Repository</title><link href="https://cetyler.github.io/how-to-setup-local-pypi-repository.html" rel="alternate"></link><published>2021-05-09T15:00:00-05:00</published><updated>2021-05-21T17:00:00-05:00</updated><author><name>Christopher</name></author><id>tag:cetyler.github.io,2021-05-09:/how-to-setup-local-pypi-repository.html</id><summary type="html">&lt;p&gt;How to setup a local PyPi repository to host local packages.&lt;/p&gt;</summary><content type="html">&lt;p&gt;My previous &lt;a href="https://cetyler.github.io/how-to-create-a-python-package.html"&gt;post&lt;/a&gt;, I went
 through created and built a Python package.
 Then I put that package in a local directory and showed how to install that
 package from pip.&lt;/p&gt;
@@ -79,7 +478,7 @@ $ pip install --index-url http://localhost:8081 --trusted-host localhost
 &lt;h2&gt;Docker with Authentication&lt;/h2&gt;
 &lt;p&gt;For authentication, I will use 
 &lt;a href="https://github.com/pypiserver/pypiserver#apache-like-authentication-htpasswd"&gt;htpasswd&lt;/a&gt;.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;$ apt install htpasswd
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;$ apt install apache2-utils
 $ htpasswd -sc htpasswd.txt username
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
@@ -138,7 +537,13 @@ Create/open &lt;code&gt;~/.pip/pip.conf&lt;/code&gt;&lt;/p&gt;
 &lt;span class="na"&gt;trusted-host&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;localhost&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-&lt;p&gt;Instead of &lt;code&gt;localhost&lt;/code&gt; put the hostname or IP address.&lt;/p&gt;
+&lt;p&gt;Instead of &lt;code&gt;localhost&lt;/code&gt; put the hostname or IP address.
+Then run &lt;code&gt;pip config list&lt;/code&gt; to verify that the above gets returned.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="o"&gt;**&lt;/span&gt;&lt;span class="nv"&gt;Note&lt;/span&gt;&lt;span class="o"&gt;**&lt;/span&gt; &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="nv"&gt;Windows&lt;/span&gt;, &lt;span class="nv"&gt;create&lt;/span&gt; `&lt;span class="nv"&gt;pip&lt;/span&gt;.&lt;span class="nv"&gt;ini&lt;/span&gt;` &lt;span class="nv"&gt;file&lt;/span&gt; &lt;span class="nv"&gt;in&lt;/span&gt; `&lt;span class="nv"&gt;C&lt;/span&gt;:\&lt;span class="nv"&gt;Users&lt;/span&gt;\&lt;span class="nv"&gt;Username&lt;/span&gt;\&lt;span class="nv"&gt;pip&lt;/span&gt;`
+&lt;span class="nv"&gt;instead&lt;/span&gt;.
+&lt;span class="nv"&gt;The&lt;/span&gt; &lt;span class="nv"&gt;format&lt;/span&gt; &lt;span class="nv"&gt;of&lt;/span&gt; &lt;span class="nv"&gt;the&lt;/span&gt; &lt;span class="nv"&gt;file&lt;/span&gt; &lt;span class="nv"&gt;itself&lt;/span&gt; &lt;span class="nv"&gt;is&lt;/span&gt; &lt;span class="nv"&gt;the&lt;/span&gt; &lt;span class="nv"&gt;same&lt;/span&gt;.
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
 &lt;h2&gt;Conclusion&lt;/h2&gt;
 &lt;p&gt;Having a private PyPi server, I can put my packages in a centralize server and
 have all my computers on my network push/pull packages.

@@ -12,20 +12,21 @@
 <meta name="keywords" content="python, workflow, Workflow, " />
 
 <meta property="og:title" content="Python Workflow "/>
-<meta property="og:url" content="/python-workflow.html" />
+<meta property="og:url" content="https://cetyler.github.io/python-workflow.html" />
 <meta property="og:description" content="My python project workflow." />
 <meta property="og:site_name" content="Christopher Tyler R&amp;D Test Engineer" />
 <meta property="og:article:author" content="Christopher Tyler" />
-<meta property="og:article:published_time" content="2021-05-08T19:00:00-05:00" />
+<meta property="og:article:published_time" content="2021-06-05T21:00:00-05:00" />
 <meta name="twitter:title" content="Python Workflow ">
 <meta name="twitter:description" content="My python project workflow.">
 
         <title>Python Workflow  · Christopher Tyler R&amp;D Test Engineer
 </title>
         <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet">
-        <link rel="stylesheet" type="text/css" href="/theme/css/elegant.prod.css" media="screen">
-        <link rel="stylesheet" type="text/css" href="/theme/css/custom.css" media="screen">
+        <link rel="stylesheet" type="text/css" href="https://cetyler.github.io/theme/css/elegant.prod.css" media="screen">
+        <link rel="stylesheet" type="text/css" href="https://cetyler.github.io/theme/css/custom.css" media="screen">
 
+        <link href="https://cetyler.github.io/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Christopher Tyler R&amp;D Test Engineer - Full Atom Feed" />
 
 
     </head>
@@ -39,21 +40,21 @@
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                         </a>
-                        <a class="brand" href="/"><span class=site-name>Christopher Tyler R&D Test Engineer</span></a>
+                        <a class="brand" href="https://cetyler.github.io/"><span class=site-name>Christopher Tyler R&D Test Engineer</span></a>
                         <div class="nav-collapse collapse">
                             <ul class="nav pull-right top-menu">
                                 <li >
                                     <a href=
-                                       "/"
+                                       https://cetyler.github.io
                                     >Home</a>
                                 </li>
-                                <li ><a href="/pages/about-me.html">About Me</a></li>
-                                <li ><a href="/pages/resources.html">Resources</a></li>
-                                <li ><a href="/pages/my-resume.html">My Resume</a></li>
-                                <li ><a href="/categories.html">Categories</a></li>
-                                <li ><a href="/tags.html">Tags</a></li>
-                                <li ><a href="/archives.html">Archives</a></li>
-                                <li><form class="navbar-search" action="/search.html" onsubmit="return validateForm(this.elements['q'].value);"> <input type="text" class="search-query" placeholder="Search" name="q" id="tipue_search_input"></form></li>
+                                <li ><a href="https://cetyler.github.io/pages/about-me.html">About Me</a></li>
+                                <li ><a href="https://cetyler.github.io/pages/resources.html">Resources</a></li>
+                                <li ><a href="https://cetyler.github.io/pages/my-resume.html">My Resume</a></li>
+                                <li ><a href="https://cetyler.github.io/categories.html">Categories</a></li>
+                                <li ><a href="https://cetyler.github.io/tags.html">Tags</a></li>
+                                <li ><a href="https://cetyler.github.io/archives.html">Archives</a></li>
+                                <li><form class="navbar-search" action="https://cetyler.github.io/search.html" onsubmit="return validateForm(this.elements['q'].value);"> <input type="text" class="search-query" placeholder="Search" name="q" id="tipue_search_input"></form></li>
                             </ul>
                         </div>
                     </div>
@@ -67,7 +68,7 @@
 <div class="row-fluid">
     <header class="page-header span10 offset2">
         <h1>
-            <a href="/python-workflow.html">
+            <a href="https://cetyler.github.io/python-workflow.html">
                 Python Workflow
             </a>
         </h1>
@@ -99,12 +100,16 @@ improvements.</p>
 <p>I believe my biggest issue was that I did not really sit down and figure out my
 requirements and the minimum I need to get a project going.
 I am hoping that documenting will help me continuously improve my workflow.</p>
-<h2>Cookiecutter</h2>
-<h2>Code Editor</h2>
+<h2>Tools</h2>
+<h3>Cookiecutter</h3>
+<p>For right now I only use Cookiecutter when I do my Jupyter Notebook projects.
+I currently don't use it for my Python projects.
+Instead I just manually build out my project folder, .gitignore, etc.</p>
+<h3>Code Editor</h3>
 <p>I actually use couple different IDEs/editors.
 With all my editors, I put my settings/config file in a git repo so that I can
 share with all my computers.</p>
-<h3><a href="https://code.visualstudio.com/">VS Code</a></h3>
+<h4><a href="https://code.visualstudio.com/">VS Code</a></h4>
 <p>There is a lot of momentum with a lot of people using VS Code.
 VS Code has great Python support and more importantly it works on Windows,
 Linux and Mac.
@@ -117,7 +122,7 @@ Also I lean more towards more to the command-line.
 VS Code does have a neat feature to sync settings across multiple computers.</p>
 <p>However I readily suggest VS Code when others ask since it is pretty easy to use
 and it is pretty popular.</p>
-<h3><a href="https://micro-editor.github.io">micro</a></h3>
+<h4><a href="https://micro-editor.github.io">micro</a></h4>
 <p>This replaced vim for me.
 Micro is as easy as nano and almost as powerful as vim.
 Micro is a terminal-based editor which could be a turn off to some.
@@ -128,19 +133,19 @@ Micro for Windows is slow while using in Windows Terminal.
 Using micro under WSL works fine though.</p>
 <p><strong>Note</strong> that micro is not an IDE but with plugins could be consider a
 lightweight IDE.</p>
-<h2>Running Multiple Python Versions</h2>
+<h3>Running Multiple Python Versions</h3>
 <p>I currently have different methods based on OS.</p>
-<h3>Windows</h3>
+<h4>Windows</h4>
 <p>For right now, I download packages from https://python.org and install 
 <code>c:\python\pythonXX-VV</code> with <code>XX</code> being the Python version and <code>VV</code> whether it is
 32-bit or 64-bit.
 The problem with this is that I need to keep on top of minor Python updates.</p>
-<h3>Linux</h3>
+<h4>Linux</h4>
 <p>I primarily use Debian based distros.
 Right now I am using the versions that are in the package manager.
 My plan is to migrate to <a href="https://github.com/pyenv/pyenv">pyenv</a> though I don't
 have a current use.</p>
-<h2>Python Environment</h2>
+<h3>Python Environment</h3>
 <p>I use Python's standard <code>venv</code> for my virtual environments.
 I initially tried use to <a href="https://docs.conda.io/en/latest/miniconda.html">miniconda</a>
 for my Python projects but I encounter a couple of issues.
@@ -161,17 +166,47 @@ I plan to start using <a href="https://github.com/jgonggrijp/pip-review">pip-rev
 help with package upgrades.</p>
 <p>I plan on using <a href="https://pipxproject.github.io/pipx/">pipx</a> for my global
 packages like black or flake8.</p>
-<h2>Personal Packages</h2>
-<p>I run a private <a href="/how-to-setup-local-pypi-repository.html">PyPi server</a> and
+<h3>Personal Packages</h3>
+<p>I run a private <a href="https://cetyler.github.io/how-to-setup-local-pypi-repository.html">PyPi server</a> and
 create packages using flit
-(see <a href="/how-to-create-a-python-package.html">my post</a>).
+(see <a href="https://cetyler.github.io/how-to-create-a-python-package.html">my post</a>).
 This has been more recent but my plan is to create more packages.</p>
 <p>The problem I have at work is that I have one large package that tries to have
 everything and I need to break it up.
 This was due to learning how to create packages and my previous method was a
 little tedious.</p>
-<h2>Testing</h2>
-<p>I use <a href="https://docs.pytest.org/">pytest</a> for testing.</p>
+<h3>Testing</h3>
+<p>I use <a href="https://docs.pytest.org/">pytest</a> for testing.
+However, I don't use the test driven development.
+Due to the nature of my work, I typically don't get good requirements so at
+least initially, it is an iterative process.</p>
+<p>For my home projects, I have been attempting to do a more test driven
+development cycle.</p>
+<h2>Requirements Gathering</h2>
+<p>My work projects I typically don't get clear requirements.
+My Python projects typically spring from some data analysis project and it may
+be more useful to create a program or package.
+I will create some initial requirements.
+As I get more feedback, I will circle back and update my requirements.</p>
+<h2>Execution</h2>
+<p>I use Gitea (see <a href="https://cetyler.github.io/workflow-using-git.html">my post</a>) which
+is nice since I have access to an issue tracker and wiki.
+I will then create a project for my 1.0 release and milestones for the interim
+release.
+Then I create issues so I know what I need to work on to meet my milestones.</p>
+<p>I use git and git flow to create feature and release branches and work towards
+creating a program that meets the minimum requirements.
+Then as I start working on 2.0, 3.0, etc. I start adding features.</p>
+<p>Prior to a 1.0 release, anything goes.
+If I have to make breaking changes, I will as I try to meet the initial
+requirements.
+After 1.0, minor releases (ex. 1.1) will be minor new features.
+Bug fixes (ex. 1.1.1) are usually off the main or master branch.
+Major new features, breaking changes, etc. (ex. 2.0).</p>
+<h2>Summary</h2>
+<p>This is what I currently do and will be updating the post throughout this year.
+Based on my initial research, I can see using make files to automate some of my
+tasks and using tools to help with python packages and python version support.</p>
 
 
              
@@ -195,7 +230,7 @@ little tedious.</p>
                 <a class="accordion-toggle disqus-comment-count comment-count"
                    data-toggle="collapse"
                    data-parent="#accordion2"
-                   href="/python-workflow.html#comment_thread"
+                   href="https://cetyler.github.io/python-workflow.html#comment_thread"
                    id="comment-accordion-toggle">
                     Comments
                 </a>
@@ -224,15 +259,15 @@ little tedious.</p>
         </div>
         <section id="article-sidebar" class="span2">
             <h4>Published</h4>
-            <time itemprop="dateCreated" datetime="2021-05-08T19:00:00-05:00">May 8, 2021</time>
+            <time itemprop="dateCreated" datetime="2021-06-05T21:00:00-05:00">Jun 5, 2021</time>
             <h4>Category</h4>
-            <a class="category-link" href="/categories.html#workflow-ref">Workflow</a>
+            <a class="category-link" href="https://cetyler.github.io/categories.html#workflow-ref">Workflow</a>
             <h4>Tags</h4>
             <ul class="list-of-tags tags-in-article">
-                <li><a href="/tags.html#python-ref">python
-                    <span>4</span>
+                <li><a href="https://cetyler.github.io/tags.html#python-ref">python
+                    <span>5</span>
 </a></li>
-                <li><a href="/tags.html#workflow-ref">workflow
+                <li><a href="https://cetyler.github.io/tags.html#workflow-ref">workflow
                     <span>2</span>
 </a></li>
             </ul>

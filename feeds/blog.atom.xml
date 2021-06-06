@@ -1,5 +1,276 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Christopher Tyler R&amp;D Test Engineer - Blog</title><link href="https://cetyler.github.io/" rel="alternate"></link><link href="https://cetyler.github.io/feeds/blog.atom.xml" rel="self"></link><id>https://cetyler.github.io/</id><updated>2021-04-20T19:30:00-05:00</updated><entry><title>Switch Website to Pelican</title><link href="https://cetyler.github.io/switch-website-to-pelican.html" rel="alternate"></link><published>2021-04-10T14:30:00-05:00</published><updated>2021-04-20T19:30:00-05:00</updated><author><name>Christopher</name></author><id>tag:cetyler.github.io,2021-04-10:/switch-website-to-pelican.html</id><summary type="html">&lt;p&gt;Switch from Jekyll to Pelican.&lt;/p&gt;</summary><content type="html">&lt;h2&gt;Why I Changed&lt;/h2&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Christopher Tyler R&amp;D Test Engineer - Blog</title><link href="https://cetyler.github.io/" rel="alternate"></link><link href="https://cetyler.github.io/feeds/blog.atom.xml" rel="self"></link><id>https://cetyler.github.io/</id><updated>2021-05-22T14:30:00-05:00</updated><entry><title>Using SQL for Exploratory Data Analysis (EDA)</title><link href="https://cetyler.github.io/using-sql-for-exploratory-data-analysis-eda.html" rel="alternate"></link><published>2021-05-22T14:30:00-05:00</published><updated>2021-05-22T14:30:00-05:00</updated><author><name>Christopher</name></author><id>tag:cetyler.github.io,2021-05-22:/using-sql-for-exploratory-data-analysis-eda.html</id><summary type="html">&lt;p&gt;Some use SQL commands that can help with EDA.&lt;/p&gt;</summary><content type="html">&lt;p&gt;While I do use &lt;a href="https://pandas.pydata.org"&gt;pandas&lt;/a&gt; to do most of my initial
+exploratory data analysis (EDA), I do also use SQL.
+I started using pandas for EDA at work and quickly started to hit the memory
+limits.
+I then for various ways to more efficiently use my memory
+(chunking, data types, etc.) but was still having issues.
+Finally I started using SQL which made it much easier to do analysis on
+larger datasets.&lt;/p&gt;
+&lt;p&gt;This article will focus on some useful SQL commands that can help with initial
+EDA.
+&lt;strong&gt;Note&lt;/strong&gt; I highly recommend reading Memorable SQL.
+I will be using PostgreSQL in my examples.
+I also was able to get some additional ideas from
+&lt;a href="https://appsilon.com/intermediate-sql"&gt;Appsilon&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;I plan on using my existing data.&lt;/p&gt;
+&lt;h2&gt;Initial Data View&lt;/h2&gt;
+&lt;p&gt;Initially I look at the first 10 rows or so of a table to get an idea of what I
+am working with.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;SELECT * FROM hvac LIMIT 10;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;This will get the first 10 rows from &lt;code&gt;hvac&lt;/code&gt; table.
+Now I know the column names, potentially what kind of data that I have.
+If I want to look at the last 10 rows for example, I will use the timestamp to
+reverse the order.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;SELECT * FROM hvac ORDER BY timestamp DESC LIMIT 10;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Now I have the last 10 rows.&lt;/p&gt;
+&lt;p&gt;If I have multiple tables, I would do the same thing with each table.
+Usually ahead of time I know which tables are related to each other and if I
+need to do a join.&lt;/p&gt;
+&lt;p&gt;Now I may want to know how much data I am dealing with.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;SELECT COUNT(timestamp) FROM hvac;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;This will return the number of rows.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;SELECT column_name, data_type
+FROM infromation_schema.columns
+WHERE table_name = &amp;#39;hvac&amp;#39;;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;This will return a list of column names and the data type for each column for
+&lt;code&gt;hvac&lt;/code&gt; table.&lt;/p&gt;
+&lt;p&gt;I could also get the unique values for &lt;code&gt;location&lt;/code&gt;.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;SELECT DISTINCT(location) FROM hvac;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Within a few minutes, I have an idea of the size of data and what type of
+data I have.
+If this was done in pandas, I would have had to load all the data first, then
+do my EDA.
+Actually that is not completely correct as you can read SQL in pandas which
+would be similar to what I just did.
+My workflow is to do the following:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;If the data is not in a database (ex. csv, xlsx, etc.) put it in a database.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;SQLite can be really useful especially if you don't need concurrent
+  users.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Do some initial EDA in SQL to determine if it makes sense to do everything in
+  pandas or to use a mix of pandas and SQL queries.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Clean the data.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Perform some analysis to get some initial insights.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Share findings and next steps.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;Cleaning Data&lt;/h2&gt;
+&lt;p&gt;Sometimes it makes sense to do certain kinds of cleaning in SQL prior to
+loading the data into pandas.
+With the &lt;code&gt;hvac&lt;/code&gt; table there are a couple of things I would want to do&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Convert timestamp from EPOCH to date and time.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;I think name and location may be confusing and want to change the column
+  names.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Changing the column names is straightforward if I only care about when I
+display the data.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;SELECT timestamp
+    ,location AS sensor_location
+    ,name AS sensor_position
+    ,humidity
+FROM hvac
+LIMIT 10;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;I prefer to use snake_case especially if I will load this data into pandas.
+If I was going to export the table from PostgreSQL to say a csv file, then
+I would change &lt;code&gt;sensor_location&lt;/code&gt; to &lt;code&gt;"Sensor Location"&lt;/code&gt; for example.&lt;/p&gt;
+&lt;p&gt;Changing &lt;code&gt;timestamp&lt;/code&gt; from epoch, use &lt;code&gt;TO_TIMESTAMP()&lt;/code&gt;.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;SELECT TO_TIMESTAMP(timestamp) AS &amp;quot;Timestamp&amp;quot;
+    ,location AS &amp;quot;Sensor Location&amp;quot;
+    ,name AS &amp;quot;Sensor Position&amp;quot;
+    ,humidity AS &amp;quot;Humidity&amp;quot;
+FROM hvac
+LIMIT 10;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Let's say I had a problem with the case of &lt;code&gt;location&lt;/code&gt;, I could use &lt;code&gt;LOWER()&lt;/code&gt; to
+make &lt;code&gt;location&lt;/code&gt; lowercase of &lt;code&gt;UPPER()&lt;/code&gt; for uppercase.
+I can also use &lt;code&gt;CONCAT()&lt;/code&gt; if I want to combine &lt;code&gt;location&lt;/code&gt; and &lt;code&gt;name&lt;/code&gt;.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;SELECT TO_TIMESTAMP(timestamp) AS timestamp
+    ,location AS sensor_location
+    ,name AS sensor_name
+    ,UPPER(CONCAT(location, &amp;#39; &amp;#39;, name)) AS sensor
+FROM hvac
+LIMIT 10;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;This will combine &lt;code&gt;location&lt;/code&gt; and &lt;code&gt;name&lt;/code&gt; with a space between them.&lt;/p&gt;
+&lt;p&gt;There is more things that I could do but this should give you an idea of what
+you can do with this kind of data.&lt;/p&gt;
+&lt;h2&gt;Using GROUP BY&lt;/h2&gt;
+&lt;p&gt;Aggregating data can be very useful, especially if you have lots of data and
+can't fit that data in memory to use pandas.
+Let's get the total number of rows if we combine &lt;code&gt;location&lt;/code&gt; and &lt;code&gt;name&lt;/code&gt; together.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;SELECT CONCAT(location, &amp;#39; &amp;#39;, name) AS sensor
+    ,COUNT(CONCAT(location, &amp;#39; &amp;#39;, name)) AS number_of_rows
+FROM hvac
+GROUP BY CONCAT(location, &amp;#39; &amp;#39;, name);
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt; that if you include a column in the &lt;code&gt;SELECT&lt;/code&gt; statement, you must use
+it in an aggregation or you must include it in the &lt;code&gt;GROUP BY&lt;/code&gt;.
+With &lt;code&gt;GROUP BY&lt;/code&gt; you can use &lt;code&gt;WHERE&lt;/code&gt;.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;SELECT CONCAT(location, &amp;#39; &amp;#39;, name) AS sensor
+    ,COUNT(CONCAT(location, &amp;#39; &amp;#39;, name)) AS number_of_rows
+FROM hvac
+WHERE temperature &amp;lt; 90
+GROUP BY CONCAT(location, &amp;#39; &amp;#39;, name);
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;This will only count if the temperature is less than 90F.
+Using &lt;code&gt;HAVING&lt;/code&gt; will be like &lt;code&gt;WHERE&lt;/code&gt; but after &lt;code&gt;GROUP BY&lt;/code&gt; was done.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;SELET name
+    ,ROUND(AVG(temperature), 2) AS average_temperature
+FROM hvac
+GROUP BY name
+HAVING AVG(temperature) &amp;lt; 80;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;This will get the average temperature by &lt;code&gt;name&lt;/code&gt; but only include data if the
+average temperature is less than 80F.&lt;/p&gt;
+&lt;p&gt;The syntax is a little different than in pandas but you can do similar things.
+If I am doing more complex aggregation and I can fit the data in memory, then
+I would use pandas. &lt;/p&gt;
+&lt;h2&gt;Math Functions&lt;/h2&gt;
+&lt;p&gt;With this data, let's say that I would want to convert Fahrenheit to Celsius.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;SELECT *
+    ,(temperature - 32.0) * (5.0/9.0) AS Celsius
+FROM hvac
+LIMIT 10;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Keep in mind that if you don't want the result to return as an integer, then at
+least one value with each math function will need to be a float.
+I have found that if I want my result to be a float, I make all my numbers floats.
+Also know that if you do keep it as an integer, the result will not round up.&lt;/p&gt;
+&lt;p&gt;The math functions in general are what you would expect.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;addition &lt;code&gt;+&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;subtraction &lt;code&gt;-&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;multiplication &lt;code&gt;*&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;division &lt;code&gt;/&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;modulo &lt;code&gt;%&lt;/code&gt; which will return the remainder of dividing two numbers.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;exponent &lt;code&gt;^&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Functions like &lt;code&gt;COUNT()&lt;/code&gt;, &lt;code&gt;SUM()&lt;/code&gt;, &lt;code&gt;AVG()&lt;/code&gt;, &lt;code&gt;MAX()&lt;/code&gt; and &lt;code&gt;MIN()&lt;/code&gt;.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;This is not an exhaustive list but should give you an idea of what you can do.&lt;/p&gt;
+&lt;h2&gt;First/Last/Nth Values&lt;/h2&gt;
+&lt;p&gt;You can use &lt;code&gt;FIRST_VALUE&lt;/code&gt; function to return the value of a specified column
+from the first row of the window frame.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;SELECT *
+    ,TO_TIMESTAMP(timestamp) AS date_time
+    ,temperature - FIRST_VALUE(temperature) OVER (
+        PARITION BY temperature
+        ORDER BY timestamp
+    ) AS diff_temp_from_1st
+FROM hvac
+LIMIT 10;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Above will return all columns and add &lt;code&gt;date_time&lt;/code&gt; to convert EPOCH to date and
+time.
+Will also add &lt;code&gt;diff_temp_from_1st&lt;/code&gt; column that will subract a given row to the
+first row's temperature.
+It doesn't make much sense with our current data but hope it helps understand
+what you can do.&lt;/p&gt;
+&lt;h2&gt;Getting the Leading or Preceding Value&lt;/h2&gt;
+&lt;p&gt;&lt;code&gt;LEAD&lt;/code&gt; function will fetch the value of a specific attribute from the next row
+and return it in the current row.
+It takes two arguments:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Column name to fetch the next value.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;The number of rows relative to the current row.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;As expected, &lt;code&gt;LAG&lt;/code&gt; function does the opposite.
+With our data, I would like know the difference between my HVAC inlet and
+outlet temperatures.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;SELECT *
+    ,temperature - LAG(temperature, 1) OVER (
+        ORDER BY timestamp
+    ) AS temp_diff
+FROM hvac
+WHERE location = &amp;#39;HVAC&amp;#39;
+LIMIT 10;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;A bit ugly but it does subtract the current row's temperature with the previous
+temperature.&lt;/p&gt;
+&lt;p&gt;This can be useful to create an elapse time by subtracting the timestamp from
+the previous row or create a cumulative of sales.&lt;/p&gt;
+&lt;h2&gt;Ranking&lt;/h2&gt;
+&lt;p&gt;Lastly, I want to rank the temperature.
+The difference between &lt;code&gt;RANK&lt;/code&gt; and &lt;code&gt;DENSE_RANK&lt;/code&gt; functions is that &lt;code&gt;DENSE_RANK&lt;/code&gt;
+will return consecutive ranks, while &lt;code&gt;RANK&lt;/code&gt; will return ranking that if there
+are ties, a rank is skipped.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;SELECT temperature
+    ,DENSE_RANK () OVER (
+        ORDER BY timestamp
+    ) AS rank
+FROM hvac
+ORDER BY timestamp
+LIMIT 10;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Then if for example, I wanted the to filter the temperatures by rank, I can.&lt;/p&gt;
+&lt;h2&gt;Conclusion&lt;/h2&gt;
+&lt;p&gt;Hopefully so far you are starting to get an idea of how useful it can be to
+start your analysis with SQL queries first.
+Generally speaking all of what I have done above can be done with a small and
+large data set.
+While you may have to wait longer with a larger data set, it is not done in
+memory and will return a result quicker than you would expect.&lt;/p&gt;
+&lt;p&gt;Make sure comment and save your SQL statements.
+TODO put a link to how to structure your statements.
+The other reason to save your statement is that you can use those queries in
+pandas or recreate it in pandas to match the SQL statement.&lt;/p&gt;
+&lt;p&gt;I became much more productive using SQL beyond just dumping a table in pandas
+and using pandas to do my analysis.&lt;/p&gt;</content><category term="Blog"></category><category term="sql"></category><category term="eda"></category></entry><entry><title>Switch Website to Pelican</title><link href="https://cetyler.github.io/switch-website-to-pelican.html" rel="alternate"></link><published>2021-04-10T14:30:00-05:00</published><updated>2021-04-20T19:30:00-05:00</updated><author><name>Christopher</name></author><id>tag:cetyler.github.io,2021-04-10:/switch-website-to-pelican.html</id><summary type="html">&lt;p&gt;Switch from Jekyll to Pelican.&lt;/p&gt;</summary><content type="html">&lt;h2&gt;Why I Changed&lt;/h2&gt;
 &lt;p&gt;My initial website was done using the default for GitHub Pages using Jekyll.
 Jekyll would probably have been fine but I knew that I wanted to use Jupyter
 Notebooks.

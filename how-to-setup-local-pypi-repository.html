@@ -17,6 +17,7 @@
 <meta property="og:site_name" content="Christopher Tyler R&amp;D Test Engineer" />
 <meta property="og:article:author" content="Christopher" />
 <meta property="og:article:published_time" content="2021-05-09T15:00:00-05:00" />
+<meta property="og:article:modified_time" content="2021-05-21T17:00:00-05:00" />
 <meta name="twitter:title" content="How to Setup Local PyPi Repository ">
 <meta name="twitter:description" content="How to setup a local PyPi repository to host local packages.">
 
@@ -158,7 +159,7 @@ $ pip install --index-url http://localhost:8081 --trusted-host localhost
 <h2>Docker with Authentication</h2>
 <p>For authentication, I will use 
 <a href="https://github.com/pypiserver/pypiserver#apache-like-authentication-htpasswd">htpasswd</a>.</p>
-<div class="highlight"><pre><span></span><code>$ apt install htpasswd
+<div class="highlight"><pre><span></span><code>$ apt install apache2-utils
 $ htpasswd -sc htpasswd.txt username
 </code></pre></div>
 
@@ -217,7 +218,13 @@ Create/open <code>~/.pip/pip.conf</code></p>
 <span class="na">trusted-host</span> <span class="o">=</span> <span class="s">localhost</span>
 </code></pre></div>
 
-<p>Instead of <code>localhost</code> put the hostname or IP address.</p>
+<p>Instead of <code>localhost</code> put the hostname or IP address.
+Then run <code>pip config list</code> to verify that the above gets returned.</p>
+<div class="highlight"><pre><span></span><code><span class="o">**</span><span class="nv">Note</span><span class="o">**</span> <span class="k">for</span> <span class="nv">Windows</span>, <span class="nv">create</span> `<span class="nv">pip</span>.<span class="nv">ini</span>` <span class="nv">file</span> <span class="nv">in</span> `<span class="nv">C</span>:\<span class="nv">Users</span>\<span class="nv">Username</span>\<span class="nv">pip</span>`
+<span class="nv">instead</span>.
+<span class="nv">The</span> <span class="nv">format</span> <span class="nv">of</span> <span class="nv">the</span> <span class="nv">file</span> <span class="nv">itself</span> <span class="nv">is</span> <span class="nv">the</span> <span class="nv">same</span>.
+</code></pre></div>
+
 <h2>Conclusion</h2>
 <p>Having a private PyPi server, I can put my packages in a centralize server and
 have all my computers on my network push/pull packages.
@@ -276,6 +283,9 @@ to installing packages from PyPi.</p>
         <section id="article-sidebar" class="span2">
             <h4>Published</h4>
             <time itemprop="dateCreated" datetime="2021-05-09T15:00:00-05:00">May 9, 2021</time>
+<h4>Last Updated</h4>
+<time datetime="2021-05-21T17:00:00-05:00">May 21, 2021</time>
+
             <h4>Category</h4>
             <a class="category-link" href="https://cetyler.github.io/categories.html#python-ref">Python</a>
             <h4>Tags</h4>
@@ -287,7 +297,7 @@ to installing packages from PyPi.</p>
                     <span>1</span>
 </a></li>
                 <li><a href="https://cetyler.github.io/tags.html#python-ref">python
-                    <span>4</span>
+                    <span>5</span>
 </a></li>
             </ul>
 <h4>Contact</h4>
