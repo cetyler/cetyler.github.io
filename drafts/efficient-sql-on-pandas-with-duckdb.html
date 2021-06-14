@@ -9,19 +9,18 @@
         <meta property="og:type" content="article" />
         <meta name="twitter:card" content="summary">
 
-<meta name="keywords" content="python, pbpython, sidetable, Chris Moffit, Python, " />
+<meta name="keywords" content="sql, pandas, python, duckdb, Blog, " />
 
-<meta property="og:title" content="Sidetable "/>
-<meta property="og:url" content="https://cetyler.github.io/sidetable.html" />
-<meta property="og:description" content="Use Sidetable to summarize data." />
+<meta property="og:title" content="Efficient SQL on Pandas with DuckDB "/>
+<meta property="og:url" content="https://cetyler.github.io/drafts/efficient-sql-on-pandas-with-duckdb.html" />
+<meta property="og:description" content="Use SQL on top of pandas!" />
 <meta property="og:site_name" content="Christopher Tyler R&amp;D Test Engineer" />
 <meta property="og:article:author" content="Christopher" />
-<meta property="og:article:published_time" content="2021-02-26T00:00:00-06:00" />
-<meta property="og:article:modified_time" content="2021-04-20T20:16:00-05:00" />
-<meta name="twitter:title" content="Sidetable ">
-<meta name="twitter:description" content="Use Sidetable to summarize data.">
+<meta property="og:article:published_time" content="2021-06-26T14:30:00-05:00" />
+<meta name="twitter:title" content="Efficient SQL on Pandas with DuckDB ">
+<meta name="twitter:description" content="Use SQL on top of pandas!">
 
-        <title>Sidetable  · Christopher Tyler R&amp;D Test Engineer
+        <title>Efficient SQL on Pandas with DuckDB  · Christopher Tyler R&amp;D Test Engineer
 </title>
         <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet">
         <link rel="stylesheet" type="text/css" href="https://cetyler.github.io/theme/css/elegant.prod.css" media="screen">
@@ -69,8 +68,8 @@
 <div class="row-fluid">
     <header class="page-header span10 offset2">
         <h1>
-            <a href="https://cetyler.github.io/sidetable.html">
-                Sidetable
+            <a href="https://cetyler.github.io/drafts/efficient-sql-on-pandas-with-duckdb.html">
+                Efficient SQL on Pandas with DuckDB
             </a>
         </h1>
     </header>
@@ -79,13 +78,22 @@
 <div class="row-fluid">
         <div class="span8 offset2 article-content">
             
-            <p>Chris Moffit at <a href="https://pbpython.com">Practical Business Pyton</a> created a
-pandas utility library called <a href="https://pbpython.com/sidetable.html">sidetable</a>.
-I have played with it a little bit not with any real project yet.</p>
-<p>The benefit I can see is that if it can accelerate my initial analysis.
-My plan is to do a personal project before using for a work project.</p>
-<p>See my
-<a href="https://cetyler.github.io/hvac-review-using-sidetable.html">HVAC Review Using Sidetable</a>.</p>
+            <p>While watching 
+<a href="https://pythonbytes.fm/episodes/show/flask-2.0-articles-and-reactions">PythonBytes #235</a>,
+I found out about <a href="https://duckdb.org/2021/05/14/sql-on-pandas.html">DuckDB</a> by
+Mark and Hannes.
+I am curious since I use pandas quite a bit but still struggle to remember the
+syntax.
+If I could just run SQL queries on top of pandas, maybe that would cover 95% of
+what I do.</p>
+<p>I plan on going through some data and seeing how well this can work.</p>
+<h2>Setup and get the data</h2>
+<p>I WON'T USE A JUPYTER NOTEBOOK
+TRY AND FIND A FUN DATASET.</p>
+<h2>EDA</h2>
+<h2>Compare to SQLite</h2>
+<p>LOOK AT DUMPING DATA INTO SQLITE FIRST THEN JUST PERFORMING THE QUERIES INSTEAD</p>
+<h2>Conclusion</h2>
 
 
              
@@ -99,63 +107,24 @@ My plan is to do a personal project before using for a work project.</p>
 
 
 
-<section>
-    <h6 style="display:none;">Comments</h6>
-    <p id="comment-message">Leave your comments below. </p>
-
-    <div class="accordion" id="accordion2">
-        <div class="accordion-group">
-            <div class="accordion-heading">
-                <a class="accordion-toggle disqus-comment-count comment-count"
-                   data-toggle="collapse"
-                   data-parent="#accordion2"
-                   href="https://cetyler.github.io/sidetable.html#comment_thread"
-                   id="comment-accordion-toggle">
-                    Comments
-                </a>
-            </div>
-            <div id="comment_thread" class="accordion-body collapse">
-                <div class="accordion-inner">
-                    <div class="comments">
-
-                        <script src="https://utteranc.es/client.js"
-        data-repo="cetyler/cetyler.github.io"
-        data-issue-term="sidetable"
-        data-label="Comments"
-        data-theme="github-light"
-        crossorigin="anonymous"
-        async>
-</script>
-
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
             <hr/>
         </div>
         <section id="article-sidebar" class="span2">
             <h4>Published</h4>
-            <time itemprop="dateCreated" datetime="2021-02-26T00:00:00-06:00">Feb 26, 2021</time>
-<h4>Last Updated</h4>
-<time datetime="2021-04-20T20:16:00-05:00">Apr 20, 2021</time>
-
+            <time itemprop="dateCreated" datetime="2021-06-26T14:30:00-05:00">Jun 26, 2021</time>
             <h4>Category</h4>
-            <a class="category-link" href="https://cetyler.github.io/categories.html#python-ref">Python</a>
+            <a class="category-link" href="https://cetyler.github.io/categories.html#blog-ref">Blog</a>
             <h4>Tags</h4>
             <ul class="list-of-tags tags-in-article">
-                <li><a href="https://cetyler.github.io/tags.html#chris-moffit-ref">Chris Moffit
-                    <span>1</span>
+                <li><a href="https://cetyler.github.io/tags.html#duckdb-ref">duckdb
 </a></li>
-                <li><a href="https://cetyler.github.io/tags.html#pbpython-ref">pbpython
+                <li><a href="https://cetyler.github.io/tags.html#pandas-ref">pandas
                     <span>1</span>
 </a></li>
                 <li><a href="https://cetyler.github.io/tags.html#python-ref">python
                     <span>6</span>
 </a></li>
-                <li><a href="https://cetyler.github.io/tags.html#sidetable-ref">sidetable
+                <li><a href="https://cetyler.github.io/tags.html#sql-ref">sql
                     <span>2</span>
 </a></li>
             </ul>
