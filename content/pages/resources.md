@@ -1,10 +1,12 @@
 Title: Resources
 Date: 2021-04-10
-Modified: 2021-04-20
+Modified: 2022-08-11
 Author: Christopher
 Status: published
 comment_id: resources
 utterances_filter: on
+
+Any resources below that I have done a more thorough, I will link to the posts.
 
 ## Python
 
@@ -19,6 +21,13 @@ discharge batteries.
 My next project at work I was able to convert HEX logs and convert to a human
 readable format.
 These initial projects I was able to do using Al's books.
+
+### [Beyond the Boring Stuff](https://inventwithpython.com/beyond/)
+
+This is a nice continuation from Automate the Boring Stuff.
+Al does a nice job going through and talking about the tools to help make
+coding easier.
+He also goes through how to progress on your Python journey.
 
 ### [Practical Business Python](https://pbpython.com/)
 
@@ -56,10 +65,22 @@ multiple PCs.
 Jeff provides enough detail to do meaningful queries and shows how to create
 and structure a database. 
 
+### [SQL for Data Scientists](https://sqlfordatascientists.com/)
+
+While Jeff goes through and does an introduction to SQL using PostgreSQL, Renee
+uses SQL to solve business problems that a Data Scientist could see.
+While she uses MySQL, she explains the differences between the popular
+relational databases.
+While going through the syntax was helpful (as well as learning WITH Statements
+and Views), Renee did an excellent job turning a business question into a
+technical implementation.
+While my title does not say Data Scientist/Analyst, working at Dynamic I do a
+lot of data analysis and her book went a long way in helping me do my job.
+
 ## Virtualization
 
 ### [Memorable Docker](https://payhip.com/b/OwWT)
 
-Jeff's book does a good jab providing a good into to Docker.
+Jeff's book does a good job providing a good into to Docker.
 I like the fact that he is attempting to get you up and going while
 understanding potential security risks.
