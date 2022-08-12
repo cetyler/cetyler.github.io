@@ -1,0 +1,1171 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Christopher Tyler R&amp;D Test Engineer - Python</title><link href="https://cetyler.github.io/" rel="alternate"></link><link href="https://cetyler.github.io/feeds/python.atom.xml" rel="self"></link><id>https://cetyler.github.io/</id><updated>2022-08-11T20:00:00-05:00</updated><entry><title>Weather Project - PyPi</title><link href="https://cetyler.github.io/weather-project-pypi.html" rel="alternate"></link><published>2022-08-11T20:00:00-05:00</published><updated>2022-08-11T20:00:00-05:00</updated><author><name>Christopher</name></author><id>tag:cetyler.github.io,2022-08-11:/weather-project-pypi.html</id><summary type="html">&lt;p&gt;Setup PyPi with an empty project to lock in the project name.&lt;/p&gt;</summary><content type="html">&lt;h2&gt;Overview&lt;/h2&gt;
+&lt;p&gt;From the &lt;a href="https://cetyler.github.io/weather-project.html"&gt;previous article&lt;/a&gt;,
+the Weather Project will be put on PyPi to help me understand that process and
+to also share with others.
+This article will go over how to put a skeleton project on PyPi.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt; prior to the completion of this article, I found 
+&lt;a href="https://mathspp.com/blog/how-to-create-a-python-package-in-2022"&gt;Rodrigo's article&lt;/a&gt;
+though keep in mind that his article is much more comprehensive.&lt;/p&gt;
+&lt;h2&gt;Create PyPi Account&lt;/h2&gt;
+&lt;p&gt;It is fairly straightforward to create an account.
+Go to https://pypi.org/account/register/ and follow the instructions.
+I would suggest adding at least two emails to your account in case something
+happens to one of your email accounts.
+I would also setup Two Factor Authentication (2FA).
+In order to push our packages to PyPi, create an API token.
+I put it in my password manage since I created one to use for all my packages
+in PyPi.&lt;/p&gt;
+&lt;p&gt;You should do the same steps and create an account on https://test.pypi.org/.&lt;/p&gt;
+&lt;h2&gt;Create Weather Package on PyPi&lt;/h2&gt;
+&lt;p&gt;This may seem backwards, but it is easier to check if a name exists first as
+opposed to coming up with a name, creating a git project, then finding out that
+your name you selected is too similar to an existing project.
+I did a search to make sure that &lt;code&gt;openweather-report&lt;/code&gt; was not in use though it
+took a couple of tries.
+I use &lt;a href="https://github.com/pyenv/pyenv"&gt;pyenv&lt;/a&gt; to set my Python version so I
+created a folder and set the version to 3.10.6 (current at the time of this
+article) as well as create my virtual environment.
+I created a project using &lt;a href="https://www.python-poetry.org/"&gt;Poetry&lt;/a&gt;.
+This will be an empty project just to lock in the package name.
+Add the API token for both PyPi and Test PyPi using:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;poetry&lt;/span&gt; &lt;span class="n"&gt;new&lt;/span&gt; &lt;span class="n"&gt;openweather&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;report&lt;/span&gt;
+&lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;poetry&lt;/span&gt; &lt;span class="n"&gt;config&lt;/span&gt; &lt;span class="n"&gt;repositories&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;testpypi&lt;/span&gt; &lt;span class="nl"&gt;https&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="c1"&gt;//test.pypi.org/legacy/&lt;/span&gt;
+&lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;poetry&lt;/span&gt; &lt;span class="n"&gt;config&lt;/span&gt; &lt;span class="n"&gt;pypi&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;token&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;pypi&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;API&lt;/span&gt; &lt;span class="n"&gt;KEY&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+&lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;poetry&lt;/span&gt; &lt;span class="n"&gt;config&lt;/span&gt; &lt;span class="n"&gt;http&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;basic&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;testpypi&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;API&lt;/span&gt; &lt;span class="n"&gt;KEY&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+&lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;poetry&lt;/span&gt; &lt;span class="n"&gt;build&lt;/span&gt;
+&lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;poetry&lt;/span&gt; &lt;span class="n"&gt;publish&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;r&lt;/span&gt; &lt;span class="n"&gt;testpypi&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;If everything works, then the package name is unique enough and it now locked
+in.&lt;/p&gt;
+&lt;h2&gt;Create Project on Github&lt;/h2&gt;
+&lt;p&gt;Normally I use a private &lt;a href="https://gitea.io/en-us/"&gt;Gitea&lt;/a&gt; instance on my local
+network for personal projects and another one while I am work.
+Openweather-report I would like to share with others.
+While I have a &lt;a href="https://about.gitlab.com/"&gt;Gitlab&lt;/a&gt; account, most of the
+momentum is on &lt;a href="https://github.com/"&gt;Github&lt;/a&gt; so at least initially I was start
+there.
+Add a new repository called
+&lt;a href="https://github.com/cetyler/openweather_report"&gt;openweather_report&lt;/a&gt;.
+My goal is to use this project to try and understand some of the features that
+are Github provides.
+This project is going to be more than just a toy project but this project won't
+be overly complicated.
+There is enough to the project that I can learn how to use &lt;a href="https://github.com/features/actions"&gt;Github
+Actions&lt;/a&gt; for example.&lt;/p&gt;
+&lt;h2&gt;Git Flow&lt;/h2&gt;
+&lt;p&gt;Prior to pushing my project to Github, I use 
+&lt;a href="https://github.com/petervanderdoes/gitflow-avh/"&gt;Git Flow&lt;/a&gt; but I plan on using
+it differently than I have in the past.
+This project will have the following branches:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;main&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;This branch will be considered the stable branch.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;develop&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;This will be the latest branch.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Should generally be working but due to frequent additions of features, it
+    can be unstable at times.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;feature&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Any feature to add to develop branch.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;This will be a short running branch no more than a couple of days.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;bug&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;This can be off either main or develop&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;I also plan on doing pull requests instead of just branching from my local git
+repository.
+This may remove the need to use Git Flow.&lt;/p&gt;
+&lt;h2&gt;Next Steps&lt;/h2&gt;
+&lt;p&gt;I now have PyPi set up and my project on PyPi and on Github.
+The goal is the next release will be a functional release.
+The next article will be to start working on the requirements and create a
+Roadmap.&lt;/p&gt;</content><category term="Python"></category><category term="python"></category><category term="project"></category></entry><entry><title>Weather Project</title><link href="https://cetyler.github.io/weather-project.html" rel="alternate"></link><published>2022-07-19T20:00:00-05:00</published><updated>2022-07-19T20:00:00-05:00</updated><author><name>Christopher</name></author><id>tag:cetyler.github.io,2022-07-19:/weather-project.html</id><summary type="html">&lt;p&gt;Create a simple weather project to document how to add projects to PyPi and to aid with data analysis.&lt;/p&gt;</summary><content type="html">&lt;h2&gt;Overview&lt;/h2&gt;
+&lt;p&gt;I haven't added anything to PyPi.
+Also I wanted to continue to refine my Python workflow and want to use a
+project that is beyond a toy project like my 
+&lt;a href="https://cetyler.github.io/calculator-project.html"&gt;Calculator Project&lt;/a&gt;.
+Finally I wanted something to help generate data so that I can work on my data
+analysis.
+This article will cover what my requirements and goals are for this project.&lt;/p&gt;
+&lt;h2&gt;Requirements&lt;/h2&gt;
+&lt;p&gt;I have three requirement sections:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;The weather program itself.&lt;/li&gt;
+&lt;li&gt;Data analysis.&lt;/li&gt;
+&lt;li&gt;Evaluating and updating Python workflow.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;Weather Program&lt;/h3&gt;
+&lt;p&gt;I will go in more detail when I actually create the User Requirements but for
+now I want to provide some high level requirements.
+The program should be able to run using a scheduler like cron in Linux or the
+Windows Scheduler.
+This will enable getting data over time.
+I want to use weather data from &lt;a href="https://openweathermap.org/"&gt;OpenWeather&lt;/a&gt;
+since I would like to try their 
+&lt;a href="https://openweathermap.org/api/one-call-3"&gt;One API Call&lt;/a&gt;.
+I also would like to save the data to &lt;a href="https://www.postgresql.org/"&gt;PostgreSQL&lt;/a&gt;
+to practice using PostgreSQL since I use PostgreSQL quite a bit at work.
+Eventually it would nice that this program to set everything with in the
+program itself.&lt;/p&gt;
+&lt;h3&gt;Data Analysis&lt;/h3&gt;
+&lt;p&gt;I know I could go to websites like &lt;a href="https://www.kaggle.com/"&gt;Kaggle&lt;/a&gt; but I
+think it is more interesting getting data that I am actually interested in.
+Obviously I can't use any data from work.
+I also would like to practice with forecasting and while I could use stock
+data, I think weather data would be a nice start.
+I will have historical data to compare to and the forecast data from
+OpenWeather.
+I could see how accurate my forecast is as well as OpenWeather's forecast.
+Then I can create dashboards to view and analyze the data.&lt;/p&gt;
+&lt;h3&gt;Python Workflow&lt;/h3&gt;
+&lt;p&gt;I would like to evaluate my current workflow and use this project to continue
+to make improvements.
+I am currently evaluating &lt;a href="https://www.jetbrains.com/pycharm/"&gt;Pycharm&lt;/a&gt; at work
+while I am evaluating &lt;a href="https://github.com/coder/code-server"&gt;Coder&lt;/a&gt; at home.&lt;/p&gt;
+&lt;h2&gt;Roadmap&lt;/h2&gt;
+&lt;p&gt;I will include a roadmap in the project but I want to do a very high level
+initial roadmap to get a minimal viable product.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Create initial PyPi release to lock in project name.&lt;/li&gt;
+&lt;li&gt;Create User Requirements.&lt;/li&gt;
+&lt;li&gt;Create Design Requirements.&lt;/li&gt;
+&lt;li&gt;Create README.&lt;/li&gt;
+&lt;li&gt;Create Roadmap.&lt;/li&gt;
+&lt;li&gt;Create tests.&lt;/li&gt;
+&lt;li&gt;Create initial release.&lt;/li&gt;
+&lt;li&gt;Review remaining roadmap and continue through the roadmap.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;My plan unlike the Calculator Project is to continue to create article as I
+work on this weather project.&lt;/p&gt;
+&lt;h2&gt;Next Steps&lt;/h2&gt;
+&lt;p&gt;I will create a bare bones project so that I can lock in the project name on
+&lt;a href="https://pypi.org/"&gt;PyPi&lt;/a&gt;.
+I also want to be able to publish to TestPyPI as well as PyPi without needing
+to input my username and password each time.&lt;/p&gt;</content><category term="Python"></category><category term="python"></category><category term="project"></category></entry><entry><title>Manage Multiple Python Versions and Virtual Environments with pyenv</title><link href="https://cetyler.github.io/manage-multiple-python-versions-and-virtual-environments-with-pyenv.html" rel="alternate"></link><published>2022-04-28T21:00:00-05:00</published><updated>2022-04-28T21:00:00-05:00</updated><author><name>Christopher</name></author><id>tag:cetyler.github.io,2022-04-28:/manage-multiple-python-versions-and-virtual-environments-with-pyenv.html</id><summary type="html">&lt;p&gt;Use pyenv to replace venv and Deadsnakes PPA.&lt;/p&gt;</summary><content type="html">&lt;h2&gt;Overview&lt;/h2&gt;
+&lt;p&gt;After updating to 
+&lt;a href="https://ubuntu-mate.org/blog/ubuntu-mate-jammy-jellyfish-release-notes/"&gt;Ubuntu Mate 22.04&lt;/a&gt;,
+I had to redo some of my virtual environments because Python 3.9 was replaced
+with 3.10.
+I remembered an article from 
+&lt;a href="https://realpython.com/intro-to-pyenv/#virtual-environments-and-pyenv"&gt;Real Python&lt;/a&gt;
+that went through support multiple versions of Python.
+While that part is useful, using &lt;a href="https://github.com/pyenv/pyenv"&gt;pyenv&lt;/a&gt; can
+help keep up to date with the latest Python as well as support virtual
+environments.&lt;/p&gt;
+&lt;p&gt;This article will go through how I use pyenv and my plans to update my workflow
+using it.&lt;/p&gt;
+&lt;h2&gt;Current Workflow&lt;/h2&gt;
+&lt;p&gt;Currently I use &lt;code&gt;venv&lt;/code&gt; to manage my virtual environments.
+For the most part this works fine as I have alias &lt;code&gt;ae&lt;/code&gt; to activate and &lt;code&gt;de&lt;/code&gt; to
+deactivate in Linux (as long as the folder is &lt;code&gt;venv&lt;/code&gt;).
+For Windows, I still use &lt;code&gt;venv&lt;/code&gt; but I don't have any aliases as I put the
+Python version and whether I am using 32 or 64 bits.&lt;/p&gt;
+&lt;p&gt;For managing different Python versions, for Windows I just go to 
+&lt;a href="https://python.org"&gt;Python's official website&lt;/a&gt; and download a new version when
+I need to.
+I put all my installs in &lt;code&gt;c:\python&lt;/code&gt; and name the folders by version and either
+it is 32 or 64 bits.
+In Linux, initially I was using whatever came in the package manager.
+Then I wanted to have a newer version so I used
+&lt;a href="https://launchpad.net/~deadsnakes/+archive/ubuntu/ppa"&gt;Deadsnakes PPA&lt;/a&gt;.
+This works okay but can break when I update Ubuntu.&lt;/p&gt;
+&lt;h2&gt;Setting up pyenv&lt;/h2&gt;
+&lt;p&gt;For the most part &lt;a href="https://github.com/pyenv/pyenv"&gt;pyenv&lt;/a&gt; does a good job.
+&lt;a href="https://realpython.com/intro-to-pyenv/#virtual-environments-and-pyenv"&gt;Real Python&lt;/a&gt;
+does a great job setting it up and how to use &lt;code&gt;pyenv&lt;/code&gt; in Linux or Mac.&lt;/p&gt;
+&lt;p&gt;For Windows, I am going to use
+&lt;a href="https://github.com/pyenv-win/pyenv-win"&gt;pyenv-win&lt;/a&gt;.
+Since I use &lt;a href="https://chocolatey.org/"&gt;Chocolatey&lt;/a&gt;, will use &lt;code&gt;choco install
+pyenv-win&lt;/code&gt; to get pyenv.
+The downside of Windows, &lt;code&gt;pyenv-win&lt;/code&gt; doesn't support &lt;code&gt;virtualenv&lt;/code&gt; plugin like
+&lt;code&gt;pyenv&lt;/code&gt;.&lt;/p&gt;
+&lt;h2&gt;Using pyenv&lt;/h2&gt;
+&lt;p&gt;Now I can create a virtual environment for &lt;code&gt;example_project&lt;/code&gt; and went I go to
+that folder, it will automatically switch to that environment.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;$ mkdir example_project
+$ &lt;span class="nb"&gt;cd&lt;/span&gt; example_project
+$ pyenv virtualenv &lt;span class="m"&gt;3&lt;/span&gt;.9.7 example_project
+$ pyenv &lt;span class="nb"&gt;local&lt;/span&gt; example_project
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;code&gt;pyenv&lt;/code&gt; creates a &lt;code&gt;.python_version&lt;/code&gt; file with the name of either the virtual
+environment or the python version.&lt;/p&gt;
+&lt;p&gt;Windows would be slightly different.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;$ mkdir example_project
+$ &lt;span class="nb"&gt;cd&lt;/span&gt; example_project
+$ pyenv &lt;span class="nb"&gt;local&lt;/span&gt; &lt;span class="m"&gt;3&lt;/span&gt;.9.7
+$ python3 -m venv venv39-64
+$ venv&lt;span class="se"&gt;\S&lt;/span&gt;cripts&lt;span class="se"&gt;\a&lt;/span&gt;ctivate.bat
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h2&gt;Summary&lt;/h2&gt;
+&lt;p&gt;My plan is to apply this to both my personal and professional projects.
+The nice part is that &lt;code&gt;pyenv&lt;/code&gt; creates &lt;code&gt;.python_version&lt;/code&gt; so even if I decide to
+use something else, I will know which Python version I was using.
+Also using &lt;code&gt;pyenv&lt;/code&gt; to manage my Python versions, I can keep certain projects on
+an older Python version while using the newest version to try out new features.&lt;/p&gt;</content><category term="Python"></category><category term="pyenv"></category><category term="venv"></category><category term="Real Python"></category><category term="Ubuntu"></category><category term="Mate"></category><category term="22.04"></category><category term="pyenv-win"></category></entry><entry><title>Calculator Project -- Package</title><link href="https://cetyler.github.io/calculator-project-package.html" rel="alternate"></link><published>2022-04-09T21:00:00-05:00</published><updated>2022-04-09T21:00:00-05:00</updated><author><name>Christopher</name></author><id>tag:cetyler.github.io,2022-04-09:/calculator-project-package.html</id><summary type="html">&lt;p&gt;Build package with flit.&lt;/p&gt;</summary><content type="html">&lt;h2&gt;Overview&lt;/h2&gt;
+&lt;p&gt;From the 
+&lt;a href="https://cetyler.github.io/calculator-project-documentation.html"&gt;previous article&lt;/a&gt;,
+the plan is to create &lt;a href="https://github.com/cetyler/calculator"&gt;calculator&lt;/a&gt; in
+order to update my Python workflow.
+This article will cover creating a Python package.&lt;/p&gt;
+&lt;h2&gt;Using Flit&lt;/h2&gt;
+&lt;p&gt;Instead of using &lt;code&gt;setup.py&lt;/code&gt;, I will be using flit instead.
+While this project won't go on PyPi, it will go to my internal PyPi server.
+Will use &lt;a href="https://cetyler.github.io/how-to-create-a-python-package.html"&gt;my article&lt;/a&gt; to build my
+package.&lt;/p&gt;
+&lt;p&gt;The main reason I want to continue to use flit is that it only creates and
+publishes packages.&lt;/p&gt;
+&lt;h2&gt;Next Steps&lt;/h2&gt;
+&lt;p&gt;While the calculator project is not complete, it did the job in going through
+the process of creating a Python project.
+The next article I will create a checklist to update Audrey's cookiecutter.&lt;/p&gt;</content><category term="Python"></category><category term="python"></category><category term="project"></category><category term="library"></category><category term="package"></category><category term="flit"></category></entry><entry><title>Calculator Project -- Documentation</title><link href="https://cetyler.github.io/calculator-project-documentation.html" rel="alternate"></link><published>2022-04-09T16:00:00-05:00</published><updated>2022-04-09T16:00:00-05:00</updated><author><name>Christopher</name></author><id>tag:cetyler.github.io,2022-04-09:/calculator-project-documentation.html</id><summary type="html">&lt;p&gt;Finish up documentation.&lt;/p&gt;</summary><content type="html">&lt;h2&gt;Overview&lt;/h2&gt;
+&lt;p&gt;From the 
+&lt;a href="https://cetyler.github.io/calculator-project-cli.html"&gt;previous article&lt;/a&gt;,
+the plan is to create &lt;a href="https://github.com/cetyler/calculator"&gt;calculator&lt;/a&gt; in
+order to update my Python workflow.
+This article will cover the documentation.&lt;/p&gt;
+&lt;h2&gt;Code Documentation&lt;/h2&gt;
+&lt;p&gt;At minimum each class and function should have some level of documentation to
+describe what it does.
+For this project, I will do enough documentation that will benefit an initial
+package release.&lt;/p&gt;
+&lt;p&gt;Using an IDE like &lt;a href="https://code.visualstudio.com/"&gt;VS Code&lt;/a&gt; and use an
+extension &lt;a href="https://github.com/NilsJPWerner/autoDocstring"&gt;autoDocstring&lt;/a&gt; to
+auto generate the docstring.
+&lt;a href="https://www.vim.org/"&gt;Vim&lt;/a&gt; also has 
+&lt;a href="https://github.com/heavenshell/vim-pydocstring"&gt;vim-pydocstring&lt;/a&gt; to auto
+generate the docstring.&lt;/p&gt;
+&lt;h2&gt;README&lt;/h2&gt;
+&lt;p&gt;At minimum the README should describe how to install the program and brief
+explanation how to run the program.
+Simple programs/libraries can get away with just having the README as the only
+documentation.&lt;/p&gt;
+&lt;p&gt;For this project, I want the README to describe the following:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;What is this program.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;How to install.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;A link to the article series.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;How to find and build the documentation.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Since I am not going to create my documentation at
+  &lt;a href="https://readthedocs.org/"&gt;Read the Docs&lt;/a&gt;, I want to explain how to
+  create the documentation.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;I generally treat READMEs for other developers not necessarily for the users of
+the program.&lt;/p&gt;
+&lt;h2&gt;Generating Documentation with Sphinx&lt;/h2&gt;
+&lt;p&gt;While I am not going to publish the documentation, for this project I will
+generate some minimal documentation to verify the process.&lt;/p&gt;
+&lt;p&gt;Documentation will be generated by Sphinx so that I can provide information for
+users and developer.
+Also I can provide information of the API by pulling the docstrings from the
+classes and functions.&lt;/p&gt;
+&lt;h2&gt;Using Gitea/Github Wiki&lt;/h2&gt;
+&lt;p&gt;I am currently using https://github.com/cetyler/calculator/wiki for User
+Requirements and Design Requirements.
+If I planned on publishing the documentation, I may put the User Requirements
+in Sphinx instead.&lt;/p&gt;
+&lt;p&gt;I think for simple projects like the calculator project, it makes sense to have
+a README and use the Wiki instead of creating a more structured documentation.&lt;/p&gt;
+&lt;h2&gt;Next Steps&lt;/h2&gt;
+&lt;p&gt;Some basic documentation is done.
+The next article will build the package (not to pypi) to verify that the
+package will work.&lt;/p&gt;</content><category term="Python"></category><category term="python"></category><category term="project"></category><category term="library"></category><category term="package"></category><category term="documentation"></category><category term="sphinx"></category></entry><entry><title>Calculator Project -- CLI</title><link href="https://cetyler.github.io/calculator-project-cli.html" rel="alternate"></link><published>2022-04-03T16:00:00-05:00</published><updated>2022-04-03T16:00:00-05:00</updated><author><name>Christopher</name></author><id>tag:cetyler.github.io,2022-04-03:/calculator-project-cli.html</id><summary type="html">&lt;p&gt;Implement CLI.&lt;/p&gt;</summary><content type="html">&lt;h2&gt;Overview&lt;/h2&gt;
+&lt;p&gt;From the 
+&lt;a href="https://cetyler.github.io/calculator-project-api.html"&gt;previous article&lt;/a&gt;,
+the plan is to create &lt;a href="https://github.com/cetyler/calculator"&gt;calculator&lt;/a&gt; in
+order to update my Python workflow.
+This article will cover implementing the CLI.&lt;/p&gt;
+&lt;h2&gt;Determining the Interface&lt;/h2&gt;
+&lt;p&gt;According to the User Requirements, the CLI will be an interactive environment
+with no command line arguments.
+The inspiration for the interface I am thinking of comes from
+&lt;a href="https://github.com/dbcli/pgcli"&gt;pgcli&lt;/a&gt;.
+I would like at least initially be able to do the following:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Start the prompt with a statement to run help to get a list of commands.&lt;/li&gt;
+&lt;li&gt;Be able to press the up arrow or something to go through the history.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;A bonus would be able to provide some syntax highlighting and predictive
+showing of a command as the user start to type.&lt;/p&gt;
+&lt;h3&gt;Interactive CLI&lt;/h3&gt;
+&lt;p&gt;Will use &lt;a href="https://python-prompt-toolkit.readthedocs.io/"&gt;prompt toolkit&lt;/a&gt; to
+create my CLI interface.
+This library will also provide me code completion, history and suggesting stuff
+from history.&lt;/p&gt;
+&lt;h3&gt;Add Some Color&lt;/h3&gt;
+&lt;p&gt;Will use &lt;a href="https://rich.readthedocs.io/en/latest/"&gt;rich&lt;/a&gt; to add some color to my
+interface.
+The color will only be added when items are printed out.&lt;/p&gt;
+&lt;h2&gt;Setup to Run as a Package&lt;/h2&gt;
+&lt;p&gt;First step is to create &lt;code&gt;__main__.py&lt;/code&gt; so that when this project is ran as a
+package, it will start the CLI.&lt;/p&gt;
+&lt;h2&gt;Building CLI&lt;/h2&gt;
+&lt;p&gt;Using &lt;code&gt;rich&lt;/code&gt; and &lt;code&gt;prompt_toolkit&lt;/code&gt; we have enough to meet the User Requirements.
+The first step is to determine how to parse the user input.
+Due to the User Requirements, the program will need to determine the following:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&amp;gt; add(1,2)
+   |  | |&amp;lt;-- 2nd number to add.
+   |  |&amp;lt;---- 1st number to add.
+   |&amp;lt;------- add function.
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;code&gt;process_input()&lt;/code&gt; will separate the numbers from the command.
+The previous result, the user can use &lt;code&gt;ans&lt;/code&gt; in a function or as a command which
+would return the previous result.
+The numbers will initially be strings so the numbers will need to be converted
+to numbers.&lt;/p&gt;
+&lt;p&gt;Next is to execute based on the command given.
+Commands like &lt;code&gt;ans&lt;/code&gt;, &lt;code&gt;help&lt;/code&gt; and &lt;code&gt;quit&lt;/code&gt; don't have any additional values.
+Math functions like &lt;code&gt;add()&lt;/code&gt; will run the function with the numbers given.
+After math functions are done, update the previous result &lt;code&gt;ans&lt;/code&gt;.&lt;/p&gt;
+&lt;h2&gt;Catching Errors&lt;/h2&gt;
+&lt;p&gt;&lt;code&gt;Basic()&lt;/code&gt; already has some checks to verify that there are enough numbers or
+divide by zero.
+However, &lt;code&gt;Basic()&lt;/code&gt; assumes that the values being given are numbers.
+While processing the user input, will verify that numbers are numbers and will
+let the user know of the problem.&lt;/p&gt;
+&lt;p&gt;This program only has a limit number of commands.
+Will do a check that if any other non command is used, let the user know of the
+error.&lt;/p&gt;
+&lt;h2&gt;Next Steps&lt;/h2&gt;
+&lt;p&gt;The calculator program now works and currently meet the User Requirements.
+The documentation will need to be updated prior to a 1.0 release.
+Also prior to a 1.0 release, should create a package and verify that it will
+still work.
+Then can go through and create a checklist to update Audrey's cookiecutter.
+Finally, update my Python workflow.&lt;/p&gt;</content><category term="Python"></category><category term="python"></category><category term="project"></category><category term="library"></category><category term="package"></category><category term="cli"></category></entry><entry><title>Calculator Project -- API</title><link href="https://cetyler.github.io/calculator-project-api.html" rel="alternate"></link><published>2022-04-01T21:00:00-05:00</published><updated>2022-04-01T21:00:00-05:00</updated><author><name>Christopher</name></author><id>tag:cetyler.github.io,2022-04-01:/calculator-project-api.html</id><summary type="html">&lt;p&gt;Implement API.&lt;/p&gt;</summary><content type="html">&lt;h2&gt;Overview&lt;/h2&gt;
+&lt;p&gt;From the 
+&lt;a href="https://cetyler.github.io/calculator-project-tests.html"&gt;previous article&lt;/a&gt;,
+the plan is to create &lt;a href="https://github.com/cetyler/calculator"&gt;calculator&lt;/a&gt; in
+order to update my Python workflow.
+This article will cover implementing the API and verifying that the tests pass
+before the command line interface (CLI) gets developed.&lt;/p&gt;
+&lt;h2&gt;Cookiecutter Template&lt;/h2&gt;
+&lt;p&gt;Audrey's template created a MakeFile to aid to performing certain operations.
+I will make use of &lt;code&gt;make test&lt;/code&gt;, &lt;code&gt;make lint&lt;/code&gt; and &lt;code&gt;make coverage&lt;/code&gt;.
+In order to get &lt;code&gt;make coverage&lt;/code&gt; to work, I added &lt;code&gt;pytest-cov&lt;/code&gt;.&lt;/p&gt;
+&lt;h2&gt;Implement API&lt;/h2&gt;
+&lt;p&gt;Now that I have tests, I can implement the API and verify that my API will meet
+the requirements.
+If certain functions won't be implemented in a release, I can always skip a test
+until that function/feature gets implemented.
+For more complicated projects, feature release based on the roadmap can have the
+tests developed and use skip until a certain version.&lt;/p&gt;
+&lt;p&gt;More complicated programs may have multiple files for the API depending on
+functionality.
+For example, the calculator program now has its API in &lt;code&gt;calculation.py&lt;/code&gt;.
+Let's say in a future release, I add functionality to do complex calculations
+like loan terms, calculus or conversions.
+Each one of those could have its own file/module.&lt;/p&gt;
+&lt;h3&gt;Planning the API&lt;/h3&gt;
+&lt;p&gt;When planning the API the User and Design Requirements can dictate how to
+create the API.
+However most programs can change over time beyond the initial requirements.
+Depending the complexity, more design work would be needed as well as some
+thought on being able to extend the API without potentially breaking the API.&lt;/p&gt;
+&lt;p&gt;For example, the calculator program's initial API are in the &lt;code&gt;Basic()&lt;/code&gt; class.
+Each operation is a method in &lt;code&gt;Basic()&lt;/code&gt; which makes it easy to extend
+&lt;code&gt;Basic()&lt;/code&gt;.
+However each method's inputs should be thought through so that the inputs don't
+need to change.
+For example, the User Requirements did not state how many numbers can be added
+together.
+To meet the requirements, I could just have &lt;code&gt;add()&lt;/code&gt; take just two arguments
+which is the minimum to add.
+However in the future if I needed to extend &lt;code&gt;add()&lt;/code&gt; to accept more than two
+arguments, I may need to break the API which could break programs that use that
+API.&lt;/p&gt;
+&lt;h3&gt;Breaking the API&lt;/h3&gt;
+&lt;p&gt;Breaking the API should only be done if it is really necessary.
+As with the example above, breaking an API can affect users of that API.&lt;/p&gt;
+&lt;p&gt;Breaking the API should cause a major version change.
+If possible, notifying the user ahead of time would help them update their
+programs to adjust to the changes.
+If an API will get removed, then a deprecation warning should be used prior to
+removing that portion of the API.
+Changing the API should be documented.
+Adding to an API especially if it is not a breaking change does not require a
+major version change unless it is a large addition.&lt;/p&gt;
+&lt;p&gt;For example, &lt;code&gt;Basic()&lt;/code&gt; stores the previous result but it is not automatic.
+In order to store the previous result you would need to do the following:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&amp;gt; b = Basic()
+&amp;gt; b.previous_result = b.add(1, 2)
+&amp;gt; b.previous_result
+  3
+&amp;gt; b.sub(b.previous_result, 2)
+  1
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;This at first may not meet the User Requirements.
+The User Requirements the previous result is being tracked by the program.
+However this is the API and not the program.
+As long as the calculator program keeps track of the previous result, we should
+be okay.
+Let's say that after creating the API this way and working on the CLI, we
+decide that it would be easier to have &lt;code&gt;Basic()&lt;/code&gt; keep track of the result and
+to be able to clear the previous result.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&amp;gt; b = Basic()
+&amp;gt; b.add(1, 2)
+  3
+&amp;gt; b.previous_result
+  3
+&amp;gt; b.clear_result
+&amp;gt; b.previous_result
+  0
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;This would require an API additional of &lt;code&gt;clear_result()&lt;/code&gt; and after each
+calculation to store in &lt;code&gt;previous_result()&lt;/code&gt;.&lt;/p&gt;
+&lt;h2&gt;Next Steps&lt;/h2&gt;
+&lt;p&gt;Now that we have an API that works we can now create the CLI GUI interface.
+Most of the work for the program is in the API so the CLI can be fairly simple.&lt;/p&gt;</content><category term="Python"></category><category term="python"></category><category term="project"></category><category term="library"></category><category term="package"></category><category term="api"></category></entry><entry><title>Calculator Project -- Tests</title><link href="https://cetyler.github.io/calculator-project-tests.html" rel="alternate"></link><published>2022-02-06T15:00:00-06:00</published><updated>2022-02-06T15:00:00-06:00</updated><author><name>Christopher</name></author><id>tag:cetyler.github.io,2022-02-06:/calculator-project-tests.html</id><summary type="html">&lt;p&gt;Creating tests for the API.&lt;/p&gt;</summary><content type="html">&lt;h2&gt;Overview&lt;/h2&gt;
+&lt;p&gt;From the 
+&lt;a href="https://cetyler.github.io/calculator-project-requirements.html"&gt;previous article&lt;/a&gt;,
+the plan is to create &lt;a href="https://github.com/cetyler/calculator"&gt;calculator&lt;/a&gt; in
+order to update my Python workflow.
+This article will cover creating some initial tests to verify the program will
+meet the requirements and what tests would be needed after the initial tests
+using 
+&lt;a href="https://developer.ibm.com/articles/5-steps-of-test-driven-development/"&gt;Test Driven Development&lt;/a&gt;.&lt;/p&gt;
+&lt;h2&gt;Cookiecutter Template&lt;/h2&gt;
+&lt;p&gt;Audrey's template created a test folder structure that for the purposes of this
+project can be simplified.
+Will delete the &lt;code&gt;func&lt;/code&gt; and &lt;code&gt;unit&lt;/code&gt; folders.
+For more complicated projects both folders would make sense to organize the
+tests.
+Also, will be using &lt;code&gt;pytest&lt;/code&gt;.&lt;/p&gt;
+&lt;h2&gt;Test to Meet Requirements&lt;/h2&gt;
+&lt;p&gt;Most of the requirements are are related to the API.
+The initial tests should be good enough to verify that the program will meet
+the requirements.
+The goal for now is not to cover all potential edge cases.
+So for example, &lt;code&gt;add()&lt;/code&gt; can take 2 or more numbers.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&amp;gt; add(1, 2)
+&amp;gt; 3
+&amp;gt; add(1, 2, 3)
+&amp;gt; 6
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;If &lt;code&gt;add()&lt;/code&gt; only has 1 number it should be return an error.
+Since there are not that many tests, all API tests will be in &lt;code&gt;test_api.py&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;If this project was a more complicated project, I would keep &lt;code&gt;func&lt;/code&gt; and &lt;code&gt;unit&lt;/code&gt;
+folders.
+Also the initial tests would be functional tests.&lt;/p&gt;
+&lt;h3&gt;Functional Tests&lt;/h3&gt;
+&lt;p&gt;Functional tests are high level tests that primarily verify that the program
+will meet requirements/specifications.
+The goal is to ensure that these tests are done early in the process.
+For this project I am not going to create any functional tests right now.&lt;/p&gt;
+&lt;p&gt;A good example would be a program that would take an text file as an input and
+would output some simple stats (word count, number of lines, etc.).
+A functional test would be verifying that the word count matches what is in the
+text file.
+Another functional test would be to count the lines and verify that it matches.
+Neither functional tests are testing how the program does the counting, just
+providing a given input, the program will output the count.&lt;/p&gt;
+&lt;h3&gt;Unit Tests&lt;/h3&gt;
+&lt;p&gt;Unit tests typically tests a function/class/method.
+My goal is typically not trying to get 100% coverage but unit tests are to
+ensure that critical functions are tested.
+For this project, my plan is to verify each operation works when given a
+correct number of numeric values and output the right result.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;def test_add():
+    &amp;quot;&amp;quot;&amp;quot;Verify that add works.&amp;quot;&amp;quot;&amp;quot;
+    basic = Basic()
+
+    assert add(1, 2) == 3
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3&gt;In Program Tests/Checks&lt;/h3&gt;
+&lt;p&gt;These tests will be in the program/function/class.
+For example, won't create a separate &lt;code&gt;pytest&lt;/code&gt; test to check if a config file
+was loaded.
+Instead would do a &lt;code&gt;try&lt;/code&gt; and &lt;code&gt;except&lt;/code&gt; to verify that I loaded the file and do a
+check to ensure that what was loaded has the correct values.
+For this project, I probably use this to capture any exceptions like if the
+user only provided one number to &lt;code&gt;add()&lt;/code&gt; as an example.&lt;/p&gt;
+&lt;h3&gt;Manual Tests&lt;/h3&gt;
+&lt;p&gt;Non automated tests to ensure compliance.
+For example in the calculator program, it would be to run the program and try
+out some of the operations (add, subtract, etc.), verify that the interface
+looks okay, etc.&lt;/p&gt;
+&lt;h2&gt;Tests due to Bugs&lt;/h2&gt;
+&lt;p&gt;As bugs are found, the goal is to create a test to replicate the bug prior to
+fixing it.
+For example, if using &lt;code&gt;add()&lt;/code&gt; only use 1 number but didn't have a check to
+verify that more than one number was entered.
+The bug would cause the program to crash.
+Would add a test to raise an exception.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;def test_add():
+    &amp;quot;&amp;quot;&amp;quot;Verify that add works.&amp;quot;&amp;quot;&amp;quot;
+    basic = Basic()
+
+    ...
+
+    with pytest.raises(NotEnoughNumbers):
+        basic.add(1)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;After adding the test, verify that it will fail prior to making the change.
+Run the test again and it should pass.&lt;/p&gt;
+&lt;h2&gt;New Feature Tests&lt;/h2&gt;
+&lt;p&gt;Ideally create tests prior to adding new features.
+For example, add a feature so that it would be possible to chain together
+multiple operations.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&amp;gt; add(sub(4,3), mul(5,4), 3)
+&amp;gt; 13
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Prior to adding the feature, create some tests to first show that this would
+fail, then add the new feature.
+Furthermore, could use &lt;code&gt;pytest&lt;/code&gt; feature to skip tests.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="nv"&gt;@pytest&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;mark&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;skipif&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;calculator&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;__version__&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;2.0.0&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt;                    &lt;/span&gt;&lt;span class="n"&gt;reason&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;Breaking change.&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="n"&gt;def&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;test_multiple_operations&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;&lt;span class="err"&gt;:&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;&amp;quot;&amp;quot;Verify that chaining operations works.&amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="n"&gt;basic&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;Basic&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="n"&gt;assert&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;basic&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="k"&gt;add&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;basic&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;sub&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;4&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;basic&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;mul&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;5&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;4&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;==&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mi"&gt;13&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="k"&gt;with&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;pytest&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;raises&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;NotEnoughNumbers&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="err"&gt;:&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt;        &lt;/span&gt;&lt;span class="n"&gt;basic&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;sub&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;basic&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="k"&gt;add&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;5&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;4&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h2&gt;Next Steps&lt;/h2&gt;
+&lt;p&gt;Now that we have some tests created, can now work on implementing the code and
+making sure the the API works before creating the CLI GUI interface.
+Trying to develop tests prior to working on the code can help ensure that
+requirements will be met, help create better code and preparing for new
+features ahead of time.&lt;/p&gt;</content><category term="Python"></category><category term="python"></category><category term="project"></category><category term="library"></category><category term="package"></category><category term="pytest"></category><category term="tests"></category></entry><entry><title>Calculator Project -- Requirements</title><link href="https://cetyler.github.io/calculator-project-requirements.html" rel="alternate"></link><published>2022-01-29T15:00:00-06:00</published><updated>2022-01-29T15:00:00-06:00</updated><author><name>Christopher</name></author><id>tag:cetyler.github.io,2022-01-29:/calculator-project-requirements.html</id><summary type="html">&lt;p&gt;Creating the initial documentation of the calculator project.&lt;/p&gt;</summary><content type="html">&lt;h2&gt;Overview&lt;/h2&gt;
+&lt;p&gt;From the 
+&lt;a href="https://cetyler.github.io/calculator-project-setup.html"&gt;previous article&lt;/a&gt;,
+the plan is to create &lt;a href="https://github.com/cetyler/calculator"&gt;calculator&lt;/a&gt; in
+order to update my Python workflow.
+This article will cover creating User Requirements, Design Requirements and a
+Roadmap.&lt;/p&gt;
+&lt;h2&gt;Location of Documents&lt;/h2&gt;
+&lt;p&gt;While we do have Sphinx already set up, in my opinion these documents should be
+related to what the calculator package does and how to use it.
+User Requirements and Design Requirements will be in Gitea/Github wiki.
+Both these documents are more for the developer than the user.
+The Roadmap should be in Sphinx as it is useful to the user when features are
+planned to be released.&lt;/p&gt;
+&lt;h2&gt;User Requirements&lt;/h2&gt;
+&lt;p&gt;User Requirements generally are what the developer thinks the user wants based
+either by observation, feedback or a spec document.
+This document is to translate the available information into something that
+could be used to help build a design.&lt;/p&gt;
+&lt;p&gt;As you see, the
+&lt;a href="https://github.com/cetyler/calculator/wiki/User-Requirements"&gt;User Requirements&lt;/a&gt;
+describes that this will be a simple program that can also be used as a
+library.
+There are a couple more requirements but for the most part, this describes what
+I think the user would want.&lt;/p&gt;
+&lt;p&gt;The goal is to create the requirements without thinking about how to implement.
+For the calculator project, naming Python as the language is a requirement
+since this project is to specifically determine a Python workflow.&lt;/p&gt;
+&lt;h2&gt;Design Requirements&lt;/h2&gt;
+&lt;p&gt;Design Requirements generally are how the developer is planning on how to
+implement the program based on the User Requirements.
+This document is usually what an 1.0 version of the program.&lt;/p&gt;
+&lt;p&gt;As you see
+&lt;a href="https://github.com/cetyler/calculator/wiki/Design-Requirements"&gt;Design Requirements&lt;/a&gt;
+shows that there will be two parts -- GUI and API.&lt;/p&gt;
+&lt;h3&gt;GUI&lt;/h3&gt;
+&lt;p&gt;The GUI will be an interactive terminal interface similar to the Python shell
+or like
+&lt;a href="https://www.pgcli.com/"&gt;pgcli&lt;/a&gt;.
+Due to how simple this program is, I don't really need to do a long description
+on how I plan on implementing the GUI.&lt;/p&gt;
+&lt;h3&gt;API&lt;/h3&gt;
+&lt;p&gt;The API will be able to call functions to add, subtract, etc.
+I did not include a separate section describing &lt;code&gt;basic.py&lt;/code&gt; but it will support
+addition, subtracting, multiplication and division.&lt;/p&gt;
+&lt;h2&gt;Roadmap&lt;/h2&gt;
+&lt;p&gt;The Roadmap is a proposed feature release plan.
+For this calculator, there is not much of a Roadmap.
+First need to create &lt;code&gt;Roadmap.rst&lt;/code&gt; and create a simple release schedule.
+Will need to update &lt;code&gt;index.rst&lt;/code&gt; to include the Roadmap.&lt;/p&gt;
+&lt;p&gt;As you can see
+&lt;a href="https://github.com/cetyler/calculator/blob/develop/ROADMAP.rst"&gt;Roadmap&lt;/a&gt; shows
+that it is a fairly basic Roadmap.
+There is not really a plan for a 2.0.0 release and a 1.0.0 release will cover
+everything that was in User Requirements.&lt;/p&gt;
+&lt;p&gt;Will need to update my fork of Audrey's cookiecutter template to include a
+Roadmap file.&lt;/p&gt;
+&lt;h2&gt;Next Steps&lt;/h2&gt;
+&lt;p&gt;The rest of the documentation is not done but the rest of the documentation can
+be completed prior to a release.
+Using a combination of the wiki and Sphinx, it keeps a good separation to what
+will stay with the repository and what could eventually go to
+&lt;a href="https://readthedocs.org/"&gt;Read The Docs&lt;/a&gt; or an internal website.&lt;/p&gt;
+&lt;p&gt;Prior to any writing any code, I will first write tests to ensure that we will
+comply with our User Requirements.
+The initial tests should cover the API as much as possible.&lt;/p&gt;</content><category term="Python"></category><category term="python"></category><category term="project"></category><category term="library"></category><category term="package"></category></entry><entry><title>Calculator Project -- Setup</title><link href="https://cetyler.github.io/calculator-project-setup.html" rel="alternate"></link><published>2022-01-22T15:00:00-06:00</published><updated>2022-01-22T15:00:00-06:00</updated><author><name>Christopher</name></author><id>tag:cetyler.github.io,2022-01-22:/calculator-project-setup.html</id><summary type="html">&lt;p&gt;Initial setup of the calculator project.&lt;/p&gt;</summary><content type="html">&lt;h2&gt;Overview&lt;/h2&gt;
+&lt;p&gt;From the &lt;a href="https://cetyler.github.io/calculator-project.html"&gt;previous article&lt;/a&gt;,
+the plan is to create &lt;a href="https://github.com/cetyler/calculator"&gt;calculator&lt;/a&gt; in
+order to update my Python workflow.
+This article will cover setting up the project.&lt;/p&gt;
+&lt;h2&gt;Initial Cookiecutter&lt;/h2&gt;
+&lt;p&gt;At the end of the project, I plan on creating a my own
+&lt;a href="https://cookiecutter.readthedocs.io/en/1.7.2/"&gt;Cookiecutter&lt;/a&gt; template.
+Initially I will use
+&lt;a href="https://github.com/audreyfeldroy/cookiecutter-pypackage"&gt;Audrey's&lt;/a&gt;.
+Answer the following questions:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Name&lt;/li&gt;
+&lt;li&gt;Email&lt;/li&gt;
+&lt;li&gt;Github username&lt;/li&gt;
+&lt;li&gt;Project Name&lt;/li&gt;
+&lt;li&gt;Project description&lt;/li&gt;
+&lt;li&gt;PyPi username&lt;/li&gt;
+&lt;li&gt;I don't plan on publishing this on PyPi.&lt;/li&gt;
+&lt;li&gt;Version&lt;/li&gt;
+&lt;li&gt;Use &lt;code&gt;pytest&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;Use &lt;code&gt;black&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;Don't use &lt;code&gt;travis&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;Don't add &lt;code&gt;pyup&lt;/code&gt; badge?&lt;/li&gt;
+&lt;li&gt;Use &lt;code&gt;Click&lt;/code&gt; for command_line_interface.&lt;/li&gt;
+&lt;li&gt;Create author file.&lt;/li&gt;
+&lt;li&gt;Use MIT license.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;This gives me a good start though I plan on deleting some of the items.&lt;/p&gt;
+&lt;h2&gt;Automating Initial Setup&lt;/h2&gt;
+&lt;p&gt;The &lt;code&gt;Makefile&lt;/code&gt; will be able to automate some tasks.
+Audrey's &lt;code&gt;Makefile&lt;/code&gt; is a good start but I plan on using
+&lt;a href="https://flit.readthedocs.io/en/latest/"&gt;flit&lt;/a&gt; and would like the &lt;code&gt;Makefile&lt;/code&gt;
+also create the initial environment.&lt;/p&gt;
+&lt;h3&gt;requirements_dev.txt&lt;/h3&gt;
+&lt;p&gt;I removed the exact versions and added the following:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;flit&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://mypy-lang.org/"&gt;&lt;code&gt;mypy&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://pypi.org/project/toml/"&gt;&lt;code&gt;toml&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Once I determine which version I want to keep them to, I will create a pinned
+version in my cookiecutter.&lt;/p&gt;
+&lt;h3&gt;Makefile&lt;/h3&gt;
+&lt;p&gt;In the &lt;code&gt;Makefile&lt;/code&gt;, I added &lt;code&gt;lint/typing&lt;/code&gt; and &lt;code&gt;setup&lt;/code&gt;.
+&lt;code&gt;lint/typing&lt;/code&gt; is to run &lt;code&gt;mypy&lt;/code&gt;.
+&lt;code&gt;setup&lt;/code&gt; creates a virtual environment, install &lt;code&gt;requirements_dev.txt&lt;/code&gt; and
+run &lt;code&gt;flit init&lt;/code&gt;.
+Later, when I create my &lt;code&gt;cookiecutter&lt;/code&gt;, I may create &lt;code&gt;pyproject.toml&lt;/code&gt; with
+&lt;code&gt;cookiecutter&lt;/code&gt; instead.&lt;/p&gt;
+&lt;p&gt;The main downside to using a Makefile will be how to use it in Windows.
+Unfortunately, at work I use Windows 10 to do some of my programming.
+I should be able to &lt;a href="https://www.gnu.org/software/make/"&gt;GNU Make&lt;/a&gt; but that
+will be tested later.&lt;/p&gt;
+&lt;h2&gt;Cookiecutter&lt;/h2&gt;
+&lt;p&gt;My plan is to &lt;a href="https://github.com/cetyler/cookiecutter-pypackage"&gt;fork&lt;/a&gt; Audrey's
+template and make modifications.
+There will be a separate article at the end to explain the changes I did.
+Initially would want to update the &lt;code&gt;Makefile&lt;/code&gt; and &lt;code&gt;requirement_dev.txt&lt;/code&gt;.&lt;/p&gt;
+&lt;h2&gt;Documentation&lt;/h2&gt;
+&lt;p&gt;Documentation will be at minimum in two parts -- for the package/library and
+for the developer of that package/library.&lt;/p&gt;
+&lt;h3&gt;Developer&lt;/h3&gt;
+&lt;p&gt;At minimum there will be a &lt;code&gt;README.rst&lt;/code&gt; that will describe how to install the
+package and some basic information on how to use the package.
+It can also be used for user information if they are more technical (ex.
+Github).&lt;/p&gt;
+&lt;p&gt;Mote detailed documentation will use &lt;code&gt;sphinx&lt;/code&gt; and will also include any APIs.
+Developer documentation will not be included with the package through &lt;code&gt;pip
+install&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;I will also use a wiki (Gitea/Github/Gitlab) depending on the project.&lt;/p&gt;
+&lt;h3&gt;User&lt;/h3&gt;
+&lt;p&gt;At minimum will have &lt;code&gt;getting_started.rst&lt;/code&gt; if the program is simple enough.
+Help should be in the program (beyond how to install the program).
+Will use &lt;code&gt;sphinx&lt;/code&gt; when more lengthy documentation is required.
+That documentation will be included in the package and ideally hosted at a
+website if publicly shared.&lt;/p&gt;
+&lt;h2&gt;Git Branches&lt;/h2&gt;
+&lt;p&gt;In the past I have used
+&lt;a href="https://github.com/petervanderdoes/gitflow-avh"&gt;Git Flow&lt;/a&gt; but there are a
+couple of things that I don't care for.
+The main problem I have is that when I do a bugfix from my main/master branch,
+it will merge to develop but not to main/master.
+Since it is only me working on my projects, I will do this manually instead.&lt;/p&gt;
+&lt;h3&gt;Main/Master Branch&lt;/h3&gt;
+&lt;p&gt;This will be for releases only.
+Every commit should be tagged (ex. 4.1.3).
+The tagged release will also include the following:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Overview of what was done in the release.&lt;/li&gt;
+&lt;li&gt;A list of features/bugfixes.&lt;/li&gt;
+&lt;li&gt;This should include issue numbers.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;I have a git alias &lt;code&gt;over&lt;/code&gt; which will look at commit comments that contain
+&lt;code&gt;Overview&lt;/code&gt; which I will pipe to &lt;code&gt;CHANGELOG.rst&lt;/code&gt;.&lt;/p&gt;
+&lt;h3&gt;Develop&lt;/h3&gt;
+&lt;p&gt;This will be essentially what the next release will be.
+Unless it is a minor code addition/change, I plan to create a topical branch for
+each new feature or major code change.&lt;/p&gt;
+&lt;h3&gt;Bugfix&lt;/h3&gt;
+&lt;p&gt;Will typically be a new branch from main/master.
+Each bug will have its own branch.
+Once it is merged by to main/master, develop will merge from master to get the
+fixes.
+The name of the branch should be the issue number and a short name of the bug.&lt;/p&gt;
+&lt;h3&gt;Topical&lt;/h3&gt;
+&lt;p&gt;This will mainly be new features starting from develop.
+The branch should be concise and limited to a new feature for example.
+That way it makes it easier to revert if there a problem or I decide not to use
+the feature.
+The name of the branch should be the issue number and a short name of the
+feature.&lt;/p&gt;
+&lt;p&gt;If the branch is for example a more drastic change, it will instead have the
+name &lt;code&gt;major&lt;/code&gt; with a short name of what the change will be.
+For example changing the program from a locally run program using SQLite and a
+CLI interface to a web service would be major.
+Furthermore, while that major code change, you would like the option to
+continue to update the CLI, it would make sense to create another branch.&lt;/p&gt;
+&lt;h2&gt;Semantic Versioning&lt;/h2&gt;
+&lt;p&gt;I plan on using &lt;a href="https://semver.org/"&gt;semantic versioning&lt;/a&gt; using
+MAJOR.MINOR.PATCH.
+This will make it easier to keep track of breaking changes, backwards
+compatible features and backwards compatible bug fixes.&lt;/p&gt;
+&lt;h2&gt;Next Steps&lt;/h2&gt;
+&lt;p&gt;Using Audrey's &lt;code&gt;cookiecutter&lt;/code&gt; template and making some minor changes, I have a
+good start to the project.&lt;/p&gt;
+&lt;p&gt;The next article will go through the process of creating User Requirements.
+Then based on the User Requirements, create Design Requirements and a simple
+Roadmap.&lt;/p&gt;</content><category term="Python"></category><category term="python"></category><category term="project"></category><category term="library"></category><category term="package"></category></entry><entry><title>Calculator Project</title><link href="https://cetyler.github.io/calculator-project.html" rel="alternate"></link><published>2022-01-15T16:30:00-06:00</published><updated>2022-01-15T16:30:00-06:00</updated><author><name>Christopher</name></author><id>tag:cetyler.github.io,2022-01-15:/calculator-project.html</id><summary type="html">&lt;p&gt;Use a simple calculator project to document my Python workflow.&lt;/p&gt;</summary><content type="html">&lt;h2&gt;Overview&lt;/h2&gt;
+&lt;p&gt;I was reviewing how I currently create my Python projects and libraries and
+realized that I need to clean up my process.
+The plan to create a simple calculator project.
+This project can be used as both a project and a standalone program.&lt;/p&gt;
+&lt;h2&gt;Roadmap&lt;/h2&gt;
+&lt;p&gt;There will be two paths; working on the calculator itself and creating a
+workflow.&lt;/p&gt;
+&lt;h3&gt;Calculator&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Create User Requirements.&lt;/li&gt;
+&lt;li&gt;Create Design Requirements.&lt;/li&gt;
+&lt;li&gt;Create README.&lt;/li&gt;
+&lt;li&gt;Create Roadmap.&lt;/li&gt;
+&lt;li&gt;Create tests.&lt;/li&gt;
+&lt;li&gt;Create initial release.&lt;/li&gt;
+&lt;li&gt;Finish roadmap.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;Workflow&lt;/h3&gt;
+&lt;p&gt;Pretty much document every part while creating the calculator project.
+In addition, will also do the following:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Document what is the minimum required for documentation.&lt;/li&gt;
+&lt;li&gt;Document the process to setup the project.&lt;/li&gt;
+&lt;li&gt;Document what is the minimum required for testing.&lt;/li&gt;
+&lt;li&gt;Document add the Python package to PyPi.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;Next Steps&lt;/h2&gt;
+&lt;p&gt;The plan is to do a series of articles going through the my proposed roadmap.
+The goal is to use a simple project to help create a consistent workflow that I
+can use for my personal and professional projects.
+Ideally, use something like Cookiecutter to help create consistent projects.&lt;/p&gt;
+&lt;p&gt;I did recently finished &lt;a href="https://training.talkpython.fm/courses/modern-python-projects"&gt;Talk Python Modern Python Projects
+Course&lt;/a&gt; and will
+use what I learned to incorporate into my workflow.&lt;/p&gt;
+&lt;p&gt;The next article will be the initial setup of the project.&lt;/p&gt;</content><category term="Python"></category><category term="python"></category><category term="project"></category><category term="library"></category><category term="package"></category></entry><entry><title>Reuven Lerner's Weekly Python Exercise A3</title><link href="https://cetyler.github.io/reuven-lerners-weekly-python-exercise-a3.html" rel="alternate"></link><published>2022-01-14T00:00:00-06:00</published><updated>2022-01-14T00:00:00-06:00</updated><author><name>Christopher</name></author><id>tag:cetyler.github.io,2022-01-14:/reuven-lerners-weekly-python-exercise-a3.html</id><summary type="html">&lt;p&gt;Review of Reuven's Weekly Python Exercise A3.&lt;/p&gt;</summary><content type="html">&lt;h2&gt;Overview&lt;/h2&gt;
+&lt;p&gt;I recently completed Reuven Lerner's
+&lt;a href="https://store.lerner.co.il/wpe"&gt;Weekly Python Exercise&lt;/a&gt; A3 which focused on
+Object-oriented Python.
+I took this course around the same time as
+&lt;a href="https://cetyler.github.io/reuven-lerners-object-orient-python.html"&gt;Reuven's OOP self pace course&lt;/a&gt;.
+I wasn't sure which course would click more with me, so I took both.&lt;/p&gt;
+&lt;p&gt;Weekly Python Exercise (WPE) is a 15 week course where Reuven provides an
+exercise a week by email and provides the solution the following week.&lt;/p&gt;
+&lt;h2&gt;Course Topics&lt;/h2&gt;
+&lt;p&gt;Taken from Reuven's Overview:&lt;/p&gt;
+&lt;p&gt;WPE A3 covers object-oriented programming, for beginning Python developers.
+It'll cover:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Defining classes and instances&lt;/li&gt;
+&lt;li&gt;Defining methods&lt;/li&gt;
+&lt;li&gt;Composition of objects&lt;/li&gt;
+&lt;li&gt;Keeping track of shared state among instances&lt;/li&gt;
+&lt;li&gt;Inheritance&lt;/li&gt;
+&lt;li&gt;Basic "magic" methods, such as &lt;code&gt;__str__&lt;/code&gt; and &lt;code&gt;__len__&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Class methods&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;I did not take A1 (basic data structures) or A2 (functions and modules).&lt;/p&gt;
+&lt;h2&gt;Impressions&lt;/h2&gt;
+&lt;p&gt;New exercises are posted on Tuesdays with the solutions on Monday.
+Reuven includes a &lt;code&gt;pytest&lt;/code&gt; file to check your work.
+The exercises build on each other and he uses 3 different things to build on
+(ex. homes in a neighborhood).
+In the exercises, he would also include links to more information that may help
+solve the problem.
+He also introduced type hints and &lt;code&gt;mypy&lt;/code&gt;.
+For me this was extremely helpful understanding how I could use &lt;code&gt;mypy&lt;/code&gt;
+initially to get some basic checks and &lt;code&gt;pytest&lt;/code&gt; to help round out testing.
+I was already using &lt;code&gt;pytest&lt;/code&gt; and &lt;code&gt;flake8&lt;/code&gt; but I never really used &lt;code&gt;mypy&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;There is a forum where Reuven and the other students can use.
+There wasn't a ton of interaction with the other students though it was useful
+to see how they would solve the problem after I posted mine.
+Reuven would also post some suggestions or comments but the activity started to
+drop off after about 6-7 weeks.&lt;/p&gt;
+&lt;p&gt;The live office hours (through Zoom) I went to all but maybe one due to a
+scheduling conflict.
+Most of the time there were about an hour long based on whatever questions
+people emailed ahead a time or what was asked during the meeting.
+The meetings were helpful for the exercises but it was also helpful understand
+when to use type hints or how to think about using classes.&lt;/p&gt;
+&lt;h2&gt;Conclusion&lt;/h2&gt;
+&lt;p&gt;Overall I think it was a good beginner course on Object-orient programming
+using Python.
+For me it was a good value as I purchased the course through Humble Bundle
+Python Super Power Bundle.
+If I could only do one course, I would pick this over the self pace online
+course.
+Having the ability to talk with Reuven, how he included tests and type hints
+make this 15 week course a better value.
+However, I am glad that I had the opportunity to do both.
+Both courses have different styles which gave me a couple of different
+viewpoints.&lt;/p&gt;</content><category term="Python"></category><category term="training"></category><category term="Reuven Lerner"></category><category term="oop"></category><category term="python"></category><category term="review"></category></entry><entry><title>Reuven Lerner's Object-orient Python</title><link href="https://cetyler.github.io/reuven-lerners-object-orient-python.html" rel="alternate"></link><published>2022-01-08T00:00:00-06:00</published><updated>2022-01-08T00:00:00-06:00</updated><author><name>Christopher</name></author><id>tag:cetyler.github.io,2022-01-08:/reuven-lerners-object-orient-python.html</id><summary type="html">&lt;p&gt;Review of Reuven's OOP Python self pace course.&lt;/p&gt;</summary><content type="html">&lt;h2&gt;Overview&lt;/h2&gt;
+&lt;p&gt;I recently completed Reuven Lerner's
+&lt;a href="https://store.lerner.co.il/object-oriented-python"&gt;Object-orient Python&lt;/a&gt; self
+pace course.
+My goal was to better understand how to do OOP using Python.
+For context, I know of OOP but never could understand it well enough to use in
+my programs.&lt;/p&gt;
+&lt;h2&gt;Course Topics&lt;/h2&gt;
+&lt;p&gt;Taken from Reuven's Overview:&lt;/p&gt;
+&lt;p&gt;Through numerous video lessons and exercises, this course will teach you what
+you need in order to take advantage of Python's objects. I cover such topics
+as:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;What is an object?&lt;/li&gt;
+&lt;li&gt;Setting and retrieving attributes&lt;/li&gt;
+&lt;li&gt;Creating classes&lt;/li&gt;
+&lt;li&gt;The role of &lt;code&gt;__init__&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;The role of self&lt;/li&gt;
+&lt;li&gt;Writing and calling methods&lt;/li&gt;
+&lt;li&gt;Attribute search, and why we care&lt;/li&gt;
+&lt;li&gt;Class attributes&lt;/li&gt;
+&lt;li&gt;Inheritance&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;Impressions&lt;/h2&gt;
+&lt;p&gt;First of all I like the self pace nature and that Reuven provided the Jupyter
+Notebook and slides.
+Also the videos are a manageable length around 15 minutes.
+The first 6 sections I was able to work on a section a week.
+The summary project was a little quicker since there was only one video which
+gave me more time to complete the final project.&lt;/p&gt;
+&lt;p&gt;The exercises build on each other.
+Reuven used a couple different things to model like a bank account, ice cream,
+etc.
+The final exercise did a good job covering most of what Reuven covered in the
+course.
+I felt comfortable with the knowledge that I learn to complete the exercise.&lt;/p&gt;
+&lt;p&gt;This course does not include tests to verify your work instead there are
+solution videos.
+I believe there were not tests since I think Reuven assumes that you will
+also be using Jupyter Notebooks to work through the exercises.
+I instead created Python scripts and ran in the console.
+The final exercise, I created tests using pytest to ensure that I met the
+requirements.&lt;/p&gt;
+&lt;h2&gt;Conclusion&lt;/h2&gt;
+&lt;p&gt;Overall I think it was a good beginner course on Object-orient programming
+using Python.
+For me it was a good value as I purchased the course through Humble Bundle
+Python Super Power Bundle.
+This course was the first time that OOP clicked for me and the way I think.
+Finally I just simply enjoyed Reuven's teaching style.&lt;/p&gt;</content><category term="Python"></category><category term="training"></category><category term="Reuven Lerner"></category><category term="oop"></category><category term="python"></category><category term="review"></category></entry><entry><title>How to Setup Local PyPi Repository</title><link href="https://cetyler.github.io/how-to-setup-local-pypi-repository.html" rel="alternate"></link><published>2021-05-09T15:00:00-05:00</published><updated>2021-05-21T17:00:00-05:00</updated><author><name>Christopher</name></author><id>tag:cetyler.github.io,2021-05-09:/how-to-setup-local-pypi-repository.html</id><summary type="html">&lt;p&gt;How to setup a local PyPi repository to host local packages.&lt;/p&gt;</summary><content type="html">&lt;p&gt;My previous &lt;a href="https://cetyler.github.io/how-to-create-a-python-package.html"&gt;post&lt;/a&gt;, I went
+through created and built a Python package.
+Then I put that package in a local directory and showed how to install that
+package from pip.&lt;/p&gt;
+&lt;p&gt;This post will go through and create a local PyPi for packages that I don't or
+can't post publicly on PyPi.
+If you are looking to host PyPi locally due to slow or unreliable internet, I
+suggest
+&lt;a href="https://www.builtinafrica.io/blog-post/vuyisile-ndlovu-pypi"&gt;Built in Africa's article&lt;/a&gt;.&lt;/p&gt;
+&lt;h2&gt;Setup&lt;/h2&gt;
+&lt;p&gt;The plan is to use Docker and utilize 
+&lt;a href="https://hub.docker.com/r/pypiserver/pypiserver/tags/"&gt;pypiserver's Docker image&lt;/a&gt;.
+Also the intent is to host 10's or 100's of packages, not to host all of PyPi.
+I will be using &lt;a href="https://testdriven.io/blog/private-pypi/"&gt;Michael's article&lt;/a&gt; as
+a guide.&lt;/p&gt;
+&lt;h2&gt;Docker without Authentication&lt;/h2&gt;
+&lt;p&gt;I will be using &lt;a href="https://docs.docker.com/engine/install/"&gt;Docker&lt;/a&gt;
+and &lt;a href="https://docs.docker.com/compose/"&gt;Docker Compose&lt;/a&gt; as this will make it easy
+to replicate at home and at work.&lt;/p&gt;
+&lt;p&gt;Create the following &lt;code&gt;docker-compose.yml&lt;/code&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;version: &amp;#39;3.7&amp;#39;
+
+services:
+    pypi-server:
+        image: pypiserver/pypiserver:latest
+        ports:
+            - 8081:8080
+        volumes:
+            - type: volume
+              source: pypi-server
+              target: /data/packages
+        command:  -P . -a . /data/packages
+        restart: always
+
+volumes:
+    pypi-server:
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;This will create a PyPi server without authentication.
+Let's spin up the container:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;$ docker-compose up -d --build
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Now go to &lt;code&gt;http://localhost:8081&lt;/code&gt; in your browser and you should see
+&lt;em&gt;Welcome to pypiserver!&lt;/em&gt;.&lt;/p&gt;
+&lt;p&gt;To verify that this works, I will use &lt;code&gt;flit&lt;/code&gt; as I did in my previous 
+&lt;a href="https://cetyler.github.io/how-to-create-a-python-package.html"&gt;post&lt;/a&gt;.&lt;/p&gt;
+&lt;h3&gt;Push Package to Private PyPi&lt;/h3&gt;
+&lt;p&gt;I will use &lt;code&gt;podsearch&lt;/code&gt; to push a new version to my private PyPi.
+Create &lt;code&gt;~/.pypirc&lt;/code&gt; and add the following:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="k"&gt;[distutils]&lt;/span&gt;
+&lt;span class="na"&gt;index-servers&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;
+    &lt;span class="na"&gt;pypi&lt;/span&gt;
+    &lt;span class="na"&gt;private&lt;/span&gt;
+
+&lt;span class="k"&gt;[pypi]&lt;/span&gt;
+&lt;span class="na"&gt;username: user&lt;/span&gt;
+&lt;span class="na"&gt;password: password&lt;/span&gt;
+
+&lt;span class="k"&gt;[private]&lt;/span&gt;
+&lt;span class="na"&gt;repository: http://localhost:8081&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;I included PyPi but that is not required if you are not pushing packages to
+PyPi.
+Now do the following to upload &lt;code&gt;podsearch&lt;/code&gt; to the private PyPi.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;$ flit publish --repository rose
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Now create a dummy directory and install &lt;code&gt;podsearch&lt;/code&gt;.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;$ mkdir &lt;span class="nb"&gt;test&lt;/span&gt;
+$ &lt;span class="nb"&gt;cd&lt;/span&gt; &lt;span class="nb"&gt;test&lt;/span&gt;
+$ python3 -m venv venv
+$ &lt;span class="nb"&gt;source&lt;/span&gt; activate venv/bin/activate
+$ pip install --index-url http://localhost:8081 --trusted-host localhost
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h2&gt;Docker with Authentication&lt;/h2&gt;
+&lt;p&gt;For authentication, I will use 
+&lt;a href="https://github.com/pypiserver/pypiserver#apache-like-authentication-htpasswd"&gt;htpasswd&lt;/a&gt;.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;$ apt install apache2-utils
+$ htpasswd -sc htpasswd.txt username
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt; that &lt;code&gt;username&lt;/code&gt; is the name of the user how needs access.
+Repeat this for any additional users.
+Update &lt;code&gt;docker-compose.yml&lt;/code&gt; to:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="n"&gt;version&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;3.7&amp;#39;&lt;/span&gt;
+
+&lt;span class="n"&gt;services&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="n"&gt;pypi&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;server&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+        &lt;span class="n"&gt;image&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;pypiserver&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;pypiserver&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="n"&gt;latest&lt;/span&gt;
+        &lt;span class="n"&gt;ports&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+            &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="mi"&gt;8081&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="mi"&gt;8080&lt;/span&gt;
+        &lt;span class="n"&gt;volumes&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+            &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="n"&gt;type&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;volume&lt;/span&gt;
+            &lt;span class="n"&gt;source&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;pypi&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;server&lt;/span&gt;
+            &lt;span class="n"&gt;target&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;data&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;packages&lt;/span&gt;
+            &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="n"&gt;type&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;bind&lt;/span&gt;
+            &lt;span class="n"&gt;source&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;location_of_file&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;
+            &lt;span class="n"&gt;target&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;data&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;auth&lt;/span&gt;
+        &lt;span class="n"&gt;command&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;P&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;data&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;auth&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;htpasswd&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;txt&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;a&lt;/span&gt; &lt;span class="n"&gt;update&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;download&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;list&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;data&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;packages&lt;/span&gt;
+        &lt;span class="n"&gt;restart&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;always&lt;/span&gt;
+&lt;span class="n"&gt;volumes&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="n"&gt;pypi&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;server&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Notice that I am using a bind instead of a Docker volume for &lt;code&gt;htpasswd.txt&lt;/code&gt;.
+This will help to add users in the future.
+Also for command, the &lt;code&gt;htpasswd.txt&lt;/code&gt; will be used to authenticate and users will
+be able to update, download and list packages.&lt;/p&gt;
+&lt;h3&gt;Push Package to Private PyPi&lt;/h3&gt;
+&lt;p&gt;Now prior to pushing a new &lt;code&gt;podsearch&lt;/code&gt; update, we need to update &lt;code&gt;~/.pypirc&lt;/code&gt; to
+include the username and password for our private PyPi server.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="k"&gt;[distutils]&lt;/span&gt;
+&lt;span class="na"&gt;index-servers&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;
+    &lt;span class="na"&gt;pypi&lt;/span&gt;
+    &lt;span class="na"&gt;private&lt;/span&gt;
+
+&lt;span class="k"&gt;[pypi]&lt;/span&gt;
+&lt;span class="na"&gt;username: user&lt;/span&gt;
+&lt;span class="na"&gt;password: password&lt;/span&gt;
+
+&lt;span class="k"&gt;[private]&lt;/span&gt;
+&lt;span class="na"&gt;repository&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;http://localhost:8081&lt;/span&gt;
+&lt;span class="na"&gt;username&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;user&lt;/span&gt;
+&lt;span class="na"&gt;password&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;pass&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Now change the revision and do &lt;code&gt;flit publish&lt;/code&gt; to verify that it works.&lt;/p&gt;
+&lt;h2&gt;Setup Pip&lt;/h2&gt;
+&lt;p&gt;Now that I have setup my private PyPi server, let's make it easier to download
+the private packages.
+Create/open &lt;code&gt;~/.pip/pip.conf&lt;/code&gt;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="k"&gt;[global]&lt;/span&gt;
+&lt;span class="na"&gt;extra-index-url&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;http://localhost:8081&lt;/span&gt;
+&lt;span class="na"&gt;trusted-host&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;localhost&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Instead of &lt;code&gt;localhost&lt;/code&gt; put the hostname or IP address.
+Then run &lt;code&gt;pip config list&lt;/code&gt; to verify that the above gets returned.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="o"&gt;**&lt;/span&gt;&lt;span class="nv"&gt;Note&lt;/span&gt;&lt;span class="o"&gt;**&lt;/span&gt; &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="nv"&gt;Windows&lt;/span&gt;, &lt;span class="nv"&gt;create&lt;/span&gt; `&lt;span class="nv"&gt;pip&lt;/span&gt;.&lt;span class="nv"&gt;ini&lt;/span&gt;` &lt;span class="nv"&gt;file&lt;/span&gt; &lt;span class="nv"&gt;in&lt;/span&gt; `&lt;span class="nv"&gt;C&lt;/span&gt;:\&lt;span class="nv"&gt;Users&lt;/span&gt;\&lt;span class="nv"&gt;Username&lt;/span&gt;\&lt;span class="nv"&gt;pip&lt;/span&gt;`
+&lt;span class="nv"&gt;instead&lt;/span&gt;.
+&lt;span class="nv"&gt;The&lt;/span&gt; &lt;span class="nv"&gt;format&lt;/span&gt; &lt;span class="nv"&gt;of&lt;/span&gt; &lt;span class="nv"&gt;the&lt;/span&gt; &lt;span class="nv"&gt;file&lt;/span&gt; &lt;span class="nv"&gt;itself&lt;/span&gt; &lt;span class="nv"&gt;is&lt;/span&gt; &lt;span class="nv"&gt;the&lt;/span&gt; &lt;span class="nv"&gt;same&lt;/span&gt;.
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h2&gt;Conclusion&lt;/h2&gt;
+&lt;p&gt;Having a private PyPi server, I can put my packages in a centralize server and
+have all my computers on my network push/pull packages.
+This is a improvement over a local directory and once set up feels no different
+to installing packages from PyPi.&lt;/p&gt;</content><category term="Python"></category><category term="python"></category><category term="package"></category><category term="pypi"></category></entry><entry><title>How to Create a Python Package</title><link href="https://cetyler.github.io/how-to-create-a-python-package.html" rel="alternate"></link><published>2021-04-17T00:00:00-05:00</published><updated>2021-04-20T20:30:00-05:00</updated><author><name>Christopher</name></author><id>tag:cetyler.github.io,2021-04-17:/how-to-create-a-python-package.html</id><summary type="html">&lt;p&gt;How to create a Python package and have a local repository.&lt;/p&gt;</summary><content type="html">&lt;p&gt;While I was listening
+&lt;a href="https://pythonbytes.fm/episodes/show/228/supreme-court-decides-api-copyright-battle"&gt;PythonBytes&lt;/a&gt;
+episode #228 and they mentioned an
+&lt;a href="https://antonz.org/python-packaging"&gt;article&lt;/a&gt; from Anton Zhiyanov on creating
+a Python package in 2021.
+Reading the article reminded me that I wanted to update how I create Python
+packages and that I want to figure out how to create a local Python
+repository.
+Anton's article talks about how to put your package on PyPi which I will not do
+in this article.
+At work, I created a Python package that is very specific to what I do at work
+and it includes some items that probably should not be shared.
+However the way I install the package is I simple go into my Git repository and
+do the following:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;$ &lt;span class="nb"&gt;cd&lt;/span&gt; /dir-to-project-to-add-package
+$ &lt;span class="nb"&gt;source&lt;/span&gt; venv/scripts/bin/activate
+$ &lt;span class="nb"&gt;cd&lt;/span&gt; /git-repo-of-package
+$ pip3 install .
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;I know that you can also use &lt;code&gt;pip3 install /git-repo-of-package&lt;/code&gt; as well.
+The problem with this method is that I need to make sure that I am installing
+the right version.
+So prior to installing, I need to make sure the following:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Verify that I am in the &lt;code&gt;master&lt;/code&gt; branch.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Make sure that I want the latest version, otherwise checkout an earlier.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;Create Python Package&lt;/h2&gt;
+&lt;p&gt;For the most part will follow along what Anton did.
+Create a minimal package.
+Will create &lt;code&gt;podsearch&lt;/code&gt; folder, put a virtual environment.
+Create the following folder structure.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;.
+|-- .gitignore
+|-- podsearch
+    |-- __init__.py
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Put the following in &lt;code&gt;__init__.py&lt;/code&gt;.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&amp;quot;&amp;quot;&amp;quot;Let&amp;#39;s find some podcasts!&amp;quot;&amp;quot;&amp;quot;
+
+__version__ = &amp;quot;0.1.0&amp;quot;
+
+def search(name, count=5):
+    &amp;quot;&amp;quot;&amp;quot;Search podcast by name.&amp;quot;&amp;quot;&amp;quot;
+    raise NotImplementedError()
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;So far matching what Anton explained in his article.
+Now will install &lt;a href="https://flit.readthedocs.io/en/latest/"&gt;flit&lt;/a&gt;.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;pip install flit
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;After that run &lt;code&gt;flint init&lt;/code&gt; and answer the questions.
+This will create &lt;code&gt;pyproject.toml&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;This is where we will start to deviate from Anton.
+Instead of using PyPi or PyPiTest, I want to publish the package to a local
+location.&lt;/p&gt;
+&lt;h2&gt;Install Python Package from Local Directory&lt;/h2&gt;
+&lt;p&gt;If you are the only person that will use the Python package, you don't need to
+create a local repository that mimics PyPi.&lt;/p&gt;
+&lt;p&gt;First run &lt;code&gt;flit build&lt;/code&gt; to create the following in &lt;code&gt;dist/&lt;/code&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;podsearch-0.1.0-py2.py3-none-any.whl
+podsearch-0.1.0.tar.gz
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Copy these files to your local python directory.
+Then whenever you need to install the package, do the following:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;$ mkdir test_project
+$ &lt;span class="nb"&gt;cd&lt;/span&gt; test_project
+$ python -m venv venv
+$ pip install podsearch --no-index --find-links file:///local-python-package-directory
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;This will use your Python packages folder and install your packages.
+Also it has the added benefit that if your package requires something that is
+on PyPi, after searching your directory, pip will then search PyPi.&lt;/p&gt;
+&lt;p&gt;This can be a great option for a lone developer that creates private Python
+packages.
+This is the method I plan on using at work since I am the only Python
+developer.&lt;/p&gt;
+&lt;p&gt;The downside is that this may not work with a team unless you use a network
+drive/location.&lt;/p&gt;
+&lt;h2&gt;Miscellaneous&lt;/h2&gt;
+&lt;p&gt;I normally add the following in my package repository:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;README.md&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Describe what the package is about.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Maybe include some examples on how to use the package.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;If there is a website, this is a good place to include it.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;CHANGELOG.md&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;This make it easy to know the changes from each version.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Anton mentions a lot more and I will probably adapt to my workflow and explain
+my workflow in another post.&lt;/p&gt;
+&lt;h2&gt;Conclusion&lt;/h2&gt;
+&lt;p&gt;This is a pretty easy way to create a Python package and to be able to share
+internally.
+The next step would be to create a private PyPi server.
+That way I can have access to my packages from any computer on my local network.&lt;/p&gt;</content><category term="Python"></category><category term="python"></category><category term="package"></category></entry></feed>

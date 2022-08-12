@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="author" content="Christopher" />
+
+        <meta property="og:type" content="article" />
+        <meta name="twitter:card" content="summary">
+
+<meta name="keywords" content="sql, eda, Blog, " />
+
+<meta property="og:title" content="Using SQL for Exploratory Data Analysis (EDA) "/>
+<meta property="og:url" content="https://cetyler.github.io/using-sql-for-exploratory-data-analysis-eda.html" />
+<meta property="og:description" content="Some use SQL commands that can help with EDA." />
+<meta property="og:site_name" content="Christopher Tyler R&amp;D Test Engineer" />
+<meta property="og:article:author" content="Christopher" />
+<meta property="og:article:published_time" content="2021-05-22T14:30:00-05:00" />
+<meta name="twitter:title" content="Using SQL for Exploratory Data Analysis (EDA) ">
+<meta name="twitter:description" content="Some use SQL commands that can help with EDA.">
+
+        <title>Using SQL for Exploratory Data Analysis (EDA)  · Christopher Tyler R&amp;D Test Engineer
+</title>
+        <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="https://cetyler.github.io/theme/css/elegant.prod.css" media="screen">
+        <link rel="stylesheet" type="text/css" href="https://cetyler.github.io/theme/css/custom.css" media="screen">
+
+        <link href="https://cetyler.github.io/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Christopher Tyler R&amp;D Test Engineer - Full Atom Feed" />
+
+
+    </head>
+    <body>
+        <div id="content">
+            <div class="navbar navbar-static-top">
+                <div class="navbar-inner">
+                    <div class="container-fluid">
+                        <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </a>
+                        <a class="brand" href="https://cetyler.github.io/"><span class=site-name>Christopher Tyler R&D Test Engineer</span></a>
+                        <div class="nav-collapse collapse">
+                            <ul class="nav pull-right top-menu">
+                                <li >
+                                    <a href=
+                                       https://cetyler.github.io
+                                    >Home</a>
+                                </li>
+                                <li ><a href="https://cetyler.github.io/pages/about-me.html">About Me</a></li>
+                                <li ><a href="https://cetyler.github.io/pages/resources.html">Resources</a></li>
+                                <li ><a href="https://cetyler.github.io/pages/my-resume.html">My Resume</a></li>
+                                <li ><a href="https://cetyler.github.io/categories.html">Categories</a></li>
+                                <li ><a href="https://cetyler.github.io/tags.html">Tags</a></li>
+                                <li ><a href="https://cetyler.github.io/archives.html">Archives</a></li>
+                                <li><form class="navbar-search" action="https://cetyler.github.io/search.html" onsubmit="return validateForm(this.elements['q'].value);"> <input type="text" class="search-query" placeholder="Search" name="q" id="tipue_search_input"></form></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container-fluid">
+                <div class="row-fluid">
+                    <div class="span1"></div>
+                    <div class="span10">
+<article itemscope>
+<div class="row-fluid">
+    <header class="page-header span10 offset2">
+        <h1>
+            <a href="https://cetyler.github.io/using-sql-for-exploratory-data-analysis-eda.html">
+                Using SQL for Exploratory Data Analysis (EDA)
+            </a>
+        </h1>
+    </header>
+</div>
+
+<div class="row-fluid">
+        <div class="span8 offset2 article-content">
+            
+            <p>While I do use <a href="https://pandas.pydata.org">pandas</a> to do most of my initial
+exploratory data analysis (EDA), I do also use SQL.
+I started using pandas for EDA at work and quickly started to hit the memory
+limits.
+I then for various ways to more efficiently use my memory
+(chunking, data types, etc.) but was still having issues.
+Finally I started using SQL which made it much easier to do analysis on
+larger datasets.</p>
+<p>This article will focus on some useful SQL commands that can help with initial
+EDA.
+<strong>Note</strong> I highly recommend reading Memorable SQL.
+I will be using PostgreSQL in my examples.
+I also was able to get some additional ideas from
+<a href="https://appsilon.com/intermediate-sql">Appsilon</a>.</p>
+<p>I plan on using my existing data.</p>
+<h2>Initial Data View</h2>
+<p>Initially I look at the first 10 rows or so of a table to get an idea of what I
+am working with.</p>
+<div class="highlight"><pre><span></span><code>SELECT * FROM hvac LIMIT 10;
+</code></pre></div>
+
+<p>This will get the first 10 rows from <code>hvac</code> table.
+Now I know the column names, potentially what kind of data that I have.
+If I want to look at the last 10 rows for example, I will use the timestamp to
+reverse the order.</p>
+<div class="highlight"><pre><span></span><code>SELECT * FROM hvac ORDER BY timestamp DESC LIMIT 10;
+</code></pre></div>
+
+<p>Now I have the last 10 rows.</p>
+<p>If I have multiple tables, I would do the same thing with each table.
+Usually ahead of time I know which tables are related to each other and if I
+need to do a join.</p>
+<p>Now I may want to know how much data I am dealing with.</p>
+<div class="highlight"><pre><span></span><code>SELECT COUNT(timestamp) FROM hvac;
+</code></pre></div>
+
+<p>This will return the number of rows.</p>
+<div class="highlight"><pre><span></span><code>SELECT column_name, data_type
+FROM infromation_schema.columns
+WHERE table_name = &#39;hvac&#39;;
+</code></pre></div>
+
+<p>This will return a list of column names and the data type for each column for
+<code>hvac</code> table.</p>
+<p>I could also get the unique values for <code>location</code>.</p>
+<div class="highlight"><pre><span></span><code>SELECT DISTINCT(location) FROM hvac;
+</code></pre></div>
+
+<p>Within a few minutes, I have an idea of the size of data and what type of
+data I have.
+If this was done in pandas, I would have had to load all the data first, then
+do my EDA.
+Actually that is not completely correct as you can read SQL in pandas which
+would be similar to what I just did.
+My workflow is to do the following:</p>
+<ul>
+<li>
+<p>If the data is not in a database (ex. csv, xlsx, etc.) put it in a database.</p>
+<ul>
+<li>SQLite can be really useful especially if you don't need concurrent
+  users.</li>
+</ul>
+</li>
+<li>
+<p>Do some initial EDA in SQL to determine if it makes sense to do everything in
+  pandas or to use a mix of pandas and SQL queries.</p>
+</li>
+<li>
+<p>Clean the data.</p>
+</li>
+<li>
+<p>Perform some analysis to get some initial insights.</p>
+</li>
+<li>
+<p>Share findings and next steps.</p>
+</li>
+</ul>
+<h2>Cleaning Data</h2>
+<p>Sometimes it makes sense to do certain kinds of cleaning in SQL prior to
+loading the data into pandas.
+With the <code>hvac</code> table there are a couple of things I would want to do</p>
+<ul>
+<li>
+<p>Convert timestamp from EPOCH to date and time.</p>
+</li>
+<li>
+<p>I think name and location may be confusing and want to change the column
+  names.</p>
+</li>
+</ul>
+<p>Changing the column names is straightforward if I only care about when I
+display the data.</p>
+<div class="highlight"><pre><span></span><code>SELECT timestamp
+    ,location AS sensor_location
+    ,name AS sensor_position
+    ,humidity
+FROM hvac
+LIMIT 10;
+</code></pre></div>
+
+<p>I prefer to use snake_case especially if I will load this data into pandas.
+If I was going to export the table from PostgreSQL to say a csv file, then
+I would change <code>sensor_location</code> to <code>"Sensor Location"</code> for example.</p>
+<p>Changing <code>timestamp</code> from epoch, use <code>TO_TIMESTAMP()</code>.</p>
+<div class="highlight"><pre><span></span><code>SELECT TO_TIMESTAMP(timestamp) AS &quot;Timestamp&quot;
+    ,location AS &quot;Sensor Location&quot;
+    ,name AS &quot;Sensor Position&quot;
+    ,humidity AS &quot;Humidity&quot;
+FROM hvac
+LIMIT 10;
+</code></pre></div>
+
+<p>Let's say I had a problem with the case of <code>location</code>, I could use <code>LOWER()</code> to
+make <code>location</code> lowercase of <code>UPPER()</code> for uppercase.
+I can also use <code>CONCAT()</code> if I want to combine <code>location</code> and <code>name</code>.</p>
+<div class="highlight"><pre><span></span><code>SELECT TO_TIMESTAMP(timestamp) AS timestamp
+    ,location AS sensor_location
+    ,name AS sensor_name
+    ,UPPER(CONCAT(location, &#39; &#39;, name)) AS sensor
+FROM hvac
+LIMIT 10;
+</code></pre></div>
+
+<p>This will combine <code>location</code> and <code>name</code> with a space between them.</p>
+<p>There is more things that I could do but this should give you an idea of what
+you can do with this kind of data.</p>
+<h2>Using GROUP BY</h2>
+<p>Aggregating data can be very useful, especially if you have lots of data and
+can't fit that data in memory to use pandas.
+Let's get the total number of rows if we combine <code>location</code> and <code>name</code> together.</p>
+<div class="highlight"><pre><span></span><code>SELECT CONCAT(location, &#39; &#39;, name) AS sensor
+    ,COUNT(CONCAT(location, &#39; &#39;, name)) AS number_of_rows
+FROM hvac
+GROUP BY CONCAT(location, &#39; &#39;, name);
+</code></pre></div>
+
+<p><strong>Note</strong> that if you include a column in the <code>SELECT</code> statement, you must use
+it in an aggregation or you must include it in the <code>GROUP BY</code>.
+With <code>GROUP BY</code> you can use <code>WHERE</code>.</p>
+<div class="highlight"><pre><span></span><code>SELECT CONCAT(location, &#39; &#39;, name) AS sensor
+    ,COUNT(CONCAT(location, &#39; &#39;, name)) AS number_of_rows
+FROM hvac
+WHERE temperature &lt; 90
+GROUP BY CONCAT(location, &#39; &#39;, name);
+</code></pre></div>
+
+<p>This will only count if the temperature is less than 90F.
+Using <code>HAVING</code> will be like <code>WHERE</code> but after <code>GROUP BY</code> was done.</p>
+<div class="highlight"><pre><span></span><code>SELET name
+    ,ROUND(AVG(temperature), 2) AS average_temperature
+FROM hvac
+GROUP BY name
+HAVING AVG(temperature) &lt; 80;
+</code></pre></div>
+
+<p>This will get the average temperature by <code>name</code> but only include data if the
+average temperature is less than 80F.</p>
+<p>The syntax is a little different than in pandas but you can do similar things.
+If I am doing more complex aggregation and I can fit the data in memory, then
+I would use pandas. </p>
+<h2>Math Functions</h2>
+<p>With this data, let's say that I would want to convert Fahrenheit to Celsius.</p>
+<div class="highlight"><pre><span></span><code>SELECT *
+    ,(temperature - 32.0) * (5.0/9.0) AS Celsius
+FROM hvac
+LIMIT 10;
+</code></pre></div>
+
+<p>Keep in mind that if you don't want the result to return as an integer, then at
+least one value with each math function will need to be a float.
+I have found that if I want my result to be a float, I make all my numbers floats.
+Also know that if you do keep it as an integer, the result will not round up.</p>
+<p>The math functions in general are what you would expect.</p>
+<ul>
+<li>
+<p>addition <code>+</code></p>
+</li>
+<li>
+<p>subtraction <code>-</code></p>
+</li>
+<li>
+<p>multiplication <code>*</code></p>
+</li>
+<li>
+<p>division <code>/</code></p>
+</li>
+<li>
+<p>modulo <code>%</code> which will return the remainder of dividing two numbers.</p>
+</li>
+<li>
+<p>exponent <code>^</code></p>
+</li>
+<li>
+<p>Functions like <code>COUNT()</code>, <code>SUM()</code>, <code>AVG()</code>, <code>MAX()</code> and <code>MIN()</code>.</p>
+</li>
+</ul>
+<p>This is not an exhaustive list but should give you an idea of what you can do.</p>
+<h2>First/Last/Nth Values</h2>
+<p>You can use <code>FIRST_VALUE</code> function to return the value of a specified column
+from the first row of the window frame.</p>
+<div class="highlight"><pre><span></span><code>SELECT *
+    ,TO_TIMESTAMP(timestamp) AS date_time
+    ,temperature - FIRST_VALUE(temperature) OVER (
+        PARITION BY temperature
+        ORDER BY timestamp
+    ) AS diff_temp_from_1st
+FROM hvac
+LIMIT 10;
+</code></pre></div>
+
+<p>Above will return all columns and add <code>date_time</code> to convert EPOCH to date and
+time.
+Will also add <code>diff_temp_from_1st</code> column that will subract a given row to the
+first row's temperature.
+It doesn't make much sense with our current data but hope it helps understand
+what you can do.</p>
+<h2>Getting the Leading or Preceding Value</h2>
+<p><code>LEAD</code> function will fetch the value of a specific attribute from the next row
+and return it in the current row.
+It takes two arguments:</p>
+<ul>
+<li>
+<p>Column name to fetch the next value.</p>
+</li>
+<li>
+<p>The number of rows relative to the current row.</p>
+</li>
+</ul>
+<p>As expected, <code>LAG</code> function does the opposite.
+With our data, I would like know the difference between my HVAC inlet and
+outlet temperatures.</p>
+<div class="highlight"><pre><span></span><code>SELECT *
+    ,temperature - LAG(temperature, 1) OVER (
+        ORDER BY timestamp
+    ) AS temp_diff
+FROM hvac
+WHERE location = &#39;HVAC&#39;
+LIMIT 10;
+</code></pre></div>
+
+<p>A bit ugly but it does subtract the current row's temperature with the previous
+temperature.</p>
+<p>This can be useful to create an elapse time by subtracting the timestamp from
+the previous row or create a cumulative of sales.</p>
+<h2>Ranking</h2>
+<p>Lastly, I want to rank the temperature.
+The difference between <code>RANK</code> and <code>DENSE_RANK</code> functions is that <code>DENSE_RANK</code>
+will return consecutive ranks, while <code>RANK</code> will return ranking that if there
+are ties, a rank is skipped.</p>
+<div class="highlight"><pre><span></span><code>SELECT temperature
+    ,DENSE_RANK () OVER (
+        ORDER BY timestamp
+    ) AS rank
+FROM hvac
+ORDER BY timestamp
+LIMIT 10;
+</code></pre></div>
+
+<p>Then if for example, I wanted the to filter the temperatures by rank, I can.</p>
+<h2>Conclusion</h2>
+<p>Hopefully so far you are starting to get an idea of how useful it can be to
+start your analysis with SQL queries first.
+Generally speaking all of what I have done above can be done with a small and
+large data set.
+While you may have to wait longer with a larger data set, it is not done in
+memory and will return a result quicker than you would expect.</p>
+<p>Make sure comment and save your SQL statements.
+TODO put a link to how to structure your statements.
+The other reason to save your statement is that you can use those queries in
+pandas or recreate it in pandas to match the SQL statement.</p>
+<p>I became much more productive using SQL beyond just dumping a table in pandas
+and using pandas to do my analysis.</p>
+
+
+             
+ 
+            
+            
+            
+
+
+
+
+
+
+<section>
+    <h6 style="display:none;">Comments</h6>
+    <p id="comment-message">Leave your comments below. </p>
+
+    <div class="accordion" id="accordion2">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                <a class="accordion-toggle disqus-comment-count comment-count"
+                   data-toggle="collapse"
+                   data-parent="#accordion2"
+                   href="https://cetyler.github.io/using-sql-for-exploratory-data-analysis-eda.html#comment_thread"
+                   id="comment-accordion-toggle">
+                    Comments
+                </a>
+            </div>
+            <div id="comment_thread" class="accordion-body collapse">
+                <div class="accordion-inner">
+                    <div class="comments">
+
+                        <script src="https://utteranc.es/client.js"
+        data-repo="cetyler/cetyler.github.io"
+        data-issue-term="using-sql-for-eda"
+        data-label="Comments"
+        data-theme="github-light"
+        crossorigin="anonymous"
+        async>
+</script>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+            <hr/>
+        </div>
+        <section id="article-sidebar" class="span2">
+            <h4>Published</h4>
+            <time itemprop="dateCreated" datetime="2021-05-22T14:30:00-05:00">May 22, 2021</time>
+            <h4>Category</h4>
+            <a class="category-link" href="https://cetyler.github.io/categories.html#blog-ref">Blog</a>
+            <h4>Tags</h4>
+            <ul class="list-of-tags tags-in-article">
+                <li><a href="https://cetyler.github.io/tags.html#eda-ref">eda
+                    <span>1</span>
+</a></li>
+                <li><a href="https://cetyler.github.io/tags.html#sql-ref">sql
+                    <span>2</span>
+</a></li>
+            </ul>
+<h4>Contact</h4>
+<div id="sidebar-social-link">
+    <a href="https://www.linkedin.com/in/christopheretyler" title="" target="_blank" rel="nofollow noopener noreferrer">
+        <svg xmlns="http://www.w3.org/2000/svg" aria-label="LinkedIn" role="img" viewBox="0 0 512 512" fill="#fff"><rect width="512" height="512" rx="15%" fill="#0077b5"/><circle cx="142" cy="138" r="37"/><path stroke="#fff" stroke-width="66" d="M244 194v198M142 194v198"/><path d="M276 282c0-20 13-40 36-40 24 0 33 18 33 45v105h66V279c0-61-32-89-76-89-34 0-51 19-59 32"/></svg>
+    </a>
+    <a href="https://github.com/cetyler" title="" target="_blank" rel="nofollow noopener noreferrer">
+        <svg xmlns="http://www.w3.org/2000/svg" aria-label="GitHub" role="img" viewBox="0 0 512 512"><rect width="512" height="512" rx="15%" fill="#1B1817"/><path fill="#fff" d="M335 499c14 0 12 17 12 17H165s-2-17 12-17c13 0 16-6 16-12l-1-50c-71 16-86-28-86-28-12-30-28-37-28-37-24-16 1-16 1-16 26 2 40 26 40 26 22 39 59 28 74 22 2-17 9-28 16-35-57-6-116-28-116-126 0-28 10-51 26-69-3-6-11-32 3-67 0 0 21-7 70 26 42-12 86-12 128 0 49-33 70-26 70-26 14 35 6 61 3 67 16 18 26 41 26 69 0 98-60 120-117 126 10 8 18 24 18 48l-1 70c0 6 3 12 16 12z"/></svg>
+    </a>
+    <a href="https://cetyler.github.io/feeds/all.atom.xml" title="" target="_blank" rel="nofollow noopener noreferrer">
+        <svg xmlns="http://www.w3.org/2000/svg" aria-label="RSS" role="img" viewBox="0 0 512 512"><rect width="512" height="512" rx="15%" fill="#f80"/><circle cx="145" cy="367" r="35" fill="#fff"/><path fill="none" stroke="#fff" stroke-width="60" d="M109 241c89 0 162 73 162 162M109 127c152 0 276 124 276 276"/></svg>
+    </a>
+</div>
+            
+
+
+
+
+
+            
+
+
+
+
+
+        </section>
+</div>
+</article>
+                    </div>
+                    <div class="span1"></div>
+                </div>
+            </div>
+        </div>
+<footer>
+    <div>
+        
+&copy; Copyright 2022 by Christopher E. Tyler and licensed under a <a rel="license"
+  href="http://creativecommons.org/licenses/by/4.0/">
+  <img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/80x15.png" />
+  Creative Commons Attribution 4.0 International License</a>.
+
+    </div>
+
+
+
+
+    <div id="fpowered">
+        Powered by: <a href="http://getpelican.com/" title="Pelican Home Page" target="_blank" rel="nofollow noopener noreferrer">Pelican</a>
+        Theme: <a href="https://elegant.oncrashreboot.com/" title="Theme Elegant Home Page" target="_blank" rel="nofollow noopener noreferrer">Elegant</a>
+    </div>
+</footer>            <script src="//code.jquery.com/jquery.min.js"></script>
+        <script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
+        <script>
+            function validateForm(query)
+            {
+                return (query.length > 0);
+            }
+        </script>
+
+    <script>
+    (function () {
+        if (window.location.hash.match(/^#comment-\d+$/)) {
+            $('#comment_thread').collapse('show');
+        }
+    })();
+    window.onhashchange=function(){
+        if (window.location.hash.match(/^#comment-\d+$/))
+            window.location.reload(true);
+    }
+    $('#comment_thread').on('shown', function () {
+        var link = document.getElementById('comment-accordion-toggle');
+        var old_innerHTML = link.innerHTML;
+        $(link).fadeOut(200, function() {
+            $(this).text('Click here to hide comments').fadeIn(200);
+        });
+        $('#comment_thread').on('hidden', function () {
+            $(link).fadeOut(200, function() {
+                $(this).text(old_innerHTML).fadeIn(200);
+            });
+        })
+    })
+</script>
+
+    </body>
+    <!-- Theme: Elegant built for Pelican
+        License : MIT -->
+</html>

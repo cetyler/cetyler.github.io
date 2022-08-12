@@ -1,0 +1,281 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Christopher Tyler R&amp;D Test Engineer - Workflow</title><link href="https://cetyler.github.io/" rel="alternate"></link><link href="https://cetyler.github.io/feeds/workflow.atom.xml" rel="self"></link><id>https://cetyler.github.io/</id><updated>2021-06-05T21:00:00-05:00</updated><entry><title>Python Workflow</title><link href="https://cetyler.github.io/python-workflow.html" rel="alternate"></link><published>2021-06-05T21:00:00-05:00</published><updated>2021-06-05T21:00:00-05:00</updated><author><name>Christopher Tyler</name></author><id>tag:cetyler.github.io,2021-06-05:/python-workflow.html</id><summary type="html">&lt;p&gt;My python project workflow.&lt;/p&gt;</summary><content type="html">&lt;p&gt;After listening to
+&lt;a href="https://talkpython.fm/episodes/show/314/ask-us-about-modern-python-projects-and-tools"&gt;Talk Python to Me #314&lt;/a&gt;,
+I decided that I need to update my Python workflow.
+I am leaning towards buying
+&lt;a href="https://training.talkpython.fm/courses/modern-python-projects"&gt;Modern Python Projects Course&lt;/a&gt;
+but will probably wait until later in the year when I have some more time.&lt;/p&gt;
+&lt;p&gt;This post will focus on my workflow on Python projects and packages.
+I have a separate workflow for my data analysis.&lt;/p&gt;
+&lt;h2&gt;History&lt;/h2&gt;
+&lt;p&gt;When I started using Python more regularly, I realized that I needed a process
+so that I could create consistent folder structure, keep track of my packages,
+etc.
+I was already using Git but I started using
+&lt;a href="https://cookiecutter.readthedocs.io"&gt;cookiecutter&lt;/a&gt; and Python venv virtual
+environments.
+However I went crazy on my cookiecutter template and made it overly complicated
+and I had difficulty upgrading packages without breaking something.
+The last 6 months I have really started to look at my tools and make
+improvements.&lt;/p&gt;
+&lt;p&gt;I believe my biggest issue was that I did not really sit down and figure out my
+requirements and the minimum I need to get a project going.
+I am hoping that documenting will help me continuously improve my workflow.&lt;/p&gt;
+&lt;h2&gt;Tools&lt;/h2&gt;
+&lt;h3&gt;Cookiecutter&lt;/h3&gt;
+&lt;p&gt;For right now I only use Cookiecutter when I do my Jupyter Notebook projects.
+I currently don't use it for my Python projects.
+Instead I just manually build out my project folder, .gitignore, etc.&lt;/p&gt;
+&lt;h3&gt;Code Editor&lt;/h3&gt;
+&lt;p&gt;I actually use couple different IDEs/editors.
+With all my editors, I put my settings/config file in a git repo so that I can
+share with all my computers.&lt;/p&gt;
+&lt;h4&gt;&lt;a href="https://code.visualstudio.com/"&gt;VS Code&lt;/a&gt;&lt;/h4&gt;
+&lt;p&gt;There is a lot of momentum with a lot of people using VS Code.
+VS Code has great Python support and more importantly it works on Windows,
+Linux and Mac.
+VS Code supports a variety of languages as well.
+This makes learning one IDE that works everywhere and with most languages.&lt;/p&gt;
+&lt;p&gt;I use VS Code mainly at work and not much at home despite that I can use it
+everywhere.
+VS Code is a little heavy and can get slow if you use too many plugins.
+Also I lean more towards more to the command-line.
+VS Code does have a neat feature to sync settings across multiple computers.&lt;/p&gt;
+&lt;p&gt;However I readily suggest VS Code when others ask since it is pretty easy to use
+and it is pretty popular.&lt;/p&gt;
+&lt;h4&gt;&lt;a href="https://micro-editor.github.io"&gt;micro&lt;/a&gt;&lt;/h4&gt;
+&lt;p&gt;This replaced vim for me.
+Micro is as easy as nano and almost as powerful as vim.
+Micro is a terminal-based editor which could be a turn off to some.
+Micro does support plugins and with Python it supports syntax highlighting,
+linting, auto indenting, etc.&lt;/p&gt;
+&lt;p&gt;I use micro at home and at work though at work only on my Ubuntu VM.
+Micro for Windows is slow while using in Windows Terminal.
+Using micro under WSL works fine though.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt; that micro is not an IDE but with plugins could be consider a
+lightweight IDE.&lt;/p&gt;
+&lt;h3&gt;Running Multiple Python Versions&lt;/h3&gt;
+&lt;p&gt;I currently have different methods based on OS.&lt;/p&gt;
+&lt;h4&gt;Windows&lt;/h4&gt;
+&lt;p&gt;For right now, I download packages from https://python.org and install 
+&lt;code&gt;c:\python\pythonXX-VV&lt;/code&gt; with &lt;code&gt;XX&lt;/code&gt; being the Python version and &lt;code&gt;VV&lt;/code&gt; whether it is
+32-bit or 64-bit.
+The problem with this is that I need to keep on top of minor Python updates.&lt;/p&gt;
+&lt;h4&gt;Linux&lt;/h4&gt;
+&lt;p&gt;I primarily use Debian based distros.
+Right now I am using the versions that are in the package manager.
+My plan is to migrate to &lt;a href="https://github.com/pyenv/pyenv"&gt;pyenv&lt;/a&gt; though I don't
+have a current use.&lt;/p&gt;
+&lt;h3&gt;Python Environment&lt;/h3&gt;
+&lt;p&gt;I use Python's standard &lt;code&gt;venv&lt;/code&gt; for my virtual environments.
+I initially tried use to &lt;a href="https://docs.conda.io/en/latest/miniconda.html"&gt;miniconda&lt;/a&gt;
+for my Python projects but I encounter a couple of issues.
+While conda works well for my data analysis (think Jupyter Notebooks), I ran
+into problems getting 
+&lt;a href="https://docs.conda.io/en/latest/miniconda.html"&gt;PyInstaller&lt;/a&gt; to work.
+Also conda did not have all the packages I needed so I was still needing to use
+pip.&lt;/p&gt;
+&lt;p&gt;At work, I name my virtual environments &lt;code&gt;venvXX-VV&lt;/code&gt; to denote the python version
+and whether it is 32-bit or 64-bit.
+I also typically don't upgrade the packages unless I need to add a new package.
+Keep in mind that all my projects at work stay within the intranet.&lt;/p&gt;
+&lt;p&gt;At home all my virtual environment folders are &lt;code&gt;venv&lt;/code&gt;.
+While I may use Python that comes with the OS, I don't use &lt;code&gt;apt&lt;/code&gt; to install
+packages since it tends to be quite out of date.&lt;/p&gt;
+&lt;p&gt;For my &lt;code&gt;requirements.txt&lt;/code&gt; I normally just use &lt;code&gt;pip freeze&lt;/code&gt;.
+I plan to start using &lt;a href="https://github.com/jgonggrijp/pip-review"&gt;pip-review&lt;/a&gt; to
+help with package upgrades.&lt;/p&gt;
+&lt;p&gt;I plan on using &lt;a href="https://pipxproject.github.io/pipx/"&gt;pipx&lt;/a&gt; for my global
+packages like black or flake8.&lt;/p&gt;
+&lt;h3&gt;Personal Packages&lt;/h3&gt;
+&lt;p&gt;I run a private &lt;a href="https://cetyler.github.io/how-to-setup-local-pypi-repository.html"&gt;PyPi server&lt;/a&gt; and
+create packages using flit
+(see &lt;a href="https://cetyler.github.io/how-to-create-a-python-package.html"&gt;my post&lt;/a&gt;).
+This has been more recent but my plan is to create more packages.&lt;/p&gt;
+&lt;p&gt;The problem I have at work is that I have one large package that tries to have
+everything and I need to break it up.
+This was due to learning how to create packages and my previous method was a
+little tedious.&lt;/p&gt;
+&lt;h3&gt;Testing&lt;/h3&gt;
+&lt;p&gt;I use &lt;a href="https://docs.pytest.org/"&gt;pytest&lt;/a&gt; for testing.
+However, I don't use the test driven development.
+Due to the nature of my work, I typically don't get good requirements so at
+least initially, it is an iterative process.&lt;/p&gt;
+&lt;p&gt;For my home projects, I have been attempting to do a more test driven
+development cycle.&lt;/p&gt;
+&lt;h2&gt;Requirements Gathering&lt;/h2&gt;
+&lt;p&gt;My work projects I typically don't get clear requirements.
+My Python projects typically spring from some data analysis project and it may
+be more useful to create a program or package.
+I will create some initial requirements.
+As I get more feedback, I will circle back and update my requirements.&lt;/p&gt;
+&lt;h2&gt;Execution&lt;/h2&gt;
+&lt;p&gt;I use Gitea (see &lt;a href="https://cetyler.github.io/workflow-using-git.html"&gt;my post&lt;/a&gt;) which
+is nice since I have access to an issue tracker and wiki.
+I will then create a project for my 1.0 release and milestones for the interim
+release.
+Then I create issues so I know what I need to work on to meet my milestones.&lt;/p&gt;
+&lt;p&gt;I use git and git flow to create feature and release branches and work towards
+creating a program that meets the minimum requirements.
+Then as I start working on 2.0, 3.0, etc. I start adding features.&lt;/p&gt;
+&lt;p&gt;Prior to a 1.0 release, anything goes.
+If I have to make breaking changes, I will as I try to meet the initial
+requirements.
+After 1.0, minor releases (ex. 1.1) will be minor new features.
+Bug fixes (ex. 1.1.1) are usually off the main or master branch.
+Major new features, breaking changes, etc. (ex. 2.0).&lt;/p&gt;
+&lt;h2&gt;Summary&lt;/h2&gt;
+&lt;p&gt;This is what I currently do and will be updating the post throughout this year.
+Based on my initial research, I can see using make files to automate some of my
+tasks and using tools to help with python packages and python version support.&lt;/p&gt;</content><category term="Workflow"></category><category term="python"></category><category term="workflow"></category></entry><entry><title>Workflow Using Git</title><link href="https://cetyler.github.io/workflow-using-git.html" rel="alternate"></link><published>2021-03-25T00:00:00-05:00</published><updated>2021-04-20T20:30:00-05:00</updated><author><name>Christopher Tyler</name></author><id>tag:cetyler.github.io,2021-03-25:/workflow-using-git.html</id><summary type="html">&lt;p&gt;How I use Git.&lt;/p&gt;</summary><content type="html">&lt;p&gt;My goal of this post is to help someone get started with Git by sharing some
+useful resources and talking about my workflow.&lt;/p&gt;
+&lt;p&gt;Source control is not just for programmers.
+For example, writers source control can be extremely useful by working on a 
+novel and can try different versions of a story line without need version1.doc,
+good_version.doc, bear.doc, etc.
+Instead you can have a main branch of your story and create a separate branch
+to try out a different story line or try a concept and can also go back to a
+previous version/commit without losing anything.
+For example &lt;a href="https://standardebooks.org/"&gt;Standard Ebooks&lt;/a&gt; use GitHub.&lt;/p&gt;
+&lt;h2&gt;Resources&lt;/h2&gt;
+&lt;p&gt;First of all I have found these books very useful in getting up to speed with
+Git.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="https://cbx33.github.io/gitt/"&gt;Git in the Trenches&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="https://git-scm.com/book/en/v2"&gt;Pro Git&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;If you don't know much of Git, Git in the Trenches is a pretty good start as it
+is not very long and is actually a good read.
+Peter Savage created a fictional company using proper source control for the
+first time as a way to introduce git.&lt;/p&gt;
+&lt;p&gt;Pro Git goes through more of the details and is a great reference.&lt;/p&gt;
+&lt;h2&gt;My Workflow&lt;/h2&gt;
+&lt;p&gt;I will go through my workflow for work and personal projects.
+The focus is on the Git portion.
+I plan on doing separate posts describing the other tools, thought process and
+so on.&lt;/p&gt;
+&lt;h3&gt;Data Analysis&lt;/h3&gt;
+&lt;p&gt;I will go through how I use Jupyter Notebooks, Cookiecutter, etc. later and
+will focus on Git for now.
+I use &lt;a href="https://github.com/petervanderdoes/gitflow-avh"&gt;Git Flow&lt;/a&gt; which is based
+on an article from
+&lt;a href="https://nvie.com/posts/a-successful-git-branching-model/"&gt;Vincent Driessen&lt;/a&gt;.
+You don't need Git Flow to use this model.
+I have &lt;code&gt;master&lt;/code&gt; and &lt;code&gt;develop&lt;/code&gt; branches.
+The &lt;code&gt;master&lt;/code&gt; branch only has my releases where I shared information with my
+team.
+The &lt;code&gt;develop&lt;/code&gt; branch is where I do most of my work and I may have &lt;code&gt;feature&lt;/code&gt;
+branches where I am trying out a concept or working on a specific problem.
+My releases I just use a simple timestamp tag with maybe a key phrase to help
+me search if I need to go back.&lt;/p&gt;
+&lt;p&gt;My main plan is to keep it simple since my data analysis projects I typically
+short lived.
+I mainly want to keep track of what I am working on and be able to replicate
+my results.&lt;/p&gt;
+&lt;p&gt;However I don't commit any data.
+I also don't commit Jupyter Notebook files (ipynb).
+I create percent scripts (py) which I commit.&lt;/p&gt;
+&lt;p&gt;I do create a &lt;code&gt;README.md&lt;/code&gt; so that I can replicate my analysis.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;Using .gitignore makes it easy to not commit items you don&amp;#39;t want to.
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3&gt;Programming Projects&lt;/h3&gt;
+&lt;p&gt;Very similar to my Data Analysis but I do some additional things.
+I start with the same branches and I also use &lt;code&gt;feature&lt;/code&gt; branches.
+However I also use &lt;code&gt;bugfix&lt;/code&gt; branches for problems that come up that I want to
+branch off of &lt;code&gt;master&lt;/code&gt; instead of &lt;code&gt;develop&lt;/code&gt; because it is to fix a critical
+bug and I don't want to introduce new features at that time.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="nv"&gt;Note&lt;/span&gt; &lt;span class="nv"&gt;it&lt;/span&gt; &lt;span class="nv"&gt;seems&lt;/span&gt; &lt;span class="nv"&gt;to&lt;/span&gt; &lt;span class="nv"&gt;be&lt;/span&gt; &lt;span class="nv"&gt;a&lt;/span&gt; &lt;span class="nv"&gt;bug&lt;/span&gt; &lt;span class="nv"&gt;in&lt;/span&gt; &lt;span class="nv"&gt;Git&lt;/span&gt; &lt;span class="nv"&gt;Flow&lt;/span&gt; &lt;span class="nv"&gt;which&lt;/span&gt; &lt;span class="nv"&gt;bugfix&lt;/span&gt; &lt;span class="nv"&gt;merges&lt;/span&gt; &lt;span class="nv"&gt;to&lt;/span&gt; &lt;span class="nv"&gt;develop&lt;/span&gt;
+&lt;span class="nv"&gt;instead&lt;/span&gt; &lt;span class="nv"&gt;of&lt;/span&gt; &lt;span class="nv"&gt;merging&lt;/span&gt; &lt;span class="nv"&gt;to&lt;/span&gt; &lt;span class="nv"&gt;master&lt;/span&gt;.
+&lt;span class="nv"&gt;I&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt; &lt;span class="nv"&gt;bugfix&lt;/span&gt; &lt;span class="nv"&gt;branches&lt;/span&gt; &lt;span class="nv"&gt;manually&lt;/span&gt;.
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;I use xx.xx.xx for my releases and I go through and describe features and
+changes.
+I also provide at least a &lt;code&gt;README.md&lt;/code&gt; but I usually include much more
+documentation.
+There is a &lt;code&gt;CHANGELOG.md&lt;/code&gt; so that it is not required to have git access to
+know all the changes.&lt;/p&gt;
+&lt;h3&gt;Documentation Projects&lt;/h3&gt;
+&lt;p&gt;Creating manuals, my resume, this website, etc. I also use git.
+It is similar to how I do my Data Analysis but simpler in some ways.
+I use the branches in a similar way.
+My release also typically more of the timestamp for things like my resume but
+I use xx.xx.xx release for manuals, reports and the like.&lt;/p&gt;
+&lt;p&gt;I try to avoid using something like MS Word or
+&lt;a href="https://www.libreoffice.org/"&gt;Libreoffice&lt;/a&gt; and use either
+&lt;a href="https://www.markdownguide.org/"&gt;Markdown&lt;/a&gt; or 
+&lt;a href="https://docutils.sourceforge.io/rst.html"&gt;RestructuredText&lt;/a&gt;.
+RestructuredText I tend to use 
+&lt;a href="https://www.sphinx-doc.org/en/master/index.html"&gt;Sphinx&lt;/a&gt; which can create
+wonderful web pages and pdfs.&lt;/p&gt;
+&lt;p&gt;For example with my resume I can have a base resume that includes everything.
+Then I can create a branch that is focused for a particular job or a branch
+where I reformat my resume to focus a particular industry, skillset, so on.&lt;/p&gt;
+&lt;h2&gt;Git Alias&lt;/h2&gt;
+&lt;p&gt;Below are the contents from my &lt;code&gt;.gitconfig&lt;/code&gt; file.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="n"&gt;user&lt;/span&gt;&lt;span class="o"&gt;]&lt;/span&gt;&lt;span class="w"&gt;                                                                                                                                                &lt;/span&gt;
+&lt;span class="w"&gt;        &lt;/span&gt;&lt;span class="n"&gt;email&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;christopher&lt;/span&gt;&lt;span class="nv"&gt;@tyler&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;com&lt;/span&gt;&lt;span class="w"&gt;                                                                                                         &lt;/span&gt;
+&lt;span class="w"&gt;        &lt;/span&gt;&lt;span class="n"&gt;name&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;Christopher&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;Tyler&lt;/span&gt;&lt;span class="w"&gt;                                                                                                                      &lt;/span&gt;
+&lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="n"&gt;core&lt;/span&gt;&lt;span class="o"&gt;]&lt;/span&gt;&lt;span class="w"&gt;                                                                                                                                                &lt;/span&gt;
+&lt;span class="w"&gt;        &lt;/span&gt;&lt;span class="n"&gt;editor&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;micro&lt;/span&gt;&lt;span class="w"&gt;                                                                                                                                &lt;/span&gt;
+&lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="n"&gt;alias&lt;/span&gt;&lt;span class="o"&gt;]&lt;/span&gt;&lt;span class="w"&gt;                                                                                                                                               &lt;/span&gt;
+&lt;span class="w"&gt;        &lt;/span&gt;&lt;span class="n"&gt;st&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;status&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;--&lt;/span&gt;&lt;span class="n"&gt;short&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;uno&lt;/span&gt;&lt;span class="w"&gt;                                                                                                                      &lt;/span&gt;
+&lt;span class="w"&gt;        &lt;/span&gt;&lt;span class="n"&gt;ci&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;commit&lt;/span&gt;&lt;span class="w"&gt;                                                                                                                                   &lt;/span&gt;
+&lt;span class="w"&gt;        &lt;/span&gt;&lt;span class="n"&gt;ca&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;commit&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;--&lt;/span&gt;&lt;span class="n"&gt;amend&lt;/span&gt;&lt;span class="w"&gt;                                                                                                                           &lt;/span&gt;
+&lt;span class="w"&gt;        &lt;/span&gt;&lt;span class="n"&gt;caa&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;commit&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;a&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;--&lt;/span&gt;&lt;span class="n"&gt;amend&lt;/span&gt;&lt;span class="w"&gt;                                                                                                                       &lt;/span&gt;
+&lt;span class="w"&gt;        &lt;/span&gt;&lt;span class="n"&gt;br&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;branch&lt;/span&gt;&lt;span class="w"&gt;                                                                                                                                   &lt;/span&gt;
+&lt;span class="w"&gt;        &lt;/span&gt;&lt;span class="n"&gt;co&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;checkout&lt;/span&gt;&lt;span class="w"&gt;                                                                                                                                 &lt;/span&gt;
+&lt;span class="w"&gt;        &lt;/span&gt;&lt;span class="n"&gt;df&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;diff&lt;/span&gt;&lt;span class="w"&gt;                                                                                                                                     &lt;/span&gt;
+&lt;span class="w"&gt;        &lt;/span&gt;&lt;span class="n"&gt;lg&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nf"&gt;log&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;p&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;--&lt;/span&gt;&lt;span class="n"&gt;pretty&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;fuller&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;--&lt;/span&gt;&lt;span class="n"&gt;abbrev&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="k"&gt;commit&lt;/span&gt;&lt;span class="w"&gt;                                                                                                   &lt;/span&gt;
+&lt;span class="w"&gt;        &lt;/span&gt;&lt;span class="n"&gt;lgg&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nf"&gt;log&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;--&lt;/span&gt;&lt;span class="n"&gt;pretty&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;fuller&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;--&lt;/span&gt;&lt;span class="n"&gt;abbrev&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="k"&gt;commit&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;--&lt;/span&gt;&lt;span class="n"&gt;stat&lt;/span&gt;&lt;span class="w"&gt;                                                                                              &lt;/span&gt;
+&lt;span class="w"&gt;        &lt;/span&gt;&lt;span class="n"&gt;up&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;pull&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;--&lt;/span&gt;&lt;span class="n"&gt;rebase&lt;/span&gt;&lt;span class="w"&gt;                                                                                                                            &lt;/span&gt;
+&lt;span class="w"&gt;        &lt;/span&gt;&lt;span class="k"&gt;over&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nf"&gt;log&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="c1"&gt;--pretty=format:&amp;#39;%h: %an at %ad %n%b&amp;#39; --abbrev-commit --grep=&amp;#39;Overview&amp;#39;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;I have been adding as I realize I keep using the same command over and over.
+&lt;code&gt;over&lt;/code&gt; is what I use to create my &lt;code&gt;CHANGELOG.md&lt;/code&gt; as all my release tags include
+an Overview title.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="nv"&gt;Note&lt;/span&gt; &lt;span class="nv"&gt;that&lt;/span&gt; &lt;span class="nv"&gt;email&lt;/span&gt; &lt;span class="nv"&gt;is&lt;/span&gt; &lt;span class="nv"&gt;not&lt;/span&gt; &lt;span class="nv"&gt;my&lt;/span&gt; &lt;span class="nv"&gt;actual&lt;/span&gt; &lt;span class="nv"&gt;email&lt;/span&gt;.
+&lt;span class="nv"&gt;Also&lt;/span&gt; &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="nv"&gt;the&lt;/span&gt; &lt;span class="nv"&gt;editor&lt;/span&gt; &lt;span class="nv"&gt;in&lt;/span&gt; &lt;span class="nv"&gt;Windows&lt;/span&gt; &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="nv"&gt;example&lt;/span&gt; &lt;span class="nv"&gt;you&lt;/span&gt; &lt;span class="nv"&gt;need&lt;/span&gt; &lt;span class="nv"&gt;to&lt;/span&gt; &lt;span class="nv"&gt;use&lt;/span&gt; &lt;span class="nv"&gt;the&lt;/span&gt; &lt;span class="nv"&gt;full&lt;/span&gt; &lt;span class="nv"&gt;path&lt;/span&gt;.
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;To make it easier since I use multiple machines, I keep my &lt;code&gt;.gitconfig&lt;/code&gt; file in
+a Git Repository with my other config files so that I can keep everything up to
+date.&lt;/p&gt;
+&lt;h2&gt;GitHub/GitLab/Gitea&lt;/h2&gt;
+&lt;p&gt;Git does not require using an online server but it can be very useful to work
+with others and share repositories.
+It can also be useful for projects that you are the sole contributor as it
+makes it easy to share things between work and home for example.&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://github.com/"&gt;GitHub&lt;/a&gt; is probably the most popular.
+I use it for this website and any projects that I don't mind sharing publicly.
+In the past prior to Microsoft's acquisition you were limited on the number of
+private repositories but wow I don't believe there is a limitation.&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://about.gitlab.com/"&gt;GitLab&lt;/a&gt; is another popular online server.
+I use it for all my private repositories.&lt;/p&gt;
+&lt;p&gt;Finally I use &lt;a href="https://gitea.io/en-us/"&gt;Gitea&lt;/a&gt; in a Docker container.
+I have one at work for all my work projects and one at home for my personal
+projects.
+In theory you can also self host GitLab but it has some hefty hardware
+requirements.
+Gitea Docker container was easy to setup and run.&lt;/p&gt;
+&lt;p&gt;Beyond just using them as a remote Git server, I use it to track issues,
+milestones and project tracking.
+Gitea for example you can include a wiki to put information about a particular
+project.&lt;/p&gt;
+&lt;h2&gt;Summary&lt;/h2&gt;
+&lt;p&gt;Post is a little long but Git is a great tool.
+At work we use &lt;a href="https://subversion.apache.org/"&gt;SVN&lt;/a&gt; and while any source
+control is better than no source control, I greatly prefer Git.
+I usually use Git and only put my releases in SVN.&lt;/p&gt;
+&lt;p&gt;Also if you are on Windows, consider using
+&lt;a href="https://tortoisegit.org/"&gt;Tortoise Git&lt;/a&gt;.
+I try to do as much of my work as possible either in a Ubuntu virtual machine
+and Windows Subsystem for Linux (WSL) before I do anything on Windows
+proper.&lt;/p&gt;
+&lt;p&gt;Hope this post helps get you started with Git.&lt;/p&gt;</content><category term="Workflow"></category><category term="git"></category><category term="workflow"></category></entry></feed>

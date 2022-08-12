@@ -1,0 +1,467 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Christopher Tyler R&amp;D Test Engineer - Blog</title><link href="https://cetyler.github.io/" rel="alternate"></link><link href="https://cetyler.github.io/feeds/blog.atom.xml" rel="self"></link><id>https://cetyler.github.io/</id><updated>2022-05-21T15:30:00-05:00</updated><entry><title>Fixed Broken Search</title><link href="https://cetyler.github.io/fixed-broken-search.html" rel="alternate"></link><published>2022-05-21T15:30:00-05:00</published><updated>2022-05-21T15:30:00-05:00</updated><author><name>Christopher</name></author><id>tag:cetyler.github.io,2022-05-21:/fixed-broken-search.html</id><summary type="html">&lt;p&gt;Misconfiguration caused the search on my website to be broken.&lt;/p&gt;</summary><content type="html">&lt;h2&gt;Overview&lt;/h2&gt;
+&lt;p&gt;I noticed that the search on my website was broken when trying to search
+something.
+This article will go through what I did to correct the issue and to expand what
+I put in my &lt;a href="https://github.com/cetyler/cetyler.github.io/issues/25"&gt;closed&lt;/a&gt;
+issue.&lt;/p&gt;
+&lt;h2&gt;Elegant Theme&lt;/h2&gt;
+&lt;p&gt;The Elegant Theme has the ability to include a search feature but when I
+initially set up my website, I forgot to enable it.
+Using the &lt;a href="https://elegant.oncrashreboot.com/add-search"&gt;information&lt;/a&gt; from
+Elegant's website.&lt;/p&gt;
+&lt;p&gt;A couple of lines to change in &lt;code&gt;pelicanconfig.py&lt;/code&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;PLUGINS = [&amp;#39;tipue_search&amp;#39;]
+DIRECT_TEMPLATES = [&amp;#39;search&amp;#39;]
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;I did not need to change anything else.&lt;/p&gt;</content><category term="Blog"></category><category term="search"></category><category term="pelican"></category><category term="tipue_search"></category><category term="elegant"></category><category term="website"></category></entry><entry><title>Practical SQL for Data Analysis</title><link href="https://cetyler.github.io/practical-sql-for-data-analysis.html" rel="alternate"></link><published>2021-06-13T20:30:00-05:00</published><updated>2021-06-13T20:30:00-05:00</updated><author><name>Christopher</name></author><id>tag:cetyler.github.io,2021-06-13:/practical-sql-for-data-analysis.html</id><summary type="html">&lt;p&gt;Great article from Haki Benita on SQL and Pandas.&lt;/p&gt;</summary><content type="html">&lt;p&gt;&lt;a href="https://hakibenita.com/sql-for-data-analysis"&gt;Haki's article&lt;/a&gt; showcase how it
+can be better to use SQL instead of just pandas.
+This post will not go through all the great examples but will expand on why you
+should go read his article.
+While his examples are using PostgreSQL, the benefits are true for other
+databases.&lt;/p&gt;
+&lt;h2&gt;Let the Database do the Work&lt;/h2&gt;
+&lt;p&gt;For example at work I have a VM with PostgreSQL installed.
+I use that to help understand how databases work and as an interim while I
+understand how to create Python programs to interact with MS SQL Server.
+My company have MS SQL Server on a proper commercial grade server hardware.&lt;/p&gt;
+&lt;p&gt;Loading your data into pandas first for simple exploratory data analysis (EDA)
+can usually be faster than doing a series of SQL queries.
+Keep in mind I don't mean faster as in CPU cycles but human cycles.
+It starts to get problematic when the data starts getting large enough that you
+may not have enough memory to load it or manipulate it.&lt;/p&gt;
+&lt;p&gt;If you can off load some of the work to your database server, then you won't
+need to worry as much for how much memory on your computer and it will actually 
+be faster.
+Also you can still use pandas but do some of the transforming of the data in the
+SQL query first before loading into pandas.&lt;/p&gt;
+&lt;p&gt;For work, I had to look at data from the past year.
+This data would require joining two tables, looking for failures for a certain
+test and getting some stats (min, max, average, standard deviation, etc.).
+Normally I would just use pandas but it would be too large with roughly a few
+million rows of data with about 10 columns.
+Instead I did everything with a SQL query and the only table I loaded into
+pandas was my stats which was about 40 rows and 5 columns of data.
+This was pretty quick using my PostgreSQL database on my VM but it was much
+faster on using my company's MS SQL Server database on a proper server.
+If I didn't use a database, I would have had to use some sort of batching
+method.&lt;/p&gt;
+&lt;h2&gt;When Raw Data is NOT in a Database&lt;/h2&gt;
+&lt;p&gt;While my home projects I tend to put my continuous data into PostgreSQL, at work
+I don't have that luxury.
+While at work we do have data in MS SQL Server, a lot of the tester data is in
+MS Access, yuck!
+I also get data in Excel spreadsheets, csv and NI tdms files.
+Pandas support all the formats I mentioned above and then some.
+Again if you are not talking about a lot of data, just load it directly into
+pandas.&lt;/p&gt;
+&lt;p&gt;However if you have a large csv file or an Excel spreadsheet that have many tabs
+of data that are related to each other, put it in a database instead.
+I personally have a Python program that will batch through my raw data and put
+either in a PostgreSQL or SQLite database.
+Now I analyze the data easier.&lt;/p&gt;
+&lt;p&gt;For example, due to the limitation in MS Access every year we start with an
+empty MS Access file and archive the previous' year's data.
+Normally I don't need to look at data from more than a few months but we had an
+issue that we didn't know how far back it went.
+I had to look at the last 5 year's worth of data.
+I could have batch in the data using pandas and did my analysis.
+There are a couple of problems with that:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Loading data directly from MS Access into a pandas DataFrame is slow.&lt;/li&gt;
+&lt;li&gt;I could only load about 3-4 months worth of data at a time due to memory
+   constraints.&lt;/li&gt;
+&lt;li&gt;While I could load a subset of data and do some EDA, I didn't know what I was
+   looking for and the size of my subset will still be too large to load at
+   once.&lt;/li&gt;
+&lt;li&gt;As I was finding out more information, I would get different requests which
+   means I would have to do 1. each time someone would make a different request.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;I decided early on that I would load all the data into SQLite database with the
+tables denoted by year (this was due to the data structure not being the same
+over the years).
+This decision greatly reduced the wait time to load in the data as I took away
+the long MS Access load time.
+SQLite is much fast to load data into a pandas DataFrame.
+Also I could use my SQL query to reduce the data further and only use pandas for
+the more complicated analysis.&lt;/p&gt;
+&lt;p&gt;That lesson informed me to start loading data into my PostgreSQL database for
+the production lines that get requested the most.
+Now I can respond to a request quicker because I already have the data ready to
+go.&lt;/p&gt;
+&lt;h2&gt;Interim Data&lt;/h2&gt;
+&lt;p&gt;The nice thing about using a database, it doesn't just need to hold your raw
+data.
+For work I am in the process how migrating away from reading and saving data to
+SQLite.
+The problem is that each of my programs would have its own data saved in a
+unique SQLite files that was not shared.
+So if I was doing a project using Jupyter Notebooks, each project would have
+raw, interim and processed data.
+Instead putting my data into either PostgreSQL or MS SQL Server, it is in one
+centralize location.&lt;/p&gt;
+&lt;p&gt;For example, I put the most requested production line's MS Access data into
+PostgreSQL.
+I recently got a request to see if the change we made in a part of the
+production process and did it reduce the failure rate of a particular test.
+My raw data is already in PostgreSQL.
+I needed to transform and process the data.
+My SQL query that I loaded into my Jupyter Notebook, I did the following:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Rename the columns.&lt;/li&gt;
+&lt;li&gt;Made sure that my alphanumeric serial numbers were all in upper case.&lt;/li&gt;
+&lt;li&gt;Combine the date and time columns into a timestamp column and converted that
+   into EPOCH.&lt;/li&gt;
+&lt;li&gt;Only include the tests that were affected.&lt;/li&gt;
+&lt;li&gt;Only include the data between certain dates prior and after the change in the
+   process occurred.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;I then saved this data on PostgreSQL and named the database the same of my
+Jupyter Notebook project so I could refer to the data later.
+After I did my EDA, I knew what I wanted to share with the team.
+Normally I would just dump the tables into Excel and share that but this had to
+be more of a presentation.
+I decided to save those tables into my project's database.
+Finally I created a Jupyter Notebook that would look nice as a presentation and
+merely loaded the tables in, added some explanation and displayed the results.&lt;/p&gt;
+&lt;p&gt;The added bonus with this process is that data is there for my other projects to
+get to easily.
+When that data gets stale, I just dump it.
+The alternative to not using databases would be to save your processed and
+interim data in a csv, HDF5, pickle, etc. which each of them have distinct
+disadvantages.&lt;/p&gt;
+&lt;h2&gt;Conclusion&lt;/h2&gt;
+&lt;p&gt;Originally I thought I was going to show some examples but I decided that one
+article won't be enough.
+Using pandas can be very useful as long as you understand that you will be
+memory constraint and it may not be as fast as SQL queries.
+The added benefit on using SQL earlier in your analysis is that if you know that
+you will be eventually be dealing with larger datasets, using SQL queries won't
+change your method.
+Using pandas and knowing that you will have to find different ways to fit your
+data in memory means that you will need to optimize as you go.&lt;/p&gt;
+&lt;p&gt;I tend to use both pandas and SQL so that I leverage what both does best.
+I plan to write additional articles highlighting what I learned from Haki's
+article but with actual data.
+Also it will be less of a you should use SQL or pandas but more of this is how
+you can do it in either language with some explanation when it could be better
+to use one or another.&lt;/p&gt;
+&lt;p&gt;Now go read &lt;a href="https://hakibenita.com/sql-for-data-analysis"&gt;Haki's article&lt;/a&gt;!&lt;/p&gt;</content><category term="Blog"></category><category term="sql"></category><category term="pandas"></category><category term="python"></category><category term="postgresql"></category></entry><entry><title>Using SQL for Exploratory Data Analysis (EDA)</title><link href="https://cetyler.github.io/using-sql-for-exploratory-data-analysis-eda.html" rel="alternate"></link><published>2021-05-22T14:30:00-05:00</published><updated>2021-05-22T14:30:00-05:00</updated><author><name>Christopher</name></author><id>tag:cetyler.github.io,2021-05-22:/using-sql-for-exploratory-data-analysis-eda.html</id><summary type="html">&lt;p&gt;Some use SQL commands that can help with EDA.&lt;/p&gt;</summary><content type="html">&lt;p&gt;While I do use &lt;a href="https://pandas.pydata.org"&gt;pandas&lt;/a&gt; to do most of my initial
+exploratory data analysis (EDA), I do also use SQL.
+I started using pandas for EDA at work and quickly started to hit the memory
+limits.
+I then for various ways to more efficiently use my memory
+(chunking, data types, etc.) but was still having issues.
+Finally I started using SQL which made it much easier to do analysis on
+larger datasets.&lt;/p&gt;
+&lt;p&gt;This article will focus on some useful SQL commands that can help with initial
+EDA.
+&lt;strong&gt;Note&lt;/strong&gt; I highly recommend reading Memorable SQL.
+I will be using PostgreSQL in my examples.
+I also was able to get some additional ideas from
+&lt;a href="https://appsilon.com/intermediate-sql"&gt;Appsilon&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;I plan on using my existing data.&lt;/p&gt;
+&lt;h2&gt;Initial Data View&lt;/h2&gt;
+&lt;p&gt;Initially I look at the first 10 rows or so of a table to get an idea of what I
+am working with.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;SELECT * FROM hvac LIMIT 10;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;This will get the first 10 rows from &lt;code&gt;hvac&lt;/code&gt; table.
+Now I know the column names, potentially what kind of data that I have.
+If I want to look at the last 10 rows for example, I will use the timestamp to
+reverse the order.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;SELECT * FROM hvac ORDER BY timestamp DESC LIMIT 10;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Now I have the last 10 rows.&lt;/p&gt;
+&lt;p&gt;If I have multiple tables, I would do the same thing with each table.
+Usually ahead of time I know which tables are related to each other and if I
+need to do a join.&lt;/p&gt;
+&lt;p&gt;Now I may want to know how much data I am dealing with.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;SELECT COUNT(timestamp) FROM hvac;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;This will return the number of rows.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;SELECT column_name, data_type
+FROM infromation_schema.columns
+WHERE table_name = &amp;#39;hvac&amp;#39;;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;This will return a list of column names and the data type for each column for
+&lt;code&gt;hvac&lt;/code&gt; table.&lt;/p&gt;
+&lt;p&gt;I could also get the unique values for &lt;code&gt;location&lt;/code&gt;.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;SELECT DISTINCT(location) FROM hvac;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Within a few minutes, I have an idea of the size of data and what type of
+data I have.
+If this was done in pandas, I would have had to load all the data first, then
+do my EDA.
+Actually that is not completely correct as you can read SQL in pandas which
+would be similar to what I just did.
+My workflow is to do the following:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;If the data is not in a database (ex. csv, xlsx, etc.) put it in a database.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;SQLite can be really useful especially if you don't need concurrent
+  users.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Do some initial EDA in SQL to determine if it makes sense to do everything in
+  pandas or to use a mix of pandas and SQL queries.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Clean the data.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Perform some analysis to get some initial insights.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Share findings and next steps.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;Cleaning Data&lt;/h2&gt;
+&lt;p&gt;Sometimes it makes sense to do certain kinds of cleaning in SQL prior to
+loading the data into pandas.
+With the &lt;code&gt;hvac&lt;/code&gt; table there are a couple of things I would want to do&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Convert timestamp from EPOCH to date and time.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;I think name and location may be confusing and want to change the column
+  names.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Changing the column names is straightforward if I only care about when I
+display the data.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;SELECT timestamp
+    ,location AS sensor_location
+    ,name AS sensor_position
+    ,humidity
+FROM hvac
+LIMIT 10;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;I prefer to use snake_case especially if I will load this data into pandas.
+If I was going to export the table from PostgreSQL to say a csv file, then
+I would change &lt;code&gt;sensor_location&lt;/code&gt; to &lt;code&gt;"Sensor Location"&lt;/code&gt; for example.&lt;/p&gt;
+&lt;p&gt;Changing &lt;code&gt;timestamp&lt;/code&gt; from epoch, use &lt;code&gt;TO_TIMESTAMP()&lt;/code&gt;.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;SELECT TO_TIMESTAMP(timestamp) AS &amp;quot;Timestamp&amp;quot;
+    ,location AS &amp;quot;Sensor Location&amp;quot;
+    ,name AS &amp;quot;Sensor Position&amp;quot;
+    ,humidity AS &amp;quot;Humidity&amp;quot;
+FROM hvac
+LIMIT 10;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Let's say I had a problem with the case of &lt;code&gt;location&lt;/code&gt;, I could use &lt;code&gt;LOWER()&lt;/code&gt; to
+make &lt;code&gt;location&lt;/code&gt; lowercase of &lt;code&gt;UPPER()&lt;/code&gt; for uppercase.
+I can also use &lt;code&gt;CONCAT()&lt;/code&gt; if I want to combine &lt;code&gt;location&lt;/code&gt; and &lt;code&gt;name&lt;/code&gt;.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;SELECT TO_TIMESTAMP(timestamp) AS timestamp
+    ,location AS sensor_location
+    ,name AS sensor_name
+    ,UPPER(CONCAT(location, &amp;#39; &amp;#39;, name)) AS sensor
+FROM hvac
+LIMIT 10;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;This will combine &lt;code&gt;location&lt;/code&gt; and &lt;code&gt;name&lt;/code&gt; with a space between them.&lt;/p&gt;
+&lt;p&gt;There is more things that I could do but this should give you an idea of what
+you can do with this kind of data.&lt;/p&gt;
+&lt;h2&gt;Using GROUP BY&lt;/h2&gt;
+&lt;p&gt;Aggregating data can be very useful, especially if you have lots of data and
+can't fit that data in memory to use pandas.
+Let's get the total number of rows if we combine &lt;code&gt;location&lt;/code&gt; and &lt;code&gt;name&lt;/code&gt; together.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;SELECT CONCAT(location, &amp;#39; &amp;#39;, name) AS sensor
+    ,COUNT(CONCAT(location, &amp;#39; &amp;#39;, name)) AS number_of_rows
+FROM hvac
+GROUP BY CONCAT(location, &amp;#39; &amp;#39;, name);
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt; that if you include a column in the &lt;code&gt;SELECT&lt;/code&gt; statement, you must use
+it in an aggregation or you must include it in the &lt;code&gt;GROUP BY&lt;/code&gt;.
+With &lt;code&gt;GROUP BY&lt;/code&gt; you can use &lt;code&gt;WHERE&lt;/code&gt;.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;SELECT CONCAT(location, &amp;#39; &amp;#39;, name) AS sensor
+    ,COUNT(CONCAT(location, &amp;#39; &amp;#39;, name)) AS number_of_rows
+FROM hvac
+WHERE temperature &amp;lt; 90
+GROUP BY CONCAT(location, &amp;#39; &amp;#39;, name);
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;This will only count if the temperature is less than 90F.
+Using &lt;code&gt;HAVING&lt;/code&gt; will be like &lt;code&gt;WHERE&lt;/code&gt; but after &lt;code&gt;GROUP BY&lt;/code&gt; was done.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;SELET name
+    ,ROUND(AVG(temperature), 2) AS average_temperature
+FROM hvac
+GROUP BY name
+HAVING AVG(temperature) &amp;lt; 80;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;This will get the average temperature by &lt;code&gt;name&lt;/code&gt; but only include data if the
+average temperature is less than 80F.&lt;/p&gt;
+&lt;p&gt;The syntax is a little different than in pandas but you can do similar things.
+If I am doing more complex aggregation and I can fit the data in memory, then
+I would use pandas. &lt;/p&gt;
+&lt;h2&gt;Math Functions&lt;/h2&gt;
+&lt;p&gt;With this data, let's say that I would want to convert Fahrenheit to Celsius.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;SELECT *
+    ,(temperature - 32.0) * (5.0/9.0) AS Celsius
+FROM hvac
+LIMIT 10;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Keep in mind that if you don't want the result to return as an integer, then at
+least one value with each math function will need to be a float.
+I have found that if I want my result to be a float, I make all my numbers floats.
+Also know that if you do keep it as an integer, the result will not round up.&lt;/p&gt;
+&lt;p&gt;The math functions in general are what you would expect.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;addition &lt;code&gt;+&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;subtraction &lt;code&gt;-&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;multiplication &lt;code&gt;*&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;division &lt;code&gt;/&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;modulo &lt;code&gt;%&lt;/code&gt; which will return the remainder of dividing two numbers.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;exponent &lt;code&gt;^&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Functions like &lt;code&gt;COUNT()&lt;/code&gt;, &lt;code&gt;SUM()&lt;/code&gt;, &lt;code&gt;AVG()&lt;/code&gt;, &lt;code&gt;MAX()&lt;/code&gt; and &lt;code&gt;MIN()&lt;/code&gt;.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;This is not an exhaustive list but should give you an idea of what you can do.&lt;/p&gt;
+&lt;h2&gt;First/Last/Nth Values&lt;/h2&gt;
+&lt;p&gt;You can use &lt;code&gt;FIRST_VALUE&lt;/code&gt; function to return the value of a specified column
+from the first row of the window frame.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;SELECT *
+    ,TO_TIMESTAMP(timestamp) AS date_time
+    ,temperature - FIRST_VALUE(temperature) OVER (
+        PARITION BY temperature
+        ORDER BY timestamp
+    ) AS diff_temp_from_1st
+FROM hvac
+LIMIT 10;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Above will return all columns and add &lt;code&gt;date_time&lt;/code&gt; to convert EPOCH to date and
+time.
+Will also add &lt;code&gt;diff_temp_from_1st&lt;/code&gt; column that will subract a given row to the
+first row's temperature.
+It doesn't make much sense with our current data but hope it helps understand
+what you can do.&lt;/p&gt;
+&lt;h2&gt;Getting the Leading or Preceding Value&lt;/h2&gt;
+&lt;p&gt;&lt;code&gt;LEAD&lt;/code&gt; function will fetch the value of a specific attribute from the next row
+and return it in the current row.
+It takes two arguments:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Column name to fetch the next value.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;The number of rows relative to the current row.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;As expected, &lt;code&gt;LAG&lt;/code&gt; function does the opposite.
+With our data, I would like know the difference between my HVAC inlet and
+outlet temperatures.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;SELECT *
+    ,temperature - LAG(temperature, 1) OVER (
+        ORDER BY timestamp
+    ) AS temp_diff
+FROM hvac
+WHERE location = &amp;#39;HVAC&amp;#39;
+LIMIT 10;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;A bit ugly but it does subtract the current row's temperature with the previous
+temperature.&lt;/p&gt;
+&lt;p&gt;This can be useful to create an elapse time by subtracting the timestamp from
+the previous row or create a cumulative of sales.&lt;/p&gt;
+&lt;h2&gt;Ranking&lt;/h2&gt;
+&lt;p&gt;Lastly, I want to rank the temperature.
+The difference between &lt;code&gt;RANK&lt;/code&gt; and &lt;code&gt;DENSE_RANK&lt;/code&gt; functions is that &lt;code&gt;DENSE_RANK&lt;/code&gt;
+will return consecutive ranks, while &lt;code&gt;RANK&lt;/code&gt; will return ranking that if there
+are ties, a rank is skipped.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;SELECT temperature
+    ,DENSE_RANK () OVER (
+        ORDER BY timestamp
+    ) AS rank
+FROM hvac
+ORDER BY timestamp
+LIMIT 10;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Then if for example, I wanted the to filter the temperatures by rank, I can.&lt;/p&gt;
+&lt;h2&gt;Conclusion&lt;/h2&gt;
+&lt;p&gt;Hopefully so far you are starting to get an idea of how useful it can be to
+start your analysis with SQL queries first.
+Generally speaking all of what I have done above can be done with a small and
+large data set.
+While you may have to wait longer with a larger data set, it is not done in
+memory and will return a result quicker than you would expect.&lt;/p&gt;
+&lt;p&gt;Make sure comment and save your SQL statements.
+TODO put a link to how to structure your statements.
+The other reason to save your statement is that you can use those queries in
+pandas or recreate it in pandas to match the SQL statement.&lt;/p&gt;
+&lt;p&gt;I became much more productive using SQL beyond just dumping a table in pandas
+and using pandas to do my analysis.&lt;/p&gt;</content><category term="Blog"></category><category term="sql"></category><category term="eda"></category></entry><entry><title>Switch Website to Pelican</title><link href="https://cetyler.github.io/switch-website-to-pelican.html" rel="alternate"></link><published>2021-04-10T14:30:00-05:00</published><updated>2021-04-20T19:30:00-05:00</updated><author><name>Christopher</name></author><id>tag:cetyler.github.io,2021-04-10:/switch-website-to-pelican.html</id><summary type="html">&lt;p&gt;Switch from Jekyll to Pelican.&lt;/p&gt;</summary><content type="html">&lt;h2&gt;Why I Changed&lt;/h2&gt;
+&lt;p&gt;My initial website was done using the default for GitHub Pages using Jekyll.
+Jekyll would probably have been fine but I knew that I wanted to use Jupyter
+Notebooks.
+Also I know Python a lot more than Ruby so I thought it made sense to make the
+change sooner rather than waiting until I have problems with different kinds of
+content.&lt;/p&gt;
+&lt;h2&gt;Changing to Pelican&lt;/h2&gt;
+&lt;p&gt;Initially I used
+&lt;a href="https://justinnaldzin.github.io/create-a-website-using-github-pages-and-pelican.html"&gt;Justin Naldzin&lt;/a&gt;
+blog post but it was not up to date however, it was a good start.
+I then went to &lt;a href="https://blog.getpelican.com/"&gt;Pelican&lt;/a&gt; and used a combo of both
+to get up and going.
+After getting the theme to work and trying some test pages, I moved the handful
+of my posts and was able to get things to work using &lt;code&gt;make devserver&lt;/code&gt; and
+viewing my website locally.
+I did had to add in &lt;code&gt;pelicanconf.py&lt;/code&gt; the option &lt;code&gt;BIND = ''&lt;/code&gt; so that I could see
+my website on my local network as I work on a remote VM.&lt;/p&gt;
+&lt;h2&gt;Updating My GitHub Page&lt;/h2&gt;
+&lt;p&gt;First I open &lt;code&gt;MakeFile&lt;/code&gt; and do the following:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;DELETE_OUTPUT_DIRECTORY = False
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;I then do a git submodule of my GitHub Page repo to the &lt;code&gt;output&lt;/code&gt; folder.
+For now I am not using any pre-commits to automatically apply the same commit
+message to my git submodule at this time.&lt;/p&gt;
+&lt;p&gt;Finally I run &lt;code&gt;make publish&lt;/code&gt; to publish my website and go into the &lt;code&gt;output&lt;/code&gt;
+folder and commit that as well.&lt;/p&gt;
+&lt;h2&gt;Add Jupyter Notebook Support&lt;/h2&gt;
+&lt;p&gt;I wanted to have the ability to write a post using Jupyter Notebooks.
+That way if I had any tables/charts/analysis, I can do everything in the
+notebook instead of using Markdown or RestructuredText.&lt;/p&gt;
+&lt;p&gt;I followed the instructions to install
+&lt;a href="https://github.com/danielfrg/pelican-jupyter"&gt;Pelican Jupyter&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Now all I need to do is work on my post using Jupyter Notebook and when I
+publish, the notebook will be generated as a html page.
+This enables me to work on a notebook in a separate directory and I just need to
+copy to my &lt;code&gt;content&lt;/code&gt; folder.&lt;/p&gt;
+&lt;h2&gt;Conclusion&lt;/h2&gt;
+&lt;p&gt;I now have my website to the same level as I had using Jekyll.
+I was able to pretty easily add Jupyter Notebook support.&lt;/p&gt;</content><category term="Blog"></category><category term="website"></category><category term="pelican"></category><category term="jekyll"></category></entry><entry><title>Introduction</title><link href="https://cetyler.github.io/introduction.html" rel="alternate"></link><published>2021-02-25T00:00:00-06:00</published><updated>2021-04-10T14:21:00-05:00</updated><author><name>Christopher</name></author><id>tag:cetyler.github.io,2021-02-25:/introduction.html</id><summary type="html">&lt;p&gt;My first post.&lt;/p&gt;</summary><content type="html">&lt;p&gt;Instead of posting on Twitter or LinkedIn, my goal is to use this website to
+post interesting articles that either I found else where or things that I am
+working on.&lt;/p&gt;
+&lt;p&gt;With my current job, I do mainly do data analyzing using Python with the Pandas
+library.
+I have been also PostgreSQL to store my data for further analysis.&lt;/p&gt;
+&lt;p&gt;My next posts will mainly be problems that I was able to solve with Python. &lt;/p&gt;</content><category term="Blog"></category><category term="intro"></category></entry></feed>
