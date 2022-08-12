@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="author" content="Christopher" />
+
+        <meta property="og:type" content="article" />
+        <meta name="twitter:card" content="summary">
+
+<meta name="keywords" content="website, pelican, jekyll, Blog, " />
+
+<meta property="og:title" content="Switch Website to Pelican "/>
+<meta property="og:url" content="https://cetyler.github.io/switch-website-to-pelican.html" />
+<meta property="og:description" content="Switch from Jekyll to Pelican." />
+<meta property="og:site_name" content="Christopher Tyler R&amp;D Test Engineer" />
+<meta property="og:article:author" content="Christopher" />
+<meta property="og:article:published_time" content="2021-04-10T14:30:00-05:00" />
+<meta property="og:article:modified_time" content="2021-04-20T19:30:00-05:00" />
+<meta name="twitter:title" content="Switch Website to Pelican ">
+<meta name="twitter:description" content="Switch from Jekyll to Pelican.">
+
+        <title>Switch Website to Pelican  · Christopher Tyler R&amp;D Test Engineer
+</title>
+        <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="https://cetyler.github.io/theme/css/elegant.prod.css" media="screen">
+        <link rel="stylesheet" type="text/css" href="https://cetyler.github.io/theme/css/custom.css" media="screen">
+
+        <link href="https://cetyler.github.io/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Christopher Tyler R&amp;D Test Engineer - Full Atom Feed" />
+
+
+    </head>
+    <body>
+        <div id="content">
+            <div class="navbar navbar-static-top">
+                <div class="navbar-inner">
+                    <div class="container-fluid">
+                        <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </a>
+                        <a class="brand" href="https://cetyler.github.io/"><span class=site-name>Christopher Tyler R&D Test Engineer</span></a>
+                        <div class="nav-collapse collapse">
+                            <ul class="nav pull-right top-menu">
+                                <li >
+                                    <a href=
+                                       https://cetyler.github.io
+                                    >Home</a>
+                                </li>
+                                <li ><a href="https://cetyler.github.io/pages/about-me.html">About Me</a></li>
+                                <li ><a href="https://cetyler.github.io/pages/resources.html">Resources</a></li>
+                                <li ><a href="https://cetyler.github.io/pages/my-resume.html">My Resume</a></li>
+                                <li ><a href="https://cetyler.github.io/categories.html">Categories</a></li>
+                                <li ><a href="https://cetyler.github.io/tags.html">Tags</a></li>
+                                <li ><a href="https://cetyler.github.io/archives.html">Archives</a></li>
+                                <li><form class="navbar-search" action="https://cetyler.github.io/search.html" onsubmit="return validateForm(this.elements['q'].value);"> <input type="text" class="search-query" placeholder="Search" name="q" id="tipue_search_input"></form></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container-fluid">
+                <div class="row-fluid">
+                    <div class="span1"></div>
+                    <div class="span10">
+<article itemscope>
+<div class="row-fluid">
+    <header class="page-header span10 offset2">
+        <h1>
+            <a href="https://cetyler.github.io/switch-website-to-pelican.html">
+                Switch Website to Pelican
+            </a>
+        </h1>
+    </header>
+</div>
+
+<div class="row-fluid">
+        <div class="span8 offset2 article-content">
+            
+            <h2>Why I Changed</h2>
+<p>My initial website was done using the default for GitHub Pages using Jekyll.
+Jekyll would probably have been fine but I knew that I wanted to use Jupyter
+Notebooks.
+Also I know Python a lot more than Ruby so I thought it made sense to make the
+change sooner rather than waiting until I have problems with different kinds of
+content.</p>
+<h2>Changing to Pelican</h2>
+<p>Initially I used
+<a href="https://justinnaldzin.github.io/create-a-website-using-github-pages-and-pelican.html">Justin Naldzin</a>
+blog post but it was not up to date however, it was a good start.
+I then went to <a href="https://blog.getpelican.com/">Pelican</a> and used a combo of both
+to get up and going.
+After getting the theme to work and trying some test pages, I moved the handful
+of my posts and was able to get things to work using <code>make devserver</code> and
+viewing my website locally.
+I did had to add in <code>pelicanconf.py</code> the option <code>BIND = ''</code> so that I could see
+my website on my local network as I work on a remote VM.</p>
+<h2>Updating My GitHub Page</h2>
+<p>First I open <code>MakeFile</code> and do the following:</p>
+<div class="highlight"><pre><span></span><code>DELETE_OUTPUT_DIRECTORY = False
+</code></pre></div>
+
+<p>I then do a git submodule of my GitHub Page repo to the <code>output</code> folder.
+For now I am not using any pre-commits to automatically apply the same commit
+message to my git submodule at this time.</p>
+<p>Finally I run <code>make publish</code> to publish my website and go into the <code>output</code>
+folder and commit that as well.</p>
+<h2>Add Jupyter Notebook Support</h2>
+<p>I wanted to have the ability to write a post using Jupyter Notebooks.
+That way if I had any tables/charts/analysis, I can do everything in the
+notebook instead of using Markdown or RestructuredText.</p>
+<p>I followed the instructions to install
+<a href="https://github.com/danielfrg/pelican-jupyter">Pelican Jupyter</a>.</p>
+<p>Now all I need to do is work on my post using Jupyter Notebook and when I
+publish, the notebook will be generated as a html page.
+This enables me to work on a notebook in a separate directory and I just need to
+copy to my <code>content</code> folder.</p>
+<h2>Conclusion</h2>
+<p>I now have my website to the same level as I had using Jekyll.
+I was able to pretty easily add Jupyter Notebook support.</p>
+
+
+             
+ 
+            
+            
+            
+
+
+
+
+
+
+<section>
+    <h6 style="display:none;">Comments</h6>
+    <p id="comment-message">Leave your comments below. </p>
+
+    <div class="accordion" id="accordion2">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                <a class="accordion-toggle disqus-comment-count comment-count"
+                   data-toggle="collapse"
+                   data-parent="#accordion2"
+                   href="https://cetyler.github.io/switch-website-to-pelican.html#comment_thread"
+                   id="comment-accordion-toggle">
+                    Comments
+                </a>
+            </div>
+            <div id="comment_thread" class="accordion-body collapse">
+                <div class="accordion-inner">
+                    <div class="comments">
+
+                        <script src="https://utteranc.es/client.js"
+        data-repo="cetyler/cetyler.github.io"
+        data-issue-term="switch-from-jekyll-to-pelican"
+        data-label="Comments"
+        data-theme="github-light"
+        crossorigin="anonymous"
+        async>
+</script>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+            <hr/>
+        </div>
+        <section id="article-sidebar" class="span2">
+            <h4>Published</h4>
+            <time itemprop="dateCreated" datetime="2021-04-10T14:30:00-05:00">Apr 10, 2021</time>
+<h4>Last Updated</h4>
+<time datetime="2021-04-20T19:30:00-05:00">Apr 20, 2021</time>
+
+            <h4>Category</h4>
+            <a class="category-link" href="https://cetyler.github.io/categories.html#blog-ref">Blog</a>
+            <h4>Tags</h4>
+            <ul class="list-of-tags tags-in-article">
+                <li><a href="https://cetyler.github.io/tags.html#jekyll-ref">jekyll
+                    <span>1</span>
+</a></li>
+                <li><a href="https://cetyler.github.io/tags.html#pelican-ref">pelican
+                    <span>2</span>
+</a></li>
+                <li><a href="https://cetyler.github.io/tags.html#website-ref">website
+                    <span>2</span>
+</a></li>
+            </ul>
+<h4>Contact</h4>
+<div id="sidebar-social-link">
+    <a href="https://www.linkedin.com/in/christopheretyler" title="" target="_blank" rel="nofollow noopener noreferrer">
+        <svg xmlns="http://www.w3.org/2000/svg" aria-label="LinkedIn" role="img" viewBox="0 0 512 512" fill="#fff"><rect width="512" height="512" rx="15%" fill="#0077b5"/><circle cx="142" cy="138" r="37"/><path stroke="#fff" stroke-width="66" d="M244 194v198M142 194v198"/><path d="M276 282c0-20 13-40 36-40 24 0 33 18 33 45v105h66V279c0-61-32-89-76-89-34 0-51 19-59 32"/></svg>
+    </a>
+    <a href="https://github.com/cetyler" title="" target="_blank" rel="nofollow noopener noreferrer">
+        <svg xmlns="http://www.w3.org/2000/svg" aria-label="GitHub" role="img" viewBox="0 0 512 512"><rect width="512" height="512" rx="15%" fill="#1B1817"/><path fill="#fff" d="M335 499c14 0 12 17 12 17H165s-2-17 12-17c13 0 16-6 16-12l-1-50c-71 16-86-28-86-28-12-30-28-37-28-37-24-16 1-16 1-16 26 2 40 26 40 26 22 39 59 28 74 22 2-17 9-28 16-35-57-6-116-28-116-126 0-28 10-51 26-69-3-6-11-32 3-67 0 0 21-7 70 26 42-12 86-12 128 0 49-33 70-26 70-26 14 35 6 61 3 67 16 18 26 41 26 69 0 98-60 120-117 126 10 8 18 24 18 48l-1 70c0 6 3 12 16 12z"/></svg>
+    </a>
+    <a href="https://cetyler.github.io/feeds/all.atom.xml" title="" target="_blank" rel="nofollow noopener noreferrer">
+        <svg xmlns="http://www.w3.org/2000/svg" aria-label="RSS" role="img" viewBox="0 0 512 512"><rect width="512" height="512" rx="15%" fill="#f80"/><circle cx="145" cy="367" r="35" fill="#fff"/><path fill="none" stroke="#fff" stroke-width="60" d="M109 241c89 0 162 73 162 162M109 127c152 0 276 124 276 276"/></svg>
+    </a>
+</div>
+            
+
+
+
+
+
+            
+
+
+
+
+
+        </section>
+</div>
+</article>
+                    </div>
+                    <div class="span1"></div>
+                </div>
+            </div>
+        </div>
+<footer>
+    <div>
+        
+&copy; Copyright 2022 by Christopher E. Tyler and licensed under a <a rel="license"
+  href="http://creativecommons.org/licenses/by/4.0/">
+  <img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/80x15.png" />
+  Creative Commons Attribution 4.0 International License</a>.
+
+    </div>
+
+
+
+
+    <div id="fpowered">
+        Powered by: <a href="http://getpelican.com/" title="Pelican Home Page" target="_blank" rel="nofollow noopener noreferrer">Pelican</a>
+        Theme: <a href="https://elegant.oncrashreboot.com/" title="Theme Elegant Home Page" target="_blank" rel="nofollow noopener noreferrer">Elegant</a>
+    </div>
+</footer>            <script src="//code.jquery.com/jquery.min.js"></script>
+        <script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
+        <script>
+            function validateForm(query)
+            {
+                return (query.length > 0);
+            }
+        </script>
+
+    <script>
+    (function () {
+        if (window.location.hash.match(/^#comment-\d+$/)) {
+            $('#comment_thread').collapse('show');
+        }
+    })();
+    window.onhashchange=function(){
+        if (window.location.hash.match(/^#comment-\d+$/))
+            window.location.reload(true);
+    }
+    $('#comment_thread').on('shown', function () {
+        var link = document.getElementById('comment-accordion-toggle');
+        var old_innerHTML = link.innerHTML;
+        $(link).fadeOut(200, function() {
+            $(this).text('Click here to hide comments').fadeIn(200);
+        });
+        $('#comment_thread').on('hidden', function () {
+            $(link).fadeOut(200, function() {
+                $(this).text(old_innerHTML).fadeIn(200);
+            });
+        })
+    })
+</script>
+
+    </body>
+    <!-- Theme: Elegant built for Pelican
+        License : MIT -->
+</html>

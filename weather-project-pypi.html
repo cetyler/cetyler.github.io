@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="author" content="Christopher" />
+
+        <meta property="og:type" content="article" />
+        <meta name="twitter:card" content="summary">
+
+<meta name="keywords" content="python, project, Python, " />
+
+<meta property="og:title" content="Weather Project - PyPi "/>
+<meta property="og:url" content="https://cetyler.github.io/weather-project-pypi.html" />
+<meta property="og:description" content="Setup PyPi with an empty project to lock in the project name." />
+<meta property="og:site_name" content="Christopher Tyler R&amp;D Test Engineer" />
+<meta property="og:article:author" content="Christopher" />
+<meta property="og:article:published_time" content="2022-08-11T20:00:00-05:00" />
+<meta name="twitter:title" content="Weather Project - PyPi ">
+<meta name="twitter:description" content="Setup PyPi with an empty project to lock in the project name.">
+
+        <title>Weather Project - PyPi  · Christopher Tyler R&amp;D Test Engineer
+</title>
+        <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="https://cetyler.github.io/theme/css/elegant.prod.css" media="screen">
+        <link rel="stylesheet" type="text/css" href="https://cetyler.github.io/theme/css/custom.css" media="screen">
+
+        <link href="https://cetyler.github.io/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Christopher Tyler R&amp;D Test Engineer - Full Atom Feed" />
+
+
+    </head>
+    <body>
+        <div id="content">
+            <div class="navbar navbar-static-top">
+                <div class="navbar-inner">
+                    <div class="container-fluid">
+                        <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </a>
+                        <a class="brand" href="https://cetyler.github.io/"><span class=site-name>Christopher Tyler R&D Test Engineer</span></a>
+                        <div class="nav-collapse collapse">
+                            <ul class="nav pull-right top-menu">
+                                <li >
+                                    <a href=
+                                       https://cetyler.github.io
+                                    >Home</a>
+                                </li>
+                                <li ><a href="https://cetyler.github.io/pages/about-me.html">About Me</a></li>
+                                <li ><a href="https://cetyler.github.io/pages/resources.html">Resources</a></li>
+                                <li ><a href="https://cetyler.github.io/pages/my-resume.html">My Resume</a></li>
+                                <li ><a href="https://cetyler.github.io/categories.html">Categories</a></li>
+                                <li ><a href="https://cetyler.github.io/tags.html">Tags</a></li>
+                                <li ><a href="https://cetyler.github.io/archives.html">Archives</a></li>
+                                <li><form class="navbar-search" action="https://cetyler.github.io/search.html" onsubmit="return validateForm(this.elements['q'].value);"> <input type="text" class="search-query" placeholder="Search" name="q" id="tipue_search_input"></form></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container-fluid">
+                <div class="row-fluid">
+                    <div class="span1"></div>
+                    <div class="span10">
+<article itemscope>
+<div class="row-fluid">
+    <header class="page-header span10 offset2">
+        <h1>
+            <a href="https://cetyler.github.io/weather-project-pypi.html">
+                Weather Project - PyPi
+            </a>
+        </h1>
+    </header>
+</div>
+
+<div class="row-fluid">
+        <div class="span8 offset2 article-content">
+            
+            <h2>Overview</h2>
+<p>From the <a href="https://cetyler.github.io/weather-project.html">previous article</a>,
+the Weather Project will be put on PyPi to help me understand that process and
+to also share with others.
+This article will go over how to put a skeleton project on PyPi.</p>
+<p><strong>Note</strong> prior to the completion of this article, I found 
+<a href="https://mathspp.com/blog/how-to-create-a-python-package-in-2022">Rodrigo's article</a>
+though keep in mind that his article is much more comprehensive.</p>
+<h2>Create PyPi Account</h2>
+<p>It is fairly straightforward to create an account.
+Go to https://pypi.org/account/register/ and follow the instructions.
+I would suggest adding at least two emails to your account in case something
+happens to one of your email accounts.
+I would also setup Two Factor Authentication (2FA).
+In order to push our packages to PyPi, create an API token.
+I put it in my password manage since I created one to use for all my packages
+in PyPi.</p>
+<p>You should do the same steps and create an account on https://test.pypi.org/.</p>
+<h2>Create Weather Package on PyPi</h2>
+<p>This may seem backwards, but it is easier to check if a name exists first as
+opposed to coming up with a name, creating a git project, then finding out that
+your name you selected is too similar to an existing project.
+I did a search to make sure that <code>openweather-report</code> was not in use though it
+took a couple of tries.
+I use <a href="https://github.com/pyenv/pyenv">pyenv</a> to set my Python version so I
+created a folder and set the version to 3.10.6 (current at the time of this
+article) as well as create my virtual environment.
+I created a project using <a href="https://www.python-poetry.org/">Poetry</a>.
+This will be an empty project just to lock in the package name.
+Add the API token for both PyPi and Test PyPi using:</p>
+<div class="highlight"><pre><span></span><code><span class="o">&gt;</span> <span class="n">poetry</span> <span class="n">new</span> <span class="n">openweather</span><span class="o">-</span><span class="n">report</span>
+<span class="o">&gt;</span> <span class="n">poetry</span> <span class="n">config</span> <span class="n">repositories</span><span class="p">.</span><span class="n">testpypi</span> <span class="nl">https</span><span class="p">:</span><span class="c1">//test.pypi.org/legacy/</span>
+<span class="o">&gt;</span> <span class="n">poetry</span> <span class="n">config</span> <span class="n">pypi</span><span class="o">-</span><span class="n">token</span><span class="p">.</span><span class="n">pypi</span> <span class="p">[</span><span class="n">API</span> <span class="n">KEY</span><span class="p">]</span>
+<span class="o">&gt;</span> <span class="n">poetry</span> <span class="n">config</span> <span class="n">http</span><span class="o">-</span><span class="n">basic</span><span class="p">.</span><span class="n">testpypi</span> <span class="p">[</span><span class="n">API</span> <span class="n">KEY</span><span class="p">]</span>
+<span class="o">&gt;</span> <span class="n">poetry</span> <span class="n">build</span>
+<span class="o">&gt;</span> <span class="n">poetry</span> <span class="n">publish</span> <span class="o">-</span><span class="n">r</span> <span class="n">testpypi</span>
+</code></pre></div>
+
+<p>If everything works, then the package name is unique enough and it now locked
+in.</p>
+<h2>Create Project on Github</h2>
+<p>Normally I use a private <a href="https://gitea.io/en-us/">Gitea</a> instance on my local
+network for personal projects and another one while I am work.
+Openweather-report I would like to share with others.
+While I have a <a href="https://about.gitlab.com/">Gitlab</a> account, most of the
+momentum is on <a href="https://github.com/">Github</a> so at least initially I was start
+there.
+Add a new repository called
+<a href="https://github.com/cetyler/openweather_report">openweather_report</a>.
+My goal is to use this project to try and understand some of the features that
+are Github provides.
+This project is going to be more than just a toy project but this project won't
+be overly complicated.
+There is enough to the project that I can learn how to use <a href="https://github.com/features/actions">Github
+Actions</a> for example.</p>
+<h2>Git Flow</h2>
+<p>Prior to pushing my project to Github, I use 
+<a href="https://github.com/petervanderdoes/gitflow-avh/">Git Flow</a> but I plan on using
+it differently than I have in the past.
+This project will have the following branches:</p>
+<ul>
+<li>
+<p>main</p>
+</li>
+<li>
+<p>This branch will be considered the stable branch.</p>
+</li>
+<li>
+<p>develop</p>
+</li>
+<li>
+<p>This will be the latest branch.</p>
+</li>
+<li>
+<p>Should generally be working but due to frequent additions of features, it
+    can be unstable at times.</p>
+</li>
+<li>
+<p>feature</p>
+</li>
+<li>
+<p>Any feature to add to develop branch.</p>
+</li>
+<li>
+<p>This will be a short running branch no more than a couple of days.</p>
+</li>
+<li>
+<p>bug</p>
+</li>
+<li>
+<p>This can be off either main or develop</p>
+</li>
+</ul>
+<p>I also plan on doing pull requests instead of just branching from my local git
+repository.
+This may remove the need to use Git Flow.</p>
+<h2>Next Steps</h2>
+<p>I now have PyPi set up and my project on PyPi and on Github.
+The goal is the next release will be a functional release.
+The next article will be to start working on the requirements and create a
+Roadmap.</p>
+
+
+             
+ 
+            
+            
+            
+
+
+
+
+
+
+<section>
+    <h6 style="display:none;">Comments</h6>
+    <p id="comment-message">Leave your comments below. </p>
+
+    <div class="accordion" id="accordion2">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                <a class="accordion-toggle disqus-comment-count comment-count"
+                   data-toggle="collapse"
+                   data-parent="#accordion2"
+                   href="https://cetyler.github.io/weather-project-pypi.html#comment_thread"
+                   id="comment-accordion-toggle">
+                    Comments
+                </a>
+            </div>
+            <div id="comment_thread" class="accordion-body collapse">
+                <div class="accordion-inner">
+                    <div class="comments">
+
+                        <script src="https://utteranc.es/client.js"
+        data-repo="cetyler/cetyler.github.io"
+        data-issue-term="https://cetyler.github.io/weather-project-pypi.html"
+        data-label="Comments"
+        data-theme="github-light"
+        crossorigin="anonymous"
+        async>
+</script>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+            <hr/>
+        </div>
+        <section id="article-sidebar" class="span2">
+            <h4>Published</h4>
+            <time itemprop="dateCreated" datetime="2022-08-11T20:00:00-05:00">Aug 11, 2022</time>
+        <h4>More in This Series</h4>
+    <ul class="multi-parts-list">
+            <li >
+            <a href="https://cetyler.github.io/weather-project.html" title="Weather Project">Part 1: Weather Project</a>
+            </li>
+            <li  class="active-part">
+            Part 2: Weather Project - PyPi
+            </li>
+    </ul>
+            <h4>Category</h4>
+            <a class="category-link" href="https://cetyler.github.io/categories.html#python-ref">Python</a>
+            <h4>Tags</h4>
+            <ul class="list-of-tags tags-in-article">
+                <li><a href="https://cetyler.github.io/tags.html#project-ref">project
+                    <span>10</span>
+</a></li>
+                <li><a href="https://cetyler.github.io/tags.html#python-ref">python
+                    <span>18</span>
+</a></li>
+            </ul>
+<h4>Contact</h4>
+<div id="sidebar-social-link">
+    <a href="https://www.linkedin.com/in/christopheretyler" title="" target="_blank" rel="nofollow noopener noreferrer">
+        <svg xmlns="http://www.w3.org/2000/svg" aria-label="LinkedIn" role="img" viewBox="0 0 512 512" fill="#fff"><rect width="512" height="512" rx="15%" fill="#0077b5"/><circle cx="142" cy="138" r="37"/><path stroke="#fff" stroke-width="66" d="M244 194v198M142 194v198"/><path d="M276 282c0-20 13-40 36-40 24 0 33 18 33 45v105h66V279c0-61-32-89-76-89-34 0-51 19-59 32"/></svg>
+    </a>
+    <a href="https://github.com/cetyler" title="" target="_blank" rel="nofollow noopener noreferrer">
+        <svg xmlns="http://www.w3.org/2000/svg" aria-label="GitHub" role="img" viewBox="0 0 512 512"><rect width="512" height="512" rx="15%" fill="#1B1817"/><path fill="#fff" d="M335 499c14 0 12 17 12 17H165s-2-17 12-17c13 0 16-6 16-12l-1-50c-71 16-86-28-86-28-12-30-28-37-28-37-24-16 1-16 1-16 26 2 40 26 40 26 22 39 59 28 74 22 2-17 9-28 16-35-57-6-116-28-116-126 0-28 10-51 26-69-3-6-11-32 3-67 0 0 21-7 70 26 42-12 86-12 128 0 49-33 70-26 70-26 14 35 6 61 3 67 16 18 26 41 26 69 0 98-60 120-117 126 10 8 18 24 18 48l-1 70c0 6 3 12 16 12z"/></svg>
+    </a>
+    <a href="https://cetyler.github.io/feeds/all.atom.xml" title="" target="_blank" rel="nofollow noopener noreferrer">
+        <svg xmlns="http://www.w3.org/2000/svg" aria-label="RSS" role="img" viewBox="0 0 512 512"><rect width="512" height="512" rx="15%" fill="#f80"/><circle cx="145" cy="367" r="35" fill="#fff"/><path fill="none" stroke="#fff" stroke-width="60" d="M109 241c89 0 162 73 162 162M109 127c152 0 276 124 276 276"/></svg>
+    </a>
+</div>
+            
+
+
+
+
+
+            
+
+
+
+
+
+        </section>
+</div>
+</article>
+                    </div>
+                    <div class="span1"></div>
+                </div>
+            </div>
+        </div>
+<footer>
+    <div>
+        
+&copy; Copyright 2022 by Christopher E. Tyler and licensed under a <a rel="license"
+  href="http://creativecommons.org/licenses/by/4.0/">
+  <img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/80x15.png" />
+  Creative Commons Attribution 4.0 International License</a>.
+
+    </div>
+
+
+
+
+    <div id="fpowered">
+        Powered by: <a href="http://getpelican.com/" title="Pelican Home Page" target="_blank" rel="nofollow noopener noreferrer">Pelican</a>
+        Theme: <a href="https://elegant.oncrashreboot.com/" title="Theme Elegant Home Page" target="_blank" rel="nofollow noopener noreferrer">Elegant</a>
+    </div>
+</footer>            <script src="//code.jquery.com/jquery.min.js"></script>
+        <script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
+        <script>
+            function validateForm(query)
+            {
+                return (query.length > 0);
+            }
+        </script>
+
+    <script>
+    (function () {
+        if (window.location.hash.match(/^#comment-\d+$/)) {
+            $('#comment_thread').collapse('show');
+        }
+    })();
+    window.onhashchange=function(){
+        if (window.location.hash.match(/^#comment-\d+$/))
+            window.location.reload(true);
+    }
+    $('#comment_thread').on('shown', function () {
+        var link = document.getElementById('comment-accordion-toggle');
+        var old_innerHTML = link.innerHTML;
+        $(link).fadeOut(200, function() {
+            $(this).text('Click here to hide comments').fadeIn(200);
+        });
+        $('#comment_thread').on('hidden', function () {
+            $(link).fadeOut(200, function() {
+                $(this).text(old_innerHTML).fadeIn(200);
+            });
+        })
+    })
+</script>
+
+    </body>
+    <!-- Theme: Elegant built for Pelican
+        License : MIT -->
+</html>
