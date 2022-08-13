@@ -6,7 +6,8 @@ Status: published
 comment_id: resources
 utterances_filter: on
 
-Any resources below that I have done a more thorough, I will link to the posts.
+Any resources below that I have done a more thorough review, I will link to the
+posts.
 
 ## Python
 
