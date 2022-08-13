@@ -81,25 +81,16 @@ it differently than I have in the past.
 This project will have the following branches:
 
 * main
-
-  * This branch will be considered the stable branch.
-
+    * This branch will be considered the stable branch.
 * develop
-
-  * This will be the latest branch.
-
-  * Should generally be working but due to frequent additions of features, it
-    can be unstable at times.
-
+    * This will be the latest branch.
+    * Should generally be working but due to frequent additions of features, it
+      can be unstable at times.
 * feature
-
-  * Any feature to add to develop branch.
-
-  * This will be a short running branch no more than a couple of days.
-
+    * Any feature to add to develop branch.
+    * This will be a short running branch no more than a couple of days.
 * bug
-
-  * This can be off either main or develop
+    * This can be off either main or develop
 
 I also plan on doing pull requests instead of just branching from my local git
 repository.
