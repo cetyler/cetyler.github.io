@@ -10,7 +10,7 @@ series_index: 3
 
 ## Overview
 
-From the [previous article]({filename}/python/2022-08-01-weather_pypi.md),
+From the [previous article]({filename}/python/2022-08-01-weather_project_pypi.md),
 the Weather Project is now on
 [PyPi](https://pypi.org/project/openweather-report/) and is on
 [Github](https://github.com/cetyler/openweather_report).
