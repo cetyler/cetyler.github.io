@@ -9,18 +9,18 @@
         <meta property="og:type" content="article" />
         <meta name="twitter:card" content="summary">
 
-<meta name="keywords" content="training, Reuven Lerner, oop, python, review, Python, " />
+<meta name="keywords" content="python, project, documentation, Python, " />
 
-<meta property="og:title" content="Reuven Lerner&#39;s Object-orient Python "/>
-<meta property="og:url" content="https://cetyler.github.io/reuven-lerners-object-orient-python.html" />
-<meta property="og:description" content="Review of Reuven&#39;s OOP Python self pace course." />
+<meta property="og:title" content="Weather Project - Requirements and Roadmap. "/>
+<meta property="og:url" content="https://cetyler.github.io/weather-project-requirements-and-roadmap.html" />
+<meta property="og:description" content="Create a roadmap and requirements." />
 <meta property="og:site_name" content="Christopher Tyler R&amp;D Test Engineer" />
 <meta property="og:article:author" content="Christopher" />
-<meta property="og:article:published_time" content="2022-01-08T00:00:00-06:00" />
-<meta name="twitter:title" content="Reuven Lerner&#39;s Object-orient Python ">
-<meta name="twitter:description" content="Review of Reuven&#39;s OOP Python self pace course.">
+<meta property="og:article:published_time" content="2022-09-16T20:00:00-05:00" />
+<meta name="twitter:title" content="Weather Project - Requirements and Roadmap. ">
+<meta name="twitter:description" content="Create a roadmap and requirements.">
 
-        <title>Reuven Lerner&#39;s Object-orient Python  · Christopher Tyler R&amp;D Test Engineer
+        <title>Weather Project - Requirements and Roadmap.  · Christopher Tyler R&amp;D Test Engineer
 </title>
         <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet">
         <link rel="stylesheet" type="text/css" href="https://cetyler.github.io/theme/css/elegant.prod.css" media="screen">
@@ -68,8 +68,8 @@
 <div class="row-fluid">
     <header class="page-header span10 offset2">
         <h1>
-            <a href="https://cetyler.github.io/reuven-lerners-object-orient-python.html">
-                Reuven Lerner's Object-orient Python
+            <a href="https://cetyler.github.io/weather-project-requirements-and-roadmap.html">
+                Weather Project - Requirements and Roadmap.
             </a>
         </h1>
     </header>
@@ -79,55 +79,129 @@
         <div class="span8 offset2 article-content">
             
             <h2>Overview</h2>
-<p>I recently completed Reuven Lerner's
-<a href="https://store.lerner.co.il/object-oriented-python">Object-orient Python</a> self
-pace course.
-My goal was to better understand how to do OOP using Python.
-For context, I know of OOP but never could understand it well enough to use in
-my programs.</p>
-<h2>Course Topics</h2>
-<p>Taken from Reuven's Overview:</p>
-<p>Through numerous video lessons and exercises, this course will teach you what
-you need in order to take advantage of Python's objects. I cover such topics
-as:</p>
+<p>From the <a href="https://cetyler.github.io/weather-project-pypi.html">previous article</a>,
+the Weather Project is now on
+<a href="https://pypi.org/project/openweather-report/">PyPi</a> and is on
+<a href="https://github.com/cetyler/openweather_report">Github</a>.
+This article will start going through the requirements and to develop a
+Roadmap.</p>
+<h2>Requirements</h2>
+<p>Initially, all documentation will reside on
+<a href="https://github.com/cetyler/openweather_report/wiki">Github</a> in the wiki.
+The <a href="https://github.com/cetyler/openweather_report/blob/main/README.md">README</a>
+will also include some of the initial documentation until it is necessary to
+have a dedicated, detailed documentation.</p>
+<h3>User Requirements</h3>
+<p>The initial requirements will be based on what I would like this program to do.
+The
+<a href="https://github.com/cetyler/openweather_report/wiki/User-Requirements">wiki</a>
+will have more detail, but I will describe at a high level what is in the User
+Requirements.
+User requirements go through and list what are the requirements that the
+program should be able to do.
+User requirements don't go into details in terms of what programming language,
+software, etc. to use unless it is an absolute requirement.</p>
+<p>The program should have the ability to pull data using <a href="https://openweathermap.org/api">OpenWeather's
+API</a>.
+The data should be able to save to either a file or database.
+My requirements that the data should be saved to
+<a href="https://www.postgresql.org/">PostgreSQL</a> due to how much I use PostgreSQL at
+work.
+Optionally the data should be able to save to
+<a href="https://www.sqlite.org/index.html">SQLite</a> because it would be easier to share
+the data since it would be a single file.</p>
+<p>The program should be able to provide some reporting capabilities.
+The program should have the option to display the last recorded values, the
+forecast and historical data.</p>
+<p>The goal of the program is to save the data and report the data initially in a
+simplified format.
+In the future the reporting can get more complex and have a robust interface.</p>
+<h3>Design Requirements</h3>
+<p>The initial design requirements are how I would like to structure the program,
+which programming language to use, etc.
+The
+<a href="https://github.com/cetyler/openweather_report/wiki/Design-Requirements">wiki</a>
+will have more detail but I would like describe at a high level here similar to
+what I did for the User Requirements.
+Due to this programming being used as a learning tool, it will be coded in
+Python.
+The design should be setup to use as either a standalone program or the ability
+to import as a library.</p>
+<h4>Pulling OpenWeather Data</h4>
+<p>This should be straight forward since the data will be saved into the database
+as a JSON column.
+The <a href="https://openweathermap.org/api/one-call-3">One Call API</a> JSON format won't 
+be checked as the data being saved will be considered raw data.
+I define raw data as data that is minimally modified from the source.
+The data will then be saved either a text file or a database (SQLite and
+PostgreSQL).
+When that data is being saved to a database, there should at least an entry
+date, what type of API call and the raw data.</p>
+<p>At least initially, error checking will be minimal.
+Testing will be minimal initially as well, though the goal is to have at least
+all critical sections of the code tested.</p>
+<p>The config file will store the following:</p>
 <ul>
-<li>What is an object?</li>
-<li>Setting and retrieving attributes</li>
-<li>Creating classes</li>
-<li>The role of <code>__init__</code></li>
-<li>The role of self</li>
-<li>Writing and calling methods</li>
-<li>Attribute search, and why we care</li>
-<li>Class attributes</li>
-<li>Inheritance</li>
+<li>API key required for OpenWeather.</li>
+<li>PostgreSQL login information.</li>
+<li>SQLite file location.</li>
+<li>Folder location to save text files.</li>
+<li>Default save type (PostgreSQL, SQLite, text).</li>
+<li>
+<p>City information.</p>
+<ul>
+<li>Longitude.</li>
+<li>Latitude.</li>
+<li>City ID from OpenWeather.</li>
 </ul>
-<h2>Impressions</h2>
-<p>First of all I like the self pace nature and that Reuven provided the Jupyter
-Notebook and slides.
-Also the videos are a manageable length around 15 minutes.
-The first 6 sections I was able to work on a section a week.
-The summary project was a little quicker since there was only one video which
-gave me more time to complete the final project.</p>
-<p>The exercises build on each other.
-Reuven used a couple different things to model like a bank account, ice cream,
-etc.
-The final exercise did a good job covering most of what Reuven covered in the
-course.
-I felt comfortable with the knowledge that I learn to complete the exercise.</p>
-<p>This course does not include tests to verify your work instead there are
-solution videos.
-I believe there were not tests since I think Reuven assumes that you will
-also be using Jupyter Notebooks to work through the exercises.
-I instead created Python scripts and ran in the console.
-The final exercise, I created tests using pytest to ensure that I met the
-requirements.</p>
-<h2>Conclusion</h2>
-<p>Overall I think it was a good beginner course on Object-orient programming
-using Python.
-For me it was a good value as I purchased the course through Humble Bundle
-Python Super Power Bundle.
-This course was the first time that OOP clicked for me and the way I think.
-Finally I just simply enjoyed Reuven's teaching style.</p>
+</li>
+</ul>
+<p>The program should be able to run using a cron job or if in Windows Task
+Scheduler.</p>
+<h4>Displaying/Reporting Data</h4>
+<p>Initially it will be very basic.
+For files, just return the JSON in a pretty format.
+For databases, initially will support returning the data by entry date and
+return the JSON in a pretty format.</p>
+<p>The more complicated reports such as current conditions, forecast and
+historical data, will prefer to do as much of the calculations in SQL if
+possible.
+The plan is to use <a href="https://www.sqlalchemy.org/">SQLAlchemy</a> so that I can
+learn how to use an ORM instead of doing raw SQL.</p>
+<p>Testing and error checking here will much more robust than pulling in the data.
+Logging probably is not needed since at least initially will not be run using a
+cron job.</p>
+<h2>Roadmap</h2>
+<p>Instead of creating a file or using the wiki, I will use utilize 
+<a href="https://github.com/cetyler/openweather_report/projects">Github Projects</a> as my
+Roadmap.
+Each project will be a major release (1.0.0, 2.0.0, etc.).
+Each <a href="https://github.com/cetyler/openweather_report/milestones">milestone</a> will 
+be a minor or bug fix release.
+The goal is to have a living Roadmap that shouldn't go out of date.</p>
+<h3>Initial Release</h3>
+<p>Be able to pull data from OpenWeather using their One Call API.
+Initially be able to save to a text file or to a database.</p>
+<h3>Basic Displaying the Data</h3>
+<p>Be able to return results by location, date and data type.
+The results will be displayed in the console.</p>
+<h3>Basic Reporting</h3>
+<p>Be able to save a report to file or display the report.</p>
+<h3>Basic Logging/Testing</h3>
+<p>Make sure that all critical areas of the code is tested.
+Add some logging capabilities to note when there is an error.</p>
+<h3>1.0.0 Release</h3>
+<p>This release should have the features above as well as documentation.</p>
+<h3>Interactive Display</h3>
+<p>Be able to display a dashboard to show current weather conditions and forecast.
+Should have the option to export the report.</p>
+<h3>Add Display API</h3>
+<p>Be able to use program as a library and do an API call to pull data from the
+database to use for dashboards.</p>
+<h2>Next Steps</h2>
+<p>The requirements and initial Roadmap is complete.
+Will now work on using Github's project management features and start doing
+some actual coding.</p>
 
 
              
@@ -151,7 +225,7 @@ Finally I just simply enjoyed Reuven's teaching style.</p>
                 <a class="accordion-toggle disqus-comment-count comment-count"
                    data-toggle="collapse"
                    data-parent="#accordion2"
-                   href="https://cetyler.github.io/reuven-lerners-object-orient-python.html#comment_thread"
+                   href="https://cetyler.github.io/weather-project-requirements-and-roadmap.html#comment_thread"
                    id="comment-accordion-toggle">
                     Comments
                 </a>
@@ -162,7 +236,7 @@ Finally I just simply enjoyed Reuven's teaching style.</p>
 
                         <script src="https://utteranc.es/client.js"
         data-repo="cetyler/cetyler.github.io"
-        data-issue-term="https://cetyler.github.io/reuven-lerners-object-orient-python.html"
+        data-issue-term="https://cetyler.github.io/weather-project-requirements-and-roadmap.html"
         data-label="Comments"
         data-theme="github-light"
         crossorigin="anonymous"
@@ -180,25 +254,31 @@ Finally I just simply enjoyed Reuven's teaching style.</p>
         </div>
         <section id="article-sidebar" class="span2">
             <h4>Published</h4>
-            <time itemprop="dateCreated" datetime="2022-01-08T00:00:00-06:00">Jan 8, 2022</time>
+            <time itemprop="dateCreated" datetime="2022-09-16T20:00:00-05:00">Sep 16, 2022</time>
+        <h4>More in This Series</h4>
+    <ul class="multi-parts-list">
+            <li >
+            <a href="https://cetyler.github.io/weather-project.html" title="Weather Project">Part 1: Weather Project</a>
+            </li>
+            <li >
+            <a href="https://cetyler.github.io/weather-project-pypi.html" title="Weather Project - PyPi">Part 2: Weather Project - PyPi</a>
+            </li>
+            <li  class="active-part">
+            Part 3: Weather Project - Requirements and Roadmap.
+            </li>
+    </ul>
             <h4>Category</h4>
             <a class="category-link" href="https://cetyler.github.io/categories.html#python-ref">Python</a>
             <h4>Tags</h4>
             <ul class="list-of-tags tags-in-article">
-                <li><a href="https://cetyler.github.io/tags.html#oop-ref">oop
+                <li><a href="https://cetyler.github.io/tags.html#documentation-ref">documentation
                     <span>2</span>
+</a></li>
+                <li><a href="https://cetyler.github.io/tags.html#project-ref">project
+                    <span>11</span>
 </a></li>
                 <li><a href="https://cetyler.github.io/tags.html#python-ref">python
                     <span>19</span>
-</a></li>
-                <li><a href="https://cetyler.github.io/tags.html#reuven-lerner-ref">Reuven Lerner
-                    <span>2</span>
-</a></li>
-                <li><a href="https://cetyler.github.io/tags.html#review-ref">review
-                    <span>2</span>
-</a></li>
-                <li><a href="https://cetyler.github.io/tags.html#training-ref">training
-                    <span>2</span>
 </a></li>
             </ul>
 <h4>Contact</h4>

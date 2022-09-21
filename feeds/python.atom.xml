@@ -1,5 +1,128 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Christopher Tyler R&amp;D Test Engineer - Python</title><link href="https://cetyler.github.io/" rel="alternate"></link><link href="https://cetyler.github.io/feeds/python.atom.xml" rel="self"></link><id>https://cetyler.github.io/</id><updated>2022-08-11T20:00:00-05:00</updated><entry><title>Weather Project - PyPi</title><link href="https://cetyler.github.io/weather-project-pypi.html" rel="alternate"></link><published>2022-08-11T20:00:00-05:00</published><updated>2022-08-11T20:00:00-05:00</updated><author><name>Christopher</name></author><id>tag:cetyler.github.io,2022-08-11:/weather-project-pypi.html</id><summary type="html">&lt;p&gt;Setup PyPi with an empty project to lock in the project name.&lt;/p&gt;</summary><content type="html">&lt;h2&gt;Overview&lt;/h2&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Christopher Tyler R&amp;D Test Engineer - Python</title><link href="https://cetyler.github.io/" rel="alternate"></link><link href="https://cetyler.github.io/feeds/python.atom.xml" rel="self"></link><id>https://cetyler.github.io/</id><updated>2022-09-16T20:00:00-05:00</updated><entry><title>Weather Project - Requirements and Roadmap.</title><link href="https://cetyler.github.io/weather-project-requirements-and-roadmap.html" rel="alternate"></link><published>2022-09-16T20:00:00-05:00</published><updated>2022-09-16T20:00:00-05:00</updated><author><name>Christopher</name></author><id>tag:cetyler.github.io,2022-09-16:/weather-project-requirements-and-roadmap.html</id><summary type="html">&lt;p&gt;Create a roadmap and requirements.&lt;/p&gt;</summary><content type="html">&lt;h2&gt;Overview&lt;/h2&gt;
+&lt;p&gt;From the &lt;a href="https://cetyler.github.io/weather-project-pypi.html"&gt;previous article&lt;/a&gt;,
+the Weather Project is now on
+&lt;a href="https://pypi.org/project/openweather-report/"&gt;PyPi&lt;/a&gt; and is on
+&lt;a href="https://github.com/cetyler/openweather_report"&gt;Github&lt;/a&gt;.
+This article will start going through the requirements and to develop a
+Roadmap.&lt;/p&gt;
+&lt;h2&gt;Requirements&lt;/h2&gt;
+&lt;p&gt;Initially, all documentation will reside on
+&lt;a href="https://github.com/cetyler/openweather_report/wiki"&gt;Github&lt;/a&gt; in the wiki.
+The &lt;a href="https://github.com/cetyler/openweather_report/blob/main/README.md"&gt;README&lt;/a&gt;
+will also include some of the initial documentation until it is necessary to
+have a dedicated, detailed documentation.&lt;/p&gt;
+&lt;h3&gt;User Requirements&lt;/h3&gt;
+&lt;p&gt;The initial requirements will be based on what I would like this program to do.
+The
+&lt;a href="https://github.com/cetyler/openweather_report/wiki/User-Requirements"&gt;wiki&lt;/a&gt;
+will have more detail, but I will describe at a high level what is in the User
+Requirements.
+User requirements go through and list what are the requirements that the
+program should be able to do.
+User requirements don't go into details in terms of what programming language,
+software, etc. to use unless it is an absolute requirement.&lt;/p&gt;
+&lt;p&gt;The program should have the ability to pull data using &lt;a href="https://openweathermap.org/api"&gt;OpenWeather's
+API&lt;/a&gt;.
+The data should be able to save to either a file or database.
+My requirements that the data should be saved to
+&lt;a href="https://www.postgresql.org/"&gt;PostgreSQL&lt;/a&gt; due to how much I use PostgreSQL at
+work.
+Optionally the data should be able to save to
+&lt;a href="https://www.sqlite.org/index.html"&gt;SQLite&lt;/a&gt; because it would be easier to share
+the data since it would be a single file.&lt;/p&gt;
+&lt;p&gt;The program should be able to provide some reporting capabilities.
+The program should have the option to display the last recorded values, the
+forecast and historical data.&lt;/p&gt;
+&lt;p&gt;The goal of the program is to save the data and report the data initially in a
+simplified format.
+In the future the reporting can get more complex and have a robust interface.&lt;/p&gt;
+&lt;h3&gt;Design Requirements&lt;/h3&gt;
+&lt;p&gt;The initial design requirements are how I would like to structure the program,
+which programming language to use, etc.
+The
+&lt;a href="https://github.com/cetyler/openweather_report/wiki/Design-Requirements"&gt;wiki&lt;/a&gt;
+will have more detail but I would like describe at a high level here similar to
+what I did for the User Requirements.
+Due to this programming being used as a learning tool, it will be coded in
+Python.
+The design should be setup to use as either a standalone program or the ability
+to import as a library.&lt;/p&gt;
+&lt;h4&gt;Pulling OpenWeather Data&lt;/h4&gt;
+&lt;p&gt;This should be straight forward since the data will be saved into the database
+as a JSON column.
+The &lt;a href="https://openweathermap.org/api/one-call-3"&gt;One Call API&lt;/a&gt; JSON format won't 
+be checked as the data being saved will be considered raw data.
+I define raw data as data that is minimally modified from the source.
+The data will then be saved either a text file or a database (SQLite and
+PostgreSQL).
+When that data is being saved to a database, there should at least an entry
+date, what type of API call and the raw data.&lt;/p&gt;
+&lt;p&gt;At least initially, error checking will be minimal.
+Testing will be minimal initially as well, though the goal is to have at least
+all critical sections of the code tested.&lt;/p&gt;
+&lt;p&gt;The config file will store the following:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;API key required for OpenWeather.&lt;/li&gt;
+&lt;li&gt;PostgreSQL login information.&lt;/li&gt;
+&lt;li&gt;SQLite file location.&lt;/li&gt;
+&lt;li&gt;Folder location to save text files.&lt;/li&gt;
+&lt;li&gt;Default save type (PostgreSQL, SQLite, text).&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;City information.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Longitude.&lt;/li&gt;
+&lt;li&gt;Latitude.&lt;/li&gt;
+&lt;li&gt;City ID from OpenWeather.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;The program should be able to run using a cron job or if in Windows Task
+Scheduler.&lt;/p&gt;
+&lt;h4&gt;Displaying/Reporting Data&lt;/h4&gt;
+&lt;p&gt;Initially it will be very basic.
+For files, just return the JSON in a pretty format.
+For databases, initially will support returning the data by entry date and
+return the JSON in a pretty format.&lt;/p&gt;
+&lt;p&gt;The more complicated reports such as current conditions, forecast and
+historical data, will prefer to do as much of the calculations in SQL if
+possible.
+The plan is to use &lt;a href="https://www.sqlalchemy.org/"&gt;SQLAlchemy&lt;/a&gt; so that I can
+learn how to use an ORM instead of doing raw SQL.&lt;/p&gt;
+&lt;p&gt;Testing and error checking here will much more robust than pulling in the data.
+Logging probably is not needed since at least initially will not be run using a
+cron job.&lt;/p&gt;
+&lt;h2&gt;Roadmap&lt;/h2&gt;
+&lt;p&gt;Instead of creating a file or using the wiki, I will use utilize 
+&lt;a href="https://github.com/cetyler/openweather_report/projects"&gt;Github Projects&lt;/a&gt; as my
+Roadmap.
+Each project will be a major release (1.0.0, 2.0.0, etc.).
+Each &lt;a href="https://github.com/cetyler/openweather_report/milestones"&gt;milestone&lt;/a&gt; will 
+be a minor or bug fix release.
+The goal is to have a living Roadmap that shouldn't go out of date.&lt;/p&gt;
+&lt;h3&gt;Initial Release&lt;/h3&gt;
+&lt;p&gt;Be able to pull data from OpenWeather using their One Call API.
+Initially be able to save to a text file or to a database.&lt;/p&gt;
+&lt;h3&gt;Basic Displaying the Data&lt;/h3&gt;
+&lt;p&gt;Be able to return results by location, date and data type.
+The results will be displayed in the console.&lt;/p&gt;
+&lt;h3&gt;Basic Reporting&lt;/h3&gt;
+&lt;p&gt;Be able to save a report to file or display the report.&lt;/p&gt;
+&lt;h3&gt;Basic Logging/Testing&lt;/h3&gt;
+&lt;p&gt;Make sure that all critical areas of the code is tested.
+Add some logging capabilities to note when there is an error.&lt;/p&gt;
+&lt;h3&gt;1.0.0 Release&lt;/h3&gt;
+&lt;p&gt;This release should have the features above as well as documentation.&lt;/p&gt;
+&lt;h3&gt;Interactive Display&lt;/h3&gt;
+&lt;p&gt;Be able to display a dashboard to show current weather conditions and forecast.
+Should have the option to export the report.&lt;/p&gt;
+&lt;h3&gt;Add Display API&lt;/h3&gt;
+&lt;p&gt;Be able to use program as a library and do an API call to pull data from the
+database to use for dashboards.&lt;/p&gt;
+&lt;h2&gt;Next Steps&lt;/h2&gt;
+&lt;p&gt;The requirements and initial Roadmap is complete.
+Will now work on using Github's project management features and start doing
+some actual coding.&lt;/p&gt;</content><category term="Python"></category><category term="python"></category><category term="project"></category><category term="documentation"></category></entry><entry><title>Weather Project - PyPi</title><link href="https://cetyler.github.io/weather-project-pypi.html" rel="alternate"></link><published>2022-08-11T20:00:00-05:00</published><updated>2022-08-11T20:00:00-05:00</updated><author><name>Christopher</name></author><id>tag:cetyler.github.io,2022-08-11:/weather-project-pypi.html</id><summary type="html">&lt;p&gt;Setup PyPi with an empty project to lock in the project name.&lt;/p&gt;</summary><content type="html">&lt;h2&gt;Overview&lt;/h2&gt;
 &lt;p&gt;From the &lt;a href="https://cetyler.github.io/weather-project.html"&gt;previous article&lt;/a&gt;,
 the Weather Project will be put on PyPi to help me understand that process and
 to also share with others.
@@ -1038,122 +1161,4 @@ Then run &lt;code&gt;pip config list&lt;/code&gt; to verify that the above gets 
 &lt;p&gt;Having a private PyPi server, I can put my packages in a centralize server and
 have all my computers on my network push/pull packages.
 This is a improvement over a local directory and once set up feels no different
-to installing packages from PyPi.&lt;/p&gt;</content><category term="Python"></category><category term="python"></category><category term="package"></category><category term="pypi"></category></entry><entry><title>How to Create a Python Package</title><link href="https://cetyler.github.io/how-to-create-a-python-package.html" rel="alternate"></link><published>2021-04-17T00:00:00-05:00</published><updated>2021-04-20T20:30:00-05:00</updated><author><name>Christopher</name></author><id>tag:cetyler.github.io,2021-04-17:/how-to-create-a-python-package.html</id><summary type="html">&lt;p&gt;How to create a Python package and have a local repository.&lt;/p&gt;</summary><content type="html">&lt;p&gt;While I was listening
-&lt;a href="https://pythonbytes.fm/episodes/show/228/supreme-court-decides-api-copyright-battle"&gt;PythonBytes&lt;/a&gt;
-episode #228 and they mentioned an
-&lt;a href="https://antonz.org/python-packaging"&gt;article&lt;/a&gt; from Anton Zhiyanov on creating
-a Python package in 2021.
-Reading the article reminded me that I wanted to update how I create Python
-packages and that I want to figure out how to create a local Python
-repository.
-Anton's article talks about how to put your package on PyPi which I will not do
-in this article.
-At work, I created a Python package that is very specific to what I do at work
-and it includes some items that probably should not be shared.
-However the way I install the package is I simple go into my Git repository and
-do the following:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;$ &lt;span class="nb"&gt;cd&lt;/span&gt; /dir-to-project-to-add-package
-$ &lt;span class="nb"&gt;source&lt;/span&gt; venv/scripts/bin/activate
-$ &lt;span class="nb"&gt;cd&lt;/span&gt; /git-repo-of-package
-$ pip3 install .
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;I know that you can also use &lt;code&gt;pip3 install /git-repo-of-package&lt;/code&gt; as well.
-The problem with this method is that I need to make sure that I am installing
-the right version.
-So prior to installing, I need to make sure the following:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;Verify that I am in the &lt;code&gt;master&lt;/code&gt; branch.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Make sure that I want the latest version, otherwise checkout an earlier.&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2&gt;Create Python Package&lt;/h2&gt;
-&lt;p&gt;For the most part will follow along what Anton did.
-Create a minimal package.
-Will create &lt;code&gt;podsearch&lt;/code&gt; folder, put a virtual environment.
-Create the following folder structure.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;.
-|-- .gitignore
-|-- podsearch
-    |-- __init__.py
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;Put the following in &lt;code&gt;__init__.py&lt;/code&gt;.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&amp;quot;&amp;quot;&amp;quot;Let&amp;#39;s find some podcasts!&amp;quot;&amp;quot;&amp;quot;
-
-__version__ = &amp;quot;0.1.0&amp;quot;
-
-def search(name, count=5):
-    &amp;quot;&amp;quot;&amp;quot;Search podcast by name.&amp;quot;&amp;quot;&amp;quot;
-    raise NotImplementedError()
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;So far matching what Anton explained in his article.
-Now will install &lt;a href="https://flit.readthedocs.io/en/latest/"&gt;flit&lt;/a&gt;.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;pip install flit
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;After that run &lt;code&gt;flint init&lt;/code&gt; and answer the questions.
-This will create &lt;code&gt;pyproject.toml&lt;/code&gt;.&lt;/p&gt;
-&lt;p&gt;This is where we will start to deviate from Anton.
-Instead of using PyPi or PyPiTest, I want to publish the package to a local
-location.&lt;/p&gt;
-&lt;h2&gt;Install Python Package from Local Directory&lt;/h2&gt;
-&lt;p&gt;If you are the only person that will use the Python package, you don't need to
-create a local repository that mimics PyPi.&lt;/p&gt;
-&lt;p&gt;First run &lt;code&gt;flit build&lt;/code&gt; to create the following in &lt;code&gt;dist/&lt;/code&gt;:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;podsearch-0.1.0-py2.py3-none-any.whl
-podsearch-0.1.0.tar.gz
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;Copy these files to your local python directory.
-Then whenever you need to install the package, do the following:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;$ mkdir test_project
-$ &lt;span class="nb"&gt;cd&lt;/span&gt; test_project
-$ python -m venv venv
-$ pip install podsearch --no-index --find-links file:///local-python-package-directory
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;This will use your Python packages folder and install your packages.
-Also it has the added benefit that if your package requires something that is
-on PyPi, after searching your directory, pip will then search PyPi.&lt;/p&gt;
-&lt;p&gt;This can be a great option for a lone developer that creates private Python
-packages.
-This is the method I plan on using at work since I am the only Python
-developer.&lt;/p&gt;
-&lt;p&gt;The downside is that this may not work with a team unless you use a network
-drive/location.&lt;/p&gt;
-&lt;h2&gt;Miscellaneous&lt;/h2&gt;
-&lt;p&gt;I normally add the following in my package repository:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;README.md&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;Describe what the package is about.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Maybe include some examples on how to use the package.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;If there is a website, this is a good place to include it.&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;CHANGELOG.md&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;This make it easy to know the changes from each version.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;Anton mentions a lot more and I will probably adapt to my workflow and explain
-my workflow in another post.&lt;/p&gt;
-&lt;h2&gt;Conclusion&lt;/h2&gt;
-&lt;p&gt;This is a pretty easy way to create a Python package and to be able to share
-internally.
-The next step would be to create a private PyPi server.
-That way I can have access to my packages from any computer on my local network.&lt;/p&gt;</content><category term="Python"></category><category term="python"></category><category term="package"></category></entry></feed>
+to installing packages from PyPi.&lt;/p&gt;</content><category term="Python"></category><category term="python"></category><category term="package"></category><category term="pypi"></category></entry></feed>
