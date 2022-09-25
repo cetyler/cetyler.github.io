@@ -1,4 +1,4 @@
-Title: Weather Project - Requirements and Roadmap.
+Title: Weather Project - Requirements and Roadmap
 Date: 2022-09-16 20:00
 Category: Python
 Tags: python, project, documentation
