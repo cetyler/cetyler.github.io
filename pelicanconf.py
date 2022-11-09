@@ -64,6 +64,7 @@ LINKS = (
 # Social widget
 SOCIAL = (
     ("LinkedIn", "https://www.linkedin.com/in/christopheretyler"),
+    ("Mastodon", "https://fosstodon.org/@got20170422"),
     ("GitHub", "https://github.com/cetyler"),
     ("RSS", "https://cetyler.github.io/feeds/all.atom.xml"),
 )
@@ -115,4 +116,5 @@ SITE_LICENSE = f"""
   href="http://creativecommons.org/licenses/by/4.0/">
   <img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/80x15.png" />
   Creative Commons Attribution 4.0 International License</a>.
+<a rel="me" href="https://fosstodon.org/@got20170422">Mastodon</a>
 """
