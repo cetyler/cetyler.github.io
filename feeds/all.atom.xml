@@ -1,5 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Christopher Tyler R&amp;D Test Engineer</title><link href="https://cetyler.github.io/" rel="alternate"></link><link href="https://cetyler.github.io/feeds/all.atom.xml" rel="self"></link><id>https://cetyler.github.io/</id><updated>2022-12-16T17:00:00-06:00</updated><entry><title>TIL - Today I Learned</title><link href="https://cetyler.github.io/til-today-i-learned.html" rel="alternate"></link><published>2022-12-16T17:00:00-06:00</published><updated>2022-12-16T17:00:00-06:00</updated><author><name>Christopher</name></author><id>tag:cetyler.github.io,2022-12-16:/til-today-i-learned.html</id><summary type="html">&lt;p&gt;Start posting TIL to potentially help others as well as myself.&lt;/p&gt;</summary><content type="html">&lt;h2&gt;Overview&lt;/h2&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Christopher Tyler R&amp;D Test Engineer</title><link href="https://cetyler.github.io/" rel="alternate"></link><link href="https://cetyler.github.io/feeds/all.atom.xml" rel="self"></link><id>https://cetyler.github.io/</id><updated>2022-12-16T18:00:00-06:00</updated><entry><title>Create Automatic Timestamps in PostgreSQL</title><link href="https://cetyler.github.io/create-automatic-timestamps-in-postgresql.html" rel="alternate"></link><published>2022-12-16T18:00:00-06:00</published><updated>2022-12-16T18:00:00-06:00</updated><author><name>Christopher</name></author><id>tag:cetyler.github.io,2022-12-16:/create-automatic-timestamps-in-postgresql.html</id><summary type="html">&lt;p&gt;Create automatic timestamps by default.&lt;/p&gt;</summary><content type="html">&lt;p&gt;Found this at
+&lt;a href="https://x-team.com/blog/automatic-timestamps-with-postgresql/"&gt;X-Team&lt;/a&gt;.&lt;/p&gt;
+&lt;h2&gt;Create Table with Default Timestamp&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;CREATE TABLE todos (
+ id SERIAL NOT NULL PRIMARY KEY,
+ content TEXT,
+ created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+ updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+ completed_at TIMESTAMPTZ
+);
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;In creating the &lt;code&gt;todos&lt;/code&gt; table, both &lt;code&gt;created_at&lt;/code&gt; and &lt;code&gt;updated_at&lt;/code&gt; will default
+with the current timestamp if one is not given.
+This is great for if you are adding items from a CSV and you want to know when
+the data is being created.&lt;/p&gt;
+&lt;h2&gt;Update Timestamp on Update&lt;/h2&gt;
+&lt;p&gt;The article also explains how to create a trigger function.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="n"&gt;CREATE&lt;/span&gt; &lt;span class="kr"&gt;OR&lt;/span&gt; &lt;span class="n"&gt;REPLACE&lt;/span&gt; &lt;span class="n"&gt;FUNCTION&lt;/span&gt; &lt;span class="n"&gt;trigger_set_timestamp&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;span class="n"&gt;RETURNS&lt;/span&gt; &lt;span class="n"&gt;TRIGGER&lt;/span&gt; &lt;span class="n"&gt;AS&lt;/span&gt; &lt;span class="o"&gt;$$&lt;/span&gt;
+&lt;span class="kr"&gt;BEGIN&lt;/span&gt;
+ &lt;span class="kr"&gt;NEW&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;updated_at&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;NOW&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
+ &lt;span class="kr"&gt;RETURN&lt;/span&gt; &lt;span class="kr"&gt;NEW&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="kr"&gt;END&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="o"&gt;$$&lt;/span&gt; &lt;span class="n"&gt;LANGUAGE&lt;/span&gt; &lt;span class="n"&gt;plpgsql&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;With this function, when can update a table and automatically update column
+&lt;code&gt;updated_at&lt;/code&gt; with the current timestamp.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="n"&gt;CREATE&lt;/span&gt; &lt;span class="n"&gt;TRIGGER&lt;/span&gt; &lt;span class="n"&gt;set_timestamp&lt;/span&gt;
+&lt;span class="n"&gt;BEFORE&lt;/span&gt; &lt;span class="n"&gt;UPDATE&lt;/span&gt; &lt;span class="n"&gt;ON&lt;/span&gt; &lt;span class="n"&gt;todos&lt;/span&gt;
+&lt;span class="kr"&gt;FOR&lt;/span&gt; &lt;span class="mh"&gt;EACH&lt;/span&gt; &lt;span class="n"&gt;ROW&lt;/span&gt;
+&lt;span class="n"&gt;EXECUTE&lt;/span&gt; &lt;span class="kr"&gt;PROCEDURE&lt;/span&gt; &lt;span class="n"&gt;trigger_set_timestamp&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;This will execute anytime a row is updated in &lt;code&gt;todos&lt;/code&gt;.&lt;/p&gt;</content><category term="TIL"></category><category term="til"></category><category term="postgresql"></category><category term="timestamp"></category><category term="function"></category></entry><entry><title>TIL - Today I Learned</title><link href="https://cetyler.github.io/til-today-i-learned.html" rel="alternate"></link><published>2022-12-16T17:00:00-06:00</published><updated>2022-12-16T17:00:00-06:00</updated><author><name>Christopher</name></author><id>tag:cetyler.github.io,2022-12-16:/til-today-i-learned.html</id><summary type="html">&lt;p&gt;Start posting TIL to potentially help others as well as myself.&lt;/p&gt;</summary><content type="html">&lt;h2&gt;Overview&lt;/h2&gt;
 &lt;p&gt;I currently put my notes in a
 &lt;a href="https://zettelkasten.de/introduction/"&gt;Zettelkasten&lt;/a&gt; and currently have it in
 a private git repo.
@@ -10,7 +45,7 @@ What I found is that there are some notes that are more like Today I Learned
 &lt;a href="https://simonwillison.net/2022/Nov/6/what-to-blog-about/"&gt;Simon wrote an article&lt;/a&gt;
 about blogging and doing Today I Learned.
 My original thinking was that 9 times out of 10 I found out something by
-reading it from somewhere so why regurgitate?
+reading it from somewhere so why share as it is not new?
 Afterwards and also noticing others using social media for TIL, I realized that
 if I found something useful, others may find it useful.
 Also if the source of the information was so useful to me, then I should share
@@ -955,60 +990,4 @@ Ideally, use something like Cookiecutter to help create consistent projects.&lt;
 &lt;p&gt;I did recently finished &lt;a href="https://training.talkpython.fm/courses/modern-python-projects"&gt;Talk Python Modern Python Projects
 Course&lt;/a&gt; and will
 use what I learned to incorporate into my workflow.&lt;/p&gt;
-&lt;p&gt;The next article will be the initial setup of the project.&lt;/p&gt;</content><category term="Python"></category><category term="python"></category><category term="project"></category><category term="library"></category><category term="package"></category></entry><entry><title>Reuven Lerner's Weekly Python Exercise A3</title><link href="https://cetyler.github.io/reuven-lerners-weekly-python-exercise-a3.html" rel="alternate"></link><published>2022-01-14T00:00:00-06:00</published><updated>2022-01-14T00:00:00-06:00</updated><author><name>Christopher</name></author><id>tag:cetyler.github.io,2022-01-14:/reuven-lerners-weekly-python-exercise-a3.html</id><summary type="html">&lt;p&gt;Review of Reuven's Weekly Python Exercise A3.&lt;/p&gt;</summary><content type="html">&lt;h2&gt;Overview&lt;/h2&gt;
-&lt;p&gt;I recently completed Reuven Lerner's
-&lt;a href="https://store.lerner.co.il/wpe"&gt;Weekly Python Exercise&lt;/a&gt; A3 which focused on
-Object-oriented Python.
-I took this course around the same time as
-&lt;a href="https://cetyler.github.io/reuven-lerners-object-orient-python.html"&gt;Reuven's OOP self pace course&lt;/a&gt;.
-I wasn't sure which course would click more with me, so I took both.&lt;/p&gt;
-&lt;p&gt;Weekly Python Exercise (WPE) is a 15 week course where Reuven provides an
-exercise a week by email and provides the solution the following week.&lt;/p&gt;
-&lt;h2&gt;Course Topics&lt;/h2&gt;
-&lt;p&gt;Taken from Reuven's Overview:&lt;/p&gt;
-&lt;p&gt;WPE A3 covers object-oriented programming, for beginning Python developers.
-It'll cover:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Defining classes and instances&lt;/li&gt;
-&lt;li&gt;Defining methods&lt;/li&gt;
-&lt;li&gt;Composition of objects&lt;/li&gt;
-&lt;li&gt;Keeping track of shared state among instances&lt;/li&gt;
-&lt;li&gt;Inheritance&lt;/li&gt;
-&lt;li&gt;Basic "magic" methods, such as &lt;code&gt;__str__&lt;/code&gt; and &lt;code&gt;__len__&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;Class methods&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;I did not take A1 (basic data structures) or A2 (functions and modules).&lt;/p&gt;
-&lt;h2&gt;Impressions&lt;/h2&gt;
-&lt;p&gt;New exercises are posted on Tuesdays with the solutions on Monday.
-Reuven includes a &lt;code&gt;pytest&lt;/code&gt; file to check your work.
-The exercises build on each other and he uses 3 different things to build on
-(ex. homes in a neighborhood).
-In the exercises, he would also include links to more information that may help
-solve the problem.
-He also introduced type hints and &lt;code&gt;mypy&lt;/code&gt;.
-For me this was extremely helpful understanding how I could use &lt;code&gt;mypy&lt;/code&gt;
-initially to get some basic checks and &lt;code&gt;pytest&lt;/code&gt; to help round out testing.
-I was already using &lt;code&gt;pytest&lt;/code&gt; and &lt;code&gt;flake8&lt;/code&gt; but I never really used &lt;code&gt;mypy&lt;/code&gt;.&lt;/p&gt;
-&lt;p&gt;There is a forum where Reuven and the other students can use.
-There wasn't a ton of interaction with the other students though it was useful
-to see how they would solve the problem after I posted mine.
-Reuven would also post some suggestions or comments but the activity started to
-drop off after about 6-7 weeks.&lt;/p&gt;
-&lt;p&gt;The live office hours (through Zoom) I went to all but maybe one due to a
-scheduling conflict.
-Most of the time there were about an hour long based on whatever questions
-people emailed ahead a time or what was asked during the meeting.
-The meetings were helpful for the exercises but it was also helpful understand
-when to use type hints or how to think about using classes.&lt;/p&gt;
-&lt;h2&gt;Conclusion&lt;/h2&gt;
-&lt;p&gt;Overall I think it was a good beginner course on Object-orient programming
-using Python.
-For me it was a good value as I purchased the course through Humble Bundle
-Python Super Power Bundle.
-If I could only do one course, I would pick this over the self pace online
-course.
-Having the ability to talk with Reuven, how he included tests and type hints
-make this 15 week course a better value.
-However, I am glad that I had the opportunity to do both.
-Both courses have different styles which gave me a couple of different
-viewpoints.&lt;/p&gt;</content><category term="Python"></category><category term="training"></category><category term="Reuven Lerner"></category><category term="oop"></category><category term="python"></category><category term="review"></category></entry></feed>
+&lt;p&gt;The next article will be the initial setup of the project.&lt;/p&gt;</content><category term="Python"></category><category term="python"></category><category term="project"></category><category term="library"></category><category term="package"></category></entry></feed>
