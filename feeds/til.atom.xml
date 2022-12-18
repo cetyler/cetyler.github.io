@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Christopher Tyler R&amp;D Test Engineer - TIL</title><link href="https://cetyler.github.io/" rel="alternate"></link><link href="https://cetyler.github.io/feeds/til.atom.xml" rel="self"></link><id>https://cetyler.github.io/</id><updated>2021-12-16T18:00:00-06:00</updated><entry><title>Create Automatic Timestamps in PostgreSQL</title><link href="https://cetyler.github.io/create-automatic-timestamps-in-postgresql.html" rel="alternate"></link><published>2021-12-16T18:00:00-06:00</published><updated>2021-12-16T18:00:00-06:00</updated><author><name>Christopher</name></author><id>tag:cetyler.github.io,2021-12-16:/create-automatic-timestamps-in-postgresql.html</id><summary type="html">&lt;p&gt;Create automatic timestamps by default.&lt;/p&gt;</summary><content type="html">&lt;p&gt;Found this at
+&lt;a href="https://x-team.com/blog/automatic-timestamps-with-postgresql/"&gt;X-Team&lt;/a&gt;.&lt;/p&gt;
+&lt;h2&gt;Create Table with Default Timestamp&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;CREATE TABLE todos (
+ id SERIAL NOT NULL PRIMARY KEY,
+ content TEXT,
+ created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+ updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+ completed_at TIMESTAMPTZ
+);
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;In creating the &lt;code&gt;todos&lt;/code&gt; table, both &lt;code&gt;created_at&lt;/code&gt; and &lt;code&gt;updated_at&lt;/code&gt; will default
+with the current timestamp if one is not given.
+This is great for if you are adding items from a CSV and you want to know when
+the data is being created.&lt;/p&gt;
+&lt;h2&gt;Update Timestamp on Update&lt;/h2&gt;
+&lt;p&gt;The article also explains how to create a trigger function.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="n"&gt;CREATE&lt;/span&gt; &lt;span class="kr"&gt;OR&lt;/span&gt; &lt;span class="n"&gt;REPLACE&lt;/span&gt; &lt;span class="n"&gt;FUNCTION&lt;/span&gt; &lt;span class="n"&gt;trigger_set_timestamp&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;span class="n"&gt;RETURNS&lt;/span&gt; &lt;span class="n"&gt;TRIGGER&lt;/span&gt; &lt;span class="n"&gt;AS&lt;/span&gt; &lt;span class="o"&gt;$$&lt;/span&gt;
+&lt;span class="kr"&gt;BEGIN&lt;/span&gt;
+ &lt;span class="kr"&gt;NEW&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;updated_at&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;NOW&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
+ &lt;span class="kr"&gt;RETURN&lt;/span&gt; &lt;span class="kr"&gt;NEW&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="kr"&gt;END&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="o"&gt;$$&lt;/span&gt; &lt;span class="n"&gt;LANGUAGE&lt;/span&gt; &lt;span class="n"&gt;plpgsql&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;With this function, when can update a table and automatically update column
+&lt;code&gt;updated_at&lt;/code&gt; with the current timestamp.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="n"&gt;CREATE&lt;/span&gt; &lt;span class="n"&gt;TRIGGER&lt;/span&gt; &lt;span class="n"&gt;set_timestamp&lt;/span&gt;
+&lt;span class="n"&gt;BEFORE&lt;/span&gt; &lt;span class="n"&gt;UPDATE&lt;/span&gt; &lt;span class="n"&gt;ON&lt;/span&gt; &lt;span class="n"&gt;todos&lt;/span&gt;
+&lt;span class="kr"&gt;FOR&lt;/span&gt; &lt;span class="mh"&gt;EACH&lt;/span&gt; &lt;span class="n"&gt;ROW&lt;/span&gt;
+&lt;span class="n"&gt;EXECUTE&lt;/span&gt; &lt;span class="kr"&gt;PROCEDURE&lt;/span&gt; &lt;span class="n"&gt;trigger_set_timestamp&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;This will execute anytime a row is updated in &lt;code&gt;todos&lt;/code&gt;.&lt;/p&gt;</content><category term="TIL"></category><category term="til"></category><category term="postgresql"></category><category term="timestamp"></category><category term="function"></category></entry></feed>

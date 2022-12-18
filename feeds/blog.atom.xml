@@ -1,5 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Christopher Tyler R&amp;D Test Engineer - Blog</title><link href="https://cetyler.github.io/" rel="alternate"></link><link href="https://cetyler.github.io/feeds/blog.atom.xml" rel="self"></link><id>https://cetyler.github.io/</id><updated>2022-05-21T15:30:00-05:00</updated><entry><title>Fixed Broken Search</title><link href="https://cetyler.github.io/fixed-broken-search.html" rel="alternate"></link><published>2022-05-21T15:30:00-05:00</published><updated>2022-05-21T15:30:00-05:00</updated><author><name>Christopher</name></author><id>tag:cetyler.github.io,2022-05-21:/fixed-broken-search.html</id><summary type="html">&lt;p&gt;Misconfiguration caused the search on my website to be broken.&lt;/p&gt;</summary><content type="html">&lt;h2&gt;Overview&lt;/h2&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Christopher Tyler R&amp;D Test Engineer - Blog</title><link href="https://cetyler.github.io/" rel="alternate"></link><link href="https://cetyler.github.io/feeds/blog.atom.xml" rel="self"></link><id>https://cetyler.github.io/</id><updated>2022-12-16T17:00:00-06:00</updated><entry><title>TIL - Today I Learned</title><link href="https://cetyler.github.io/til-today-i-learned.html" rel="alternate"></link><published>2022-12-16T17:00:00-06:00</published><updated>2022-12-16T17:00:00-06:00</updated><author><name>Christopher</name></author><id>tag:cetyler.github.io,2022-12-16:/til-today-i-learned.html</id><summary type="html">&lt;p&gt;Start posting TIL to potentially help others as well as myself.&lt;/p&gt;</summary><content type="html">&lt;h2&gt;Overview&lt;/h2&gt;
+&lt;p&gt;I currently put my notes in a
+&lt;a href="https://zettelkasten.de/introduction/"&gt;Zettelkasten&lt;/a&gt; and currently have it in
+a private git repo.
+What I found is that there are some notes that are more like Today I Learned
+(TIL).&lt;/p&gt;
+&lt;h2&gt;Why Post TIL&lt;/h2&gt;
+&lt;p&gt;I originally heard on a podcast but
+&lt;a href="https://simonwillison.net/2022/Nov/6/what-to-blog-about/"&gt;Simon wrote an article&lt;/a&gt;
+about blogging and doing Today I Learned.
+My original thinking was that 9 times out of 10 I found out something by
+reading it from somewhere so why regurgitate?
+Afterwards and also noticing others using social media for TIL, I realized that
+if I found something useful, others may find it useful.
+Also if the source of the information was so useful to me, then I should share
+that with everyone else.&lt;/p&gt;
+&lt;h2&gt;Why Not Share My Zettelkasten&lt;/h2&gt;
+&lt;p&gt;I could just either share my private Zettelkasten or share a sanitized one.
+The method to created it I learned watching
+&lt;a href="https://www.youtube.com/watch?v=Rxgi12c3sEY"&gt;PyBites' video&lt;/a&gt;.
+Beyond the issue of making sure that I don't share something that I shouldn't
+or isn't useful, the main issue it would be in a git repo and not my blog.
+Also I already have over 200 personal notes using this method and I only
+started a couple of months ago.
+This to me would cause potentially more noise than I would like.&lt;/p&gt;
+&lt;p&gt;Simon has a &lt;a href="https://til.simonwillison.net/"&gt;good method&lt;/a&gt; but for now, I will
+just include them in my blog and create a separate category for them.
+Since my notes are in Markdown, I just need to add the header block to work
+with Pelican.&lt;/p&gt;
+&lt;h2&gt;Next Steps&lt;/h2&gt;
+&lt;p&gt;While I may have some TIL only on social media, I think my primary vehicle will
+be this site.
+I can use the search feature when I need to find my TIL and unlike my notes,
+can expand a little further on how the TIL helps me.&lt;/p&gt;</content><category term="Blog"></category><category term="til"></category><category term="zettelkasten"></category></entry><entry><title>Fixed Broken Search</title><link href="https://cetyler.github.io/fixed-broken-search.html" rel="alternate"></link><published>2022-05-21T15:30:00-05:00</published><updated>2022-05-21T15:30:00-05:00</updated><author><name>Christopher</name></author><id>tag:cetyler.github.io,2022-05-21:/fixed-broken-search.html</id><summary type="html">&lt;p&gt;Misconfiguration caused the search on my website to be broken.&lt;/p&gt;</summary><content type="html">&lt;h2&gt;Overview&lt;/h2&gt;
 &lt;p&gt;I noticed that the search on my website was broken when trying to search
 something.
 This article will go through what I did to correct the issue and to expand what

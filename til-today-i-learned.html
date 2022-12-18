@@ -9,18 +9,18 @@
         <meta property="og:type" content="article" />
         <meta name="twitter:card" content="summary">
 
-<meta name="keywords" content="python, project, Python, " />
+<meta name="keywords" content="til, zettelkasten, Blog, " />
 
-<meta property="og:title" content="Weather Project - PyPi "/>
-<meta property="og:url" content="https://cetyler.github.io/weather-project-pypi.html" />
-<meta property="og:description" content="Setup PyPi with an empty project to lock in the project name." />
+<meta property="og:title" content="TIL - Today I Learned "/>
+<meta property="og:url" content="https://cetyler.github.io/til-today-i-learned.html" />
+<meta property="og:description" content="Start posting TIL to potentially help others as well as myself." />
 <meta property="og:site_name" content="Christopher Tyler R&amp;D Test Engineer" />
 <meta property="og:article:author" content="Christopher" />
-<meta property="og:article:published_time" content="2022-08-11T20:00:00-05:00" />
-<meta name="twitter:title" content="Weather Project - PyPi ">
-<meta name="twitter:description" content="Setup PyPi with an empty project to lock in the project name.">
+<meta property="og:article:published_time" content="2022-12-16T17:00:00-06:00" />
+<meta name="twitter:title" content="TIL - Today I Learned ">
+<meta name="twitter:description" content="Start posting TIL to potentially help others as well as myself.">
 
-        <title>Weather Project - PyPi  · Christopher Tyler R&amp;D Test Engineer
+        <title>TIL - Today I Learned  · Christopher Tyler R&amp;D Test Engineer
 </title>
         <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet">
         <link rel="stylesheet" type="text/css" href="https://cetyler.github.io/theme/css/elegant.prod.css" media="screen">
@@ -68,8 +68,8 @@
 <div class="row-fluid">
     <header class="page-header span10 offset2">
         <h1>
-            <a href="https://cetyler.github.io/weather-project-pypi.html">
-                Weather Project - PyPi
+            <a href="https://cetyler.github.io/til-today-i-learned.html">
+                TIL - Today I Learned
             </a>
         </h1>
     </header>
@@ -79,94 +79,39 @@
         <div class="span8 offset2 article-content">
             
             <h2>Overview</h2>
-<p>From the <a href="https://cetyler.github.io/weather-project.html">previous article</a>,
-the Weather Project will be put on PyPi to help me understand that process and
-to also share with others.
-This article will go over how to put a skeleton project on PyPi.</p>
-<p><strong>Note</strong> prior to the completion of this article, I found 
-<a href="https://mathspp.com/blog/how-to-create-a-python-package-in-2022">Rodrigo's article</a>
-though keep in mind that his article is much more comprehensive.</p>
-<h2>Create PyPi Account</h2>
-<p>It is fairly straightforward to create an account.
-Go to https://pypi.org/account/register/ and follow the instructions.
-I would suggest adding at least two emails to your account in case something
-happens to one of your email accounts.
-I would also setup Two Factor Authentication (2FA).
-In order to push our packages to PyPi, create an API token.
-I put it in my password manage since I created one to use for all my packages
-in PyPi.</p>
-<p>You should do the same steps and create an account on https://test.pypi.org/.</p>
-<h2>Create Weather Package on PyPi</h2>
-<p>This may seem backwards, but it is easier to check if a name exists first as
-opposed to coming up with a name, creating a git project, then finding out that
-your name you selected is too similar to an existing project.
-I did a search to make sure that <code>openweather-report</code> was not in use though it
-took a couple of tries.
-I use <a href="https://github.com/pyenv/pyenv">pyenv</a> to set my Python version so I
-created a folder and set the version to 3.10.6 (current at the time of this
-article) as well as create my virtual environment.
-I created a project using <a href="https://www.python-poetry.org/">Poetry</a>.
-This will be an empty project just to lock in the package name.
-Add the API token for both PyPi and Test PyPi using:</p>
-<div class="highlight"><pre><span></span><code><span class="o">&gt;</span> <span class="n">poetry</span> <span class="n">new</span> <span class="n">openweather</span><span class="o">-</span><span class="n">report</span>
-<span class="o">&gt;</span> <span class="n">poetry</span> <span class="n">config</span> <span class="n">repositories</span><span class="p">.</span><span class="n">testpypi</span> <span class="nl">https</span><span class="p">:</span><span class="c1">//test.pypi.org/legacy/</span>
-<span class="o">&gt;</span> <span class="n">poetry</span> <span class="n">config</span> <span class="n">pypi</span><span class="o">-</span><span class="n">token</span><span class="p">.</span><span class="n">pypi</span> <span class="p">[</span><span class="n">API</span> <span class="n">KEY</span><span class="p">]</span>
-<span class="o">&gt;</span> <span class="n">poetry</span> <span class="n">config</span> <span class="n">http</span><span class="o">-</span><span class="n">basic</span><span class="p">.</span><span class="n">testpypi</span> <span class="p">[</span><span class="n">API</span> <span class="n">KEY</span><span class="p">]</span>
-<span class="o">&gt;</span> <span class="n">poetry</span> <span class="n">build</span>
-<span class="o">&gt;</span> <span class="n">poetry</span> <span class="n">publish</span> <span class="o">-</span><span class="n">r</span> <span class="n">testpypi</span>
-</code></pre></div>
-
-<p>If everything works, then the package name is unique enough and it now locked
-in.</p>
-<h2>Create Project on Github</h2>
-<p>Normally I use a private <a href="https://gitea.io/en-us/">Gitea</a> instance on my local
-network for personal projects and another one while I am work.
-Openweather-report I would like to share with others.
-While I have a <a href="https://about.gitlab.com/">Gitlab</a> account, most of the
-momentum is on <a href="https://github.com/">Github</a> so at least initially I was start
-there.
-Add a new repository called
-<a href="https://github.com/cetyler/openweather_report">openweather_report</a>.
-My goal is to use this project to try and understand some of the features that
-are Github provides.
-This project is going to be more than just a toy project but this project won't
-be overly complicated.
-There is enough to the project that I can learn how to use <a href="https://github.com/features/actions">Github
-Actions</a> for example.</p>
-<h2>Git Flow</h2>
-<p>Prior to pushing my project to Github, I use 
-<a href="https://github.com/petervanderdoes/gitflow-avh/">Git Flow</a> but I plan on using
-it differently than I have in the past.
-This project will have the following branches:</p>
-<ul>
-<li>main<ul>
-<li>This branch will be considered the stable branch.</li>
-</ul>
-</li>
-<li>develop<ul>
-<li>This will be the latest branch.</li>
-<li>Should generally be working but due to frequent additions of features, it
-  can be unstable at times.</li>
-</ul>
-</li>
-<li>feature<ul>
-<li>Any feature to add to develop branch.</li>
-<li>This will be a short running branch no more than a couple of days.</li>
-</ul>
-</li>
-<li>bug<ul>
-<li>This can be off either main or develop</li>
-</ul>
-</li>
-</ul>
-<p>I also plan on doing pull requests instead of just branching from my local git
-repository.
-This may remove the need to use Git Flow.</p>
+<p>I currently put my notes in a
+<a href="https://zettelkasten.de/introduction/">Zettelkasten</a> and currently have it in
+a private git repo.
+What I found is that there are some notes that are more like Today I Learned
+(TIL).</p>
+<h2>Why Post TIL</h2>
+<p>I originally heard on a podcast but
+<a href="https://simonwillison.net/2022/Nov/6/what-to-blog-about/">Simon wrote an article</a>
+about blogging and doing Today I Learned.
+My original thinking was that 9 times out of 10 I found out something by
+reading it from somewhere so why regurgitate?
+Afterwards and also noticing others using social media for TIL, I realized that
+if I found something useful, others may find it useful.
+Also if the source of the information was so useful to me, then I should share
+that with everyone else.</p>
+<h2>Why Not Share My Zettelkasten</h2>
+<p>I could just either share my private Zettelkasten or share a sanitized one.
+The method to created it I learned watching
+<a href="https://www.youtube.com/watch?v=Rxgi12c3sEY">PyBites' video</a>.
+Beyond the issue of making sure that I don't share something that I shouldn't
+or isn't useful, the main issue it would be in a git repo and not my blog.
+Also I already have over 200 personal notes using this method and I only
+started a couple of months ago.
+This to me would cause potentially more noise than I would like.</p>
+<p>Simon has a <a href="https://til.simonwillison.net/">good method</a> but for now, I will
+just include them in my blog and create a separate category for them.
+Since my notes are in Markdown, I just need to add the header block to work
+with Pelican.</p>
 <h2>Next Steps</h2>
-<p>I now have PyPi set up and my project on PyPi and on Github.
-The goal is the next release will be a functional release.
-The next article will be to start working on the requirements and create a
-Roadmap.</p>
+<p>While I may have some TIL only on social media, I think my primary vehicle will
+be this site.
+I can use the search feature when I need to find my TIL and unlike my notes,
+can expand a little further on how the TIL helps me.</p>
 
 
              
@@ -190,7 +135,7 @@ Roadmap.</p>
                 <a class="accordion-toggle disqus-comment-count comment-count"
                    data-toggle="collapse"
                    data-parent="#accordion2"
-                   href="https://cetyler.github.io/weather-project-pypi.html#comment_thread"
+                   href="https://cetyler.github.io/til-today-i-learned.html#comment_thread"
                    id="comment-accordion-toggle">
                     Comments
                 </a>
@@ -201,7 +146,7 @@ Roadmap.</p>
 
                         <script src="https://utteranc.es/client.js"
         data-repo="cetyler/cetyler.github.io"
-        data-issue-term="https://cetyler.github.io/weather-project-pypi.html"
+        data-issue-term="til"
         data-label="Comments"
         data-theme="github-light"
         crossorigin="anonymous"
@@ -219,28 +164,16 @@ Roadmap.</p>
         </div>
         <section id="article-sidebar" class="span2">
             <h4>Published</h4>
-            <time itemprop="dateCreated" datetime="2022-08-11T20:00:00-05:00">Aug 11, 2022</time>
-        <h4>More in This Series</h4>
-    <ul class="multi-parts-list">
-            <li >
-            <a href="https://cetyler.github.io/weather-project.html" title="Weather Project">Part 1: Weather Project</a>
-            </li>
-            <li  class="active-part">
-            Part 2: Weather Project - PyPi
-            </li>
-            <li >
-            <a href="https://cetyler.github.io/weather-project-requirements-and-roadmap.html" title="Weather Project - Requirements and Roadmap">Part 3: Weather Project - Requirements and Roadmap</a>
-            </li>
-    </ul>
+            <time itemprop="dateCreated" datetime="2022-12-16T17:00:00-06:00">Dec 16, 2022</time>
             <h4>Category</h4>
-            <a class="category-link" href="https://cetyler.github.io/categories.html#python-ref">Python</a>
+            <a class="category-link" href="https://cetyler.github.io/categories.html#blog-ref">Blog</a>
             <h4>Tags</h4>
             <ul class="list-of-tags tags-in-article">
-                <li><a href="https://cetyler.github.io/tags.html#project-ref">project
-                    <span>11</span>
+                <li><a href="https://cetyler.github.io/tags.html#til-ref">til
+                    <span>2</span>
 </a></li>
-                <li><a href="https://cetyler.github.io/tags.html#python-ref">python
-                    <span>19</span>
+                <li><a href="https://cetyler.github.io/tags.html#zettelkasten-ref">zettelkasten
+                    <span>1</span>
 </a></li>
             </ul>
 <h4>Contact</h4>
