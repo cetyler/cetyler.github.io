@@ -1,5 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Christopher Tyler R&amp;D Test Engineer</title><link href="https://cetyler.github.io/" rel="alternate"></link><link href="https://cetyler.github.io/feeds/all.atom.xml" rel="self"></link><id>https://cetyler.github.io/</id><updated>2022-12-16T18:00:00-06:00</updated><entry><title>Create Automatic Timestamps in PostgreSQL</title><link href="https://cetyler.github.io/create-automatic-timestamps-in-postgresql.html" rel="alternate"></link><published>2022-12-16T18:00:00-06:00</published><updated>2022-12-16T18:00:00-06:00</updated><author><name>Christopher</name></author><id>tag:cetyler.github.io,2022-12-16:/create-automatic-timestamps-in-postgresql.html</id><summary type="html">&lt;p&gt;Create automatic timestamps by default.&lt;/p&gt;</summary><content type="html">&lt;p&gt;Found this at
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Christopher Tyler R&amp;D Test Engineer</title><link href="https://cetyler.github.io/" rel="alternate"></link><link href="https://cetyler.github.io/feeds/all.atom.xml" rel="self"></link><id>https://cetyler.github.io/</id><updated>2022-12-19T17:00:00-06:00</updated><entry><title>Include Schema in psycopg2 Connection String</title><link href="https://cetyler.github.io/include-schema-in-psycopg2-connection-string.html" rel="alternate"></link><published>2022-12-19T17:00:00-06:00</published><updated>2022-12-19T17:00:00-06:00</updated><author><name>Christopher</name></author><id>tag:cetyler.github.io,2022-12-19:/include-schema-in-psycopg2-connection-string.html</id><summary type="html">&lt;p&gt;Include schema in PostgreSQL connection string.&lt;/p&gt;</summary><content type="html">&lt;p&gt;Info from
+https://stackoverflow.com/questions/59298580/how-to-specify-schema-in-psycopg2-connection-method&lt;/p&gt;
+&lt;p&gt;If you are using the string form you need to URL escape the options argument:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="nl"&gt;postgresql&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="o"&gt;//&lt;/span&gt;&lt;span class="k"&gt;user&lt;/span&gt;&lt;span class="err"&gt;:&lt;/span&gt;&lt;span class="n"&gt;password&lt;/span&gt;&lt;span class="nv"&gt;@localhost&lt;/span&gt;&lt;span class="err"&gt;:&lt;/span&gt;&lt;span class="mi"&gt;5432&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;database_name&lt;/span&gt;&lt;span class="vm"&gt;?&lt;/span&gt;&lt;span class="n"&gt;options&lt;/span&gt;&lt;span class="o"&gt;=-&lt;/span&gt;&lt;span class="n"&gt;csearch_path&lt;/span&gt;&lt;span class="o"&gt;%&lt;/span&gt;&lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="n"&gt;Ddbo&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="k"&gt;public&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;This will connect to &lt;code&gt;localhost&lt;/code&gt; to database &lt;code&gt;database_name&lt;/code&gt; with &lt;code&gt;public&lt;/code&gt;
+schema.
+This can be useful to include the schema to reduce adding the schema to each
+query.
+For my use case, I am going through
+&lt;a href="https://theartofpostgresql.com/"&gt;The Art of PostgreSQL&lt;/a&gt; and I want to put the
+training data in a schema &lt;code&gt;taop&lt;/code&gt;.
+Instead of updating each Python file for each query, I can just update the
+connection string.&lt;/p&gt;</content><category term="TIL"></category><category term="til"></category><category term="postgresql"></category><category term="psycopg2"></category><category term="sqlalchemy"></category></entry><entry><title>Create Automatic Timestamps in PostgreSQL</title><link href="https://cetyler.github.io/create-automatic-timestamps-in-postgresql.html" rel="alternate"></link><published>2022-12-16T18:00:00-06:00</published><updated>2022-12-16T18:00:00-06:00</updated><author><name>Christopher</name></author><id>tag:cetyler.github.io,2022-12-16:/create-automatic-timestamps-in-postgresql.html</id><summary type="html">&lt;p&gt;Create automatic timestamps by default.&lt;/p&gt;</summary><content type="html">&lt;p&gt;Found this at
 &lt;a href="https://x-team.com/blog/automatic-timestamps-with-postgresql/"&gt;X-Team&lt;/a&gt;.&lt;/p&gt;
 &lt;h2&gt;Create Table with Default Timestamp&lt;/h2&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;CREATE TABLE todos (
@@ -955,39 +969,4 @@ compatible features and backwards compatible bug fixes.&lt;/p&gt;
 good start to the project.&lt;/p&gt;
 &lt;p&gt;The next article will go through the process of creating User Requirements.
 Then based on the User Requirements, create Design Requirements and a simple
-Roadmap.&lt;/p&gt;</content><category term="Python"></category><category term="python"></category><category term="project"></category><category term="library"></category><category term="package"></category></entry><entry><title>Calculator Project</title><link href="https://cetyler.github.io/calculator-project.html" rel="alternate"></link><published>2022-01-15T16:30:00-06:00</published><updated>2022-01-15T16:30:00-06:00</updated><author><name>Christopher</name></author><id>tag:cetyler.github.io,2022-01-15:/calculator-project.html</id><summary type="html">&lt;p&gt;Use a simple calculator project to document my Python workflow.&lt;/p&gt;</summary><content type="html">&lt;h2&gt;Overview&lt;/h2&gt;
-&lt;p&gt;I was reviewing how I currently create my Python projects and libraries and
-realized that I need to clean up my process.
-The plan to create a simple calculator project.
-This project can be used as both a project and a standalone program.&lt;/p&gt;
-&lt;h2&gt;Roadmap&lt;/h2&gt;
-&lt;p&gt;There will be two paths; working on the calculator itself and creating a
-workflow.&lt;/p&gt;
-&lt;h3&gt;Calculator&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;Create User Requirements.&lt;/li&gt;
-&lt;li&gt;Create Design Requirements.&lt;/li&gt;
-&lt;li&gt;Create README.&lt;/li&gt;
-&lt;li&gt;Create Roadmap.&lt;/li&gt;
-&lt;li&gt;Create tests.&lt;/li&gt;
-&lt;li&gt;Create initial release.&lt;/li&gt;
-&lt;li&gt;Finish roadmap.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3&gt;Workflow&lt;/h3&gt;
-&lt;p&gt;Pretty much document every part while creating the calculator project.
-In addition, will also do the following:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Document what is the minimum required for documentation.&lt;/li&gt;
-&lt;li&gt;Document the process to setup the project.&lt;/li&gt;
-&lt;li&gt;Document what is the minimum required for testing.&lt;/li&gt;
-&lt;li&gt;Document add the Python package to PyPi.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2&gt;Next Steps&lt;/h2&gt;
-&lt;p&gt;The plan is to do a series of articles going through the my proposed roadmap.
-The goal is to use a simple project to help create a consistent workflow that I
-can use for my personal and professional projects.
-Ideally, use something like Cookiecutter to help create consistent projects.&lt;/p&gt;
-&lt;p&gt;I did recently finished &lt;a href="https://training.talkpython.fm/courses/modern-python-projects"&gt;Talk Python Modern Python Projects
-Course&lt;/a&gt; and will
-use what I learned to incorporate into my workflow.&lt;/p&gt;
-&lt;p&gt;The next article will be the initial setup of the project.&lt;/p&gt;</content><category term="Python"></category><category term="python"></category><category term="project"></category><category term="library"></category><category term="package"></category></entry></feed>
+Roadmap.&lt;/p&gt;</content><category term="Python"></category><category term="python"></category><category term="project"></category><category term="library"></category><category term="package"></category></entry></feed>

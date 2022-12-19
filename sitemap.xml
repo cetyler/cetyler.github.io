@@ -5,56 +5,56 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>https://cetyler.github.io/search.html</loc>
-<lastmod>2022-12-18T16:44:47-00:00</lastmod>
+<lastmod>2022-12-19T07:11:35-00:00</lastmod>
 <changefreq>hourly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>https://cetyler.github.io/</loc>
-<lastmod>2022-12-18T16:44:47-00:00</lastmod>
+<lastmod>2022-12-19T07:11:35-00:00</lastmod>
 <changefreq>hourly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>https://cetyler.github.io/archives.html</loc>
-<lastmod>2022-12-18T16:44:47-00:00</lastmod>
+<lastmod>2022-12-19T07:11:35-00:00</lastmod>
 <changefreq>hourly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>https://cetyler.github.io/authors.html</loc>
-<lastmod>2022-12-18T16:44:47-00:00</lastmod>
+<lastmod>2022-12-19T07:11:35-00:00</lastmod>
 <changefreq>hourly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>https://cetyler.github.io/tags.html</loc>
-<lastmod>2022-12-18T16:44:47-00:00</lastmod>
+<lastmod>2022-12-19T07:11:35-00:00</lastmod>
 <changefreq>hourly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>https://cetyler.github.io/categories.html</loc>
-<lastmod>2022-12-18T16:44:47-00:00</lastmod>
+<lastmod>2022-12-19T07:11:35-00:00</lastmod>
 <changefreq>hourly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>https://cetyler.github.io/404.html</loc>
-<lastmod>2022-12-18T16:44:47-00:00</lastmod>
+<lastmod>2022-12-19T07:11:35-00:00</lastmod>
 <changefreq>hourly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>https://cetyler.github.io/pages/about-me.html</loc>
-<lastmod>2022-12-18T16:44:47-00:00</lastmod>
+<lastmod>2022-12-19T07:11:35-00:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
@@ -68,9 +68,16 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>https://cetyler.github.io/pages/my-resume.html</loc>
-<lastmod>2022-12-18T16:44:47-00:00</lastmod>
+<lastmod>2022-12-19T07:11:35-00:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
+</url>
+
+<url>
+<loc>https://cetyler.github.io/include-schema-in-psycopg2-connection-string.html</loc>
+<lastmod>2022-12-19T17:00:00-06:00</lastmod>
+<changefreq>always</changefreq>
+<priority>1</priority>
 </url>
 
 <url>
@@ -278,7 +285,7 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>https://cetyler.github.io/category/til.html</loc>
-<lastmod>2022-12-16T18:00:00-05:51</lastmod>
+<lastmod>2022-12-19T17:00:00-05:51</lastmod>
 <changefreq>hourly</changefreq>
 <priority>0.5</priority>
 </url>
@@ -292,14 +299,28 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>https://cetyler.github.io/tag/til.html</loc>
-<lastmod>2022-12-16T18:00:00-05:51</lastmod>
+<lastmod>2022-12-19T17:00:00-05:51</lastmod>
 <changefreq>hourly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>https://cetyler.github.io/tag/postgresql.html</loc>
-<lastmod>2022-12-16T18:00:00-05:51</lastmod>
+<lastmod>2022-12-19T17:00:00-05:51</lastmod>
+<changefreq>hourly</changefreq>
+<priority>0.5</priority>
+</url>
+
+<url>
+<loc>https://cetyler.github.io/tag/psycopg2.html</loc>
+<lastmod>2022-12-19T17:00:00-05:51</lastmod>
+<changefreq>hourly</changefreq>
+<priority>0.5</priority>
+</url>
+
+<url>
+<loc>https://cetyler.github.io/tag/sqlalchemy.html</loc>
+<lastmod>2022-12-19T17:00:00-05:51</lastmod>
 <changefreq>hourly</changefreq>
 <priority>0.5</priority>
 </url>
@@ -607,7 +628,7 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>https://cetyler.github.io/author/christopher.html</loc>
-<lastmod>2022-12-16T18:00:00-05:51</lastmod>
+<lastmod>2022-12-19T17:00:00-05:51</lastmod>
 <changefreq>hourly</changefreq>
 <priority>0.5</priority>
 </url>

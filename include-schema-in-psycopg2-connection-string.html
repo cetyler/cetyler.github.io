@@ -9,18 +9,18 @@
         <meta property="og:type" content="article" />
         <meta name="twitter:card" content="summary">
 
-<meta name="keywords" content="sql, pandas, python, postgresql, Blog, " />
+<meta name="keywords" content="til, postgresql, psycopg2, sqlalchemy, TIL, " />
 
-<meta property="og:title" content="Practical SQL for Data Analysis "/>
-<meta property="og:url" content="https://cetyler.github.io/practical-sql-for-data-analysis.html" />
-<meta property="og:description" content="Great article from Haki Benita on SQL and Pandas." />
+<meta property="og:title" content="Include Schema in psycopg2 Connection String "/>
+<meta property="og:url" content="https://cetyler.github.io/include-schema-in-psycopg2-connection-string.html" />
+<meta property="og:description" content="Include schema in PostgreSQL connection string." />
 <meta property="og:site_name" content="Christopher Tyler R&amp;D Test Engineer" />
 <meta property="og:article:author" content="Christopher" />
-<meta property="og:article:published_time" content="2021-06-13T20:30:00-05:00" />
-<meta name="twitter:title" content="Practical SQL for Data Analysis ">
-<meta name="twitter:description" content="Great article from Haki Benita on SQL and Pandas.">
+<meta property="og:article:published_time" content="2022-12-19T17:00:00-06:00" />
+<meta name="twitter:title" content="Include Schema in psycopg2 Connection String ">
+<meta name="twitter:description" content="Include schema in PostgreSQL connection string.">
 
-        <title>Practical SQL for Data Analysis  · Christopher Tyler R&amp;D Test Engineer
+        <title>Include Schema in psycopg2 Connection String  · Christopher Tyler R&amp;D Test Engineer
 </title>
         <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet">
         <link rel="stylesheet" type="text/css" href="https://cetyler.github.io/theme/css/elegant.prod.css" media="screen">
@@ -68,8 +68,8 @@
 <div class="row-fluid">
     <header class="page-header span10 offset2">
         <h1>
-            <a href="https://cetyler.github.io/practical-sql-for-data-analysis.html">
-                Practical SQL for Data Analysis
+            <a href="https://cetyler.github.io/include-schema-in-psycopg2-connection-string.html">
+                Include Schema in psycopg2 Connection String
             </a>
         </h1>
     </header>
@@ -78,139 +78,21 @@
 <div class="row-fluid">
         <div class="span8 offset2 article-content">
             
-            <p><a href="https://hakibenita.com/sql-for-data-analysis">Haki's article</a> showcase how it
-can be better to use SQL instead of just pandas.
-This post will not go through all the great examples but will expand on why you
-should go read his article.
-While his examples are using PostgreSQL, the benefits are true for other
-databases.</p>
-<h2>Let the Database do the Work</h2>
-<p>For example at work I have a VM with PostgreSQL installed.
-I use that to help understand how databases work and as an interim while I
-understand how to create Python programs to interact with MS SQL Server.
-My company have MS SQL Server on a proper commercial grade server hardware.</p>
-<p>Loading your data into pandas first for simple exploratory data analysis (EDA)
-can usually be faster than doing a series of SQL queries.
-Keep in mind I don't mean faster as in CPU cycles but human cycles.
-It starts to get problematic when the data starts getting large enough that you
-may not have enough memory to load it or manipulate it.</p>
-<p>If you can off load some of the work to your database server, then you won't
-need to worry as much for how much memory on your computer and it will actually 
-be faster.
-Also you can still use pandas but do some of the transforming of the data in the
-SQL query first before loading into pandas.</p>
-<p>For work, I had to look at data from the past year.
-This data would require joining two tables, looking for failures for a certain
-test and getting some stats (min, max, average, standard deviation, etc.).
-Normally I would just use pandas but it would be too large with roughly a few
-million rows of data with about 10 columns.
-Instead I did everything with a SQL query and the only table I loaded into
-pandas was my stats which was about 40 rows and 5 columns of data.
-This was pretty quick using my PostgreSQL database on my VM but it was much
-faster on using my company's MS SQL Server database on a proper server.
-If I didn't use a database, I would have had to use some sort of batching
-method.</p>
-<h2>When Raw Data is NOT in a Database</h2>
-<p>While my home projects I tend to put my continuous data into PostgreSQL, at work
-I don't have that luxury.
-While at work we do have data in MS SQL Server, a lot of the tester data is in
-MS Access, yuck!
-I also get data in Excel spreadsheets, csv and NI tdms files.
-Pandas support all the formats I mentioned above and then some.
-Again if you are not talking about a lot of data, just load it directly into
-pandas.</p>
-<p>However if you have a large csv file or an Excel spreadsheet that have many tabs
-of data that are related to each other, put it in a database instead.
-I personally have a Python program that will batch through my raw data and put
-either in a PostgreSQL or SQLite database.
-Now I analyze the data easier.</p>
-<p>For example, due to the limitation in MS Access every year we start with an
-empty MS Access file and archive the previous' year's data.
-Normally I don't need to look at data from more than a few months but we had an
-issue that we didn't know how far back it went.
-I had to look at the last 5 year's worth of data.
-I could have batch in the data using pandas and did my analysis.
-There are a couple of problems with that:</p>
-<ol>
-<li>Loading data directly from MS Access into a pandas DataFrame is slow.</li>
-<li>I could only load about 3-4 months worth of data at a time due to memory
-   constraints.</li>
-<li>While I could load a subset of data and do some EDA, I didn't know what I was
-   looking for and the size of my subset will still be too large to load at
-   once.</li>
-<li>As I was finding out more information, I would get different requests which
-   means I would have to do 1. each time someone would make a different request.</li>
-</ol>
-<p>I decided early on that I would load all the data into SQLite database with the
-tables denoted by year (this was due to the data structure not being the same
-over the years).
-This decision greatly reduced the wait time to load in the data as I took away
-the long MS Access load time.
-SQLite is much fast to load data into a pandas DataFrame.
-Also I could use my SQL query to reduce the data further and only use pandas for
-the more complicated analysis.</p>
-<p>That lesson informed me to start loading data into my PostgreSQL database for
-the production lines that get requested the most.
-Now I can respond to a request quicker because I already have the data ready to
-go.</p>
-<h2>Interim Data</h2>
-<p>The nice thing about using a database, it doesn't just need to hold your raw
-data.
-For work I am in the process how migrating away from reading and saving data to
-SQLite.
-The problem is that each of my programs would have its own data saved in a
-unique SQLite files that was not shared.
-So if I was doing a project using Jupyter Notebooks, each project would have
-raw, interim and processed data.
-Instead putting my data into either PostgreSQL or MS SQL Server, it is in one
-centralize location.</p>
-<p>For example, I put the most requested production line's MS Access data into
-PostgreSQL.
-I recently got a request to see if the change we made in a part of the
-production process and did it reduce the failure rate of a particular test.
-My raw data is already in PostgreSQL.
-I needed to transform and process the data.
-My SQL query that I loaded into my Jupyter Notebook, I did the following:</p>
-<ol>
-<li>Rename the columns.</li>
-<li>Made sure that my alphanumeric serial numbers were all in upper case.</li>
-<li>Combine the date and time columns into a timestamp column and converted that
-   into EPOCH.</li>
-<li>Only include the tests that were affected.</li>
-<li>Only include the data between certain dates prior and after the change in the
-   process occurred.</li>
-</ol>
-<p>I then saved this data on PostgreSQL and named the database the same of my
-Jupyter Notebook project so I could refer to the data later.
-After I did my EDA, I knew what I wanted to share with the team.
-Normally I would just dump the tables into Excel and share that but this had to
-be more of a presentation.
-I decided to save those tables into my project's database.
-Finally I created a Jupyter Notebook that would look nice as a presentation and
-merely loaded the tables in, added some explanation and displayed the results.</p>
-<p>The added bonus with this process is that data is there for my other projects to
-get to easily.
-When that data gets stale, I just dump it.
-The alternative to not using databases would be to save your processed and
-interim data in a csv, HDF5, pickle, etc. which each of them have distinct
-disadvantages.</p>
-<h2>Conclusion</h2>
-<p>Originally I thought I was going to show some examples but I decided that one
-article won't be enough.
-Using pandas can be very useful as long as you understand that you will be
-memory constraint and it may not be as fast as SQL queries.
-The added benefit on using SQL earlier in your analysis is that if you know that
-you will be eventually be dealing with larger datasets, using SQL queries won't
-change your method.
-Using pandas and knowing that you will have to find different ways to fit your
-data in memory means that you will need to optimize as you go.</p>
-<p>I tend to use both pandas and SQL so that I leverage what both does best.
-I plan to write additional articles highlighting what I learned from Haki's
-article but with actual data.
-Also it will be less of a you should use SQL or pandas but more of this is how
-you can do it in either language with some explanation when it could be better
-to use one or another.</p>
-<p>Now go read <a href="https://hakibenita.com/sql-for-data-analysis">Haki's article</a>!</p>
+            <p>Info from
+https://stackoverflow.com/questions/59298580/how-to-specify-schema-in-psycopg2-connection-method</p>
+<p>If you are using the string form you need to URL escape the options argument:</p>
+<div class="highlight"><pre><span></span><code><span class="nl">postgresql</span><span class="p">:</span><span class="o">//</span><span class="k">user</span><span class="err">:</span><span class="n">password</span><span class="nv">@localhost</span><span class="err">:</span><span class="mi">5432</span><span class="o">/</span><span class="n">database_name</span><span class="vm">?</span><span class="n">options</span><span class="o">=-</span><span class="n">csearch_path</span><span class="o">%</span><span class="mi">3</span><span class="n">Ddbo</span><span class="p">,</span><span class="k">public</span><span class="w"></span>
+</code></pre></div>
+
+<p>This will connect to <code>localhost</code> to database <code>database_name</code> with <code>public</code>
+schema.
+This can be useful to include the schema to reduce adding the schema to each
+query.
+For my use case, I am going through
+<a href="https://theartofpostgresql.com/">The Art of PostgreSQL</a> and I want to put the
+training data in a schema <code>taop</code>.
+Instead of updating each Python file for each query, I can just update the
+connection string.</p>
 
 
              
@@ -234,7 +116,7 @@ to use one or another.</p>
                 <a class="accordion-toggle disqus-comment-count comment-count"
                    data-toggle="collapse"
                    data-parent="#accordion2"
-                   href="https://cetyler.github.io/practical-sql-for-data-analysis.html#comment_thread"
+                   href="https://cetyler.github.io/include-schema-in-psycopg2-connection-string.html#comment_thread"
                    id="comment-accordion-toggle">
                     Comments
                 </a>
@@ -245,7 +127,7 @@ to use one or another.</p>
 
                         <script src="https://utteranc.es/client.js"
         data-repo="cetyler/cetyler.github.io"
-        data-issue-term="practical-sql-data-analysis"
+        data-issue-term="til_202212_schema"
         data-label="Comments"
         data-theme="github-light"
         crossorigin="anonymous"
@@ -263,22 +145,22 @@ to use one or another.</p>
         </div>
         <section id="article-sidebar" class="span2">
             <h4>Published</h4>
-            <time itemprop="dateCreated" datetime="2021-06-13T20:30:00-05:00">Jun 13, 2021</time>
+            <time itemprop="dateCreated" datetime="2022-12-19T17:00:00-06:00">Dec 19, 2022</time>
             <h4>Category</h4>
-            <a class="category-link" href="https://cetyler.github.io/categories.html#blog-ref">Blog</a>
+            <a class="category-link" href="https://cetyler.github.io/categories.html#til-ref">TIL</a>
             <h4>Tags</h4>
             <ul class="list-of-tags tags-in-article">
-                <li><a href="https://cetyler.github.io/tags.html#pandas-ref">pandas
-                    <span>1</span>
-</a></li>
                 <li><a href="https://cetyler.github.io/tags.html#postgresql-ref">postgresql
                     <span>3</span>
 </a></li>
-                <li><a href="https://cetyler.github.io/tags.html#python-ref">python
-                    <span>19</span>
+                <li><a href="https://cetyler.github.io/tags.html#psycopg2-ref">psycopg2
+                    <span>1</span>
 </a></li>
-                <li><a href="https://cetyler.github.io/tags.html#sql-ref">sql
-                    <span>2</span>
+                <li><a href="https://cetyler.github.io/tags.html#sqlalchemy-ref">sqlalchemy
+                    <span>1</span>
+</a></li>
+                <li><a href="https://cetyler.github.io/tags.html#til-ref">til
+                    <span>3</span>
 </a></li>
             </ul>
 <h4>Contact</h4>
