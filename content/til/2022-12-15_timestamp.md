@@ -5,7 +5,7 @@ Tags: til, postgresql, timestamp, function
 Author: Christopher
 Summary: Create automatic timestamps by default.
 Status: published
-comment_id: til
+comment_id: til_202212_timstamps
 
 Found this at
 [X-Team](https://x-team.com/blog/automatic-timestamps-with-postgresql/).
