@@ -10,5 +10,5 @@ Do `pip install -r requirements.txt.`
 ## To Publish
 
 Will publish to output folder.
-Use `make github` to publish to Github (origin repo is Github pages).
+Use `make github` to publish to Github (github repo is Github pages).
 

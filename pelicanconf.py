@@ -24,27 +24,27 @@ PLUGINS = [
     "i18n_subsites",
     "sitemap",
     nb_markup,
-    'tipue_search',
-    'series',
+    "tipue_search",
+    "series",
 ]
 
 DIRECT_TEMPLATES = [
-        'search', 
-        'index', 
-        'archives',
-        'authors',
-        #'feeds',
-        #'sitemap',
-        'tags',
-        'categories',
-        #'archives',
-        '404',
-        ]
+    "search",
+    "index",
+    "archives",
+    "authors",
+    #'feeds',
+    #'sitemap',
+    "tags",
+    "categories",
+    #'archives',
+    "404",
+]
 
 BIND = ""
 
 # Feed generation is usually not desired when developing
-FEED_ALL_ATOM = None #'feeds/all.atom.xml'
+FEED_ALL_ATOM = None  #'feeds/all.atom.xml'
 CATEGORY_FEED_ATOM = None
 TRANSLATION_FEED_ATOM = None
 AUTHOR_FEED_ATOM = None
@@ -109,6 +109,8 @@ STATIC_PATHS = ["extra/robots.txt"]
 EXTRA_PATH_METADATA = {"extra/robots.txt": {"path": "output/robots.txt"}}
 
 SERIES_TITLE = "More in This Series"
+
+WITH_FUTURE_DATES = False
 
 # Legal
 SITE_LICENSE = f"""

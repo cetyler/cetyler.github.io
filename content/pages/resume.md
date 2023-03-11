@@ -12,24 +12,17 @@ Six Sigma trained and well-versed in UL, ISO 17025 and ISO 9001:2001.
 ### Core Competences
 
 - Identifies and streamlines procedures and processes
-
 - Analyzes firmware source code to create robust test plans
-
 - Improving team performs through superior training and mentoring
 
 ### Technical Skills
   
 - Operating Systems: Microsoft Windows, Linux, UNIX
-
 - Software: Microsoft Office, Project Link
-
-- Computer Languages: C/C++, Visual Basic, LATEX, Python, Labview
-
+- Computer Languages: Python, Labview
 - Engineering Software: BqStudio, Roadrunner, BenchVue, PLC Directsoft
-
 - Equipment: Picoscope, MACCOR, GW Instek Programmable Load, Chamber with Watlow
   Controller
-
 - Machinery: Basic use of standard powered shop tools
 
 ## Experience
@@ -39,6 +32,23 @@ Six Sigma trained and well-versed in UL, ISO 17025 and ISO 9001:2001.
 #### Dynamic Manufacturing
 
 Nov 2018 - Present
+Hillside, IL
+
+Dynamic Manufacturing is a premier supplier of world class OEM new and
+remanufactured Drivetrain components serving the OE Automotive Industry.
+
+Create dashboards and tools to enhance cross-functional teams throughout
+Dynamic.
+Perform analysis to help reduce cost, increase performance and improve yields.
+Internal auditor to ensure compliance to IATF16949:2016.
+
+- Design, implement daily/weekly/monthly Production line status reports by
+  email to provide summaries to Plant Managers, Quality and Engineering using
+  Python and PostgreSQL.
+- Design, implement interactive Dashboards for team members to get Production
+  line status, Root Cause, etc.
+- Perform ad-hoc data analysis for Quality, Production and Engineering using
+  Python, PostgreSQL and Excel.
 
 ### R&D Test Engineer
 
@@ -58,25 +68,16 @@ Internal auditor to ensure compliance to ISO 9001 and ISO 14001.
 
 - Interpreted customer product specifications to create robust qualification and 
   manufacturing test plans
-
 - Test lead for major projects, testing, creating reports
-
 - Created highly detailed reports (500+ pages)
-
 - Customer facing providing project status updates to internal and external 
   customers
-
 - Managed tests done at internal (USA, China) and external labs (Elite, NTS, ESI)
-
 - Specialized in firmware testing server battery packs
-
 - Updated NI DAQ by expanding number of channels from 12 to 64 and adjust scan
   rate
-
 - Used Python to reduce data manipulation of MACCOR and DAQ data by 70%
-
 - Performed MIL-STD 461 and MIL-STD 810G
-
 - Internal Auditor to ISO 9001 & ISO 14001
 
 ### R&D Test Engineer
@@ -105,24 +106,17 @@ results.
 
 - Test Lead for projects (Smoothie, Frozen Carbonated Beverage, Sustaining 
   Engineering) with up to 10 technicians at a time
-
 - Lead testing, corrective actions and certification for all Coca-Cola activities
-
 - Awarded for taste and reliability testing on Frozen Carbonated Beverage valve 
   by reducing part cost by 50%
-
 - Increased throughput for taste testing by adding a process where a whole 
   assembly can be taste tested at one time instead of each individual parts
-
 - Reduced offsite storage by 90% by requiring only competitor and non current 
   production equipment to be kept
-
 - Designed automated valve dispenser for performance testing for 6 different 
   test configurations and for up to 12 valves using Koyo PLCs
-
 - Designed new/existing reliability test stands for up to a million cycles 
   testing using Koyo PLC
-
 - Mentored and trained on test procedures (Internal, Customer, UL, and CE) as 
   well as product portfolio to increase skill set
 
@@ -143,10 +137,8 @@ determine which one would be the most cost effective and quickest to fix.
 - Researcher: Redesigned the motor setup to accommodate larger motors and added
   a suspension system on MDMS project using ProEngineer to create 
   professional-grade CAD drawings for the machinists
-
 - Ford Mustang Analysis Case Study: Researched and ranked 14 different
   changeable settings and analyzed skid pad data to determine which prototype
   exhibited over-steer
-
 - Shower Temperature Regulator: Analyzed fluid flow and water mixing properties
   with Mathcad and designed user interface
