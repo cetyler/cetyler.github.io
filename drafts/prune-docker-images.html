@@ -9,18 +9,18 @@
         <meta property="og:type" content="article" />
         <meta name="twitter:card" content="summary">
 
-<meta name="keywords" content="til, postgresql, psycopg2, sqlalchemy, TIL, " />
+<meta name="keywords" content="til, docker, prune, images, TIL, " />
 
-<meta property="og:title" content="Include Schema in psycopg2 Connection String "/>
-<meta property="og:url" content="https://cetyler.github.io/include-schema-in-psycopg2-connection-string.html" />
-<meta property="og:description" content="Include schema in PostgreSQL connection string." />
+<meta property="og:title" content="Prune Docker Images "/>
+<meta property="og:url" content="https://cetyler.github.io/drafts/prune-docker-images.html" />
+<meta property="og:description" content="Remove images that are not in use." />
 <meta property="og:site_name" content="Christopher Tyler R&amp;D Test Engineer" />
 <meta property="og:article:author" content="Christopher" />
-<meta property="og:article:published_time" content="2022-12-19T17:00:00-06:00" />
-<meta name="twitter:title" content="Include Schema in psycopg2 Connection String ">
-<meta name="twitter:description" content="Include schema in PostgreSQL connection string.">
+<meta property="og:article:published_time" content="2023-04-21T00:00:00-05:00" />
+<meta name="twitter:title" content="Prune Docker Images ">
+<meta name="twitter:description" content="Remove images that are not in use.">
 
-        <title>Include Schema in psycopg2 Connection String  · Christopher Tyler R&amp;D Test Engineer
+        <title>Prune Docker Images  · Christopher Tyler R&amp;D Test Engineer
 </title>
         <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet">
         <link rel="stylesheet" type="text/css" href="https://cetyler.github.io/theme/css/elegant.prod.css" media="screen">
@@ -68,8 +68,8 @@
 <div class="row-fluid">
     <header class="page-header span10 offset2">
         <h1>
-            <a href="https://cetyler.github.io/include-schema-in-psycopg2-connection-string.html">
-                Include Schema in psycopg2 Connection String
+            <a href="https://cetyler.github.io/drafts/prune-docker-images.html">
+                Prune Docker Images
             </a>
         </h1>
     </header>
@@ -78,21 +78,10 @@
 <div class="row-fluid">
         <div class="span8 offset2 article-content">
             
-            <p>Info from
-https://stackoverflow.com/questions/59298580/how-to-specify-schema-in-psycopg2-connection-method</p>
-<p>If you are using the string form you need to URL escape the options argument:</p>
-<div class="highlight"><pre><span></span><code><span class="nl">postgresql</span><span class="p">:</span><span class="o">//</span><span class="k">user</span><span class="err">:</span><span class="n">password</span><span class="nv">@localhost</span><span class="err">:</span><span class="mi">5432</span><span class="o">/</span><span class="n">database_name</span><span class="vm">?</span><span class="n">options</span><span class="o">=-</span><span class="n">csearch_path</span><span class="o">%</span><span class="mi">3</span><span class="n">Ddbo</span><span class="p">,</span><span class="k">public</span><span class="w"></span>
-</code></pre></div>
-
-<p>This will connect to <code>localhost</code> to database <code>database_name</code> with <code>public</code>
-schema.
-This can be useful to include the schema to reduce adding the schema to each
-query.
-For my use case, I am going through
-<a href="https://theartofpostgresql.com/">The Art of PostgreSQL</a> and I want to put the
-training data in a schema <code>taop</code>.
-Instead of updating each Python file for each query, I can just update the
-connection string.</p>
+            <p>Can run <code>docker image prune -a --filter "until=24h"</code> which will get rid of any
+images older than 24hrs.
+It will also remove images that are currently not running and not attached to
+any containers.</p>
 
 
              
@@ -106,58 +95,20 @@ connection string.</p>
 
 
 
-<section>
-    <h6 style="display:none;">Comments</h6>
-    <p id="comment-message">Leave your comments below. </p>
-
-    <div class="accordion" id="accordion2">
-        <div class="accordion-group">
-            <div class="accordion-heading">
-                <a class="accordion-toggle disqus-comment-count comment-count"
-                   data-toggle="collapse"
-                   data-parent="#accordion2"
-                   href="https://cetyler.github.io/include-schema-in-psycopg2-connection-string.html#comment_thread"
-                   id="comment-accordion-toggle">
-                    Comments
-                </a>
-            </div>
-            <div id="comment_thread" class="accordion-body collapse">
-                <div class="accordion-inner">
-                    <div class="comments">
-
-                        <script src="https://utteranc.es/client.js"
-        data-repo="cetyler/cetyler.github.io"
-        data-issue-term="til_202212_schema"
-        data-label="Comments"
-        data-theme="github-light"
-        crossorigin="anonymous"
-        async>
-</script>
-
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
             <hr/>
         </div>
         <section id="article-sidebar" class="span2">
             <h4>Published</h4>
-            <time itemprop="dateCreated" datetime="2022-12-19T17:00:00-06:00">Dec 19, 2022</time>
+            <time itemprop="dateCreated" datetime="2023-04-21T00:00:00-05:00">Apr 21, 2023</time>
             <h4>Category</h4>
             <a class="category-link" href="https://cetyler.github.io/categories.html#til-ref">TIL</a>
             <h4>Tags</h4>
             <ul class="list-of-tags tags-in-article">
-                <li><a href="https://cetyler.github.io/tags.html#postgresql-ref">postgresql
-                    <span>4</span>
+                <li><a href="https://cetyler.github.io/tags.html#docker-ref">docker
 </a></li>
-                <li><a href="https://cetyler.github.io/tags.html#psycopg2-ref">psycopg2
-                    <span>1</span>
+                <li><a href="https://cetyler.github.io/tags.html#images-ref">images
 </a></li>
-                <li><a href="https://cetyler.github.io/tags.html#sqlalchemy-ref">sqlalchemy
-                    <span>1</span>
+                <li><a href="https://cetyler.github.io/tags.html#prune-ref">prune
 </a></li>
                 <li><a href="https://cetyler.github.io/tags.html#til-ref">til
                     <span>4</span>

@@ -1,96 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Christopher Tyler R&amp;D Test Engineer</title><link href="https://cetyler.github.io/" rel="alternate"></link><link href="https://cetyler.github.io/feeds/all.atom.xml" rel="self"></link><id>https://cetyler.github.io/</id><updated>2023-04-21T00:00:00-05:00</updated><entry><title>Prune Docker Images</title><link href="https://cetyler.github.io/prune-docker-images.html" rel="alternate"></link><published>2023-04-21T00:00:00-05:00</published><updated>2023-04-21T00:00:00-05:00</updated><author><name>Christopher</name></author><id>tag:cetyler.github.io,2023-04-21:/prune-docker-images.html</id><summary type="html">&lt;p&gt;Remove images that are not in use.&lt;/p&gt;</summary><content type="html">&lt;p&gt;Can run &lt;code&gt;docker image prune -a --filter "until=24h"&lt;/code&gt; which will get rid of any
-images older than 24hrs.
-It will also remove images that are currently not running and not attached to
-any containers.&lt;/p&gt;</content><category term="TIL"></category><category term="til"></category><category term="docker"></category><category term="prune"></category><category term="images"></category></entry><entry><title>Clear Highlighting in Vim</title><link href="https://cetyler.github.io/clear-highlighting-in-vim.html" rel="alternate"></link><published>2023-04-14T00:00:00-05:00</published><updated>2023-04-14T00:00:00-05:00</updated><author><name>Christopher</name></author><id>tag:cetyler.github.io,2023-04-14:/clear-highlighting-in-vim.html</id><summary type="html">&lt;p&gt;Clearing highlighting after performing a search for an example.&lt;/p&gt;</summary><content type="html">&lt;p&gt;To clear highlighting:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;:noh
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;This will clear any highlighting.&lt;/p&gt;</content><category term="TIL"></category><category term="til"></category><category term="vim"></category><category term="highlighting"></category></entry><entry><title>Inject Packages in pipx</title><link href="https://cetyler.github.io/inject-packages-in-pipx.html" rel="alternate"></link><published>2023-04-07T00:00:00-05:00</published><updated>2023-04-07T00:00:00-05:00</updated><author><name>Christopher</name></author><id>tag:cetyler.github.io,2023-04-07:/inject-packages-in-pipx.html</id><summary type="html">&lt;p&gt;Add packages to an existing virtual environment.&lt;/p&gt;</summary><content type="html">&lt;p&gt;I figured out how to inject and add multiple packages to an install:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;$ pipx inject visidata psycopg2-binary
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</content><category term="TIL"></category><category term="pipx"></category></entry><entry><title>Application Name in PostgreSQL</title><link href="https://cetyler.github.io/application-name-in-postgresql.html" rel="alternate"></link><published>2023-03-31T00:00:00-05:00</published><updated>2023-03-31T00:00:00-05:00</updated><author><name>Christopher</name></author><id>tag:cetyler.github.io,2023-03-31:/application-name-in-postgresql.html</id><summary type="html">&lt;p&gt;Send application name to PostgreSQL.&lt;/p&gt;</summary><content type="html">&lt;p&gt;From Dimitri's &lt;a href="https://theartofpostgresql.com/"&gt;The Art of PostgreSQL&lt;/a&gt;.
-PostgreSQL has an &lt;code&gt;application_name&lt;/code&gt; parameter, which you can set in the
-connection string.
-It is then possible have it reported in the server's logs and is also part of
-the system &lt;code&gt;pg_stat_activity&lt;/code&gt;.&lt;/p&gt;
-&lt;p&gt;For example:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="s"&gt;&amp;quot;postgres://user:pass@127.0.0.1:5432/db_name?application_name=app_name&amp;quot;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</content><category term="TIL"></category><category term="til"></category><category term="postgresql"></category><category term="application_name"></category><category term="taop"></category><category term="The Art of PostgreSQL"></category></entry><entry><title>Find and Replace in Vim</title><link href="https://cetyler.github.io/find-and-replace-in-vim.html" rel="alternate"></link><published>2023-03-24T00:00:00-05:00</published><updated>2023-03-24T00:00:00-05:00</updated><author><name>Christopher</name></author><id>tag:cetyler.github.io,2023-03-24:/find-and-replace-in-vim.html</id><summary type="html">&lt;p&gt;Different ways to find and replace items using vim.&lt;/p&gt;</summary><content type="html">&lt;p&gt;From https://linuxize.com/post/vim-find-replace/&lt;/p&gt;
-&lt;h2&gt;Basic Find and Replace&lt;/h2&gt;
-&lt;p&gt;In Vim you use &lt;code&gt;:substitute&lt;/code&gt; (&lt;code&gt;:s&lt;/code&gt;) command.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="err"&gt;:&lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="n"&gt;range&lt;/span&gt;&lt;span class="o"&gt;]&lt;/span&gt;&lt;span class="n"&gt;s&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="err"&gt;{&lt;/span&gt;&lt;span class="n"&gt;pattern&lt;/span&gt;&lt;span class="err"&gt;}&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="err"&gt;{&lt;/span&gt;&lt;span class="n"&gt;string&lt;/span&gt;&lt;span class="err"&gt;}&lt;/span&gt;&lt;span class="o"&gt;/[&lt;/span&gt;&lt;span class="n"&gt;flags&lt;/span&gt;&lt;span class="o"&gt;]&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="n"&gt;count&lt;/span&gt;&lt;span class="o"&gt;]&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;If no &lt;code&gt;[range]&lt;/code&gt; and &lt;code&gt;[count]&lt;/code&gt; are given, only the pattern found in the current
-line is replace.&lt;/p&gt;
-&lt;p&gt;If you want to replace all occurrences of foo with bar:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;:%s/foo/bar/g
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;The &lt;code&gt;%&lt;/code&gt; is for the entire file and &lt;code&gt;g&lt;/code&gt; would be all occurrences.
-The &lt;code&gt;/&lt;/code&gt; can be replaced with any non-alphanumeric single-byte character as a
-delimiter.
-This is useful if you are replacing &lt;code&gt;/&lt;/code&gt;.&lt;/p&gt;
-&lt;h2&gt;Case Sensitivity&lt;/h2&gt;
-&lt;p&gt;By default the search is case sensitive so include &lt;code&gt;i&lt;/code&gt; to make it ignore the
-case.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;:s/Foo/bar/gi
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;h2&gt;Search Range&lt;/h2&gt;
-&lt;p&gt;To search for certain line ranges, include the line numbers:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;:3,10s/foo/bar/g
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;This will be for lines 3 to 10 (this is inclusive).&lt;/p&gt;
-&lt;p&gt;To make changes from the current line to the end of the file using &lt;code&gt;.&lt;/code&gt; and &lt;code&gt;$&lt;/code&gt;.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;:.,$/foo/bar/
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;Finally you can use &lt;code&gt;+&lt;/code&gt; and &lt;code&gt;-&lt;/code&gt; to denote the number of rows above or below a
-certain linIf no &lt;code&gt;[range]&lt;/code&gt; and &lt;code&gt;[count]&lt;/code&gt; are given, only the pattern found in
-the current line is replace.&lt;/p&gt;
-&lt;p&gt;If you want to replace all occurrences of foo with bar:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;:%s/foo/bar/g
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;The &lt;code&gt;%&lt;/code&gt; is for the entire file and &lt;code&gt;g&lt;/code&gt; would be all occurrences.
-The &lt;code&gt;/&lt;/code&gt; can be replaced with any non-alphanumeric single-byte character as a
-delimiter.
-This is useful if you are replacing &lt;code&gt;/&lt;/code&gt;.&lt;/p&gt;
-&lt;h2&gt;Case Sensitivity&lt;/h2&gt;
-&lt;p&gt;By default the search is case sensitive so include &lt;code&gt;i&lt;/code&gt; to make it ignore the
-case.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;:s/Foo/bar/gi
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;h2&gt;Search Range&lt;/h2&gt;
-&lt;p&gt;To search for certain line ranges, include the line numbers:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;:3,10s/foo/bar/g
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;This will be for lines 3 to 10 (this is inclusive).&lt;/p&gt;
-&lt;p&gt;To make changes from the current line to the end of the file using &lt;code&gt;.&lt;/code&gt; and &lt;code&gt;$&lt;/code&gt;.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;:.,$/foo/bar/
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;Finally you can use &lt;code&gt;+&lt;/code&gt; and &lt;code&gt;-&lt;/code&gt; to denote the number of rows above or below a
-certain line.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;:.,+4s/foo/bar/g
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;h2&gt;Substituting Whole Word&lt;/h2&gt;
-&lt;p&gt;To only replace the whole word and not portions, type &lt;code&gt;\&amp;lt;&lt;/code&gt; to mark the
-beginning of a word and &lt;code&gt;\&amp;gt;&lt;/code&gt; to mark the end of a word.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;:s/\&amp;lt;foo\&amp;gt;/bar/
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</content><category term="TIL"></category><category term="til"></category><category term="vim"></category><category term="find"></category><category term="replace"></category><category term="substitute"></category></entry><entry><title>Calculate the Distance between two Latitudes and Longitudes</title><link href="https://cetyler.github.io/calculate-the-distance-between-two-latitudes-and-longitudes.html" rel="alternate"></link><published>2023-03-17T00:00:00-05:00</published><updated>2023-03-17T00:00:00-05:00</updated><author><name>Christoper</name></author><id>tag:cetyler.github.io,2023-03-17:/calculate-the-distance-between-two-latitudes-and-longitudes.html</id><summary type="html">&lt;p&gt;Calculation using SQL.&lt;/p&gt;</summary><content type="html">&lt;p&gt;From Renee's 
-&lt;a href="https://sqlfordatascientists.com/"&gt;SQL for Data Scientists&lt;/a&gt; found the
-calculation https://daynebatten.com/2015/latitude-longitude-distance-sql which
-can be useful for my weather data.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;ROUND(2 * 3961 * ASIN(SQRT(POWER(SIN(RADIANS((latitude - 38.4463) / 2)),2) +
-COS(RADIANS(38.4463)) * COS(RADIANS(latitude)) * POWER((SIN(RADIANS((longitude
-- -78.8712) / 2))), 2))))
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</content><category term="TIL"></category><category term="til"></category><category term="sql"></category><category term="SQL for Data Scientists"></category></entry><entry><title>Get Disk Size for Each Database</title><link href="https://cetyler.github.io/get-disk-size-for-each-database.html" rel="alternate"></link><published>2023-03-10T00:00:00-06:00</published><updated>2023-03-10T00:00:00-06:00</updated><author><name>Christopher</name></author><id>tag:cetyler.github.io,2023-03-10:/get-disk-size-for-each-database.html</id><summary type="html">&lt;p&gt;Get the disk size for each database in PostgreSQL.&lt;/p&gt;</summary><content type="html">&lt;p&gt;I learned this from Dimitri's
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Christopher Tyler R&amp;D Test Engineer</title><link href="https://cetyler.github.io/" rel="alternate"></link><link href="https://cetyler.github.io/feeds/all.atom.xml" rel="self"></link><id>https://cetyler.github.io/</id><updated>2023-03-10T00:00:00-06:00</updated><entry><title>Get Disk Size for Each Database</title><link href="https://cetyler.github.io/get-disk-size-for-each-database.html" rel="alternate"></link><published>2023-03-10T00:00:00-06:00</published><updated>2023-03-10T00:00:00-06:00</updated><author><name>Christopher</name></author><id>tag:cetyler.github.io,2023-03-10:/get-disk-size-for-each-database.html</id><summary type="html">&lt;p&gt;Get the disk size for each database in PostgreSQL.&lt;/p&gt;</summary><content type="html">&lt;p&gt;I learned this from Dimitri's
 &lt;a href="https://theartofpostgresql.com/"&gt;The Art of PostgreSQL&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;To get the size in megabytes&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="n"&gt;postgres&lt;/span&gt;&lt;span class="nv"&gt;@f1db&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="err"&gt;#&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;SELECT&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;datname&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
@@ -540,4 +449,413 @@ $ venv&lt;span class="se"&gt;\S&lt;/span&gt;cripts&lt;span class="se"&gt;\a&lt;/
 The nice part is that &lt;code&gt;pyenv&lt;/code&gt; creates &lt;code&gt;.python_version&lt;/code&gt; so even if I decide to
 use something else, I will know which Python version I was using.
 Also using &lt;code&gt;pyenv&lt;/code&gt; to manage my Python versions, I can keep certain projects on
-an older Python version while using the newest version to try out new features.&lt;/p&gt;</content><category term="Python"></category><category term="pyenv"></category><category term="venv"></category><category term="Real Python"></category><category term="Ubuntu"></category><category term="Mate"></category><category term="22.04"></category><category term="pyenv-win"></category></entry></feed>
+an older Python version while using the newest version to try out new features.&lt;/p&gt;</content><category term="Python"></category><category term="pyenv"></category><category term="venv"></category><category term="Real Python"></category><category term="Ubuntu"></category><category term="Mate"></category><category term="22.04"></category><category term="pyenv-win"></category></entry><entry><title>Calculator Project -- Package</title><link href="https://cetyler.github.io/calculator-project-package.html" rel="alternate"></link><published>2022-04-09T21:00:00-05:00</published><updated>2022-04-09T21:00:00-05:00</updated><author><name>Christopher</name></author><id>tag:cetyler.github.io,2022-04-09:/calculator-project-package.html</id><summary type="html">&lt;p&gt;Build package with flit.&lt;/p&gt;</summary><content type="html">&lt;h2&gt;Overview&lt;/h2&gt;
+&lt;p&gt;From the 
+&lt;a href="https://cetyler.github.io/calculator-project-documentation.html"&gt;previous article&lt;/a&gt;,
+the plan is to create &lt;a href="https://github.com/cetyler/calculator"&gt;calculator&lt;/a&gt; in
+order to update my Python workflow.
+This article will cover creating a Python package.&lt;/p&gt;
+&lt;h2&gt;Using Flit&lt;/h2&gt;
+&lt;p&gt;Instead of using &lt;code&gt;setup.py&lt;/code&gt;, I will be using flit instead.
+While this project won't go on PyPi, it will go to my internal PyPi server.
+Will use &lt;a href="https://cetyler.github.io/how-to-create-a-python-package.html"&gt;my article&lt;/a&gt; to build my
+package.&lt;/p&gt;
+&lt;p&gt;The main reason I want to continue to use flit is that it only creates and
+publishes packages.&lt;/p&gt;
+&lt;h2&gt;Next Steps&lt;/h2&gt;
+&lt;p&gt;While the calculator project is not complete, it did the job in going through
+the process of creating a Python project.
+The next article I will create a checklist to update Audrey's cookiecutter.&lt;/p&gt;</content><category term="Python"></category><category term="python"></category><category term="project"></category><category term="library"></category><category term="package"></category><category term="flit"></category></entry><entry><title>Calculator Project -- Documentation</title><link href="https://cetyler.github.io/calculator-project-documentation.html" rel="alternate"></link><published>2022-04-09T16:00:00-05:00</published><updated>2022-04-09T16:00:00-05:00</updated><author><name>Christopher</name></author><id>tag:cetyler.github.io,2022-04-09:/calculator-project-documentation.html</id><summary type="html">&lt;p&gt;Finish up documentation.&lt;/p&gt;</summary><content type="html">&lt;h2&gt;Overview&lt;/h2&gt;
+&lt;p&gt;From the 
+&lt;a href="https://cetyler.github.io/calculator-project-cli.html"&gt;previous article&lt;/a&gt;,
+the plan is to create &lt;a href="https://github.com/cetyler/calculator"&gt;calculator&lt;/a&gt; in
+order to update my Python workflow.
+This article will cover the documentation.&lt;/p&gt;
+&lt;h2&gt;Code Documentation&lt;/h2&gt;
+&lt;p&gt;At minimum each class and function should have some level of documentation to
+describe what it does.
+For this project, I will do enough documentation that will benefit an initial
+package release.&lt;/p&gt;
+&lt;p&gt;Using an IDE like &lt;a href="https://code.visualstudio.com/"&gt;VS Code&lt;/a&gt; and use an
+extension &lt;a href="https://github.com/NilsJPWerner/autoDocstring"&gt;autoDocstring&lt;/a&gt; to
+auto generate the docstring.
+&lt;a href="https://www.vim.org/"&gt;Vim&lt;/a&gt; also has 
+&lt;a href="https://github.com/heavenshell/vim-pydocstring"&gt;vim-pydocstring&lt;/a&gt; to auto
+generate the docstring.&lt;/p&gt;
+&lt;h2&gt;README&lt;/h2&gt;
+&lt;p&gt;At minimum the README should describe how to install the program and brief
+explanation how to run the program.
+Simple programs/libraries can get away with just having the README as the only
+documentation.&lt;/p&gt;
+&lt;p&gt;For this project, I want the README to describe the following:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;What is this program.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;How to install.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;A link to the article series.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;How to find and build the documentation.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Since I am not going to create my documentation at
+  &lt;a href="https://readthedocs.org/"&gt;Read the Docs&lt;/a&gt;, I want to explain how to
+  create the documentation.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;I generally treat READMEs for other developers not necessarily for the users of
+the program.&lt;/p&gt;
+&lt;h2&gt;Generating Documentation with Sphinx&lt;/h2&gt;
+&lt;p&gt;While I am not going to publish the documentation, for this project I will
+generate some minimal documentation to verify the process.&lt;/p&gt;
+&lt;p&gt;Documentation will be generated by Sphinx so that I can provide information for
+users and developer.
+Also I can provide information of the API by pulling the docstrings from the
+classes and functions.&lt;/p&gt;
+&lt;h2&gt;Using Gitea/Github Wiki&lt;/h2&gt;
+&lt;p&gt;I am currently using https://github.com/cetyler/calculator/wiki for User
+Requirements and Design Requirements.
+If I planned on publishing the documentation, I may put the User Requirements
+in Sphinx instead.&lt;/p&gt;
+&lt;p&gt;I think for simple projects like the calculator project, it makes sense to have
+a README and use the Wiki instead of creating a more structured documentation.&lt;/p&gt;
+&lt;h2&gt;Next Steps&lt;/h2&gt;
+&lt;p&gt;Some basic documentation is done.
+The next article will build the package (not to pypi) to verify that the
+package will work.&lt;/p&gt;</content><category term="Python"></category><category term="python"></category><category term="project"></category><category term="library"></category><category term="package"></category><category term="documentation"></category><category term="sphinx"></category></entry><entry><title>Calculator Project -- CLI</title><link href="https://cetyler.github.io/calculator-project-cli.html" rel="alternate"></link><published>2022-04-03T16:00:00-05:00</published><updated>2022-04-03T16:00:00-05:00</updated><author><name>Christopher</name></author><id>tag:cetyler.github.io,2022-04-03:/calculator-project-cli.html</id><summary type="html">&lt;p&gt;Implement CLI.&lt;/p&gt;</summary><content type="html">&lt;h2&gt;Overview&lt;/h2&gt;
+&lt;p&gt;From the 
+&lt;a href="https://cetyler.github.io/calculator-project-api.html"&gt;previous article&lt;/a&gt;,
+the plan is to create &lt;a href="https://github.com/cetyler/calculator"&gt;calculator&lt;/a&gt; in
+order to update my Python workflow.
+This article will cover implementing the CLI.&lt;/p&gt;
+&lt;h2&gt;Determining the Interface&lt;/h2&gt;
+&lt;p&gt;According to the User Requirements, the CLI will be an interactive environment
+with no command line arguments.
+The inspiration for the interface I am thinking of comes from
+&lt;a href="https://github.com/dbcli/pgcli"&gt;pgcli&lt;/a&gt;.
+I would like at least initially be able to do the following:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Start the prompt with a statement to run help to get a list of commands.&lt;/li&gt;
+&lt;li&gt;Be able to press the up arrow or something to go through the history.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;A bonus would be able to provide some syntax highlighting and predictive
+showing of a command as the user start to type.&lt;/p&gt;
+&lt;h3&gt;Interactive CLI&lt;/h3&gt;
+&lt;p&gt;Will use &lt;a href="https://python-prompt-toolkit.readthedocs.io/"&gt;prompt toolkit&lt;/a&gt; to
+create my CLI interface.
+This library will also provide me code completion, history and suggesting stuff
+from history.&lt;/p&gt;
+&lt;h3&gt;Add Some Color&lt;/h3&gt;
+&lt;p&gt;Will use &lt;a href="https://rich.readthedocs.io/en/latest/"&gt;rich&lt;/a&gt; to add some color to my
+interface.
+The color will only be added when items are printed out.&lt;/p&gt;
+&lt;h2&gt;Setup to Run as a Package&lt;/h2&gt;
+&lt;p&gt;First step is to create &lt;code&gt;__main__.py&lt;/code&gt; so that when this project is ran as a
+package, it will start the CLI.&lt;/p&gt;
+&lt;h2&gt;Building CLI&lt;/h2&gt;
+&lt;p&gt;Using &lt;code&gt;rich&lt;/code&gt; and &lt;code&gt;prompt_toolkit&lt;/code&gt; we have enough to meet the User Requirements.
+The first step is to determine how to parse the user input.
+Due to the User Requirements, the program will need to determine the following:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&amp;gt; add(1,2)
+   |  | |&amp;lt;-- 2nd number to add.
+   |  |&amp;lt;---- 1st number to add.
+   |&amp;lt;------- add function.
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;code&gt;process_input()&lt;/code&gt; will separate the numbers from the command.
+The previous result, the user can use &lt;code&gt;ans&lt;/code&gt; in a function or as a command which
+would return the previous result.
+The numbers will initially be strings so the numbers will need to be converted
+to numbers.&lt;/p&gt;
+&lt;p&gt;Next is to execute based on the command given.
+Commands like &lt;code&gt;ans&lt;/code&gt;, &lt;code&gt;help&lt;/code&gt; and &lt;code&gt;quit&lt;/code&gt; don't have any additional values.
+Math functions like &lt;code&gt;add()&lt;/code&gt; will run the function with the numbers given.
+After math functions are done, update the previous result &lt;code&gt;ans&lt;/code&gt;.&lt;/p&gt;
+&lt;h2&gt;Catching Errors&lt;/h2&gt;
+&lt;p&gt;&lt;code&gt;Basic()&lt;/code&gt; already has some checks to verify that there are enough numbers or
+divide by zero.
+However, &lt;code&gt;Basic()&lt;/code&gt; assumes that the values being given are numbers.
+While processing the user input, will verify that numbers are numbers and will
+let the user know of the problem.&lt;/p&gt;
+&lt;p&gt;This program only has a limit number of commands.
+Will do a check that if any other non command is used, let the user know of the
+error.&lt;/p&gt;
+&lt;h2&gt;Next Steps&lt;/h2&gt;
+&lt;p&gt;The calculator program now works and currently meet the User Requirements.
+The documentation will need to be updated prior to a 1.0 release.
+Also prior to a 1.0 release, should create a package and verify that it will
+still work.
+Then can go through and create a checklist to update Audrey's cookiecutter.
+Finally, update my Python workflow.&lt;/p&gt;</content><category term="Python"></category><category term="python"></category><category term="project"></category><category term="library"></category><category term="package"></category><category term="cli"></category></entry><entry><title>Calculator Project -- API</title><link href="https://cetyler.github.io/calculator-project-api.html" rel="alternate"></link><published>2022-04-01T21:00:00-05:00</published><updated>2022-04-01T21:00:00-05:00</updated><author><name>Christopher</name></author><id>tag:cetyler.github.io,2022-04-01:/calculator-project-api.html</id><summary type="html">&lt;p&gt;Implement API.&lt;/p&gt;</summary><content type="html">&lt;h2&gt;Overview&lt;/h2&gt;
+&lt;p&gt;From the 
+&lt;a href="https://cetyler.github.io/calculator-project-tests.html"&gt;previous article&lt;/a&gt;,
+the plan is to create &lt;a href="https://github.com/cetyler/calculator"&gt;calculator&lt;/a&gt; in
+order to update my Python workflow.
+This article will cover implementing the API and verifying that the tests pass
+before the command line interface (CLI) gets developed.&lt;/p&gt;
+&lt;h2&gt;Cookiecutter Template&lt;/h2&gt;
+&lt;p&gt;Audrey's template created a MakeFile to aid to performing certain operations.
+I will make use of &lt;code&gt;make test&lt;/code&gt;, &lt;code&gt;make lint&lt;/code&gt; and &lt;code&gt;make coverage&lt;/code&gt;.
+In order to get &lt;code&gt;make coverage&lt;/code&gt; to work, I added &lt;code&gt;pytest-cov&lt;/code&gt;.&lt;/p&gt;
+&lt;h2&gt;Implement API&lt;/h2&gt;
+&lt;p&gt;Now that I have tests, I can implement the API and verify that my API will meet
+the requirements.
+If certain functions won't be implemented in a release, I can always skip a test
+until that function/feature gets implemented.
+For more complicated projects, feature release based on the roadmap can have the
+tests developed and use skip until a certain version.&lt;/p&gt;
+&lt;p&gt;More complicated programs may have multiple files for the API depending on
+functionality.
+For example, the calculator program now has its API in &lt;code&gt;calculation.py&lt;/code&gt;.
+Let's say in a future release, I add functionality to do complex calculations
+like loan terms, calculus or conversions.
+Each one of those could have its own file/module.&lt;/p&gt;
+&lt;h3&gt;Planning the API&lt;/h3&gt;
+&lt;p&gt;When planning the API the User and Design Requirements can dictate how to
+create the API.
+However most programs can change over time beyond the initial requirements.
+Depending the complexity, more design work would be needed as well as some
+thought on being able to extend the API without potentially breaking the API.&lt;/p&gt;
+&lt;p&gt;For example, the calculator program's initial API are in the &lt;code&gt;Basic()&lt;/code&gt; class.
+Each operation is a method in &lt;code&gt;Basic()&lt;/code&gt; which makes it easy to extend
+&lt;code&gt;Basic()&lt;/code&gt;.
+However each method's inputs should be thought through so that the inputs don't
+need to change.
+For example, the User Requirements did not state how many numbers can be added
+together.
+To meet the requirements, I could just have &lt;code&gt;add()&lt;/code&gt; take just two arguments
+which is the minimum to add.
+However in the future if I needed to extend &lt;code&gt;add()&lt;/code&gt; to accept more than two
+arguments, I may need to break the API which could break programs that use that
+API.&lt;/p&gt;
+&lt;h3&gt;Breaking the API&lt;/h3&gt;
+&lt;p&gt;Breaking the API should only be done if it is really necessary.
+As with the example above, breaking an API can affect users of that API.&lt;/p&gt;
+&lt;p&gt;Breaking the API should cause a major version change.
+If possible, notifying the user ahead of time would help them update their
+programs to adjust to the changes.
+If an API will get removed, then a deprecation warning should be used prior to
+removing that portion of the API.
+Changing the API should be documented.
+Adding to an API especially if it is not a breaking change does not require a
+major version change unless it is a large addition.&lt;/p&gt;
+&lt;p&gt;For example, &lt;code&gt;Basic()&lt;/code&gt; stores the previous result but it is not automatic.
+In order to store the previous result you would need to do the following:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&amp;gt; b = Basic()
+&amp;gt; b.previous_result = b.add(1, 2)
+&amp;gt; b.previous_result
+  3
+&amp;gt; b.sub(b.previous_result, 2)
+  1
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;This at first may not meet the User Requirements.
+The User Requirements the previous result is being tracked by the program.
+However this is the API and not the program.
+As long as the calculator program keeps track of the previous result, we should
+be okay.
+Let's say that after creating the API this way and working on the CLI, we
+decide that it would be easier to have &lt;code&gt;Basic()&lt;/code&gt; keep track of the result and
+to be able to clear the previous result.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&amp;gt; b = Basic()
+&amp;gt; b.add(1, 2)
+  3
+&amp;gt; b.previous_result
+  3
+&amp;gt; b.clear_result
+&amp;gt; b.previous_result
+  0
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;This would require an API additional of &lt;code&gt;clear_result()&lt;/code&gt; and after each
+calculation to store in &lt;code&gt;previous_result()&lt;/code&gt;.&lt;/p&gt;
+&lt;h2&gt;Next Steps&lt;/h2&gt;
+&lt;p&gt;Now that we have an API that works we can now create the CLI GUI interface.
+Most of the work for the program is in the API so the CLI can be fairly simple.&lt;/p&gt;</content><category term="Python"></category><category term="python"></category><category term="project"></category><category term="library"></category><category term="package"></category><category term="api"></category></entry><entry><title>Calculator Project -- Tests</title><link href="https://cetyler.github.io/calculator-project-tests.html" rel="alternate"></link><published>2022-02-06T15:00:00-06:00</published><updated>2022-02-06T15:00:00-06:00</updated><author><name>Christopher</name></author><id>tag:cetyler.github.io,2022-02-06:/calculator-project-tests.html</id><summary type="html">&lt;p&gt;Creating tests for the API.&lt;/p&gt;</summary><content type="html">&lt;h2&gt;Overview&lt;/h2&gt;
+&lt;p&gt;From the 
+&lt;a href="https://cetyler.github.io/calculator-project-requirements.html"&gt;previous article&lt;/a&gt;,
+the plan is to create &lt;a href="https://github.com/cetyler/calculator"&gt;calculator&lt;/a&gt; in
+order to update my Python workflow.
+This article will cover creating some initial tests to verify the program will
+meet the requirements and what tests would be needed after the initial tests
+using 
+&lt;a href="https://developer.ibm.com/articles/5-steps-of-test-driven-development/"&gt;Test Driven Development&lt;/a&gt;.&lt;/p&gt;
+&lt;h2&gt;Cookiecutter Template&lt;/h2&gt;
+&lt;p&gt;Audrey's template created a test folder structure that for the purposes of this
+project can be simplified.
+Will delete the &lt;code&gt;func&lt;/code&gt; and &lt;code&gt;unit&lt;/code&gt; folders.
+For more complicated projects both folders would make sense to organize the
+tests.
+Also, will be using &lt;code&gt;pytest&lt;/code&gt;.&lt;/p&gt;
+&lt;h2&gt;Test to Meet Requirements&lt;/h2&gt;
+&lt;p&gt;Most of the requirements are are related to the API.
+The initial tests should be good enough to verify that the program will meet
+the requirements.
+The goal for now is not to cover all potential edge cases.
+So for example, &lt;code&gt;add()&lt;/code&gt; can take 2 or more numbers.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&amp;gt; add(1, 2)
+&amp;gt; 3
+&amp;gt; add(1, 2, 3)
+&amp;gt; 6
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;If &lt;code&gt;add()&lt;/code&gt; only has 1 number it should be return an error.
+Since there are not that many tests, all API tests will be in &lt;code&gt;test_api.py&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;If this project was a more complicated project, I would keep &lt;code&gt;func&lt;/code&gt; and &lt;code&gt;unit&lt;/code&gt;
+folders.
+Also the initial tests would be functional tests.&lt;/p&gt;
+&lt;h3&gt;Functional Tests&lt;/h3&gt;
+&lt;p&gt;Functional tests are high level tests that primarily verify that the program
+will meet requirements/specifications.
+The goal is to ensure that these tests are done early in the process.
+For this project I am not going to create any functional tests right now.&lt;/p&gt;
+&lt;p&gt;A good example would be a program that would take an text file as an input and
+would output some simple stats (word count, number of lines, etc.).
+A functional test would be verifying that the word count matches what is in the
+text file.
+Another functional test would be to count the lines and verify that it matches.
+Neither functional tests are testing how the program does the counting, just
+providing a given input, the program will output the count.&lt;/p&gt;
+&lt;h3&gt;Unit Tests&lt;/h3&gt;
+&lt;p&gt;Unit tests typically tests a function/class/method.
+My goal is typically not trying to get 100% coverage but unit tests are to
+ensure that critical functions are tested.
+For this project, my plan is to verify each operation works when given a
+correct number of numeric values and output the right result.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;def test_add():
+    &amp;quot;&amp;quot;&amp;quot;Verify that add works.&amp;quot;&amp;quot;&amp;quot;
+    basic = Basic()
+
+    assert add(1, 2) == 3
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3&gt;In Program Tests/Checks&lt;/h3&gt;
+&lt;p&gt;These tests will be in the program/function/class.
+For example, won't create a separate &lt;code&gt;pytest&lt;/code&gt; test to check if a config file
+was loaded.
+Instead would do a &lt;code&gt;try&lt;/code&gt; and &lt;code&gt;except&lt;/code&gt; to verify that I loaded the file and do a
+check to ensure that what was loaded has the correct values.
+For this project, I probably use this to capture any exceptions like if the
+user only provided one number to &lt;code&gt;add()&lt;/code&gt; as an example.&lt;/p&gt;
+&lt;h3&gt;Manual Tests&lt;/h3&gt;
+&lt;p&gt;Non automated tests to ensure compliance.
+For example in the calculator program, it would be to run the program and try
+out some of the operations (add, subtract, etc.), verify that the interface
+looks okay, etc.&lt;/p&gt;
+&lt;h2&gt;Tests due to Bugs&lt;/h2&gt;
+&lt;p&gt;As bugs are found, the goal is to create a test to replicate the bug prior to
+fixing it.
+For example, if using &lt;code&gt;add()&lt;/code&gt; only use 1 number but didn't have a check to
+verify that more than one number was entered.
+The bug would cause the program to crash.
+Would add a test to raise an exception.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;def test_add():
+    &amp;quot;&amp;quot;&amp;quot;Verify that add works.&amp;quot;&amp;quot;&amp;quot;
+    basic = Basic()
+
+    ...
+
+    with pytest.raises(NotEnoughNumbers):
+        basic.add(1)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;After adding the test, verify that it will fail prior to making the change.
+Run the test again and it should pass.&lt;/p&gt;
+&lt;h2&gt;New Feature Tests&lt;/h2&gt;
+&lt;p&gt;Ideally create tests prior to adding new features.
+For example, add a feature so that it would be possible to chain together
+multiple operations.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&amp;gt; add(sub(4,3), mul(5,4), 3)
+&amp;gt; 13
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Prior to adding the feature, create some tests to first show that this would
+fail, then add the new feature.
+Furthermore, could use &lt;code&gt;pytest&lt;/code&gt; feature to skip tests.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="nv"&gt;@pytest&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;mark&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;skipif&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;calculator&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;__version__&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;2.0.0&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt;                    &lt;/span&gt;&lt;span class="n"&gt;reason&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;Breaking change.&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="n"&gt;def&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;test_multiple_operations&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;&lt;span class="err"&gt;:&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;&amp;quot;&amp;quot;Verify that chaining operations works.&amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="n"&gt;basic&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;Basic&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="n"&gt;assert&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;basic&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="k"&gt;add&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;basic&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;sub&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;4&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;basic&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;mul&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;5&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;4&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;==&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mi"&gt;13&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="k"&gt;with&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;pytest&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;raises&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;NotEnoughNumbers&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="err"&gt;:&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt;        &lt;/span&gt;&lt;span class="n"&gt;basic&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;sub&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;basic&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="k"&gt;add&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;5&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;4&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h2&gt;Next Steps&lt;/h2&gt;
+&lt;p&gt;Now that we have some tests created, can now work on implementing the code and
+making sure the the API works before creating the CLI GUI interface.
+Trying to develop tests prior to working on the code can help ensure that
+requirements will be met, help create better code and preparing for new
+features ahead of time.&lt;/p&gt;</content><category term="Python"></category><category term="python"></category><category term="project"></category><category term="library"></category><category term="package"></category><category term="pytest"></category><category term="tests"></category></entry><entry><title>Calculator Project -- Requirements</title><link href="https://cetyler.github.io/calculator-project-requirements.html" rel="alternate"></link><published>2022-01-29T15:00:00-06:00</published><updated>2022-01-29T15:00:00-06:00</updated><author><name>Christopher</name></author><id>tag:cetyler.github.io,2022-01-29:/calculator-project-requirements.html</id><summary type="html">&lt;p&gt;Creating the initial documentation of the calculator project.&lt;/p&gt;</summary><content type="html">&lt;h2&gt;Overview&lt;/h2&gt;
+&lt;p&gt;From the 
+&lt;a href="https://cetyler.github.io/calculator-project-setup.html"&gt;previous article&lt;/a&gt;,
+the plan is to create &lt;a href="https://github.com/cetyler/calculator"&gt;calculator&lt;/a&gt; in
+order to update my Python workflow.
+This article will cover creating User Requirements, Design Requirements and a
+Roadmap.&lt;/p&gt;
+&lt;h2&gt;Location of Documents&lt;/h2&gt;
+&lt;p&gt;While we do have Sphinx already set up, in my opinion these documents should be
+related to what the calculator package does and how to use it.
+User Requirements and Design Requirements will be in Gitea/Github wiki.
+Both these documents are more for the developer than the user.
+The Roadmap should be in Sphinx as it is useful to the user when features are
+planned to be released.&lt;/p&gt;
+&lt;h2&gt;User Requirements&lt;/h2&gt;
+&lt;p&gt;User Requirements generally are what the developer thinks the user wants based
+either by observation, feedback or a spec document.
+This document is to translate the available information into something that
+could be used to help build a design.&lt;/p&gt;
+&lt;p&gt;As you see, the
+&lt;a href="https://github.com/cetyler/calculator/wiki/User-Requirements"&gt;User Requirements&lt;/a&gt;
+describes that this will be a simple program that can also be used as a
+library.
+There are a couple more requirements but for the most part, this describes what
+I think the user would want.&lt;/p&gt;
+&lt;p&gt;The goal is to create the requirements without thinking about how to implement.
+For the calculator project, naming Python as the language is a requirement
+since this project is to specifically determine a Python workflow.&lt;/p&gt;
+&lt;h2&gt;Design Requirements&lt;/h2&gt;
+&lt;p&gt;Design Requirements generally are how the developer is planning on how to
+implement the program based on the User Requirements.
+This document is usually what an 1.0 version of the program.&lt;/p&gt;
+&lt;p&gt;As you see
+&lt;a href="https://github.com/cetyler/calculator/wiki/Design-Requirements"&gt;Design Requirements&lt;/a&gt;
+shows that there will be two parts -- GUI and API.&lt;/p&gt;
+&lt;h3&gt;GUI&lt;/h3&gt;
+&lt;p&gt;The GUI will be an interactive terminal interface similar to the Python shell
+or like
+&lt;a href="https://www.pgcli.com/"&gt;pgcli&lt;/a&gt;.
+Due to how simple this program is, I don't really need to do a long description
+on how I plan on implementing the GUI.&lt;/p&gt;
+&lt;h3&gt;API&lt;/h3&gt;
+&lt;p&gt;The API will be able to call functions to add, subtract, etc.
+I did not include a separate section describing &lt;code&gt;basic.py&lt;/code&gt; but it will support
+addition, subtracting, multiplication and division.&lt;/p&gt;
+&lt;h2&gt;Roadmap&lt;/h2&gt;
+&lt;p&gt;The Roadmap is a proposed feature release plan.
+For this calculator, there is not much of a Roadmap.
+First need to create &lt;code&gt;Roadmap.rst&lt;/code&gt; and create a simple release schedule.
+Will need to update &lt;code&gt;index.rst&lt;/code&gt; to include the Roadmap.&lt;/p&gt;
+&lt;p&gt;As you can see
+&lt;a href="https://github.com/cetyler/calculator/blob/develop/ROADMAP.rst"&gt;Roadmap&lt;/a&gt; shows
+that it is a fairly basic Roadmap.
+There is not really a plan for a 2.0.0 release and a 1.0.0 release will cover
+everything that was in User Requirements.&lt;/p&gt;
+&lt;p&gt;Will need to update my fork of Audrey's cookiecutter template to include a
+Roadmap file.&lt;/p&gt;
+&lt;h2&gt;Next Steps&lt;/h2&gt;
+&lt;p&gt;The rest of the documentation is not done but the rest of the documentation can
+be completed prior to a release.
+Using a combination of the wiki and Sphinx, it keeps a good separation to what
+will stay with the repository and what could eventually go to
+&lt;a href="https://readthedocs.org/"&gt;Read The Docs&lt;/a&gt; or an internal website.&lt;/p&gt;
+&lt;p&gt;Prior to any writing any code, I will first write tests to ensure that we will
+comply with our User Requirements.
+The initial tests should cover the API as much as possible.&lt;/p&gt;</content><category term="Python"></category><category term="python"></category><category term="project"></category><category term="library"></category><category term="package"></category></entry></feed>
