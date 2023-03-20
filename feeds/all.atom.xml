@@ -1,5 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Christopher Tyler R&amp;D Test Engineer</title><link href="https://cetyler.github.io/" rel="alternate"></link><link href="https://cetyler.github.io/feeds/all.atom.xml" rel="self"></link><id>https://cetyler.github.io/</id><updated>2023-03-10T00:00:00-06:00</updated><entry><title>Get Disk Size for Each Database</title><link href="https://cetyler.github.io/get-disk-size-for-each-database.html" rel="alternate"></link><published>2023-03-10T00:00:00-06:00</published><updated>2023-03-10T00:00:00-06:00</updated><author><name>Christopher</name></author><id>tag:cetyler.github.io,2023-03-10:/get-disk-size-for-each-database.html</id><summary type="html">&lt;p&gt;Get the disk size for each database in PostgreSQL.&lt;/p&gt;</summary><content type="html">&lt;p&gt;I learned this from Dimitri's
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Christopher Tyler R&amp;D Test Engineer</title><link href="https://cetyler.github.io/" rel="alternate"></link><link href="https://cetyler.github.io/feeds/all.atom.xml" rel="self"></link><id>https://cetyler.github.io/</id><updated>2023-03-17T00:00:00-05:00</updated><entry><title>Calculate the Distance between two Latitudes and Longitudes</title><link href="https://cetyler.github.io/calculate-the-distance-between-two-latitudes-and-longitudes.html" rel="alternate"></link><published>2023-03-17T00:00:00-05:00</published><updated>2023-03-17T00:00:00-05:00</updated><author><name>Christoper</name></author><id>tag:cetyler.github.io,2023-03-17:/calculate-the-distance-between-two-latitudes-and-longitudes.html</id><summary type="html">&lt;p&gt;Calculation using SQL.&lt;/p&gt;</summary><content type="html">&lt;p&gt;From Renee's 
+&lt;a href="https://sqlfordatascientists.com/"&gt;SQL for Data Scientists&lt;/a&gt; found the
+calculation https://daynebatten.com/2015/latitude-longitude-distance-sql which
+can be useful for my weather data.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;ROUND(2 * 3961 * ASIN(SQRT(POWER(SIN(RADIANS((latitude - 38.4463) / 2)),2) +
+COS(RADIANS(38.4463)) * COS(RADIANS(latitude)) * POWER((SIN(RADIANS((longitude
+- -78.8712) / 2))), 2))))
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</content><category term="TIL"></category><category term="til"></category><category term="sql"></category><category term="SQL for Data Scientists"></category></entry><entry><title>Get Disk Size for Each Database</title><link href="https://cetyler.github.io/get-disk-size-for-each-database.html" rel="alternate"></link><published>2023-03-10T00:00:00-06:00</published><updated>2023-03-10T00:00:00-06:00</updated><author><name>Christopher</name></author><id>tag:cetyler.github.io,2023-03-10:/get-disk-size-for-each-database.html</id><summary type="html">&lt;p&gt;Get the disk size for each database in PostgreSQL.&lt;/p&gt;</summary><content type="html">&lt;p&gt;I learned this from Dimitri's
 &lt;a href="https://theartofpostgresql.com/"&gt;The Art of PostgreSQL&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;To get the size in megabytes&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="n"&gt;postgres&lt;/span&gt;&lt;span class="nv"&gt;@f1db&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="err"&gt;#&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;SELECT&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;datname&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
@@ -793,69 +800,4 @@ Furthermore, could use &lt;code&gt;pytest&lt;/code&gt; feature to skip tests.&lt
 making sure the the API works before creating the CLI GUI interface.
 Trying to develop tests prior to working on the code can help ensure that
 requirements will be met, help create better code and preparing for new
-features ahead of time.&lt;/p&gt;</content><category term="Python"></category><category term="python"></category><category term="project"></category><category term="library"></category><category term="package"></category><category term="pytest"></category><category term="tests"></category></entry><entry><title>Calculator Project -- Requirements</title><link href="https://cetyler.github.io/calculator-project-requirements.html" rel="alternate"></link><published>2022-01-29T15:00:00-06:00</published><updated>2022-01-29T15:00:00-06:00</updated><author><name>Christopher</name></author><id>tag:cetyler.github.io,2022-01-29:/calculator-project-requirements.html</id><summary type="html">&lt;p&gt;Creating the initial documentation of the calculator project.&lt;/p&gt;</summary><content type="html">&lt;h2&gt;Overview&lt;/h2&gt;
-&lt;p&gt;From the 
-&lt;a href="https://cetyler.github.io/calculator-project-setup.html"&gt;previous article&lt;/a&gt;,
-the plan is to create &lt;a href="https://github.com/cetyler/calculator"&gt;calculator&lt;/a&gt; in
-order to update my Python workflow.
-This article will cover creating User Requirements, Design Requirements and a
-Roadmap.&lt;/p&gt;
-&lt;h2&gt;Location of Documents&lt;/h2&gt;
-&lt;p&gt;While we do have Sphinx already set up, in my opinion these documents should be
-related to what the calculator package does and how to use it.
-User Requirements and Design Requirements will be in Gitea/Github wiki.
-Both these documents are more for the developer than the user.
-The Roadmap should be in Sphinx as it is useful to the user when features are
-planned to be released.&lt;/p&gt;
-&lt;h2&gt;User Requirements&lt;/h2&gt;
-&lt;p&gt;User Requirements generally are what the developer thinks the user wants based
-either by observation, feedback or a spec document.
-This document is to translate the available information into something that
-could be used to help build a design.&lt;/p&gt;
-&lt;p&gt;As you see, the
-&lt;a href="https://github.com/cetyler/calculator/wiki/User-Requirements"&gt;User Requirements&lt;/a&gt;
-describes that this will be a simple program that can also be used as a
-library.
-There are a couple more requirements but for the most part, this describes what
-I think the user would want.&lt;/p&gt;
-&lt;p&gt;The goal is to create the requirements without thinking about how to implement.
-For the calculator project, naming Python as the language is a requirement
-since this project is to specifically determine a Python workflow.&lt;/p&gt;
-&lt;h2&gt;Design Requirements&lt;/h2&gt;
-&lt;p&gt;Design Requirements generally are how the developer is planning on how to
-implement the program based on the User Requirements.
-This document is usually what an 1.0 version of the program.&lt;/p&gt;
-&lt;p&gt;As you see
-&lt;a href="https://github.com/cetyler/calculator/wiki/Design-Requirements"&gt;Design Requirements&lt;/a&gt;
-shows that there will be two parts -- GUI and API.&lt;/p&gt;
-&lt;h3&gt;GUI&lt;/h3&gt;
-&lt;p&gt;The GUI will be an interactive terminal interface similar to the Python shell
-or like
-&lt;a href="https://www.pgcli.com/"&gt;pgcli&lt;/a&gt;.
-Due to how simple this program is, I don't really need to do a long description
-on how I plan on implementing the GUI.&lt;/p&gt;
-&lt;h3&gt;API&lt;/h3&gt;
-&lt;p&gt;The API will be able to call functions to add, subtract, etc.
-I did not include a separate section describing &lt;code&gt;basic.py&lt;/code&gt; but it will support
-addition, subtracting, multiplication and division.&lt;/p&gt;
-&lt;h2&gt;Roadmap&lt;/h2&gt;
-&lt;p&gt;The Roadmap is a proposed feature release plan.
-For this calculator, there is not much of a Roadmap.
-First need to create &lt;code&gt;Roadmap.rst&lt;/code&gt; and create a simple release schedule.
-Will need to update &lt;code&gt;index.rst&lt;/code&gt; to include the Roadmap.&lt;/p&gt;
-&lt;p&gt;As you can see
-&lt;a href="https://github.com/cetyler/calculator/blob/develop/ROADMAP.rst"&gt;Roadmap&lt;/a&gt; shows
-that it is a fairly basic Roadmap.
-There is not really a plan for a 2.0.0 release and a 1.0.0 release will cover
-everything that was in User Requirements.&lt;/p&gt;
-&lt;p&gt;Will need to update my fork of Audrey's cookiecutter template to include a
-Roadmap file.&lt;/p&gt;
-&lt;h2&gt;Next Steps&lt;/h2&gt;
-&lt;p&gt;The rest of the documentation is not done but the rest of the documentation can
-be completed prior to a release.
-Using a combination of the wiki and Sphinx, it keeps a good separation to what
-will stay with the repository and what could eventually go to
-&lt;a href="https://readthedocs.org/"&gt;Read The Docs&lt;/a&gt; or an internal website.&lt;/p&gt;
-&lt;p&gt;Prior to any writing any code, I will first write tests to ensure that we will
-comply with our User Requirements.
-The initial tests should cover the API as much as possible.&lt;/p&gt;</content><category term="Python"></category><category term="python"></category><category term="project"></category><category term="library"></category><category term="package"></category></entry></feed>
+features ahead of time.&lt;/p&gt;</content><category term="Python"></category><category term="python"></category><category term="project"></category><category term="library"></category><category term="package"></category><category term="pytest"></category><category term="tests"></category></entry></feed>
