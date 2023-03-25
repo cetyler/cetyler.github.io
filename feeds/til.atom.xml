@@ -1,5 +1,73 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Christopher Tyler R&amp;D Test Engineer - TIL</title><link href="https://cetyler.github.io/" rel="alternate"></link><link href="https://cetyler.github.io/feeds/til.atom.xml" rel="self"></link><id>https://cetyler.github.io/</id><updated>2023-03-17T00:00:00-05:00</updated><entry><title>Calculate the Distance between two Latitudes and Longitudes</title><link href="https://cetyler.github.io/calculate-the-distance-between-two-latitudes-and-longitudes.html" rel="alternate"></link><published>2023-03-17T00:00:00-05:00</published><updated>2023-03-17T00:00:00-05:00</updated><author><name>Christoper</name></author><id>tag:cetyler.github.io,2023-03-17:/calculate-the-distance-between-two-latitudes-and-longitudes.html</id><summary type="html">&lt;p&gt;Calculation using SQL.&lt;/p&gt;</summary><content type="html">&lt;p&gt;From Renee's 
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Christopher Tyler R&amp;D Test Engineer - TIL</title><link href="https://cetyler.github.io/" rel="alternate"></link><link href="https://cetyler.github.io/feeds/til.atom.xml" rel="self"></link><id>https://cetyler.github.io/</id><updated>2023-03-24T00:00:00-05:00</updated><entry><title>Find and Replace in Vim</title><link href="https://cetyler.github.io/find-and-replace-in-vim.html" rel="alternate"></link><published>2023-03-24T00:00:00-05:00</published><updated>2023-03-24T00:00:00-05:00</updated><author><name>Christopher</name></author><id>tag:cetyler.github.io,2023-03-24:/find-and-replace-in-vim.html</id><summary type="html">&lt;p&gt;Different ways to find and replace items using vim.&lt;/p&gt;</summary><content type="html">&lt;p&gt;From https://linuxize.com/post/vim-find-replace/&lt;/p&gt;
+&lt;h2&gt;Basic Find and Replace&lt;/h2&gt;
+&lt;p&gt;In Vim you use &lt;code&gt;:substitute&lt;/code&gt; (&lt;code&gt;:s&lt;/code&gt;) command.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="err"&gt;:&lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="n"&gt;range&lt;/span&gt;&lt;span class="o"&gt;]&lt;/span&gt;&lt;span class="n"&gt;s&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="err"&gt;{&lt;/span&gt;&lt;span class="n"&gt;pattern&lt;/span&gt;&lt;span class="err"&gt;}&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="err"&gt;{&lt;/span&gt;&lt;span class="n"&gt;string&lt;/span&gt;&lt;span class="err"&gt;}&lt;/span&gt;&lt;span class="o"&gt;/[&lt;/span&gt;&lt;span class="n"&gt;flags&lt;/span&gt;&lt;span class="o"&gt;]&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="n"&gt;count&lt;/span&gt;&lt;span class="o"&gt;]&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;If no &lt;code&gt;[range]&lt;/code&gt; and &lt;code&gt;[count]&lt;/code&gt; are given, only the pattern found in the current
+line is replace.&lt;/p&gt;
+&lt;p&gt;If you want to replace all occurrences of foo with bar:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;:%s/foo/bar/g
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;The &lt;code&gt;%&lt;/code&gt; is for the entire file and &lt;code&gt;g&lt;/code&gt; would be all occurrences.
+The &lt;code&gt;/&lt;/code&gt; can be replaced with any non-alphanumeric single-byte character as a
+delimiter.
+This is useful if you are replacing &lt;code&gt;/&lt;/code&gt;.&lt;/p&gt;
+&lt;h2&gt;Case Sensitivity&lt;/h2&gt;
+&lt;p&gt;By default the search is case sensitive so include &lt;code&gt;i&lt;/code&gt; to make it ignore the
+case.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;:s/Foo/bar/gi
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h2&gt;Search Range&lt;/h2&gt;
+&lt;p&gt;To search for certain line ranges, include the line numbers:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;:3,10s/foo/bar/g
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;This will be for lines 3 to 10 (this is inclusive).&lt;/p&gt;
+&lt;p&gt;To make changes from the current line to the end of the file using &lt;code&gt;.&lt;/code&gt; and &lt;code&gt;$&lt;/code&gt;.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;:.,$/foo/bar/
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Finally you can use &lt;code&gt;+&lt;/code&gt; and &lt;code&gt;-&lt;/code&gt; to denote the number of rows above or below a
+certain linIf no &lt;code&gt;[range]&lt;/code&gt; and &lt;code&gt;[count]&lt;/code&gt; are given, only the pattern found in
+the current line is replace.&lt;/p&gt;
+&lt;p&gt;If you want to replace all occurrences of foo with bar:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;:%s/foo/bar/g
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;The &lt;code&gt;%&lt;/code&gt; is for the entire file and &lt;code&gt;g&lt;/code&gt; would be all occurrences.
+The &lt;code&gt;/&lt;/code&gt; can be replaced with any non-alphanumeric single-byte character as a
+delimiter.
+This is useful if you are replacing &lt;code&gt;/&lt;/code&gt;.&lt;/p&gt;
+&lt;h2&gt;Case Sensitivity&lt;/h2&gt;
+&lt;p&gt;By default the search is case sensitive so include &lt;code&gt;i&lt;/code&gt; to make it ignore the
+case.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;:s/Foo/bar/gi
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h2&gt;Search Range&lt;/h2&gt;
+&lt;p&gt;To search for certain line ranges, include the line numbers:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;:3,10s/foo/bar/g
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;This will be for lines 3 to 10 (this is inclusive).&lt;/p&gt;
+&lt;p&gt;To make changes from the current line to the end of the file using &lt;code&gt;.&lt;/code&gt; and &lt;code&gt;$&lt;/code&gt;.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;:.,$/foo/bar/
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Finally you can use &lt;code&gt;+&lt;/code&gt; and &lt;code&gt;-&lt;/code&gt; to denote the number of rows above or below a
+certain line.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;:.,+4s/foo/bar/g
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h2&gt;Substituting Whole Word&lt;/h2&gt;
+&lt;p&gt;To only replace the whole word and not portions, type &lt;code&gt;\&amp;lt;&lt;/code&gt; to mark the
+beginning of a word and &lt;code&gt;\&amp;gt;&lt;/code&gt; to mark the end of a word.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;:s/\&amp;lt;foo\&amp;gt;/bar/
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</content><category term="TIL"></category><category term="til"></category><category term="vim"></category><category term="find"></category><category term="replace"></category><category term="substitute"></category></entry><entry><title>Calculate the Distance between two Latitudes and Longitudes</title><link href="https://cetyler.github.io/calculate-the-distance-between-two-latitudes-and-longitudes.html" rel="alternate"></link><published>2023-03-17T00:00:00-05:00</published><updated>2023-03-17T00:00:00-05:00</updated><author><name>Christoper</name></author><id>tag:cetyler.github.io,2023-03-17:/calculate-the-distance-between-two-latitudes-and-longitudes.html</id><summary type="html">&lt;p&gt;Calculation using SQL.&lt;/p&gt;</summary><content type="html">&lt;p&gt;From Renee's 
 &lt;a href="https://sqlfordatascientists.com/"&gt;SQL for Data Scientists&lt;/a&gt; found the
 calculation https://daynebatten.com/2015/latitude-longitude-distance-sql which
 can be useful for my weather data.&lt;/p&gt;
