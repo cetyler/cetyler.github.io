@@ -1,5 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Christopher Tyler R&amp;D Test Engineer</title><link href="https://cetyler.github.io/" rel="alternate"></link><link href="https://cetyler.github.io/feeds/all.atom.xml" rel="self"></link><id>https://cetyler.github.io/</id><updated>2023-03-24T00:00:00-05:00</updated><entry><title>Find and Replace in Vim</title><link href="https://cetyler.github.io/find-and-replace-in-vim.html" rel="alternate"></link><published>2023-03-24T00:00:00-05:00</published><updated>2023-03-24T00:00:00-05:00</updated><author><name>Christopher</name></author><id>tag:cetyler.github.io,2023-03-24:/find-and-replace-in-vim.html</id><summary type="html">&lt;p&gt;Different ways to find and replace items using vim.&lt;/p&gt;</summary><content type="html">&lt;p&gt;From https://linuxize.com/post/vim-find-replace/&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Christopher Tyler R&amp;D Test Engineer</title><link href="https://cetyler.github.io/" rel="alternate"></link><link href="https://cetyler.github.io/feeds/all.atom.xml" rel="self"></link><id>https://cetyler.github.io/</id><updated>2023-03-31T00:00:00-05:00</updated><entry><title>Application Name in PostgreSQL</title><link href="https://cetyler.github.io/application-name-in-postgresql.html" rel="alternate"></link><published>2023-03-31T00:00:00-05:00</published><updated>2023-03-31T00:00:00-05:00</updated><author><name>Christopher</name></author><id>tag:cetyler.github.io,2023-03-31:/application-name-in-postgresql.html</id><summary type="html">&lt;p&gt;Send application name to PostgreSQL.&lt;/p&gt;</summary><content type="html">&lt;p&gt;From Dimitri's &lt;a href="https://theartofpostgresql.com/"&gt;The Art of PostgreSQL&lt;/a&gt;.
+PostgreSQL has an &lt;code&gt;application_name&lt;/code&gt; parameter, which you can set in the
+connection string.
+It is then possible have it reported in the server's logs and is also part of
+the system &lt;code&gt;pg_stat_activity&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;For example:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="s"&gt;&amp;quot;postgres://user:pass@127.0.0.1:5432/db_name?application_name=app_name&amp;quot;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</content><category term="TIL"></category><category term="til"></category><category term="postgresql"></category><category term="application_name"></category><category term="taop"></category><category term="The Art of PostgreSQL"></category></entry><entry><title>Find and Replace in Vim</title><link href="https://cetyler.github.io/find-and-replace-in-vim.html" rel="alternate"></link><published>2023-03-24T00:00:00-05:00</published><updated>2023-03-24T00:00:00-05:00</updated><author><name>Christopher</name></author><id>tag:cetyler.github.io,2023-03-24:/find-and-replace-in-vim.html</id><summary type="html">&lt;p&gt;Different ways to find and replace items using vim.&lt;/p&gt;</summary><content type="html">&lt;p&gt;From https://linuxize.com/post/vim-find-replace/&lt;/p&gt;
 &lt;h2&gt;Basic Find and Replace&lt;/h2&gt;
 &lt;p&gt;In Vim you use &lt;code&gt;:substitute&lt;/code&gt; (&lt;code&gt;:s&lt;/code&gt;) command.&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="err"&gt;:&lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="n"&gt;range&lt;/span&gt;&lt;span class="o"&gt;]&lt;/span&gt;&lt;span class="n"&gt;s&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="err"&gt;{&lt;/span&gt;&lt;span class="n"&gt;pattern&lt;/span&gt;&lt;span class="err"&gt;}&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="err"&gt;{&lt;/span&gt;&lt;span class="n"&gt;string&lt;/span&gt;&lt;span class="err"&gt;}&lt;/span&gt;&lt;span class="o"&gt;/[&lt;/span&gt;&lt;span class="n"&gt;flags&lt;/span&gt;&lt;span class="o"&gt;]&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="n"&gt;count&lt;/span&gt;&lt;span class="o"&gt;]&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
@@ -665,89 +672,4 @@ The documentation will need to be updated prior to a 1.0 release.
 Also prior to a 1.0 release, should create a package and verify that it will
 still work.
 Then can go through and create a checklist to update Audrey's cookiecutter.
-Finally, update my Python workflow.&lt;/p&gt;</content><category term="Python"></category><category term="python"></category><category term="project"></category><category term="library"></category><category term="package"></category><category term="cli"></category></entry><entry><title>Calculator Project -- API</title><link href="https://cetyler.github.io/calculator-project-api.html" rel="alternate"></link><published>2022-04-01T21:00:00-05:00</published><updated>2022-04-01T21:00:00-05:00</updated><author><name>Christopher</name></author><id>tag:cetyler.github.io,2022-04-01:/calculator-project-api.html</id><summary type="html">&lt;p&gt;Implement API.&lt;/p&gt;</summary><content type="html">&lt;h2&gt;Overview&lt;/h2&gt;
-&lt;p&gt;From the 
-&lt;a href="https://cetyler.github.io/calculator-project-tests.html"&gt;previous article&lt;/a&gt;,
-the plan is to create &lt;a href="https://github.com/cetyler/calculator"&gt;calculator&lt;/a&gt; in
-order to update my Python workflow.
-This article will cover implementing the API and verifying that the tests pass
-before the command line interface (CLI) gets developed.&lt;/p&gt;
-&lt;h2&gt;Cookiecutter Template&lt;/h2&gt;
-&lt;p&gt;Audrey's template created a MakeFile to aid to performing certain operations.
-I will make use of &lt;code&gt;make test&lt;/code&gt;, &lt;code&gt;make lint&lt;/code&gt; and &lt;code&gt;make coverage&lt;/code&gt;.
-In order to get &lt;code&gt;make coverage&lt;/code&gt; to work, I added &lt;code&gt;pytest-cov&lt;/code&gt;.&lt;/p&gt;
-&lt;h2&gt;Implement API&lt;/h2&gt;
-&lt;p&gt;Now that I have tests, I can implement the API and verify that my API will meet
-the requirements.
-If certain functions won't be implemented in a release, I can always skip a test
-until that function/feature gets implemented.
-For more complicated projects, feature release based on the roadmap can have the
-tests developed and use skip until a certain version.&lt;/p&gt;
-&lt;p&gt;More complicated programs may have multiple files for the API depending on
-functionality.
-For example, the calculator program now has its API in &lt;code&gt;calculation.py&lt;/code&gt;.
-Let's say in a future release, I add functionality to do complex calculations
-like loan terms, calculus or conversions.
-Each one of those could have its own file/module.&lt;/p&gt;
-&lt;h3&gt;Planning the API&lt;/h3&gt;
-&lt;p&gt;When planning the API the User and Design Requirements can dictate how to
-create the API.
-However most programs can change over time beyond the initial requirements.
-Depending the complexity, more design work would be needed as well as some
-thought on being able to extend the API without potentially breaking the API.&lt;/p&gt;
-&lt;p&gt;For example, the calculator program's initial API are in the &lt;code&gt;Basic()&lt;/code&gt; class.
-Each operation is a method in &lt;code&gt;Basic()&lt;/code&gt; which makes it easy to extend
-&lt;code&gt;Basic()&lt;/code&gt;.
-However each method's inputs should be thought through so that the inputs don't
-need to change.
-For example, the User Requirements did not state how many numbers can be added
-together.
-To meet the requirements, I could just have &lt;code&gt;add()&lt;/code&gt; take just two arguments
-which is the minimum to add.
-However in the future if I needed to extend &lt;code&gt;add()&lt;/code&gt; to accept more than two
-arguments, I may need to break the API which could break programs that use that
-API.&lt;/p&gt;
-&lt;h3&gt;Breaking the API&lt;/h3&gt;
-&lt;p&gt;Breaking the API should only be done if it is really necessary.
-As with the example above, breaking an API can affect users of that API.&lt;/p&gt;
-&lt;p&gt;Breaking the API should cause a major version change.
-If possible, notifying the user ahead of time would help them update their
-programs to adjust to the changes.
-If an API will get removed, then a deprecation warning should be used prior to
-removing that portion of the API.
-Changing the API should be documented.
-Adding to an API especially if it is not a breaking change does not require a
-major version change unless it is a large addition.&lt;/p&gt;
-&lt;p&gt;For example, &lt;code&gt;Basic()&lt;/code&gt; stores the previous result but it is not automatic.
-In order to store the previous result you would need to do the following:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&amp;gt; b = Basic()
-&amp;gt; b.previous_result = b.add(1, 2)
-&amp;gt; b.previous_result
-  3
-&amp;gt; b.sub(b.previous_result, 2)
-  1
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;This at first may not meet the User Requirements.
-The User Requirements the previous result is being tracked by the program.
-However this is the API and not the program.
-As long as the calculator program keeps track of the previous result, we should
-be okay.
-Let's say that after creating the API this way and working on the CLI, we
-decide that it would be easier to have &lt;code&gt;Basic()&lt;/code&gt; keep track of the result and
-to be able to clear the previous result.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&amp;gt; b = Basic()
-&amp;gt; b.add(1, 2)
-  3
-&amp;gt; b.previous_result
-  3
-&amp;gt; b.clear_result
-&amp;gt; b.previous_result
-  0
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;This would require an API additional of &lt;code&gt;clear_result()&lt;/code&gt; and after each
-calculation to store in &lt;code&gt;previous_result()&lt;/code&gt;.&lt;/p&gt;
-&lt;h2&gt;Next Steps&lt;/h2&gt;
-&lt;p&gt;Now that we have an API that works we can now create the CLI GUI interface.
-Most of the work for the program is in the API so the CLI can be fairly simple.&lt;/p&gt;</content><category term="Python"></category><category term="python"></category><category term="project"></category><category term="library"></category><category term="package"></category><category term="api"></category></entry></feed>
+Finally, update my Python workflow.&lt;/p&gt;</content><category term="Python"></category><category term="python"></category><category term="project"></category><category term="library"></category><category term="package"></category><category term="cli"></category></entry></feed>

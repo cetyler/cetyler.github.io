@@ -5,56 +5,56 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>https://cetyler.github.io/search.html</loc>
-<lastmod>2023-03-25T17:54:17-00:00</lastmod>
+<lastmod>2023-04-01T19:44:38-00:00</lastmod>
 <changefreq>hourly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>https://cetyler.github.io/</loc>
-<lastmod>2023-03-25T17:54:17-00:00</lastmod>
+<lastmod>2023-04-01T19:44:38-00:00</lastmod>
 <changefreq>hourly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>https://cetyler.github.io/archives.html</loc>
-<lastmod>2023-03-25T17:54:17-00:00</lastmod>
+<lastmod>2023-04-01T19:44:38-00:00</lastmod>
 <changefreq>hourly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>https://cetyler.github.io/authors.html</loc>
-<lastmod>2023-03-25T17:54:17-00:00</lastmod>
+<lastmod>2023-04-01T19:44:38-00:00</lastmod>
 <changefreq>hourly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>https://cetyler.github.io/tags.html</loc>
-<lastmod>2023-03-25T17:54:17-00:00</lastmod>
+<lastmod>2023-04-01T19:44:38-00:00</lastmod>
 <changefreq>hourly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>https://cetyler.github.io/categories.html</loc>
-<lastmod>2023-03-25T17:54:17-00:00</lastmod>
+<lastmod>2023-04-01T19:44:38-00:00</lastmod>
 <changefreq>hourly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>https://cetyler.github.io/404.html</loc>
-<lastmod>2023-03-25T17:54:17-00:00</lastmod>
+<lastmod>2023-04-01T19:44:38-00:00</lastmod>
 <changefreq>hourly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>https://cetyler.github.io/pages/about-me.html</loc>
-<lastmod>2023-03-25T17:54:17-00:00</lastmod>
+<lastmod>2023-04-01T19:44:38-00:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
@@ -68,9 +68,16 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>https://cetyler.github.io/pages/my-resume.html</loc>
-<lastmod>2023-03-25T17:54:17-00:00</lastmod>
+<lastmod>2023-04-01T19:44:38-00:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
+</url>
+
+<url>
+<loc>https://cetyler.github.io/application-name-in-postgresql.html</loc>
+<lastmod>2023-03-31T00:00:00-05:00</lastmod>
+<changefreq>always</changefreq>
+<priority>1</priority>
 </url>
 
 <url>
@@ -306,7 +313,7 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>https://cetyler.github.io/category/til.html</loc>
-<lastmod>2023-03-24T00:00:00-05:51</lastmod>
+<lastmod>2023-03-31T00:00:00-05:51</lastmod>
 <changefreq>hourly</changefreq>
 <priority>0.5</priority>
 </url>
@@ -320,7 +327,35 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>https://cetyler.github.io/tag/til.html</loc>
-<lastmod>2023-03-24T00:00:00-05:51</lastmod>
+<lastmod>2023-03-31T00:00:00-05:51</lastmod>
+<changefreq>hourly</changefreq>
+<priority>0.5</priority>
+</url>
+
+<url>
+<loc>https://cetyler.github.io/tag/postgresql.html</loc>
+<lastmod>2023-03-31T00:00:00-05:51</lastmod>
+<changefreq>hourly</changefreq>
+<priority>0.5</priority>
+</url>
+
+<url>
+<loc>https://cetyler.github.io/tag/application_name.html</loc>
+<lastmod>2023-03-31T00:00:00-05:51</lastmod>
+<changefreq>hourly</changefreq>
+<priority>0.5</priority>
+</url>
+
+<url>
+<loc>https://cetyler.github.io/tag/taop.html</loc>
+<lastmod>2023-03-31T00:00:00-05:51</lastmod>
+<changefreq>hourly</changefreq>
+<priority>0.5</priority>
+</url>
+
+<url>
+<loc>https://cetyler.github.io/tag/the-art-of-postgresql.html</loc>
+<lastmod>2023-03-31T00:00:00-05:51</lastmod>
 <changefreq>hourly</changefreq>
 <priority>0.5</priority>
 </url>
@@ -368,28 +403,7 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 </url>
 
 <url>
-<loc>https://cetyler.github.io/tag/taop.html</loc>
-<lastmod>2023-03-10T00:00:00-05:51</lastmod>
-<changefreq>hourly</changefreq>
-<priority>0.5</priority>
-</url>
-
-<url>
-<loc>https://cetyler.github.io/tag/postgresql.html</loc>
-<lastmod>2023-03-10T00:00:00-05:51</lastmod>
-<changefreq>hourly</changefreq>
-<priority>0.5</priority>
-</url>
-
-<url>
 <loc>https://cetyler.github.io/tag/psql.html</loc>
-<lastmod>2023-03-10T00:00:00-05:51</lastmod>
-<changefreq>hourly</changefreq>
-<priority>0.5</priority>
-</url>
-
-<url>
-<loc>https://cetyler.github.io/tag/the-art-of-postgresql.html</loc>
 <lastmod>2023-03-10T00:00:00-05:51</lastmod>
 <changefreq>hourly</changefreq>
 <priority>0.5</priority>
@@ -719,7 +733,7 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>https://cetyler.github.io/author/christopher.html</loc>
-<lastmod>2023-03-24T00:00:00-05:51</lastmod>
+<lastmod>2023-03-31T00:00:00-05:51</lastmod>
 <changefreq>hourly</changefreq>
 <priority>0.5</priority>
 </url>
