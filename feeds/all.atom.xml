@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Christopher Tyler R&amp;D Test Engineer</title><link href="https://cetyler.github.io/" rel="alternate"></link><link href="https://cetyler.github.io/feeds/all.atom.xml" rel="self"></link><id>https://cetyler.github.io/</id><updated>2023-03-31T00:00:00-05:00</updated><entry><title>Application Name in PostgreSQL</title><link href="https://cetyler.github.io/application-name-in-postgresql.html" rel="alternate"></link><published>2023-03-31T00:00:00-05:00</published><updated>2023-03-31T00:00:00-05:00</updated><author><name>Christopher</name></author><id>tag:cetyler.github.io,2023-03-31:/application-name-in-postgresql.html</id><summary type="html">&lt;p&gt;Send application name to PostgreSQL.&lt;/p&gt;</summary><content type="html">&lt;p&gt;From Dimitri's &lt;a href="https://theartofpostgresql.com/"&gt;The Art of PostgreSQL&lt;/a&gt;.
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Christopher Tyler R&amp;D Test Engineer</title><link href="https://cetyler.github.io/" rel="alternate"></link><link href="https://cetyler.github.io/feeds/all.atom.xml" rel="self"></link><id>https://cetyler.github.io/</id><updated>2023-04-07T00:00:00-05:00</updated><entry><title>Inject Packages in pipx</title><link href="https://cetyler.github.io/inject-packages-in-pipx.html" rel="alternate"></link><published>2023-04-07T00:00:00-05:00</published><updated>2023-04-07T00:00:00-05:00</updated><author><name>Christopher</name></author><id>tag:cetyler.github.io,2023-04-07:/inject-packages-in-pipx.html</id><summary type="html">&lt;p&gt;Add packages to an existing virtual environment.&lt;/p&gt;</summary><content type="html">&lt;p&gt;I figured out how to inject and add multiple packages to an install:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;$ pipx inject visidata psycopg2-binary
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</content><category term="TIL"></category><category term="pipx"></category></entry><entry><title>Application Name in PostgreSQL</title><link href="https://cetyler.github.io/application-name-in-postgresql.html" rel="alternate"></link><published>2023-03-31T00:00:00-05:00</published><updated>2023-03-31T00:00:00-05:00</updated><author><name>Christopher</name></author><id>tag:cetyler.github.io,2023-03-31:/application-name-in-postgresql.html</id><summary type="html">&lt;p&gt;Send application name to PostgreSQL.&lt;/p&gt;</summary><content type="html">&lt;p&gt;From Dimitri's &lt;a href="https://theartofpostgresql.com/"&gt;The Art of PostgreSQL&lt;/a&gt;.
 PostgreSQL has an &lt;code&gt;application_name&lt;/code&gt; parameter, which you can set in the
 connection string.
 It is then possible have it reported in the server's logs and is also part of
@@ -608,68 +610,4 @@ a README and use the Wiki instead of creating a more structured documentation.&l
 &lt;h2&gt;Next Steps&lt;/h2&gt;
 &lt;p&gt;Some basic documentation is done.
 The next article will build the package (not to pypi) to verify that the
-package will work.&lt;/p&gt;</content><category term="Python"></category><category term="python"></category><category term="project"></category><category term="library"></category><category term="package"></category><category term="documentation"></category><category term="sphinx"></category></entry><entry><title>Calculator Project -- CLI</title><link href="https://cetyler.github.io/calculator-project-cli.html" rel="alternate"></link><published>2022-04-03T16:00:00-05:00</published><updated>2022-04-03T16:00:00-05:00</updated><author><name>Christopher</name></author><id>tag:cetyler.github.io,2022-04-03:/calculator-project-cli.html</id><summary type="html">&lt;p&gt;Implement CLI.&lt;/p&gt;</summary><content type="html">&lt;h2&gt;Overview&lt;/h2&gt;
-&lt;p&gt;From the 
-&lt;a href="https://cetyler.github.io/calculator-project-api.html"&gt;previous article&lt;/a&gt;,
-the plan is to create &lt;a href="https://github.com/cetyler/calculator"&gt;calculator&lt;/a&gt; in
-order to update my Python workflow.
-This article will cover implementing the CLI.&lt;/p&gt;
-&lt;h2&gt;Determining the Interface&lt;/h2&gt;
-&lt;p&gt;According to the User Requirements, the CLI will be an interactive environment
-with no command line arguments.
-The inspiration for the interface I am thinking of comes from
-&lt;a href="https://github.com/dbcli/pgcli"&gt;pgcli&lt;/a&gt;.
-I would like at least initially be able to do the following:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Start the prompt with a statement to run help to get a list of commands.&lt;/li&gt;
-&lt;li&gt;Be able to press the up arrow or something to go through the history.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;A bonus would be able to provide some syntax highlighting and predictive
-showing of a command as the user start to type.&lt;/p&gt;
-&lt;h3&gt;Interactive CLI&lt;/h3&gt;
-&lt;p&gt;Will use &lt;a href="https://python-prompt-toolkit.readthedocs.io/"&gt;prompt toolkit&lt;/a&gt; to
-create my CLI interface.
-This library will also provide me code completion, history and suggesting stuff
-from history.&lt;/p&gt;
-&lt;h3&gt;Add Some Color&lt;/h3&gt;
-&lt;p&gt;Will use &lt;a href="https://rich.readthedocs.io/en/latest/"&gt;rich&lt;/a&gt; to add some color to my
-interface.
-The color will only be added when items are printed out.&lt;/p&gt;
-&lt;h2&gt;Setup to Run as a Package&lt;/h2&gt;
-&lt;p&gt;First step is to create &lt;code&gt;__main__.py&lt;/code&gt; so that when this project is ran as a
-package, it will start the CLI.&lt;/p&gt;
-&lt;h2&gt;Building CLI&lt;/h2&gt;
-&lt;p&gt;Using &lt;code&gt;rich&lt;/code&gt; and &lt;code&gt;prompt_toolkit&lt;/code&gt; we have enough to meet the User Requirements.
-The first step is to determine how to parse the user input.
-Due to the User Requirements, the program will need to determine the following:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&amp;gt; add(1,2)
-   |  | |&amp;lt;-- 2nd number to add.
-   |  |&amp;lt;---- 1st number to add.
-   |&amp;lt;------- add function.
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;&lt;code&gt;process_input()&lt;/code&gt; will separate the numbers from the command.
-The previous result, the user can use &lt;code&gt;ans&lt;/code&gt; in a function or as a command which
-would return the previous result.
-The numbers will initially be strings so the numbers will need to be converted
-to numbers.&lt;/p&gt;
-&lt;p&gt;Next is to execute based on the command given.
-Commands like &lt;code&gt;ans&lt;/code&gt;, &lt;code&gt;help&lt;/code&gt; and &lt;code&gt;quit&lt;/code&gt; don't have any additional values.
-Math functions like &lt;code&gt;add()&lt;/code&gt; will run the function with the numbers given.
-After math functions are done, update the previous result &lt;code&gt;ans&lt;/code&gt;.&lt;/p&gt;
-&lt;h2&gt;Catching Errors&lt;/h2&gt;
-&lt;p&gt;&lt;code&gt;Basic()&lt;/code&gt; already has some checks to verify that there are enough numbers or
-divide by zero.
-However, &lt;code&gt;Basic()&lt;/code&gt; assumes that the values being given are numbers.
-While processing the user input, will verify that numbers are numbers and will
-let the user know of the problem.&lt;/p&gt;
-&lt;p&gt;This program only has a limit number of commands.
-Will do a check that if any other non command is used, let the user know of the
-error.&lt;/p&gt;
-&lt;h2&gt;Next Steps&lt;/h2&gt;
-&lt;p&gt;The calculator program now works and currently meet the User Requirements.
-The documentation will need to be updated prior to a 1.0 release.
-Also prior to a 1.0 release, should create a package and verify that it will
-still work.
-Then can go through and create a checklist to update Audrey's cookiecutter.
-Finally, update my Python workflow.&lt;/p&gt;</content><category term="Python"></category><category term="python"></category><category term="project"></category><category term="library"></category><category term="package"></category><category term="cli"></category></entry></feed>
+package will work.&lt;/p&gt;</content><category term="Python"></category><category term="python"></category><category term="project"></category><category term="library"></category><category term="package"></category><category term="documentation"></category><category term="sphinx"></category></entry></feed>
