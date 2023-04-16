@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Christopher Tyler R&amp;D Test Engineer</title><link href="https://cetyler.github.io/" rel="alternate"></link><link href="https://cetyler.github.io/feeds/all.atom.xml" rel="self"></link><id>https://cetyler.github.io/</id><updated>2023-04-07T00:00:00-05:00</updated><entry><title>Inject Packages in pipx</title><link href="https://cetyler.github.io/inject-packages-in-pipx.html" rel="alternate"></link><published>2023-04-07T00:00:00-05:00</published><updated>2023-04-07T00:00:00-05:00</updated><author><name>Christopher</name></author><id>tag:cetyler.github.io,2023-04-07:/inject-packages-in-pipx.html</id><summary type="html">&lt;p&gt;Add packages to an existing virtual environment.&lt;/p&gt;</summary><content type="html">&lt;p&gt;I figured out how to inject and add multiple packages to an install:&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Christopher Tyler R&amp;D Test Engineer</title><link href="https://cetyler.github.io/" rel="alternate"></link><link href="https://cetyler.github.io/feeds/all.atom.xml" rel="self"></link><id>https://cetyler.github.io/</id><updated>2023-04-14T00:00:00-05:00</updated><entry><title>Clear Highlighting in Vim</title><link href="https://cetyler.github.io/clear-highlighting-in-vim.html" rel="alternate"></link><published>2023-04-14T00:00:00-05:00</published><updated>2023-04-14T00:00:00-05:00</updated><author><name>Christopher</name></author><id>tag:cetyler.github.io,2023-04-14:/clear-highlighting-in-vim.html</id><summary type="html">&lt;p&gt;Clearing highlighting after performing a search for an example.&lt;/p&gt;</summary><content type="html">&lt;p&gt;To clear highlighting:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;:noh
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;This will clear any highlighting.&lt;/p&gt;</content><category term="TIL"></category><category term="til"></category><category term="vim"></category><category term="highlighting"></category></entry><entry><title>Inject Packages in pipx</title><link href="https://cetyler.github.io/inject-packages-in-pipx.html" rel="alternate"></link><published>2023-04-07T00:00:00-05:00</published><updated>2023-04-07T00:00:00-05:00</updated><author><name>Christopher</name></author><id>tag:cetyler.github.io,2023-04-07:/inject-packages-in-pipx.html</id><summary type="html">&lt;p&gt;Add packages to an existing virtual environment.&lt;/p&gt;</summary><content type="html">&lt;p&gt;I figured out how to inject and add multiple packages to an install:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;$ pipx inject visidata psycopg2-binary
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</content><category term="TIL"></category><category term="pipx"></category></entry><entry><title>Application Name in PostgreSQL</title><link href="https://cetyler.github.io/application-name-in-postgresql.html" rel="alternate"></link><published>2023-03-31T00:00:00-05:00</published><updated>2023-03-31T00:00:00-05:00</updated><author><name>Christopher</name></author><id>tag:cetyler.github.io,2023-03-31:/application-name-in-postgresql.html</id><summary type="html">&lt;p&gt;Send application name to PostgreSQL.&lt;/p&gt;</summary><content type="html">&lt;p&gt;From Dimitri's &lt;a href="https://theartofpostgresql.com/"&gt;The Art of PostgreSQL&lt;/a&gt;.
 PostgreSQL has an &lt;code&gt;application_name&lt;/code&gt; parameter, which you can set in the
@@ -549,65 +553,4 @@ publishes packages.&lt;/p&gt;
 &lt;h2&gt;Next Steps&lt;/h2&gt;
 &lt;p&gt;While the calculator project is not complete, it did the job in going through
 the process of creating a Python project.
-The next article I will create a checklist to update Audrey's cookiecutter.&lt;/p&gt;</content><category term="Python"></category><category term="python"></category><category term="project"></category><category term="library"></category><category term="package"></category><category term="flit"></category></entry><entry><title>Calculator Project -- Documentation</title><link href="https://cetyler.github.io/calculator-project-documentation.html" rel="alternate"></link><published>2022-04-09T16:00:00-05:00</published><updated>2022-04-09T16:00:00-05:00</updated><author><name>Christopher</name></author><id>tag:cetyler.github.io,2022-04-09:/calculator-project-documentation.html</id><summary type="html">&lt;p&gt;Finish up documentation.&lt;/p&gt;</summary><content type="html">&lt;h2&gt;Overview&lt;/h2&gt;
-&lt;p&gt;From the 
-&lt;a href="https://cetyler.github.io/calculator-project-cli.html"&gt;previous article&lt;/a&gt;,
-the plan is to create &lt;a href="https://github.com/cetyler/calculator"&gt;calculator&lt;/a&gt; in
-order to update my Python workflow.
-This article will cover the documentation.&lt;/p&gt;
-&lt;h2&gt;Code Documentation&lt;/h2&gt;
-&lt;p&gt;At minimum each class and function should have some level of documentation to
-describe what it does.
-For this project, I will do enough documentation that will benefit an initial
-package release.&lt;/p&gt;
-&lt;p&gt;Using an IDE like &lt;a href="https://code.visualstudio.com/"&gt;VS Code&lt;/a&gt; and use an
-extension &lt;a href="https://github.com/NilsJPWerner/autoDocstring"&gt;autoDocstring&lt;/a&gt; to
-auto generate the docstring.
-&lt;a href="https://www.vim.org/"&gt;Vim&lt;/a&gt; also has 
-&lt;a href="https://github.com/heavenshell/vim-pydocstring"&gt;vim-pydocstring&lt;/a&gt; to auto
-generate the docstring.&lt;/p&gt;
-&lt;h2&gt;README&lt;/h2&gt;
-&lt;p&gt;At minimum the README should describe how to install the program and brief
-explanation how to run the program.
-Simple programs/libraries can get away with just having the README as the only
-documentation.&lt;/p&gt;
-&lt;p&gt;For this project, I want the README to describe the following:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;What is this program.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;How to install.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;A link to the article series.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;How to find and build the documentation.&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Since I am not going to create my documentation at
-  &lt;a href="https://readthedocs.org/"&gt;Read the Docs&lt;/a&gt;, I want to explain how to
-  create the documentation.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;I generally treat READMEs for other developers not necessarily for the users of
-the program.&lt;/p&gt;
-&lt;h2&gt;Generating Documentation with Sphinx&lt;/h2&gt;
-&lt;p&gt;While I am not going to publish the documentation, for this project I will
-generate some minimal documentation to verify the process.&lt;/p&gt;
-&lt;p&gt;Documentation will be generated by Sphinx so that I can provide information for
-users and developer.
-Also I can provide information of the API by pulling the docstrings from the
-classes and functions.&lt;/p&gt;
-&lt;h2&gt;Using Gitea/Github Wiki&lt;/h2&gt;
-&lt;p&gt;I am currently using https://github.com/cetyler/calculator/wiki for User
-Requirements and Design Requirements.
-If I planned on publishing the documentation, I may put the User Requirements
-in Sphinx instead.&lt;/p&gt;
-&lt;p&gt;I think for simple projects like the calculator project, it makes sense to have
-a README and use the Wiki instead of creating a more structured documentation.&lt;/p&gt;
-&lt;h2&gt;Next Steps&lt;/h2&gt;
-&lt;p&gt;Some basic documentation is done.
-The next article will build the package (not to pypi) to verify that the
-package will work.&lt;/p&gt;</content><category term="Python"></category><category term="python"></category><category term="project"></category><category term="library"></category><category term="package"></category><category term="documentation"></category><category term="sphinx"></category></entry></feed>
+The next article I will create a checklist to update Audrey's cookiecutter.&lt;/p&gt;</content><category term="Python"></category><category term="python"></category><category term="project"></category><category term="library"></category><category term="package"></category><category term="flit"></category></entry></feed>
