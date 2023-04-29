@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Christopher Tyler R&amp;D Test Engineer</title><link href="https://cetyler.github.io/" rel="alternate"></link><link href="https://cetyler.github.io/feeds/all.atom.xml" rel="self"></link><id>https://cetyler.github.io/</id><updated>2023-04-14T00:00:00-05:00</updated><entry><title>Clear Highlighting in Vim</title><link href="https://cetyler.github.io/clear-highlighting-in-vim.html" rel="alternate"></link><published>2023-04-14T00:00:00-05:00</published><updated>2023-04-14T00:00:00-05:00</updated><author><name>Christopher</name></author><id>tag:cetyler.github.io,2023-04-14:/clear-highlighting-in-vim.html</id><summary type="html">&lt;p&gt;Clearing highlighting after performing a search for an example.&lt;/p&gt;</summary><content type="html">&lt;p&gt;To clear highlighting:&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Christopher Tyler R&amp;D Test Engineer</title><link href="https://cetyler.github.io/" rel="alternate"></link><link href="https://cetyler.github.io/feeds/all.atom.xml" rel="self"></link><id>https://cetyler.github.io/</id><updated>2023-04-21T00:00:00-05:00</updated><entry><title>Prune Docker Images</title><link href="https://cetyler.github.io/prune-docker-images.html" rel="alternate"></link><published>2023-04-21T00:00:00-05:00</published><updated>2023-04-21T00:00:00-05:00</updated><author><name>Christopher</name></author><id>tag:cetyler.github.io,2023-04-21:/prune-docker-images.html</id><summary type="html">&lt;p&gt;Remove images that are not in use.&lt;/p&gt;</summary><content type="html">&lt;p&gt;Can run &lt;code&gt;docker image prune -a --filter "until=24h"&lt;/code&gt; which will get rid of any
+images older than 24hrs.
+It will also remove images that are currently not running and not attached to
+any containers.&lt;/p&gt;</content><category term="TIL"></category><category term="til"></category><category term="docker"></category><category term="prune"></category><category term="images"></category></entry><entry><title>Clear Highlighting in Vim</title><link href="https://cetyler.github.io/clear-highlighting-in-vim.html" rel="alternate"></link><published>2023-04-14T00:00:00-05:00</published><updated>2023-04-14T00:00:00-05:00</updated><author><name>Christopher</name></author><id>tag:cetyler.github.io,2023-04-14:/clear-highlighting-in-vim.html</id><summary type="html">&lt;p&gt;Clearing highlighting after performing a search for an example.&lt;/p&gt;</summary><content type="html">&lt;p&gt;To clear highlighting:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;:noh
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
@@ -537,20 +540,4 @@ $ venv&lt;span class="se"&gt;\S&lt;/span&gt;cripts&lt;span class="se"&gt;\a&lt;/
 The nice part is that &lt;code&gt;pyenv&lt;/code&gt; creates &lt;code&gt;.python_version&lt;/code&gt; so even if I decide to
 use something else, I will know which Python version I was using.
 Also using &lt;code&gt;pyenv&lt;/code&gt; to manage my Python versions, I can keep certain projects on
-an older Python version while using the newest version to try out new features.&lt;/p&gt;</content><category term="Python"></category><category term="pyenv"></category><category term="venv"></category><category term="Real Python"></category><category term="Ubuntu"></category><category term="Mate"></category><category term="22.04"></category><category term="pyenv-win"></category></entry><entry><title>Calculator Project -- Package</title><link href="https://cetyler.github.io/calculator-project-package.html" rel="alternate"></link><published>2022-04-09T21:00:00-05:00</published><updated>2022-04-09T21:00:00-05:00</updated><author><name>Christopher</name></author><id>tag:cetyler.github.io,2022-04-09:/calculator-project-package.html</id><summary type="html">&lt;p&gt;Build package with flit.&lt;/p&gt;</summary><content type="html">&lt;h2&gt;Overview&lt;/h2&gt;
-&lt;p&gt;From the 
-&lt;a href="https://cetyler.github.io/calculator-project-documentation.html"&gt;previous article&lt;/a&gt;,
-the plan is to create &lt;a href="https://github.com/cetyler/calculator"&gt;calculator&lt;/a&gt; in
-order to update my Python workflow.
-This article will cover creating a Python package.&lt;/p&gt;
-&lt;h2&gt;Using Flit&lt;/h2&gt;
-&lt;p&gt;Instead of using &lt;code&gt;setup.py&lt;/code&gt;, I will be using flit instead.
-While this project won't go on PyPi, it will go to my internal PyPi server.
-Will use &lt;a href="https://cetyler.github.io/how-to-create-a-python-package.html"&gt;my article&lt;/a&gt; to build my
-package.&lt;/p&gt;
-&lt;p&gt;The main reason I want to continue to use flit is that it only creates and
-publishes packages.&lt;/p&gt;
-&lt;h2&gt;Next Steps&lt;/h2&gt;
-&lt;p&gt;While the calculator project is not complete, it did the job in going through
-the process of creating a Python project.
-The next article I will create a checklist to update Audrey's cookiecutter.&lt;/p&gt;</content><category term="Python"></category><category term="python"></category><category term="project"></category><category term="library"></category><category term="package"></category><category term="flit"></category></entry></feed>
+an older Python version while using the newest version to try out new features.&lt;/p&gt;</content><category term="Python"></category><category term="pyenv"></category><category term="venv"></category><category term="Real Python"></category><category term="Ubuntu"></category><category term="Mate"></category><category term="22.04"></category><category term="pyenv-win"></category></entry></feed>
