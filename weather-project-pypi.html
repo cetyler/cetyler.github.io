@@ -17,6 +17,7 @@
 <meta property="og:site_name" content="Christopher Tyler R&amp;D Test Engineer" />
 <meta property="og:article:author" content="Christopher" />
 <meta property="og:article:published_time" content="2022-08-11T20:00:00-05:00" />
+<meta property="og:article:modified_time" content="2023-04-30T20:00:00-05:00" />
 <meta name="twitter:title" content="Weather Project - PyPi ">
 <meta name="twitter:description" content="Setup PyPi with an empty project to lock in the project name.">
 
@@ -108,16 +109,44 @@ article) as well as create my virtual environment.
 I created a project using <a href="https://www.python-poetry.org/">Poetry</a>.
 This will be an empty project just to lock in the package name.
 Add the API token for both PyPi and Test PyPi using:</p>
-<div class="highlight"><pre><span></span><code><span class="o">&gt;</span> <span class="n">poetry</span> <span class="n">new</span> <span class="n">openweather</span><span class="o">-</span><span class="n">report</span>
-<span class="o">&gt;</span> <span class="n">poetry</span> <span class="n">config</span> <span class="n">repositories</span><span class="p">.</span><span class="n">testpypi</span> <span class="nl">https</span><span class="p">:</span><span class="c1">//test.pypi.org/legacy/</span>
-<span class="o">&gt;</span> <span class="n">poetry</span> <span class="n">config</span> <span class="n">pypi</span><span class="o">-</span><span class="n">token</span><span class="p">.</span><span class="n">pypi</span> <span class="p">[</span><span class="n">API</span> <span class="n">KEY</span><span class="p">]</span>
-<span class="o">&gt;</span> <span class="n">poetry</span> <span class="n">config</span> <span class="n">http</span><span class="o">-</span><span class="n">basic</span><span class="p">.</span><span class="n">testpypi</span> <span class="p">[</span><span class="n">API</span> <span class="n">KEY</span><span class="p">]</span>
-<span class="o">&gt;</span> <span class="n">poetry</span> <span class="n">build</span>
-<span class="o">&gt;</span> <span class="n">poetry</span> <span class="n">publish</span> <span class="o">-</span><span class="n">r</span> <span class="n">testpypi</span>
+<div class="highlight"><pre><span></span><code><span class="n">$</span> <span class="n">poetry</span> <span class="n">new</span> <span class="n">openweather</span><span class="o">-</span><span class="n">report</span>
+<span class="n">$</span> <span class="n">poetry</span> <span class="n">config</span> <span class="n">repositories</span><span class="p">.</span><span class="n">testpypi</span> <span class="nl">https</span><span class="p">:</span><span class="c1">//test.pypi.org/legacy/</span>
+<span class="n">$</span> <span class="n">poetry</span> <span class="n">config</span> <span class="n">pypi</span><span class="o">-</span><span class="n">token</span><span class="p">.</span><span class="n">pypi</span> <span class="p">[</span><span class="n">API</span> <span class="n">KEY</span><span class="p">]</span>
+<span class="n">$</span> <span class="n">poetry</span> <span class="n">config</span> <span class="n">http</span><span class="o">-</span><span class="n">basic</span><span class="p">.</span><span class="n">testpypi</span> <span class="p">[</span><span class="n">API</span> <span class="n">KEY</span><span class="p">]</span>
+<span class="n">$</span> <span class="n">poetry</span> <span class="n">build</span>
+<span class="n">$</span> <span class="n">poetry</span> <span class="n">publish</span> <span class="o">-</span><span class="n">r</span> <span class="n">testpypi</span>
 </code></pre></div>
 
 <p>If everything works, then the package name is unique enough and it now locked
 in.</p>
+<blockquote>
+<p><strong>Update:</strong>
+I switched from using Poetry and use Flit.</p>
+</blockquote>
+<h3>Using Flit</h3>
+<p>Create a token at <a href="https://pypi.org/manage/account/">PyPi</a>.
+Using <a href="https://packaging.python.org/en/latest/specifications/pypirc/">PyPa</a>
+instructions, I updated <code>.pypirc</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="k">[distutils]</span>
+<span class="na">index-servers</span> <span class="o">=</span>
+        <span class="na">pypi</span>
+        <span class="na">testpypi</span>
+
+<span class="k">[pypi]</span>
+<span class="na">username</span> <span class="o">=</span> <span class="s">__token__</span>
+<span class="na">password</span> <span class="o">=</span> <span class="s">&lt;api-token&gt;</span>
+
+<span class="k">[testpypi]</span>
+<span class="na">username</span> <span class="o">=</span> <span class="s">__token__</span>
+<span class="na">password</span> <span class="o">=</span> <span class="s">&lt;api-token&gt;</span>
+</code></pre></div>
+
+<p>Now to build and publish using flit:</p>
+<div class="highlight"><pre><span></span><code>$ flit init
+$ flit build
+$ flit publish --repository testpypi
+</code></pre></div>
+
 <h2>Create Project on Github</h2>
 <p>Normally I use a private <a href="https://gitea.io/en-us/">Gitea</a> instance on my local
 network for personal projects and another one while I am work.
@@ -143,10 +172,9 @@ This project will have the following branches:</p>
 <li>This branch will be considered the stable branch.</li>
 </ul>
 </li>
-<li>develop<ul>
-<li>This will be the latest branch.</li>
-<li>Should generally be working but due to frequent additions of features, it
-  can be unstable at times.</li>
+<li>release_xxx<ul>
+<li>This will be the next release.</li>
+<li>There can be multiple releases open (as pull requests).</li>
 </ul>
 </li>
 <li>feature<ul>
@@ -155,7 +183,7 @@ This project will have the following branches:</p>
 </ul>
 </li>
 <li>bug<ul>
-<li>This can be off either main or develop</li>
+<li>This can be off either main.</li>
 </ul>
 </li>
 </ul>
@@ -220,6 +248,9 @@ Roadmap.</p>
         <section id="article-sidebar" class="span2">
             <h4>Published</h4>
             <time itemprop="dateCreated" datetime="2022-08-11T20:00:00-05:00">Aug 11, 2022</time>
+<h4>Last Updated</h4>
+<time datetime="2023-04-30T20:00:00-05:00">Apr 30, 2023</time>
+
         <h4>More in This Series</h4>
     <ul class="multi-parts-list">
             <li >
@@ -231,16 +262,19 @@ Roadmap.</p>
             <li >
             <a href="https://cetyler.github.io/weather-project-requirements-and-roadmap.html" title="Weather Project - Requirements and Roadmap">Part 3: Weather Project - Requirements and Roadmap</a>
             </li>
+            <li >
+            <a href="https://cetyler.github.io/weather-project-initial-release.html" title="Weather Project - Initial Release">Part 4: Weather Project - Initial Release</a>
+            </li>
     </ul>
             <h4>Category</h4>
             <a class="category-link" href="https://cetyler.github.io/categories.html#python-ref">Python</a>
             <h4>Tags</h4>
             <ul class="list-of-tags tags-in-article">
                 <li><a href="https://cetyler.github.io/tags.html#project-ref">project
-                    <span>11</span>
+                    <span>12</span>
 </a></li>
                 <li><a href="https://cetyler.github.io/tags.html#python-ref">python
-                    <span>19</span>
+                    <span>20</span>
 </a></li>
             </ul>
 <h4>Contact</h4>

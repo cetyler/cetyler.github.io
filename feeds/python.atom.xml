@@ -1,5 +1,113 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Christopher Tyler R&amp;D Test Engineer - Python</title><link href="https://cetyler.github.io/" rel="alternate"></link><link href="https://cetyler.github.io/feeds/python.atom.xml" rel="self"></link><id>https://cetyler.github.io/</id><updated>2022-09-16T20:00:00-05:00</updated><entry><title>Weather Project - Requirements and Roadmap</title><link href="https://cetyler.github.io/weather-project-requirements-and-roadmap.html" rel="alternate"></link><published>2022-09-16T20:00:00-05:00</published><updated>2022-09-16T20:00:00-05:00</updated><author><name>Christopher</name></author><id>tag:cetyler.github.io,2022-09-16:/weather-project-requirements-and-roadmap.html</id><summary type="html">&lt;p&gt;Create a roadmap and requirements.&lt;/p&gt;</summary><content type="html">&lt;h2&gt;Overview&lt;/h2&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Christopher Tyler R&amp;D Test Engineer - Python</title><link href="https://cetyler.github.io/" rel="alternate"></link><link href="https://cetyler.github.io/feeds/python.atom.xml" rel="self"></link><id>https://cetyler.github.io/</id><updated>2023-04-30T20:10:00-05:00</updated><entry><title>Weather Project - Initial Release</title><link href="https://cetyler.github.io/weather-project-initial-release.html" rel="alternate"></link><published>2023-04-30T20:10:00-05:00</published><updated>2023-04-30T20:10:00-05:00</updated><author><name>Christopher</name></author><id>tag:cetyler.github.io,2023-04-30:/weather-project-initial-release.html</id><summary type="html">&lt;p&gt;Initial working release.&lt;/p&gt;</summary><content type="html">&lt;h2&gt;Overview&lt;/h2&gt;
+&lt;p&gt;From the &lt;a href="https://cetyler.github.io/weather-project-requirements-and-roadmap.html"&gt;previous article&lt;/a&gt;,
+the Weather Project is now on
+&lt;a href="https://pypi.org/project/openweather-report/"&gt;PyPi&lt;/a&gt; and is on
+&lt;a href="https://github.com/cetyler/openweather_report"&gt;Github&lt;/a&gt;.
+This article will be a bit of an update and the steps to the initial working
+release.&lt;/p&gt;
+&lt;h2&gt;Current Status&lt;/h2&gt;
+&lt;p&gt;The last update has been quite awhile ago.
+The initial goal the project more or less hasn't change but I have changed a
+some of the goals of the project.
+This program will still have the goal of pulling data from OpenWeather but for
+now only the &lt;a href="https://openweathermap.org/api/one-call-3"&gt;One Call API&lt;/a&gt; since
+this is a free API and contains a lot of data:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Current weather&lt;/li&gt;
+&lt;li&gt;Minute forecast for 1 hour&lt;/li&gt;
+&lt;li&gt;Hourly forecast for 48 hours&lt;/li&gt;
+&lt;li&gt;Daily forecast for 8 days&lt;/li&gt;
+&lt;li&gt;National weather alerts&lt;/li&gt;
+&lt;li&gt;Historical weather data for 40+ years back (since January 1, 1979)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;The latest release (0.1.5), &lt;code&gt;openweather_report&lt;/code&gt; will only get all the data
+listed but the last bullet point.&lt;/p&gt;
+&lt;h2&gt;Switch from Poetry to Flit&lt;/h2&gt;
+&lt;p&gt;In the past year I used &lt;a href="https://python-poetry.org/"&gt;Poetry&lt;/a&gt; in multiple
+projects at work and the workflow was getting in my way.
+Most of my projects are relatively simple and a lot of the features that could
+help a large project was showing me down.
+I went back to using &lt;a href="https://flit.pypa.io/"&gt;Flit&lt;/a&gt; with
+&lt;a href="https://pip-tools.readthedocs.io/en/latest/index.html"&gt;pip-tools&lt;/a&gt; and
+&lt;a href="http://pip-chill.readthedocs.io/en/latest/readme.html"&gt;pip-chill&lt;/a&gt;.
+This provides what I need while still being performant.&lt;/p&gt;
+&lt;p&gt;This release I didn't use &lt;code&gt;pip-tools&lt;/code&gt; and &lt;code&gt;pip-chill&lt;/code&gt; but will going forward.&lt;/p&gt;
+&lt;h2&gt;Getting 0.1.5 Released&lt;/h2&gt;
+&lt;p&gt;I already have a crude private version of this program that was getting data
+from OpenWeather but it wasn't generic enough to share.&lt;/p&gt;
+&lt;h3&gt;pyproject.toml&lt;/h3&gt;
+&lt;p&gt;Switching from Poetry to Flit was straightforward.
+Instead of using &lt;a href="https://www.sqlalchemy.org/"&gt;SQLAlchemy&lt;/a&gt;, I decided to use
+&lt;a href="https://nackjicholson.github.io/aiosql/"&gt;aiosql&lt;/a&gt;.
+The main reason is that the SQL required to save data is simple and I don't
+want it mixed within my Python code like my internal program had.
+SQLAlchemy would be overkill.
+I also included the development dependencies but only used
+&lt;a href="https://www.mypy-lang.org/"&gt;mypy&lt;/a&gt; on this release.
+Once I get the rest of the tools setup, I will go into more detail of the
+settings in my &lt;code&gt;pyproject.toml&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;I did figure out how to get &lt;a href="https://pypa.github.io/pipx/"&gt;pipx&lt;/a&gt; to recognize
+that this was a CLI program and not a library by adding the following:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="k"&gt;[project.scripts]&lt;/span&gt;
+&lt;span class="na"&gt;openweather_report&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;openweather_report.cli:main&amp;quot;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3&gt;README.md&lt;/h3&gt;
+&lt;p&gt;I wanted to make sure that the &lt;code&gt;README.md&lt;/code&gt; had a quickstart as well as
+describing what is required to be able to save to PostgreSQL and SQLite.
+The &lt;a href="https://github.com/cetyler/openweather_report/wiki"&gt;wiki&lt;/a&gt; will still house
+the detail documentation.&lt;/p&gt;
+&lt;h3&gt;CLI Arguments&lt;/h3&gt;
+&lt;p&gt;The program will work using the latitude and longitude of the city you would
+like the weather conditions.
+The API Key is a required as well.
+An invalid API Key will cause OpenWeather to return JSON that describes the
+error.
+Optionally:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;--save&lt;/code&gt;: Will either save to JSON file, PostgreSQL or SQLite.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;--save_path&lt;/code&gt;: This is only for saving to JSON and will default to a
+  timestamp filename.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;--db_string&lt;/code&gt;: This is only for the databases.&lt;/li&gt;
+&lt;li&gt;For PostgreSQL it will be
+    &lt;code&gt;postgres://username:password@host:port/database&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;For SQLite it will be the filename.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;The program will crash if the save location is incorrect or if a database the
+tables not set up ahead of time.&lt;/p&gt;
+&lt;h3&gt;Save to JSON&lt;/h3&gt;
+&lt;p&gt;This was straightforward since I would just dump to a file.
+There is an option to provide a filename but will default to a timestamp
+filename.&lt;/p&gt;
+&lt;h3&gt;PostgreSQL&lt;/h3&gt;
+&lt;p&gt;It requires a schema of &lt;code&gt;weather&lt;/code&gt; and a table &lt;code&gt;weather.raw_json_data&lt;/code&gt; which is
+described in the README.
+Will print to screen if there is an error but won't stop the program from
+running.&lt;/p&gt;
+&lt;h3&gt;SQLite&lt;/h3&gt;
+&lt;p&gt;It is similar to PostgreSQL except there isn't a schema.
+The class is similar to PostgreSQL and will get cleaned up in the next release.&lt;/p&gt;
+&lt;h3&gt;SQL Code&lt;/h3&gt;
+&lt;p&gt;By using &lt;code&gt;aiosql&lt;/code&gt;, I have the SQL separate from the Python code.
+Right now there are two function &lt;code&gt;save_json_data&lt;/code&gt; and
+&lt;code&gt;save_json_data_no_schema&lt;/code&gt;.
+I may decide to separate &lt;code&gt;openweather.sql&lt;/code&gt; into one from PostgreSQL and one
+from SQLite as the project grows.&lt;/p&gt;
+&lt;h2&gt;Next Steps&lt;/h2&gt;
+&lt;p&gt;I verified that the program works and was able to replace my crusty internal
+version.
+I did create a helper program so that I could use this program to loop through
+the cities I track the weather.
+I should provide at least an example of this file so others could do the same.
+I need to flesh out the Roadmap and get the program tested before it gets any
+larger.&lt;/p&gt;
+&lt;p&gt;I also would like to explain how to take this data and do some basic analysis.
+For example it can be slow to query JSON in PostgreSQL and I plan on showing
+how to take the JSON data and put it into separate indexed tables to make
+querying more performant.&lt;/p&gt;
+&lt;p&gt;Finally I really need to revisit &lt;a href="https://www.cookiecutter.io/"&gt;Cookiecutter&lt;/a&gt;
+to help me be more consistent with my projects.&lt;/p&gt;</content><category term="Python"></category><category term="python"></category><category term="project"></category></entry><entry><title>Weather Project - Requirements and Roadmap</title><link href="https://cetyler.github.io/weather-project-requirements-and-roadmap.html" rel="alternate"></link><published>2022-09-16T20:00:00-05:00</published><updated>2022-09-16T20:00:00-05:00</updated><author><name>Christopher</name></author><id>tag:cetyler.github.io,2022-09-16:/weather-project-requirements-and-roadmap.html</id><summary type="html">&lt;p&gt;Create a roadmap and requirements.&lt;/p&gt;</summary><content type="html">&lt;h2&gt;Overview&lt;/h2&gt;
 &lt;p&gt;From the &lt;a href="https://cetyler.github.io/weather-project-pypi.html"&gt;previous article&lt;/a&gt;,
 the Weather Project is now on
 &lt;a href="https://pypi.org/project/openweather-report/"&gt;PyPi&lt;/a&gt; and is on
@@ -122,7 +230,7 @@ database to use for dashboards.&lt;/p&gt;
 &lt;h2&gt;Next Steps&lt;/h2&gt;
 &lt;p&gt;The requirements and initial Roadmap is complete.
 Will now work on using Github's project management features and start doing
-some actual coding.&lt;/p&gt;</content><category term="Python"></category><category term="python"></category><category term="project"></category><category term="documentation"></category></entry><entry><title>Weather Project - PyPi</title><link href="https://cetyler.github.io/weather-project-pypi.html" rel="alternate"></link><published>2022-08-11T20:00:00-05:00</published><updated>2022-08-11T20:00:00-05:00</updated><author><name>Christopher</name></author><id>tag:cetyler.github.io,2022-08-11:/weather-project-pypi.html</id><summary type="html">&lt;p&gt;Setup PyPi with an empty project to lock in the project name.&lt;/p&gt;</summary><content type="html">&lt;h2&gt;Overview&lt;/h2&gt;
+some actual coding.&lt;/p&gt;</content><category term="Python"></category><category term="python"></category><category term="project"></category><category term="documentation"></category></entry><entry><title>Weather Project - PyPi</title><link href="https://cetyler.github.io/weather-project-pypi.html" rel="alternate"></link><published>2022-08-11T20:00:00-05:00</published><updated>2023-04-30T20:00:00-05:00</updated><author><name>Christopher</name></author><id>tag:cetyler.github.io,2022-08-11:/weather-project-pypi.html</id><summary type="html">&lt;p&gt;Setup PyPi with an empty project to lock in the project name.&lt;/p&gt;</summary><content type="html">&lt;h2&gt;Overview&lt;/h2&gt;
 &lt;p&gt;From the &lt;a href="https://cetyler.github.io/weather-project.html"&gt;previous article&lt;/a&gt;,
 the Weather Project will be put on PyPi to help me understand that process and
 to also share with others.
@@ -152,16 +260,44 @@ article) as well as create my virtual environment.
 I created a project using &lt;a href="https://www.python-poetry.org/"&gt;Poetry&lt;/a&gt;.
 This will be an empty project just to lock in the package name.
 Add the API token for both PyPi and Test PyPi using:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;poetry&lt;/span&gt; &lt;span class="n"&gt;new&lt;/span&gt; &lt;span class="n"&gt;openweather&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;report&lt;/span&gt;
-&lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;poetry&lt;/span&gt; &lt;span class="n"&gt;config&lt;/span&gt; &lt;span class="n"&gt;repositories&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;testpypi&lt;/span&gt; &lt;span class="nl"&gt;https&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="c1"&gt;//test.pypi.org/legacy/&lt;/span&gt;
-&lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;poetry&lt;/span&gt; &lt;span class="n"&gt;config&lt;/span&gt; &lt;span class="n"&gt;pypi&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;token&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;pypi&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;API&lt;/span&gt; &lt;span class="n"&gt;KEY&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
-&lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;poetry&lt;/span&gt; &lt;span class="n"&gt;config&lt;/span&gt; &lt;span class="n"&gt;http&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;basic&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;testpypi&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;API&lt;/span&gt; &lt;span class="n"&gt;KEY&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
-&lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;poetry&lt;/span&gt; &lt;span class="n"&gt;build&lt;/span&gt;
-&lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;poetry&lt;/span&gt; &lt;span class="n"&gt;publish&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;r&lt;/span&gt; &lt;span class="n"&gt;testpypi&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="n"&gt;$&lt;/span&gt; &lt;span class="n"&gt;poetry&lt;/span&gt; &lt;span class="n"&gt;new&lt;/span&gt; &lt;span class="n"&gt;openweather&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;report&lt;/span&gt;
+&lt;span class="n"&gt;$&lt;/span&gt; &lt;span class="n"&gt;poetry&lt;/span&gt; &lt;span class="n"&gt;config&lt;/span&gt; &lt;span class="n"&gt;repositories&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;testpypi&lt;/span&gt; &lt;span class="nl"&gt;https&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="c1"&gt;//test.pypi.org/legacy/&lt;/span&gt;
+&lt;span class="n"&gt;$&lt;/span&gt; &lt;span class="n"&gt;poetry&lt;/span&gt; &lt;span class="n"&gt;config&lt;/span&gt; &lt;span class="n"&gt;pypi&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;token&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;pypi&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;API&lt;/span&gt; &lt;span class="n"&gt;KEY&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+&lt;span class="n"&gt;$&lt;/span&gt; &lt;span class="n"&gt;poetry&lt;/span&gt; &lt;span class="n"&gt;config&lt;/span&gt; &lt;span class="n"&gt;http&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;basic&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;testpypi&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;API&lt;/span&gt; &lt;span class="n"&gt;KEY&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+&lt;span class="n"&gt;$&lt;/span&gt; &lt;span class="n"&gt;poetry&lt;/span&gt; &lt;span class="n"&gt;build&lt;/span&gt;
+&lt;span class="n"&gt;$&lt;/span&gt; &lt;span class="n"&gt;poetry&lt;/span&gt; &lt;span class="n"&gt;publish&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;r&lt;/span&gt; &lt;span class="n"&gt;testpypi&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;If everything works, then the package name is unique enough and it now locked
 in.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Update:&lt;/strong&gt;
+I switched from using Poetry and use Flit.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3&gt;Using Flit&lt;/h3&gt;
+&lt;p&gt;Create a token at &lt;a href="https://pypi.org/manage/account/"&gt;PyPi&lt;/a&gt;.
+Using &lt;a href="https://packaging.python.org/en/latest/specifications/pypirc/"&gt;PyPa&lt;/a&gt;
+instructions, I updated &lt;code&gt;.pypirc&lt;/code&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="k"&gt;[distutils]&lt;/span&gt;
+&lt;span class="na"&gt;index-servers&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt;
+        &lt;span class="na"&gt;pypi&lt;/span&gt;
+        &lt;span class="na"&gt;testpypi&lt;/span&gt;
+
+&lt;span class="k"&gt;[pypi]&lt;/span&gt;
+&lt;span class="na"&gt;username&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;__token__&lt;/span&gt;
+&lt;span class="na"&gt;password&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;lt;api-token&amp;gt;&lt;/span&gt;
+
+&lt;span class="k"&gt;[testpypi]&lt;/span&gt;
+&lt;span class="na"&gt;username&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;__token__&lt;/span&gt;
+&lt;span class="na"&gt;password&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;lt;api-token&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Now to build and publish using flit:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;$ flit init
+$ flit build
+$ flit publish --repository testpypi
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
 &lt;h2&gt;Create Project on Github&lt;/h2&gt;
 &lt;p&gt;Normally I use a private &lt;a href="https://gitea.io/en-us/"&gt;Gitea&lt;/a&gt; instance on my local
 network for personal projects and another one while I am work.
@@ -187,10 +323,9 @@ This project will have the following branches:&lt;/p&gt;
 &lt;li&gt;This branch will be considered the stable branch.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
-&lt;li&gt;develop&lt;ul&gt;
-&lt;li&gt;This will be the latest branch.&lt;/li&gt;
-&lt;li&gt;Should generally be working but due to frequent additions of features, it
-  can be unstable at times.&lt;/li&gt;
+&lt;li&gt;release_xxx&lt;ul&gt;
+&lt;li&gt;This will be the next release.&lt;/li&gt;
+&lt;li&gt;There can be multiple releases open (as pull requests).&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;li&gt;feature&lt;ul&gt;
@@ -199,7 +334,7 @@ This project will have the following branches:&lt;/p&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;li&gt;bug&lt;ul&gt;
-&lt;li&gt;This can be off either main or develop&lt;/li&gt;
+&lt;li&gt;This can be off either main.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
@@ -1011,154 +1146,4 @@ using Python.
 For me it was a good value as I purchased the course through Humble Bundle
 Python Super Power Bundle.
 This course was the first time that OOP clicked for me and the way I think.
-Finally I just simply enjoyed Reuven's teaching style.&lt;/p&gt;</content><category term="Python"></category><category term="training"></category><category term="Reuven Lerner"></category><category term="oop"></category><category term="python"></category><category term="review"></category></entry><entry><title>How to Setup Local PyPi Repository</title><link href="https://cetyler.github.io/how-to-setup-local-pypi-repository.html" rel="alternate"></link><published>2021-05-09T15:00:00-05:00</published><updated>2021-05-21T17:00:00-05:00</updated><author><name>Christopher</name></author><id>tag:cetyler.github.io,2021-05-09:/how-to-setup-local-pypi-repository.html</id><summary type="html">&lt;p&gt;How to setup a local PyPi repository to host local packages.&lt;/p&gt;</summary><content type="html">&lt;p&gt;My previous &lt;a href="https://cetyler.github.io/how-to-create-a-python-package.html"&gt;post&lt;/a&gt;, I went
-through created and built a Python package.
-Then I put that package in a local directory and showed how to install that
-package from pip.&lt;/p&gt;
-&lt;p&gt;This post will go through and create a local PyPi for packages that I don't or
-can't post publicly on PyPi.
-If you are looking to host PyPi locally due to slow or unreliable internet, I
-suggest
-&lt;a href="https://www.builtinafrica.io/blog-post/vuyisile-ndlovu-pypi"&gt;Built in Africa's article&lt;/a&gt;.&lt;/p&gt;
-&lt;h2&gt;Setup&lt;/h2&gt;
-&lt;p&gt;The plan is to use Docker and utilize 
-&lt;a href="https://hub.docker.com/r/pypiserver/pypiserver/tags/"&gt;pypiserver's Docker image&lt;/a&gt;.
-Also the intent is to host 10's or 100's of packages, not to host all of PyPi.
-I will be using &lt;a href="https://testdriven.io/blog/private-pypi/"&gt;Michael's article&lt;/a&gt; as
-a guide.&lt;/p&gt;
-&lt;h2&gt;Docker without Authentication&lt;/h2&gt;
-&lt;p&gt;I will be using &lt;a href="https://docs.docker.com/engine/install/"&gt;Docker&lt;/a&gt;
-and &lt;a href="https://docs.docker.com/compose/"&gt;Docker Compose&lt;/a&gt; as this will make it easy
-to replicate at home and at work.&lt;/p&gt;
-&lt;p&gt;Create the following &lt;code&gt;docker-compose.yml&lt;/code&gt;:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;version: &amp;#39;3.7&amp;#39;
-
-services:
-    pypi-server:
-        image: pypiserver/pypiserver:latest
-        ports:
-            - 8081:8080
-        volumes:
-            - type: volume
-              source: pypi-server
-              target: /data/packages
-        command:  -P . -a . /data/packages
-        restart: always
-
-volumes:
-    pypi-server:
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;This will create a PyPi server without authentication.
-Let's spin up the container:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;$ docker-compose up -d --build
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;Now go to &lt;code&gt;http://localhost:8081&lt;/code&gt; in your browser and you should see
-&lt;em&gt;Welcome to pypiserver!&lt;/em&gt;.&lt;/p&gt;
-&lt;p&gt;To verify that this works, I will use &lt;code&gt;flit&lt;/code&gt; as I did in my previous 
-&lt;a href="https://cetyler.github.io/how-to-create-a-python-package.html"&gt;post&lt;/a&gt;.&lt;/p&gt;
-&lt;h3&gt;Push Package to Private PyPi&lt;/h3&gt;
-&lt;p&gt;I will use &lt;code&gt;podsearch&lt;/code&gt; to push a new version to my private PyPi.
-Create &lt;code&gt;~/.pypirc&lt;/code&gt; and add the following:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="k"&gt;[distutils]&lt;/span&gt;
-&lt;span class="na"&gt;index-servers&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;
-    &lt;span class="na"&gt;pypi&lt;/span&gt;
-    &lt;span class="na"&gt;private&lt;/span&gt;
-
-&lt;span class="k"&gt;[pypi]&lt;/span&gt;
-&lt;span class="na"&gt;username: user&lt;/span&gt;
-&lt;span class="na"&gt;password: password&lt;/span&gt;
-
-&lt;span class="k"&gt;[private]&lt;/span&gt;
-&lt;span class="na"&gt;repository: http://localhost:8081&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;I included PyPi but that is not required if you are not pushing packages to
-PyPi.
-Now do the following to upload &lt;code&gt;podsearch&lt;/code&gt; to the private PyPi.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;$ flit publish --repository rose
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;Now create a dummy directory and install &lt;code&gt;podsearch&lt;/code&gt;.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;$ mkdir &lt;span class="nb"&gt;test&lt;/span&gt;
-$ &lt;span class="nb"&gt;cd&lt;/span&gt; &lt;span class="nb"&gt;test&lt;/span&gt;
-$ python3 -m venv venv
-$ &lt;span class="nb"&gt;source&lt;/span&gt; activate venv/bin/activate
-$ pip install --index-url http://localhost:8081 --trusted-host localhost
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;h2&gt;Docker with Authentication&lt;/h2&gt;
-&lt;p&gt;For authentication, I will use 
-&lt;a href="https://github.com/pypiserver/pypiserver#apache-like-authentication-htpasswd"&gt;htpasswd&lt;/a&gt;.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;$ apt install apache2-utils
-$ htpasswd -sc htpasswd.txt username
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt; that &lt;code&gt;username&lt;/code&gt; is the name of the user how needs access.
-Repeat this for any additional users.
-Update &lt;code&gt;docker-compose.yml&lt;/code&gt; to:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="n"&gt;version&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;3.7&amp;#39;&lt;/span&gt;
-
-&lt;span class="n"&gt;services&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
-    &lt;span class="n"&gt;pypi&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;server&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
-        &lt;span class="n"&gt;image&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;pypiserver&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;pypiserver&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="n"&gt;latest&lt;/span&gt;
-        &lt;span class="n"&gt;ports&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
-            &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="mi"&gt;8081&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="mi"&gt;8080&lt;/span&gt;
-        &lt;span class="n"&gt;volumes&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
-            &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="n"&gt;type&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;volume&lt;/span&gt;
-            &lt;span class="n"&gt;source&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;pypi&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;server&lt;/span&gt;
-            &lt;span class="n"&gt;target&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;data&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;packages&lt;/span&gt;
-            &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="n"&gt;type&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;bind&lt;/span&gt;
-            &lt;span class="n"&gt;source&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;location_of_file&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;
-            &lt;span class="n"&gt;target&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;data&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;auth&lt;/span&gt;
-        &lt;span class="n"&gt;command&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;P&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;data&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;auth&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;htpasswd&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;txt&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;a&lt;/span&gt; &lt;span class="n"&gt;update&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;download&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;list&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;data&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;packages&lt;/span&gt;
-        &lt;span class="n"&gt;restart&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;always&lt;/span&gt;
-&lt;span class="n"&gt;volumes&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
-    &lt;span class="n"&gt;pypi&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;server&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;Notice that I am using a bind instead of a Docker volume for &lt;code&gt;htpasswd.txt&lt;/code&gt;.
-This will help to add users in the future.
-Also for command, the &lt;code&gt;htpasswd.txt&lt;/code&gt; will be used to authenticate and users will
-be able to update, download and list packages.&lt;/p&gt;
-&lt;h3&gt;Push Package to Private PyPi&lt;/h3&gt;
-&lt;p&gt;Now prior to pushing a new &lt;code&gt;podsearch&lt;/code&gt; update, we need to update &lt;code&gt;~/.pypirc&lt;/code&gt; to
-include the username and password for our private PyPi server.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="k"&gt;[distutils]&lt;/span&gt;
-&lt;span class="na"&gt;index-servers&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;
-    &lt;span class="na"&gt;pypi&lt;/span&gt;
-    &lt;span class="na"&gt;private&lt;/span&gt;
-
-&lt;span class="k"&gt;[pypi]&lt;/span&gt;
-&lt;span class="na"&gt;username: user&lt;/span&gt;
-&lt;span class="na"&gt;password: password&lt;/span&gt;
-
-&lt;span class="k"&gt;[private]&lt;/span&gt;
-&lt;span class="na"&gt;repository&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;http://localhost:8081&lt;/span&gt;
-&lt;span class="na"&gt;username&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;user&lt;/span&gt;
-&lt;span class="na"&gt;password&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;pass&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;Now change the revision and do &lt;code&gt;flit publish&lt;/code&gt; to verify that it works.&lt;/p&gt;
-&lt;h2&gt;Setup Pip&lt;/h2&gt;
-&lt;p&gt;Now that I have setup my private PyPi server, let's make it easier to download
-the private packages.
-Create/open &lt;code&gt;~/.pip/pip.conf&lt;/code&gt;&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="k"&gt;[global]&lt;/span&gt;
-&lt;span class="na"&gt;extra-index-url&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;http://localhost:8081&lt;/span&gt;
-&lt;span class="na"&gt;trusted-host&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;localhost&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;Instead of &lt;code&gt;localhost&lt;/code&gt; put the hostname or IP address.
-Then run &lt;code&gt;pip config list&lt;/code&gt; to verify that the above gets returned.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="o"&gt;**&lt;/span&gt;&lt;span class="nv"&gt;Note&lt;/span&gt;&lt;span class="o"&gt;**&lt;/span&gt; &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="nv"&gt;Windows&lt;/span&gt;, &lt;span class="nv"&gt;create&lt;/span&gt; `&lt;span class="nv"&gt;pip&lt;/span&gt;.&lt;span class="nv"&gt;ini&lt;/span&gt;` &lt;span class="nv"&gt;file&lt;/span&gt; &lt;span class="nv"&gt;in&lt;/span&gt; `&lt;span class="nv"&gt;C&lt;/span&gt;:\&lt;span class="nv"&gt;Users&lt;/span&gt;\&lt;span class="nv"&gt;Username&lt;/span&gt;\&lt;span class="nv"&gt;pip&lt;/span&gt;`
-&lt;span class="nv"&gt;instead&lt;/span&gt;.
-&lt;span class="nv"&gt;The&lt;/span&gt; &lt;span class="nv"&gt;format&lt;/span&gt; &lt;span class="nv"&gt;of&lt;/span&gt; &lt;span class="nv"&gt;the&lt;/span&gt; &lt;span class="nv"&gt;file&lt;/span&gt; &lt;span class="nv"&gt;itself&lt;/span&gt; &lt;span class="nv"&gt;is&lt;/span&gt; &lt;span class="nv"&gt;the&lt;/span&gt; &lt;span class="nv"&gt;same&lt;/span&gt;.
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;h2&gt;Conclusion&lt;/h2&gt;
-&lt;p&gt;Having a private PyPi server, I can put my packages in a centralize server and
-have all my computers on my network push/pull packages.
-This is a improvement over a local directory and once set up feels no different
-to installing packages from PyPi.&lt;/p&gt;</content><category term="Python"></category><category term="python"></category><category term="package"></category><category term="pypi"></category></entry></feed>
+Finally I just simply enjoyed Reuven's teaching style.&lt;/p&gt;</content><category term="Python"></category><category term="training"></category><category term="Reuven Lerner"></category><category term="oop"></category><category term="python"></category><category term="review"></category></entry></feed>
