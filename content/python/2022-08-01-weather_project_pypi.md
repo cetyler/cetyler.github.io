@@ -1,5 +1,6 @@
 Title: Weather Project - PyPi
 Date: 2022-08-11 20:00
+Modified: 2023-04-30 20:00
 Category: Python
 Tags: python, project
 Author: Christopher
@@ -46,15 +47,49 @@ I created a project using [Poetry](https://www.python-poetry.org/).
 This will be an empty project just to lock in the package name.
 Add the API token for both PyPi and Test PyPi using:
 
-    > poetry new openweather-report
-    > poetry config repositories.testpypi https://test.pypi.org/legacy/
-    > poetry config pypi-token.pypi [API KEY]
-    > poetry config http-basic.testpypi [API KEY]
-    > poetry build
-    > poetry publish -r testpypi
+```
+$ poetry new openweather-report
+$ poetry config repositories.testpypi https://test.pypi.org/legacy/
+$ poetry config pypi-token.pypi [API KEY]
+$ poetry config http-basic.testpypi [API KEY]
+$ poetry build
+$ poetry publish -r testpypi
+```
 
 If everything works, then the package name is unique enough and it now locked
 in.
+
+> **Update:**
+> I switched from using Poetry and use Flit.
+
+### Using Flit
+
+Create a token at [PyPi](https://pypi.org/manage/account/).
+Using [PyPa](https://packaging.python.org/en/latest/specifications/pypirc/)
+instructions, I updated `.pypirc`:
+
+```
+[distutils]
+index-servers =
+        pypi
+        testpypi
+
+[pypi]
+username = __token__
+password = <api-token>
+ 
+[testpypi]
+username = __token__
+password = <api-token>
+```
+
+Now to build and publish using flit:
+
+```
+$ flit init
+$ flit build
+$ flit publish --repository testpypi
+```
 
 ## Create Project on Github
 
@@ -82,15 +117,14 @@ This project will have the following branches:
 
 * main
     * This branch will be considered the stable branch.
-* develop
-    * This will be the latest branch.
-    * Should generally be working but due to frequent additions of features, it
-      can be unstable at times.
+* release_xxx
+    * This will be the next release.
+    * There can be multiple releases open (as pull requests).
 * feature
     * Any feature to add to develop branch.
     * This will be a short running branch no more than a couple of days.
 * bug
-    * This can be off either main or develop
+    * This can be off either main.
 
 I also plan on doing pull requests instead of just branching from my local git
 repository.
