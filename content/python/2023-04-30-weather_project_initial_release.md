@@ -20,7 +20,7 @@ release.
 ## Current Status
 
 The last update has been quite awhile ago.
-The initial goal the project more or less hasn't change but I have changed a
+The initial goal the project more or less hasn't change but I have change
 some of the goals of the project.
 This program will still have the goal of pulling data from OpenWeather but for
 now only the [One Call API](https://openweathermap.org/api/one-call-3) since
@@ -41,7 +41,7 @@ listed but the last bullet point.
 In the past year I used [Poetry](https://python-poetry.org/) in multiple
 projects at work and the workflow was getting in my way.
 Most of my projects are relatively simple and a lot of the features that could
-help a large project was showing me down.
+help a large project was slowing me down.
 I went back to using [Flit](https://flit.pypa.io/) with
 [pip-tools](https://pip-tools.readthedocs.io/en/latest/index.html) and
 [pip-chill](http://pip-chill.readthedocs.io/en/latest/readme.html).
