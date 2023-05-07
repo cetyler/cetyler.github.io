@@ -8,7 +8,7 @@ This article will be a bit of an update and the steps to the initial working
 release.&lt;/p&gt;
 &lt;h2&gt;Current Status&lt;/h2&gt;
 &lt;p&gt;The last update has been quite awhile ago.
-The initial goal the project more or less hasn't change but I have changed a
+The initial goal the project more or less hasn't change but I have change
 some of the goals of the project.
 This program will still have the goal of pulling data from OpenWeather but for
 now only the &lt;a href="https://openweathermap.org/api/one-call-3"&gt;One Call API&lt;/a&gt; since
@@ -27,7 +27,7 @@ listed but the last bullet point.&lt;/p&gt;
 &lt;p&gt;In the past year I used &lt;a href="https://python-poetry.org/"&gt;Poetry&lt;/a&gt; in multiple
 projects at work and the workflow was getting in my way.
 Most of my projects are relatively simple and a lot of the features that could
-help a large project was showing me down.
+help a large project was slowing me down.
 I went back to using &lt;a href="https://flit.pypa.io/"&gt;Flit&lt;/a&gt; with
 &lt;a href="https://pip-tools.readthedocs.io/en/latest/index.html"&gt;pip-tools&lt;/a&gt; and
 &lt;a href="http://pip-chill.readthedocs.io/en/latest/readme.html"&gt;pip-chill&lt;/a&gt;.

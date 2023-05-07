@@ -1,5 +1,247 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Christopher Tyler R&amp;D Test Engineer</title><link href="https://cetyler.github.io/" rel="alternate"></link><link href="https://cetyler.github.io/feeds/all.atom.xml" rel="self"></link><id>https://cetyler.github.io/</id><updated>2023-04-30T20:10:00-05:00</updated><entry><title>Weather Project - Initial Release</title><link href="https://cetyler.github.io/weather-project-initial-release.html" rel="alternate"></link><published>2023-04-30T20:10:00-05:00</published><updated>2023-04-30T20:10:00-05:00</updated><author><name>Christopher</name></author><id>tag:cetyler.github.io,2023-04-30:/weather-project-initial-release.html</id><summary type="html">&lt;p&gt;Initial working release.&lt;/p&gt;</summary><content type="html">&lt;h2&gt;Overview&lt;/h2&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Christopher Tyler R&amp;D Test Engineer</title><link href="https://cetyler.github.io/" rel="alternate"></link><link href="https://cetyler.github.io/feeds/all.atom.xml" rel="self"></link><id>https://cetyler.github.io/</id><updated>2023-05-06T20:00:00-05:00</updated><entry><title>Using psql to put JSON Data into a Table</title><link href="https://cetyler.github.io/using-psql-to-put-json-data-into-a-table.html" rel="alternate"></link><published>2023-05-06T20:00:00-05:00</published><updated>2023-05-06T20:00:00-05:00</updated><author><name>Christopher</name></author><id>tag:cetyler.github.io,2023-05-06:/using-psql-to-put-json-data-into-a-table.html</id><summary type="html">&lt;p&gt;Show how you can take JSON data and insert that data into a table.&lt;/p&gt;</summary><content type="html">&lt;h2&gt;Overview&lt;/h2&gt;
+&lt;p&gt;After creating my program
+(&lt;a href="(https://github.com/cetyler/openweather_report)"&gt;openweather_report&lt;/a&gt; that
+pulls in data from &lt;a href="https://openweathermap.org"&gt;OpenWeather&lt;/a&gt;, the data is being
+saved into PostgreSQL as JSON but I would like to do some basic analysis.
+In order to query JSON data:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="n"&gt;postgres&lt;/span&gt;&lt;span class="nv"&gt;@raw_data&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="err"&gt;#&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;select&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;raw_data&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;-&amp;gt;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;minutely&amp;#39;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;-&amp;gt;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;from&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;weather&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;raw_json_data&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;limit&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt;                &lt;/span&gt;&lt;span class="vm"&gt;?&lt;/span&gt;&lt;span class="k"&gt;column&lt;/span&gt;&lt;span class="vm"&gt;?&lt;/span&gt;&lt;span class="w"&gt;                &lt;/span&gt;
+&lt;span class="o"&gt;----------------------------------------&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="err"&gt;{&lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;dt&amp;quot;&lt;/span&gt;&lt;span class="err"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mi"&gt;1678704060&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;precipitation&amp;quot;&lt;/span&gt;&lt;span class="err"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="err"&gt;}&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;row&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;I will go in more detail later in the article but this can be a little clunky
+but worse it slow down the query.
+This article will show how to query JSON data and how to then insert that data
+into a table to help with analysis and query performance.&lt;/p&gt;
+&lt;h2&gt;Querying JSON&lt;/h2&gt;
+&lt;p&gt;The data is using &lt;a href="https://openweathermap.org/api/one-call-3"&gt;One Call API&lt;/a&gt;.
+An example of the JSON:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;{
+  &amp;quot;lat&amp;quot;: 39.31,
+  &amp;quot;lon&amp;quot;: -74.5,
+  &amp;quot;timezone&amp;quot;: &amp;quot;America/New_York&amp;quot;,
+  &amp;quot;timezone_offset&amp;quot;: -18000,
+  &amp;quot;current&amp;quot;: {
+    &amp;quot;dt&amp;quot;: 1646318698,
+    &amp;quot;sunrise&amp;quot;: 1646306882,
+    &amp;quot;sunset&amp;quot;: 1646347929,
+    &amp;quot;temp&amp;quot;: 282.21,
+    &amp;quot;feels_like&amp;quot;: 278.41,
+   ...
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;For example, I can do a query to get the timezone for each location that I have
+data for the past month:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="n"&gt;postgres&lt;/span&gt;&lt;span class="nv"&gt;@raw_data&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="err"&gt;#&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;select&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;distinct&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;raw_data&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;-&amp;gt;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;timezone&amp;#39;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;as&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;timezone&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="k"&gt;from&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;weather&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;raw_json_data&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;
+&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;where&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;entry_date&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;&amp;gt;=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;2023-04-01&amp;#39;&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt;   &lt;/span&gt;&lt;span class="ow"&gt;and&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;entry_date&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;&amp;lt;=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;2023-04-30&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt;       &lt;/span&gt;&lt;span class="n"&gt;timezone&lt;/span&gt;&lt;span class="w"&gt;        &lt;/span&gt;
+&lt;span class="o"&gt;-----------------------&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;America/Chicago&amp;quot;&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;America/Denver&amp;quot;&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;America/Los_Angeles&amp;quot;&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;America/New_York&amp;quot;&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;4&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;rows&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;The JSON data is in the &lt;code&gt;raw_data&lt;/code&gt; column and using &lt;code&gt;-&amp;gt;&lt;/code&gt; I can go through each
+key in the JSON.
+In this example, I didn't need to do anything with the type since it will get
+returned as &lt;code&gt;text&lt;/code&gt;.
+If the data was suppose to be numbers, then I would need to use &lt;code&gt;numeric&lt;/code&gt; for
+example.
+As you can see, the method to get data out of a JSON column, it is fairly
+straightforward.&lt;/p&gt;
+&lt;h2&gt;Breaking Out JSON to Table&lt;/h2&gt;
+&lt;p&gt;I have about a year's worth of data for 10 locations that I get data for each
+location every 20 minutes:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="n"&gt;postgres&lt;/span&gt;&lt;span class="nv"&gt;@raw_data&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="err"&gt;#&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="err"&gt;\&lt;/span&gt;&lt;span class="n"&gt;dt&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;weather&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;raw_json_data&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;
+&lt;span class="w"&gt;                                        &lt;/span&gt;&lt;span class="n"&gt;List&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;of&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;relations&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;Schema&lt;/span&gt;&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="w"&gt;     &lt;/span&gt;&lt;span class="n"&gt;Name&lt;/span&gt;&lt;span class="w"&gt;      &lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;Type&lt;/span&gt;&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="n"&gt;Owner&lt;/span&gt;&lt;span class="w"&gt;   &lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;Persistence&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;Access&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;method&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="k"&gt;Size&lt;/span&gt;&lt;span class="w"&gt;   &lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;Description&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;
+&lt;span class="o"&gt;---------+---------------+-------+----------+-------------+---------------+---------+-------------&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;weather&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;raw_json_data&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nc"&gt;table&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;postgres&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;permanent&lt;/span&gt;&lt;span class="w"&gt;   &lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;heap&lt;/span&gt;&lt;span class="w"&gt;          &lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mi"&gt;1235&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;MB&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;row&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;If I put just the current weather data into a table:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;raw_data=# \dt+ weather.current_conditions 
+                                          List of relations
+ Schema  |        Name        | Type  |  Owner   | Persistence | Access method | Size  | Description 
+---------+--------------------+-------+----------+-------------+---------------+-------+-------------
+ weather | current_conditions | table | postgres | permanent   | heap          | 30 MB | 
+(1 row)
+
+raw_data=# select count(*) from weather.current_conditions;
+ count  
+--------
+ 222522
+(1 row)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Also by having the data into a table, I can add indexes, set up the data in
+such a way to make it easier for analyze (ex. convert all the EPOCH to 
+timestamp).&lt;/p&gt;
+&lt;p&gt;The current data is a flat JSON so it should be easy to build the query.
+I also want to make it as a view since I will use this to insert data.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="cm"&gt;/* Create View Current Conditions Weather Data from JSON&lt;/span&gt;
+&lt;span class="cm"&gt;Created by Christopher Tyler&lt;/span&gt;
+
+&lt;span class="cm"&gt;This will create a view from the JSON data for current weather conditions.&lt;/span&gt;
+&lt;span class="cm"&gt;*/&lt;/span&gt;
+
+&lt;span class="n"&gt;drop&lt;/span&gt; &lt;span class="n"&gt;view&lt;/span&gt; &lt;span class="nf"&gt;if&lt;/span&gt; &lt;span class="nf"&gt;exists&lt;/span&gt; &lt;span class="n"&gt;weather&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;vw_current&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="n"&gt;create&lt;/span&gt; &lt;span class="n"&gt;view&lt;/span&gt; &lt;span class="n"&gt;weather&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;vw_current&lt;/span&gt; &lt;span class="kr"&gt;as&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;
+&lt;span class="n"&gt;select&lt;/span&gt; &lt;span class="n"&gt;l&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;id&lt;/span&gt; 
+ &lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;timezone&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt; 
+         &lt;span class="s"&gt;&amp;#39;UTC&amp;#39;&lt;/span&gt;
+        &lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;to_timestamp&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt; 
+                &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;r&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;raw_data&lt;/span&gt; &lt;span class="o"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;current&amp;#39;&lt;/span&gt; &lt;span class="o"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;dt&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="kt"&gt;integer&lt;/span&gt; 
+                &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;r&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;raw_data&lt;/span&gt; &lt;span class="o"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;timezone_offset&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="n"&gt;integer&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+  &lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="n"&gt;timestamptz&lt;/span&gt; &lt;span class="kr"&gt;as&lt;/span&gt; &lt;span class="n"&gt;measured&lt;/span&gt; 
+ &lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;timezone&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;
+         &lt;span class="s"&gt;&amp;#39;UTC&amp;#39;&lt;/span&gt;
+        &lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;to_timestamp&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;
+                &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;r&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;raw_data&lt;/span&gt; &lt;span class="o"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;current&amp;#39;&lt;/span&gt; &lt;span class="o"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;sunrise&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="kt"&gt;integer&lt;/span&gt;
+                &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;r&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;raw_data&lt;/span&gt; &lt;span class="o"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;timezone_offset&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="n"&gt;integer&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+  &lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="n"&gt;timestamptz&lt;/span&gt; &lt;span class="kr"&gt;as&lt;/span&gt; &lt;span class="n"&gt;sunrise&lt;/span&gt;
+ &lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;timezone&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;
+         &lt;span class="s"&gt;&amp;#39;UTC&amp;#39;&lt;/span&gt;
+        &lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;to_timestamp&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;
+                &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;r&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;raw_data&lt;/span&gt; &lt;span class="o"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;current&amp;#39;&lt;/span&gt; &lt;span class="o"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;sunset&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="kt"&gt;integer&lt;/span&gt;
+                &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;r&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;raw_data&lt;/span&gt; &lt;span class="o"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;timezone_offset&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="n"&gt;integer&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+  &lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="n"&gt;timestamptz&lt;/span&gt; &lt;span class="kr"&gt;as&lt;/span&gt; &lt;span class="n"&gt;sunset&lt;/span&gt;
+ &lt;span class="p"&gt;,(&lt;/span&gt;&lt;span class="n"&gt;r&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;raw_data&lt;/span&gt; &lt;span class="o"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;current&amp;#39;&lt;/span&gt; &lt;span class="o"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;temp&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="n"&gt;numeric&lt;/span&gt; &lt;span class="kr"&gt;as&lt;/span&gt; &lt;span class="n"&gt;temperature&lt;/span&gt;
+ &lt;span class="p"&gt;,(&lt;/span&gt;&lt;span class="n"&gt;r&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;raw_data&lt;/span&gt; &lt;span class="o"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;current&amp;#39;&lt;/span&gt; &lt;span class="o"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;feels_like&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="n"&gt;numeric&lt;/span&gt; &lt;span class="kr"&gt;as&lt;/span&gt; &lt;span class="n"&gt;feels_like&lt;/span&gt;
+ &lt;span class="p"&gt;,(&lt;/span&gt;&lt;span class="n"&gt;r&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;raw_data&lt;/span&gt; &lt;span class="o"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;current&amp;#39;&lt;/span&gt; &lt;span class="o"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;pressure&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="n"&gt;numeric&lt;/span&gt; &lt;span class="kr"&gt;as&lt;/span&gt; &lt;span class="n"&gt;pressure&lt;/span&gt;
+ &lt;span class="p"&gt;,(&lt;/span&gt;&lt;span class="n"&gt;r&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;raw_data&lt;/span&gt; &lt;span class="o"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;current&amp;#39;&lt;/span&gt; &lt;span class="o"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;humidity&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="n"&gt;numeric&lt;/span&gt; &lt;span class="kr"&gt;as&lt;/span&gt; &lt;span class="n"&gt;humidity&lt;/span&gt;
+ &lt;span class="p"&gt;,(&lt;/span&gt;&lt;span class="n"&gt;r&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;raw_data&lt;/span&gt; &lt;span class="o"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;current&amp;#39;&lt;/span&gt; &lt;span class="o"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;dew_point&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="n"&gt;numeric&lt;/span&gt; &lt;span class="kr"&gt;as&lt;/span&gt; &lt;span class="n"&gt;dew_point&lt;/span&gt;
+ &lt;span class="p"&gt;,(&lt;/span&gt;&lt;span class="n"&gt;r&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;raw_data&lt;/span&gt; &lt;span class="o"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;current&amp;#39;&lt;/span&gt; &lt;span class="o"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;clouds&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="n"&gt;numeric&lt;/span&gt; &lt;span class="kr"&gt;as&lt;/span&gt; &lt;span class="n"&gt;clouds&lt;/span&gt;
+ &lt;span class="p"&gt;,(&lt;/span&gt;&lt;span class="n"&gt;r&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;raw_data&lt;/span&gt; &lt;span class="o"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;current&amp;#39;&lt;/span&gt; &lt;span class="o"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;uvi&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="n"&gt;numeric&lt;/span&gt; &lt;span class="kr"&gt;as&lt;/span&gt; &lt;span class="n"&gt;uv_index&lt;/span&gt;
+ &lt;span class="p"&gt;,(&lt;/span&gt;&lt;span class="n"&gt;r&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;raw_data&lt;/span&gt; &lt;span class="o"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;current&amp;#39;&lt;/span&gt; &lt;span class="o"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;visibility&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="n"&gt;numeric&lt;/span&gt; &lt;span class="kr"&gt;as&lt;/span&gt; &lt;span class="n"&gt;visibility&lt;/span&gt;
+ &lt;span class="p"&gt;,(&lt;/span&gt;&lt;span class="n"&gt;r&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;raw_data&lt;/span&gt; &lt;span class="o"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;current&amp;#39;&lt;/span&gt; &lt;span class="o"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;wind_speed&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="n"&gt;numeric&lt;/span&gt; &lt;span class="kr"&gt;as&lt;/span&gt; &lt;span class="n"&gt;wind_speed&lt;/span&gt;
+ &lt;span class="p"&gt;,(&lt;/span&gt;&lt;span class="n"&gt;r&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;raw_data&lt;/span&gt; &lt;span class="o"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;current&amp;#39;&lt;/span&gt; &lt;span class="o"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;wind_gust&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="n"&gt;numeric&lt;/span&gt; &lt;span class="kr"&gt;as&lt;/span&gt; &lt;span class="n"&gt;wind_gust&lt;/span&gt;
+ &lt;span class="p"&gt;,(&lt;/span&gt;&lt;span class="n"&gt;r&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;raw_data&lt;/span&gt; &lt;span class="o"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;current&amp;#39;&lt;/span&gt; &lt;span class="o"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;wind_deg&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="n"&gt;numeric&lt;/span&gt; &lt;span class="kr"&gt;as&lt;/span&gt; &lt;span class="n"&gt;wind_deg&lt;/span&gt;
+ &lt;span class="p"&gt;,(&lt;/span&gt;&lt;span class="n"&gt;r&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;raw_data&lt;/span&gt; &lt;span class="o"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;current&amp;#39;&lt;/span&gt; &lt;span class="o"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;rain&amp;#39;&lt;/span&gt; &lt;span class="o"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;1h&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="n"&gt;numeric&lt;/span&gt; &lt;span class="kr"&gt;as&lt;/span&gt; &lt;span class="n"&gt;rain&lt;/span&gt;
+ &lt;span class="p"&gt;,(&lt;/span&gt;&lt;span class="n"&gt;r&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;raw_data&lt;/span&gt; &lt;span class="o"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;current&amp;#39;&lt;/span&gt; &lt;span class="o"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;snow&amp;#39;&lt;/span&gt; &lt;span class="o"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;1h&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="n"&gt;numeric&lt;/span&gt; &lt;span class="kr"&gt;as&lt;/span&gt; &lt;span class="n"&gt;snow&lt;/span&gt;
+ &lt;span class="p"&gt;,(&lt;/span&gt;&lt;span class="n"&gt;r&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;raw_data&lt;/span&gt; &lt;span class="o"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;current&amp;#39;&lt;/span&gt; &lt;span class="o"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;weather&amp;#39;&lt;/span&gt; &lt;span class="o"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;id&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="n"&gt;int&lt;/span&gt; &lt;span class="kr"&gt;as&lt;/span&gt; &lt;span class="n"&gt;weather_id&lt;/span&gt;
+ &lt;span class="p"&gt;,(&lt;/span&gt;&lt;span class="n"&gt;r&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;raw_data&lt;/span&gt; &lt;span class="o"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;current&amp;#39;&lt;/span&gt; &lt;span class="o"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;weather&amp;#39;&lt;/span&gt; &lt;span class="o"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;main&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="n"&gt;text&lt;/span&gt; &lt;span class="kr"&gt;as&lt;/span&gt; &lt;span class="n"&gt;weather_main&lt;/span&gt;
+ &lt;span class="p"&gt;,(&lt;/span&gt;&lt;span class="n"&gt;r&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;raw_data&lt;/span&gt; &lt;span class="o"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;current&amp;#39;&lt;/span&gt; &lt;span class="o"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;weather&amp;#39;&lt;/span&gt; &lt;span class="o"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;description&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="n"&gt;text&lt;/span&gt; &lt;span class="kr"&gt;as&lt;/span&gt; &lt;span class="n"&gt;weather_description&lt;/span&gt;
+ &lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;r&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;entry_date&lt;/span&gt; &lt;span class="kr"&gt;as&lt;/span&gt; &lt;span class="n"&gt;entry&lt;/span&gt;
+&lt;span class="n"&gt;from&lt;/span&gt; &lt;span class="n"&gt;weather&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;raw_json_data&lt;/span&gt; &lt;span class="kr"&gt;as&lt;/span&gt; &lt;span class="n"&gt;r&lt;/span&gt;
+ &lt;span class="kr"&gt;left&lt;/span&gt; &lt;span class="nf"&gt;join&lt;/span&gt; &lt;span class="n"&gt;weather&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;locations&lt;/span&gt; &lt;span class="kr"&gt;as&lt;/span&gt; &lt;span class="n"&gt;l&lt;/span&gt; &lt;span class="n"&gt;on&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;r&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;raw_data&lt;/span&gt; &lt;span class="o"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;lon&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="n"&gt;numeric&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;l&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;longitude&lt;/span&gt;
+&lt;span class="n"&gt;where&lt;/span&gt; &lt;span class="n"&gt;r&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;raw_data&lt;/span&gt; &lt;span class="o"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;current&amp;#39;&lt;/span&gt; &lt;span class="n"&gt;is&lt;/span&gt; &lt;span class="kr"&gt;not&lt;/span&gt; &lt;span class="n"&gt;null&lt;/span&gt;
+&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;There is a lot here but it is not difficult to go through.
+Now with the view, it is not easy to insert the data into
+&lt;code&gt;weather.current_conditions&lt;/code&gt; table.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="cm"&gt;/* Insert Current Conditions Weather Data from JSON&lt;/span&gt;
+&lt;span class="cm"&gt;Created by Christopher Tyler&lt;/span&gt;
+
+&lt;span class="cm"&gt;This script will insert data from weather.raw_json_data and put into&lt;/span&gt;
+&lt;span class="cm"&gt;weather.current_conditions.&lt;/span&gt;
+&lt;span class="cm"&gt;The script will only add data that is current not in current_conditions.&lt;/span&gt;
+&lt;span class="cm"&gt;*/&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+
+begin&lt;span class="err"&gt;;&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+
+insert&lt;span class="w"&gt; &lt;/span&gt;into&lt;span class="w"&gt; &lt;/span&gt;weather&lt;span class="o"&gt;.&lt;/span&gt;current_conditions&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;city_id&lt;span class="o"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;measured&lt;span class="o"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;sunrise&lt;span class="o"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;sunset&lt;span class="o"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;temperature&lt;span class="o"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;feels_like&lt;span class="o"&gt;,&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt;        &lt;/span&gt;pressure&lt;span class="o"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;humidity&lt;span class="o"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;dew_point&lt;span class="o"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;clouds&lt;span class="o"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;uv_index&lt;span class="o"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;visibility&lt;span class="o"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;wind_speed&lt;span class="o"&gt;,&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt;        &lt;/span&gt;wind_gust&lt;span class="o"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;wind_deg&lt;span class="o"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;rain&lt;span class="o"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;snow&lt;span class="o"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;weather_id&lt;span class="o"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;weather_main&lt;span class="o"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;weather_description&lt;span class="o"&gt;,&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt;        &lt;/span&gt;entry&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="kr"&gt;select&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+from&lt;span class="w"&gt; &lt;/span&gt;weather&lt;span class="o"&gt;.&lt;/span&gt;vw_current&lt;span class="w"&gt;&lt;/span&gt;
+where&lt;span class="w"&gt; &lt;/span&gt;entry&lt;span class="w"&gt; &lt;/span&gt;not&lt;span class="w"&gt; &lt;/span&gt;in&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="kr"&gt;select&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;entry&lt;span class="w"&gt; &lt;/span&gt;from&lt;span class="w"&gt; &lt;/span&gt;weather&lt;span class="o"&gt;.&lt;/span&gt;current_conditions&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt; &lt;/span&gt;and&lt;span class="w"&gt; &lt;/span&gt;id&lt;span class="w"&gt; &lt;/span&gt;is&lt;span class="w"&gt; &lt;/span&gt;not&lt;span class="w"&gt; &lt;/span&gt;null&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt; &lt;/span&gt;and&lt;span class="w"&gt; &lt;/span&gt;measured&lt;span class="w"&gt; &lt;/span&gt;is&lt;span class="w"&gt; &lt;/span&gt;not&lt;span class="w"&gt; &lt;/span&gt;null&lt;span class="w"&gt;&lt;/span&gt;
+order&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="kr"&gt;by&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;entry&lt;span class="err"&gt;;&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+
+commit&lt;span class="err"&gt;;&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;This script will use the view as a means to insert the data into the table.
+The where clause is to ensure that I am only adding new data, I don't want any
+null for id or measured.&lt;/p&gt;
+&lt;p&gt;This script can be run:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&amp;gt; psql &amp;quot;postgres://&amp;lt;username&amp;gt;:&amp;lt;password&amp;gt;@&amp;lt;hostname&amp;gt;:&amp;lt;port&amp;gt;/&amp;lt;db_name&amp;gt;&amp;quot; -X -f current.sql
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3&gt;Nested JSON Data as a List&lt;/h3&gt;
+&lt;p&gt;There is a 60 minute forecast in the JSON data as &lt;code&gt;minutely&lt;/code&gt;.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;{
+  ...
+  &amp;quot;minutely&amp;quot;: [
+    {
+      &amp;quot;dt&amp;quot;: 1646318700,
+      &amp;quot;precipitation&amp;quot;: 0
+    },
+    ...
+    ]
+  ...
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;This list/array will repeat for another 59 times.
+I could do:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="n"&gt;raw_data&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="err"&gt;#&lt;/span&gt; &lt;span class="n"&gt;select&lt;/span&gt; &lt;span class="n"&gt;raw_data&lt;/span&gt; &lt;span class="o"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;minutely&amp;#39;&lt;/span&gt; &lt;span class="o"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt; &lt;span class="o"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;dt&amp;#39;&lt;/span&gt; &lt;span class="kr"&gt;as&lt;/span&gt; &lt;span class="n"&gt;forecast&lt;/span&gt;
+ &lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;raw_data&lt;/span&gt; &lt;span class="o"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;minutely&amp;#39;&lt;/span&gt; &lt;span class="o"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt; &lt;span class="o"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;precipitation&amp;#39;&lt;/span&gt; &lt;span class="kr"&gt;as&lt;/span&gt; &lt;span class="n"&gt;precipitation&lt;/span&gt;
+&lt;span class="n"&gt;from&lt;/span&gt; &lt;span class="n"&gt;weather&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;raw_json_data&lt;/span&gt; 
+&lt;span class="kr"&gt;limit&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+  &lt;span class="n"&gt;forecast&lt;/span&gt;  &lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="n"&gt;precipitation&lt;/span&gt; 
+&lt;span class="o"&gt;------------+---------------&lt;/span&gt;
+ &lt;span class="mi"&gt;1678704060&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt; &lt;span class="nf"&gt;row&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Again the query is not complicated but this can be annoying to do 60 times.
+Instead:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="n"&gt;raw_data&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="err"&gt;#&lt;/span&gt; &lt;span class="n"&gt;select&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;raw_data&lt;/span&gt; &lt;span class="o"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;current&amp;#39;&lt;/span&gt; &lt;span class="o"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;dt&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="kr"&gt;as&lt;/span&gt; &lt;span class="n"&gt;measured&lt;/span&gt;
+ &lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;rows&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;dt&lt;/span&gt; &lt;span class="kr"&gt;as&lt;/span&gt; &lt;span class="n"&gt;forecast&lt;/span&gt;
+ &lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;rows&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;precipitation&lt;/span&gt;
+&lt;span class="n"&gt;from&lt;/span&gt; &lt;span class="n"&gt;weather&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;raw_json_data&lt;/span&gt;
+&lt;span class="n"&gt;cross&lt;/span&gt; &lt;span class="nf"&gt;join&lt;/span&gt; &lt;span class="n"&gt;lateral&lt;/span&gt;
+&lt;span class="n"&gt;jsonb_to_recordset&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;raw_data&lt;/span&gt; &lt;span class="o"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;minutely&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="kr"&gt;as&lt;/span&gt; &lt;span class="n"&gt;rows&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;dt&lt;/span&gt; &lt;span class="n"&gt;int&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;precipitation&lt;/span&gt; &lt;span class="n"&gt;numeric&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="kr"&gt;limit&lt;/span&gt; &lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+  &lt;span class="n"&gt;measured&lt;/span&gt;  &lt;span class="o"&gt;|&lt;/span&gt;  &lt;span class="n"&gt;forecast&lt;/span&gt;  &lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="n"&gt;precipitation&lt;/span&gt; 
+&lt;span class="o"&gt;------------+------------+---------------&lt;/span&gt;
+ &lt;span class="mi"&gt;1678704002&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="mi"&gt;1678704060&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt;             &lt;span class="mi"&gt;0&lt;/span&gt;
+ &lt;span class="mi"&gt;1678704002&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="mi"&gt;1678704120&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt;             &lt;span class="mi"&gt;0&lt;/span&gt;
+ &lt;span class="mi"&gt;1678704002&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="mi"&gt;1678704180&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt;             &lt;span class="mi"&gt;0&lt;/span&gt;
+ &lt;span class="mi"&gt;1678704002&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="mi"&gt;1678704240&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt;             &lt;span class="mi"&gt;0&lt;/span&gt;
+ &lt;span class="mi"&gt;1678704002&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="mi"&gt;1678704300&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt;             &lt;span class="mi"&gt;0&lt;/span&gt;
+ &lt;span class="mi"&gt;1678704002&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="mi"&gt;1678704360&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt;             &lt;span class="mi"&gt;0&lt;/span&gt;
+ &lt;span class="mi"&gt;1678704002&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="mi"&gt;1678704420&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt;             &lt;span class="mi"&gt;0&lt;/span&gt;
+ &lt;span class="mi"&gt;1678704002&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="mi"&gt;1678704480&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt;             &lt;span class="mi"&gt;0&lt;/span&gt;
+ &lt;span class="mi"&gt;1678704002&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="mi"&gt;1678704540&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt;             &lt;span class="mi"&gt;0&lt;/span&gt;
+ &lt;span class="mi"&gt;1678704002&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="mi"&gt;1678704600&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt;             &lt;span class="mi"&gt;0&lt;/span&gt;
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;10&lt;/span&gt; &lt;span class="n"&gt;rows&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;I included when the forecast was measured or another way when the forecast was
+made.
+I used &lt;code&gt;jsonb_to_recordset()&lt;/code&gt; (see
+&lt;a href="https://www.postgresql.org/docs/current/functions-json.html#FUNCTIONS-JSON-PROCESSING-TABLE"&gt;PostgreSQL's documentation&lt;/a&gt;)
+and &lt;code&gt;cross join lateral&lt;/code&gt; (see
+&lt;a href="https://www.postgresql.org/docs/15/queries-table-expressions.html"&gt;PostgreSQL's documentation&lt;/a&gt;)
+to be able to unpack the JSON to each forecast has its own row.
+&lt;strong&gt;Note&lt;/strong&gt; that I did get a hint from this
+&lt;a href="https://stackoverflow.com/questions/58124750/how-to-turn-a-json-array-into-rows-in-postgresql"&gt;Stack Overflow&lt;/a&gt;.&lt;/p&gt;
+&lt;h2&gt;Conclusion&lt;/h2&gt;
+&lt;p&gt;Being able to save JSON into PostgreSQL is very useful.
+In my example of OpenWeather data, I can bring in the data as JSON and process
+the JSON to put into tables later.
+I could keep the JSON as a backup but only the last 6 months if I wanted to.
+Also while I am only using the
+&lt;a href="https://openweathermap.org/api/one-call-3"&gt;One Call API&lt;/a&gt;, my
+&lt;code&gt;weather.raw_json_data&lt;/code&gt; can support any of OpenWeather's other API calls
+without changing the table.&lt;/p&gt;</content><category term="SQL"></category><category term="sql"></category><category term="openweathermap"></category><category term="json"></category><category term="cross lateral join"></category><category term="jsonb_to_recordset()"></category></entry><entry><title>Weather Project - Initial Release</title><link href="https://cetyler.github.io/weather-project-initial-release.html" rel="alternate"></link><published>2023-04-30T20:10:00-05:00</published><updated>2023-04-30T20:10:00-05:00</updated><author><name>Christopher</name></author><id>tag:cetyler.github.io,2023-04-30:/weather-project-initial-release.html</id><summary type="html">&lt;p&gt;Initial working release.&lt;/p&gt;</summary><content type="html">&lt;h2&gt;Overview&lt;/h2&gt;
 &lt;p&gt;From the &lt;a href="https://cetyler.github.io/weather-project-requirements-and-roadmap.html"&gt;previous article&lt;/a&gt;,
 the Weather Project is now on
 &lt;a href="https://pypi.org/project/openweather-report/"&gt;PyPi&lt;/a&gt; and is on
@@ -8,7 +250,7 @@ This article will be a bit of an update and the steps to the initial working
 release.&lt;/p&gt;
 &lt;h2&gt;Current Status&lt;/h2&gt;
 &lt;p&gt;The last update has been quite awhile ago.
-The initial goal the project more or less hasn't change but I have changed a
+The initial goal the project more or less hasn't change but I have change
 some of the goals of the project.
 This program will still have the goal of pulling data from OpenWeather but for
 now only the &lt;a href="https://openweathermap.org/api/one-call-3"&gt;One Call API&lt;/a&gt; since
@@ -27,7 +269,7 @@ listed but the last bullet point.&lt;/p&gt;
 &lt;p&gt;In the past year I used &lt;a href="https://python-poetry.org/"&gt;Poetry&lt;/a&gt; in multiple
 projects at work and the workflow was getting in my way.
 Most of my projects are relatively simple and a lot of the features that could
-help a large project was showing me down.
+help a large project was slowing me down.
 I went back to using &lt;a href="https://flit.pypa.io/"&gt;Flit&lt;/a&gt; with
 &lt;a href="https://pip-tools.readthedocs.io/en/latest/index.html"&gt;pip-tools&lt;/a&gt; and
 &lt;a href="http://pip-chill.readthedocs.io/en/latest/readme.html"&gt;pip-chill&lt;/a&gt;.
@@ -597,20 +839,4 @@ work on this weather project.&lt;/p&gt;
 &lt;p&gt;I will create a bare bones project so that I can lock in the project name on
 &lt;a href="https://pypi.org/"&gt;PyPi&lt;/a&gt;.
 I also want to be able to publish to TestPyPI as well as PyPi without needing
-to input my username and password each time.&lt;/p&gt;</content><category term="Python"></category><category term="python"></category><category term="project"></category></entry><entry><title>Fixed Broken Search</title><link href="https://cetyler.github.io/fixed-broken-search.html" rel="alternate"></link><published>2022-05-21T15:30:00-05:00</published><updated>2022-05-21T15:30:00-05:00</updated><author><name>Christopher</name></author><id>tag:cetyler.github.io,2022-05-21:/fixed-broken-search.html</id><summary type="html">&lt;p&gt;Misconfiguration caused the search on my website to be broken.&lt;/p&gt;</summary><content type="html">&lt;h2&gt;Overview&lt;/h2&gt;
-&lt;p&gt;I noticed that the search on my website was broken when trying to search
-something.
-This article will go through what I did to correct the issue and to expand what
-I put in my &lt;a href="https://github.com/cetyler/cetyler.github.io/issues/25"&gt;closed&lt;/a&gt;
-issue.&lt;/p&gt;
-&lt;h2&gt;Elegant Theme&lt;/h2&gt;
-&lt;p&gt;The Elegant Theme has the ability to include a search feature but when I
-initially set up my website, I forgot to enable it.
-Using the &lt;a href="https://elegant.oncrashreboot.com/add-search"&gt;information&lt;/a&gt; from
-Elegant's website.&lt;/p&gt;
-&lt;p&gt;A couple of lines to change in &lt;code&gt;pelicanconfig.py&lt;/code&gt;:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;PLUGINS = [&amp;#39;tipue_search&amp;#39;]
-DIRECT_TEMPLATES = [&amp;#39;search&amp;#39;]
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;I did not need to change anything else.&lt;/p&gt;</content><category term="Blog"></category><category term="search"></category><category term="pelican"></category><category term="tipue_search"></category><category term="elegant"></category><category term="website"></category></entry></feed>
+to input my username and password each time.&lt;/p&gt;</content><category term="Python"></category><category term="python"></category><category term="project"></category></entry></feed>
