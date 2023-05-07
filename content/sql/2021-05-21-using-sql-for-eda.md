@@ -1,6 +1,6 @@
 Title: Using SQL for Exploratory Data Analysis (EDA)
 Date: 2021-05-22 14:30
-Category: Blog
+Category: SQL
 Tags: sql, eda
 Author: Christopher
 Summary: Some use SQL commands that can help with EDA.

@@ -1,6 +1,6 @@
 Title: Practical SQL for Data Analysis 
 Date: 2021-06-13 20:30
-Category: Blog
+Category: SQL
 Tags: sql, pandas, python, postgresql
 Author: Christopher
 Summary: Great article from Haki Benita on SQL and Pandas.

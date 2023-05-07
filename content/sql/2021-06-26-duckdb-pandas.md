@@ -1,6 +1,6 @@
 Title: Efficient SQL on Pandas with DuckDB
 Date: 2021-06-26 14:30
-Category: Blog
+Category: SQL
 Tags: sql, pandas, python, duckdb
 Author: Christopher
 Summary: Use SQL on top of pandas!
