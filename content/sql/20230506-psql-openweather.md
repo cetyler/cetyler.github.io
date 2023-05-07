@@ -10,7 +10,7 @@ comment_id: psql_openweather_json
 ## Overview
 
 After creating my program
-([openweather_report]((https://github.com/cetyler/openweather_report)) that
+([openweather_report](https://github.com/cetyler/openweather_report)) that
 pulls in data from [OpenWeather](https://openweathermap.org), the data is being
 saved into PostgreSQL as JSON but I would like to do some basic analysis.
 In order to query JSON data:
