@@ -9,18 +9,18 @@
         <meta property="og:type" content="article" />
         <meta name="twitter:card" content="summary">
 
-<meta name="keywords" content="python, workflow, Workflow, " />
+<meta name="keywords" content="workflow, zettel, zettelkasten, Workflow, " />
 
-<meta property="og:title" content="Python Workflow "/>
-<meta property="og:url" content="/python-workflow.html" />
-<meta property="og:description" content="My python project workflow." />
+<meta property="og:title" content="Zettelkasten Workflow "/>
+<meta property="og:url" content="/zettelkasten-workflow.html" />
+<meta property="og:description" content="How I use Zettelkasten using vim and fzf." />
 <meta property="og:site_name" content="Christopher Tyler R&amp;D Test Engineer" />
 <meta property="og:article:author" content="Christopher Tyler" />
-<meta property="og:article:published_time" content="2021-06-05T21:00:00-05:00" />
-<meta name="twitter:title" content="Python Workflow ">
-<meta name="twitter:description" content="My python project workflow.">
+<meta property="og:article:published_time" content="2023-05-20T15:00:00-05:00" />
+<meta name="twitter:title" content="Zettelkasten Workflow ">
+<meta name="twitter:description" content="How I use Zettelkasten using vim and fzf.">
 
-        <title>Python Workflow  · Christopher Tyler R&amp;D Test Engineer
+        <title>Zettelkasten Workflow  · Christopher Tyler R&amp;D Test Engineer
 </title>
         <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet">
         <link rel="stylesheet" type="text/css" href="/theme/css/elegant.prod.css" media="screen">
@@ -67,8 +67,8 @@
 <div class="row-fluid">
     <header class="page-header span10 offset2">
         <h1>
-            <a href="/python-workflow.html">
-                Python Workflow
+            <a href="/zettelkasten-workflow.html">
+                Zettelkasten Workflow
             </a>
         </h1>
     </header>
@@ -77,135 +77,138 @@
 <div class="row-fluid">
         <div class="span8 offset2 article-content">
             
-            <p>After listening to
-<a href="https://talkpython.fm/episodes/show/314/ask-us-about-modern-python-projects-and-tools">Talk Python to Me #314</a>,
-I decided that I need to update my Python workflow.
-I am leaning towards buying
-<a href="https://training.talkpython.fm/courses/modern-python-projects">Modern Python Projects Course</a>
-but will probably wait until later in the year when I have some more time.</p>
-<p>This post will focus on my workflow on Python projects and packages.
-I have a separate workflow for my data analysis.</p>
-<h2>History</h2>
-<p>When I started using Python more regularly, I realized that I needed a process
-so that I could create consistent folder structure, keep track of my packages,
-etc.
-I was already using Git but I started using
-<a href="https://cookiecutter.readthedocs.io">cookiecutter</a> and Python venv virtual
-environments.
-However I went crazy on my cookiecutter template and made it overly complicated
-and I had difficulty upgrading packages without breaking something.
-The last 6 months I have really started to look at my tools and make
-improvements.</p>
-<p>I believe my biggest issue was that I did not really sit down and figure out my
-requirements and the minimum I need to get a project going.
-I am hoping that documenting will help me continuously improve my workflow.</p>
-<h2>Tools</h2>
-<h3>Cookiecutter</h3>
-<p>For right now I only use Cookiecutter when I do my Jupyter Notebook projects.
-I currently don't use it for my Python projects.
-Instead I just manually build out my project folder, .gitignore, etc.</p>
-<h3>Code Editor</h3>
-<p>I actually use couple different IDEs/editors.
-With all my editors, I put my settings/config file in a git repo so that I can
-share with all my computers.</p>
-<h4><a href="https://code.visualstudio.com/">VS Code</a></h4>
-<p>There is a lot of momentum with a lot of people using VS Code.
-VS Code has great Python support and more importantly it works on Windows,
-Linux and Mac.
-VS Code supports a variety of languages as well.
-This makes learning one IDE that works everywhere and with most languages.</p>
-<p>I use VS Code mainly at work and not much at home despite that I can use it
-everywhere.
-VS Code is a little heavy and can get slow if you use too many plugins.
-Also I lean more towards more to the command-line.
-VS Code does have a neat feature to sync settings across multiple computers.</p>
-<p>However I readily suggest VS Code when others ask since it is pretty easy to use
-and it is pretty popular.</p>
-<h4><a href="https://micro-editor.github.io">micro</a></h4>
-<p>This replaced vim for me.
-Micro is as easy as nano and almost as powerful as vim.
-Micro is a terminal-based editor which could be a turn off to some.
-Micro does support plugins and with Python it supports syntax highlighting,
-linting, auto indenting, etc.</p>
-<p>I use micro at home and at work though at work only on my Ubuntu VM.
-Micro for Windows is slow while using in Windows Terminal.
-Using micro under WSL works fine though.</p>
-<p><strong>Note</strong> that micro is not an IDE but with plugins could be consider a
-lightweight IDE.</p>
-<h3>Running Multiple Python Versions</h3>
-<p>I currently have different methods based on OS.</p>
-<h4>Windows</h4>
-<p>For right now, I download packages from https://python.org and install 
-<code>c:\python\pythonXX-VV</code> with <code>XX</code> being the Python version and <code>VV</code> whether it is
-32-bit or 64-bit.
-The problem with this is that I need to keep on top of minor Python updates.</p>
-<h4>Linux</h4>
-<p>I primarily use Debian based distros.
-Right now I am using the versions that are in the package manager.
-My plan is to migrate to <a href="https://github.com/pyenv/pyenv">pyenv</a> though I don't
-have a current use.</p>
-<h3>Python Environment</h3>
-<p>I use Python's standard <code>venv</code> for my virtual environments.
-I initially tried use to <a href="https://docs.conda.io/en/latest/miniconda.html">miniconda</a>
-for my Python projects but I encounter a couple of issues.
-While conda works well for my data analysis (think Jupyter Notebooks), I ran
-into problems getting 
-<a href="https://docs.conda.io/en/latest/miniconda.html">PyInstaller</a> to work.
-Also conda did not have all the packages I needed so I was still needing to use
-pip.</p>
-<p>At work, I name my virtual environments <code>venvXX-VV</code> to denote the python version
-and whether it is 32-bit or 64-bit.
-I also typically don't upgrade the packages unless I need to add a new package.
-Keep in mind that all my projects at work stay within the intranet.</p>
-<p>At home all my virtual environment folders are <code>venv</code>.
-While I may use Python that comes with the OS, I don't use <code>apt</code> to install
-packages since it tends to be quite out of date.</p>
-<p>For my <code>requirements.txt</code> I normally just use <code>pip freeze</code>.
-I plan to start using <a href="https://github.com/jgonggrijp/pip-review">pip-review</a> to
-help with package upgrades.</p>
-<p>I plan on using <a href="https://pipxproject.github.io/pipx/">pipx</a> for my global
-packages like black or flake8.</p>
-<h3>Personal Packages</h3>
-<p>I run a private <a href="/how-to-setup-local-pypi-repository.html">PyPi server</a> and
-create packages using flit
-(see <a href="/how-to-create-a-python-package.html">my post</a>).
-This has been more recent but my plan is to create more packages.</p>
-<p>The problem I have at work is that I have one large package that tries to have
-everything and I need to break it up.
-This was due to learning how to create packages and my previous method was a
-little tedious.</p>
-<h3>Testing</h3>
-<p>I use <a href="https://docs.pytest.org/">pytest</a> for testing.
-However, I don't use the test driven development.
-Due to the nature of my work, I typically don't get good requirements so at
-least initially, it is an iterative process.</p>
-<p>For my home projects, I have been attempting to do a more test driven
-development cycle.</p>
-<h2>Requirements Gathering</h2>
-<p>My work projects I typically don't get clear requirements.
-My Python projects typically spring from some data analysis project and it may
-be more useful to create a program or package.
-I will create some initial requirements.
-As I get more feedback, I will circle back and update my requirements.</p>
-<h2>Execution</h2>
-<p>I use Gitea (see <a href="/workflow-using-git.html">my post</a>) which
-is nice since I have access to an issue tracker and wiki.
-I will then create a project for my 1.0 release and milestones for the interim
-release.
-Then I create issues so I know what I need to work on to meet my milestones.</p>
-<p>I use git and git flow to create feature and release branches and work towards
-creating a program that meets the minimum requirements.
-Then as I start working on 2.0, 3.0, etc. I start adding features.</p>
-<p>Prior to a 1.0 release, anything goes.
-If I have to make breaking changes, I will as I try to meet the initial
-requirements.
-After 1.0, minor releases (ex. 1.1) will be minor new features.
-Bug fixes (ex. 1.1.1) are usually off the main or master branch.
-Major new features, breaking changes, etc. (ex. 2.0).</p>
+            <h2>Overview</h2>
+<p>Over the years I tried different methods of note taking from paper notes, using
+apps and none quite worked because I each method have certain downsides.
+Paper notes have a low friction how putting in notes but can be difficult to
+search for stuff.
+Using apps I had to conform to their paradigm and trying to sync with my
+different devices (getting Linux support and iOS support at the same time was
+more difficult than I thought).</p>
+<p>Using <a href="https://zettelkasten.de/introduction/">Zettelkasten</a> helped me organize
+my notes and seeing
+<a href="https://www.youtube.com/watch?v=Rxgi12c3sEY">Bob Belderbos's video</a> made it
+easy for me adopt.</p>
+<h2>Quick Primer on Digital Zettelkasten</h2>
+<p>Basically instead of having detailed potentially long notes, instead keep
+atomic notes that has the following:</p>
+<ol>
+<li>A single focus to make it easier to scan and understand.</li>
+<li>Source references so you know where the info came from.</li>
+<li>Tags though keep the tags to around 3 or so.</li>
+<li>Useful links so that it can make it easier to see potential connections.</li>
+</ol>
+<p>Since I decided to do a digital instead of a paper one, I needed a method to
+employ tags to aid in searching.
+I also use what I call super tags, though I did get the idea from
+<a href="https://zettelkasten.de/posts/three-layers-structure-zettelkasten/">Structural Layers in Note Taking article</a>.
+My super tags is how I link my notes together.
+For example, I may be working on a project that involves weather, SQL and
+machine learning.
+Each of those notes would have tags like <code>#temperature</code>, <code>#postgresql</code> and
+<code>#scikitlearn</code> for example.
+None of those notes would link together but I could add
+<code>##predict_weather_project</code> to link those notes together.</p>
+<h2>My Digital Zettelkasten Tooling</h2>
+<p>Prior to seeing Bob's video, I was reading
+<a href="https://www.edwinwenink.xyz/posts/42-vim_notetaking/">Edwin's series</a> on how
+he was using vim.
+It gave me the idea of using CLI tools since I am usually on the computer,
+especially at work.
+The tools he used besides vim I don't normally use and he was trying to
+replicate the Zettelkasten paper method.
+After watching Bob's video I took a look at his
+<a href="https://github.com/bbelderbos/bobcodesit">git repo</a> as well as
+<a href="https://gist.github.com/benevidesh/d78f7681120a13d5386ea55b39d82c9b">the gist</a>
+that gave him the idea.</p>
+<p>I use CLI tools that should work in either Linux or a Unix-like such as MacOS
+or FreeBSD.
+However the tools are not required to create/view/search notes either.
+I also use git to store the notes.
+While I have my notes in my private <a href="https://gitea.io/en-us/">Gitea</a>, you could
+use something like GitHub or GitLab.
+Using git means that I can view my notes using a web browser or putting the
+git repo on said device.
+All my notes are written in Markdown which will get rendered in
+Gitea/GitHub/GitLab.
+I have an index which has a table of contents at the top so that I can quickly
+jump around.</p>
+<p>On the CLI, I have scripts to create new notes <code>zn</code>, search notes by title <code>zs</code>
+and search notes by tag <code>zt</code>.
+I use vim to create my notes as that is my editor of choice though
+<a href="https://micro-editor.github.io/">micro</a> would be my second choice.
+Using <code>zn</code> will automatically create a timestamp file located in my notes
+folder and open vim.
+Searching notes is a combination of <a href="https://github.com/junegunn/fzf">fzf</a>,
+grep, sed and <a href="https://github.com/sharkdp/bat">bat</a> (cat could be used instead)
+in a bash script.
+Finally I have a python script that will build the index.
+I have two indexes; one for notes and the other that I call super notes.
+My super notes (structured notes) is when I want to link notes together.</p>
+<p>My code and example of notes are located https://github.com/cetyler/notes which
+will have the TILs that I have in my blog.</p>
+<h2>My Zettelkasten Workflow</h2>
+<p>I initially used this workflow for work but then expanded it for everything
+else.
+I keep separate Zettelkasten for work and personal.
+I also use the tooling for other projects.</p>
+<h3>Work</h3>
+<p>Most of my notes are finding snippets of information that I will need to refer
+back.
+For example I found out how to include the schema in a PostgreSQL connection
+string from
+<a href="https://stackoverflow.com/questions/59298580/how-to-specify-schema-in-psycopg2-connection-method">Stack Overflow</a>.
+That note have the link where I found the information and a quick description
+how to do it.
+I then included tags <code>#postgresql</code> and <code>#psycopg2</code> so that I can find it
+later.
+My goal is to keep the note atomic and not too many things.
+Notes from webinars, conferences, etc. I try and keep the notes to a particular
+topic and will split into multiple notes when needed.</p>
+<p>Longer training and books I also keep the notes atomic and separate to a
+particular topic.
+I include a <code>#book</code> tag for books are <code>#training</code> for training videos.
+I also include the author's name as well as where the training came from to
+again ease in searching.</p>
+<p>My meeting notes I don't separate.
+Each note is for a particular meeting.
+I also use a super tag <code>##company_name</code> so that I can look for them in my
+super/structured index.
+My previous jobs this would be unwieldy since I was in a lot of meetings.
+Instead I would use a super tag by project since my projects had a specific
+start and end.</p>
+<p>I don't use it for any task list, just notes.
+I don't plan on removing any old notes though I am contemplating removing
+obsolete notes from an old version of Python that no longer exists in the
+current version.</p>
+<h3>Personal</h3>
+<p>During my weekly review, I will go through any work notes that could be useful
+in my personal life.
+For example, I found out about Zettelkasten at work and continued researching at
+home.
+I then copy those notes over as well as any personal notes that could be useful
+for work.
+This usually only takes less than 5 minutes so I will continue to keep my notes
+separated.</p>
+<p>I also include notes like if I did some maintenance around the house so that I
+can search later if I need to know when something was done.
+I don't put any task list and only keep notes.
+Any temporary notes don't go here but I use Apple Notes as I will delete the
+notes within a few days.</p>
+<h3>Other</h3>
+<p>I use the scripts created for my notes to keep track of my SQL scripts.
+I have a separate git repository and rename <code>zn</code>, <code>zs</code>, <code>zt</code> to <code>qn</code>, <code>qs</code>
+and <code>qt</code>.
+I use this for both work and personal queries for the past 4-5 months and it
+has worked pretty well.
+Similar to my notes, it makes it easy to find that scripts and code snippet
+to use with a particular project.</p>
 <h2>Summary</h2>
-<p>This is what I currently do and will be updating the post throughout this year.
-Based on my initial research, I can see using make files to automate some of my
-tasks and using tools to help with python packages and python version support.</p>
+<p>I included my <a href="https://github.com/cetyler/notes/tree/main">public notes</a> to
+show how the tooling works.
+This workflow has stuck much more than other methods that I have tried.
+Keeping the notes atomic and keeping the tags for each notes to a minimum, I
+can search my notes quickly.</p>
 
 
              
@@ -229,7 +232,7 @@ tasks and using tools to help with python packages and python version support.</
                 <a class="accordion-toggle disqus-comment-count comment-count"
                    data-toggle="collapse"
                    data-parent="#accordion2"
-                   href="/python-workflow.html#comment_thread"
+                   href="/zettelkasten-workflow.html#comment_thread"
                    id="comment-accordion-toggle">
                     Comments
                 </a>
@@ -240,7 +243,7 @@ tasks and using tools to help with python packages and python version support.</
 
                         <script src="https://utteranc.es/client.js"
         data-repo="cetyler/cetyler.github.io"
-        data-issue-term="python-workflow"
+        data-issue-term="zettel_workflow"
         data-label="Comments"
         data-theme="github-light"
         crossorigin="anonymous"
@@ -258,16 +261,19 @@ tasks and using tools to help with python packages and python version support.</
         </div>
         <section id="article-sidebar" class="span2">
             <h4>Published</h4>
-            <time itemprop="dateCreated" datetime="2021-06-05T21:00:00-05:00">Jun 5, 2021</time>
+            <time itemprop="dateCreated" datetime="2023-05-20T15:00:00-05:00">May 20, 2023</time>
             <h4>Category</h4>
             <a class="category-link" href="/categories.html#workflow-ref">Workflow</a>
             <h4>Tags</h4>
             <ul class="list-of-tags tags-in-article">
-                <li><a href="/tags.html#python-ref">python
-                    <span>20</span>
-</a></li>
                 <li><a href="/tags.html#workflow-ref">workflow
                     <span>3</span>
+</a></li>
+                <li><a href="/tags.html#zettel-ref">zettel
+                    <span>1</span>
+</a></li>
+                <li><a href="/tags.html#zettelkasten-ref">zettelkasten
+                    <span>2</span>
 </a></li>
             </ul>
 <h4>Contact</h4>
