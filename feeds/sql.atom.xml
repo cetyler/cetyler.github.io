@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom"><title>Christopher Tyler R&amp;D Test Engineer - SQL</title><link href="https://cetyler.github.io/" rel="alternate"></link><link href="https://cetyler.github.io/feeds/sql.atom.xml" rel="self"></link><id>https://cetyler.github.io/</id><updated>2023-05-06T20:00:00-05:00</updated><entry><title>Using psql to put JSON Data into a Table</title><link href="https://cetyler.github.io/using-psql-to-put-json-data-into-a-table.html" rel="alternate"></link><published>2023-05-06T20:00:00-05:00</published><updated>2023-05-06T20:00:00-05:00</updated><author><name>Christopher</name></author><id>tag:cetyler.github.io,2023-05-06:/using-psql-to-put-json-data-into-a-table.html</id><summary type="html">&lt;p&gt;Show how you can take JSON data and insert that data into a table.&lt;/p&gt;</summary><content type="html">&lt;h2&gt;Overview&lt;/h2&gt;
 &lt;p&gt;After creating my program
-(&lt;a href="(https://github.com/cetyler/openweather_report)"&gt;openweather_report&lt;/a&gt; that
+(&lt;a href="https://github.com/cetyler/openweather_report"&gt;openweather_report&lt;/a&gt;) that
 pulls in data from &lt;a href="https://openweathermap.org"&gt;OpenWeather&lt;/a&gt;, the data is being
 saved into PostgreSQL as JSON but I would like to do some basic analysis.
 In order to query JSON data:&lt;/p&gt;

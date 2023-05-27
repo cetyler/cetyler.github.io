@@ -1,5 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Christopher Tyler R&amp;D Test Engineer - TIL</title><link href="https://cetyler.github.io/" rel="alternate"></link><link href="https://cetyler.github.io/feeds/til.atom.xml" rel="self"></link><id>https://cetyler.github.io/</id><updated>2023-04-21T00:00:00-05:00</updated><entry><title>Prune Docker Images</title><link href="https://cetyler.github.io/prune-docker-images.html" rel="alternate"></link><published>2023-04-21T00:00:00-05:00</published><updated>2023-04-21T00:00:00-05:00</updated><author><name>Christopher</name></author><id>tag:cetyler.github.io,2023-04-21:/prune-docker-images.html</id><summary type="html">&lt;p&gt;Remove images that are not in use.&lt;/p&gt;</summary><content type="html">&lt;p&gt;Can run &lt;code&gt;docker image prune -a --filter "until=24h"&lt;/code&gt; which will get rid of any
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Christopher Tyler R&amp;D Test Engineer - TIL</title><link href="https://cetyler.github.io/" rel="alternate"></link><link href="https://cetyler.github.io/feeds/til.atom.xml" rel="self"></link><id>https://cetyler.github.io/</id><updated>2023-05-26T20:00:00-05:00</updated><entry><title>Setup Python Package to use with Pipx</title><link href="https://cetyler.github.io/setup-python-package-to-use-with-pipx.html" rel="alternate"></link><published>2023-05-26T20:00:00-05:00</published><updated>2023-05-26T20:00:00-05:00</updated><author><name>Christopher</name></author><id>tag:cetyler.github.io,2023-05-26:/setup-python-package-to-use-with-pipx.html</id><summary type="html">&lt;p&gt;Setting up your Python project to work with pipx and pyproject.toml&lt;/p&gt;</summary><content type="html">&lt;p&gt;comment_id til_pipx&lt;/p&gt;
+&lt;p&gt;Found the information at
+https://flit.pypa.io/en/latest/pyproject_toml.html#pyproject-project-scripts.&lt;/p&gt;
+&lt;h2&gt;pyproject.toml&lt;/h2&gt;
+&lt;p&gt;Add the following entry:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="k"&gt;[project.scripts]&lt;/span&gt;
+&lt;span class="na"&gt;ms_access_check&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;ms_access_check.cli:main&amp;quot;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;This should work with programs like
+&lt;a href="https://flit.pypa.io/en/latest/index.html"&gt;flit&lt;/a&gt;.
+This will do the following:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&amp;gt; pipx install ms_access_check
+  installed package ms-access-check 0.6.0, installed using Python 3.11.1
+  These apps are now globally available
+    - ms_access_check.exe
+done! ✨ 🌟 ✨
+&amp;gt; ms_access_check --version
+ms_access_check, version 0.5.0
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt; that in Windows, pipx puts the files in
+&lt;code&gt;C:\Users\&amp;lt;Your User Name&amp;gt;\.local\bin&lt;/code&gt;.&lt;/p&gt;</content><category term="TIL"></category><category term="til"></category><category term="python"></category><category term="pipx"></category><category term="pyproject"></category><category term="flit"></category></entry><entry><title>Prune Docker Images</title><link href="https://cetyler.github.io/prune-docker-images.html" rel="alternate"></link><published>2023-04-21T00:00:00-05:00</published><updated>2023-04-21T00:00:00-05:00</updated><author><name>Christopher</name></author><id>tag:cetyler.github.io,2023-04-21:/prune-docker-images.html</id><summary type="html">&lt;p&gt;Remove images that are not in use.&lt;/p&gt;</summary><content type="html">&lt;p&gt;Can run &lt;code&gt;docker image prune -a --filter "until=24h"&lt;/code&gt; which will get rid of any
 images older than 24hrs.
 It will also remove images that are currently not running and not attached to
 any containers.&lt;/p&gt;</content><category term="TIL"></category><category term="til"></category><category term="docker"></category><category term="prune"></category><category term="images"></category></entry><entry><title>Clear Highlighting in Vim</title><link href="https://cetyler.github.io/clear-highlighting-in-vim.html" rel="alternate"></link><published>2023-04-14T00:00:00-05:00</published><updated>2023-04-14T00:00:00-05:00</updated><author><name>Christopher</name></author><id>tag:cetyler.github.io,2023-04-14:/clear-highlighting-in-vim.html</id><summary type="html">&lt;p&gt;Clearing highlighting after performing a search for an example.&lt;/p&gt;</summary><content type="html">&lt;p&gt;To clear highlighting:&lt;/p&gt;

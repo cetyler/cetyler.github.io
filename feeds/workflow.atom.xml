@@ -1,5 +1,136 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Christopher Tyler R&amp;D Test Engineer - Workflow</title><link href="https://cetyler.github.io/" rel="alternate"></link><link href="https://cetyler.github.io/feeds/workflow.atom.xml" rel="self"></link><id>https://cetyler.github.io/</id><updated>2021-06-05T21:00:00-05:00</updated><entry><title>Python Workflow</title><link href="https://cetyler.github.io/python-workflow.html" rel="alternate"></link><published>2021-06-05T21:00:00-05:00</published><updated>2021-06-05T21:00:00-05:00</updated><author><name>Christopher Tyler</name></author><id>tag:cetyler.github.io,2021-06-05:/python-workflow.html</id><summary type="html">&lt;p&gt;My python project workflow.&lt;/p&gt;</summary><content type="html">&lt;p&gt;After listening to
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Christopher Tyler R&amp;D Test Engineer - Workflow</title><link href="https://cetyler.github.io/" rel="alternate"></link><link href="https://cetyler.github.io/feeds/workflow.atom.xml" rel="self"></link><id>https://cetyler.github.io/</id><updated>2023-05-20T15:00:00-05:00</updated><entry><title>Zettelkasten Workflow</title><link href="https://cetyler.github.io/zettelkasten-workflow.html" rel="alternate"></link><published>2023-05-20T15:00:00-05:00</published><updated>2023-05-20T15:00:00-05:00</updated><author><name>Christopher Tyler</name></author><id>tag:cetyler.github.io,2023-05-20:/zettelkasten-workflow.html</id><summary type="html">&lt;p&gt;How I use Zettelkasten using vim and fzf.&lt;/p&gt;</summary><content type="html">&lt;h2&gt;Overview&lt;/h2&gt;
+&lt;p&gt;Over the years I tried different methods of note taking from paper notes, using
+apps and none quite worked because I each method have certain downsides.
+Paper notes have a low friction how putting in notes but can be difficult to
+search for stuff.
+Using apps I had to conform to their paradigm and trying to sync with my
+different devices (getting Linux support and iOS support at the same time was
+more difficult than I thought).&lt;/p&gt;
+&lt;p&gt;Using &lt;a href="https://zettelkasten.de/introduction/"&gt;Zettelkasten&lt;/a&gt; helped me organize
+my notes and seeing
+&lt;a href="https://www.youtube.com/watch?v=Rxgi12c3sEY"&gt;Bob Belderbos's video&lt;/a&gt; made it
+easy for me adopt.&lt;/p&gt;
+&lt;h2&gt;Quick Primer on Digital Zettelkasten&lt;/h2&gt;
+&lt;p&gt;Basically instead of having detailed potentially long notes, instead keep
+atomic notes that has the following:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;A single focus to make it easier to scan and understand.&lt;/li&gt;
+&lt;li&gt;Source references so you know where the info came from.&lt;/li&gt;
+&lt;li&gt;Tags though keep the tags to around 3 or so.&lt;/li&gt;
+&lt;li&gt;Useful links so that it can make it easier to see potential connections.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Since I decided to do a digital instead of a paper one, I needed a method to
+employ tags to aid in searching.
+I also use what I call super tags, though I did get the idea from
+&lt;a href="https://zettelkasten.de/posts/three-layers-structure-zettelkasten/"&gt;Structural Layers in Note Taking article&lt;/a&gt;.
+My super tags is how I link my notes together.
+For example, I may be working on a project that involves weather, SQL and
+machine learning.
+Each of those notes would have tags like &lt;code&gt;#temperature&lt;/code&gt;, &lt;code&gt;#postgresql&lt;/code&gt; and
+&lt;code&gt;#scikitlearn&lt;/code&gt; for example.
+None of those notes would link together but I could add
+&lt;code&gt;##predict_weather_project&lt;/code&gt; to link those notes together.&lt;/p&gt;
+&lt;h2&gt;My Digital Zettelkasten Tooling&lt;/h2&gt;
+&lt;p&gt;Prior to seeing Bob's video, I was reading
+&lt;a href="https://www.edwinwenink.xyz/posts/42-vim_notetaking/"&gt;Edwin's series&lt;/a&gt; on how
+he was using vim.
+It gave me the idea of using CLI tools since I am usually on the computer,
+especially at work.
+The tools he used besides vim I don't normally use and he was trying to
+replicate the Zettelkasten paper method.
+After watching Bob's video I took a look at his
+&lt;a href="https://github.com/bbelderbos/bobcodesit"&gt;git repo&lt;/a&gt; as well as
+&lt;a href="https://gist.github.com/benevidesh/d78f7681120a13d5386ea55b39d82c9b"&gt;the gist&lt;/a&gt;
+that gave him the idea.&lt;/p&gt;
+&lt;p&gt;I use CLI tools that should work in either Linux or a Unix-like such as MacOS
+or FreeBSD.
+However the tools are not required to create/view/search notes either.
+I also use git to store the notes.
+While I have my notes in my private &lt;a href="https://gitea.io/en-us/"&gt;Gitea&lt;/a&gt;, you could
+use something like GitHub or GitLab.
+Using git means that I can view my notes using a web browser or putting the
+git repo on said device.
+All my notes are written in Markdown which will get rendered in
+Gitea/GitHub/GitLab.
+I have an index which has a table of contents at the top so that I can quickly
+jump around.&lt;/p&gt;
+&lt;p&gt;On the CLI, I have scripts to create new notes &lt;code&gt;zn&lt;/code&gt;, search notes by title &lt;code&gt;zs&lt;/code&gt;
+and search notes by tag &lt;code&gt;zt&lt;/code&gt;.
+I use vim to create my notes as that is my editor of choice though
+&lt;a href="https://micro-editor.github.io/"&gt;micro&lt;/a&gt; would be my second choice.
+Using &lt;code&gt;zn&lt;/code&gt; will automatically create a timestamp file located in my notes
+folder and open vim.
+Searching notes is a combination of &lt;a href="https://github.com/junegunn/fzf"&gt;fzf&lt;/a&gt;,
+grep, sed and &lt;a href="https://github.com/sharkdp/bat"&gt;bat&lt;/a&gt; (cat could be used instead)
+in a bash script.
+Finally I have a python script that will build the index.
+I have two indexes; one for notes and the other that I call super notes.
+My super notes (structured notes) is when I want to link notes together.&lt;/p&gt;
+&lt;p&gt;My code and example of notes are located https://github.com/cetyler/notes which
+will have the TILs that I have in my blog.&lt;/p&gt;
+&lt;h2&gt;My Zettelkasten Workflow&lt;/h2&gt;
+&lt;p&gt;I initially used this workflow for work but then expanded it for everything
+else.
+I keep separate Zettelkasten for work and personal.
+I also use the tooling for other projects.&lt;/p&gt;
+&lt;h3&gt;Work&lt;/h3&gt;
+&lt;p&gt;Most of my notes are finding snippets of information that I will need to refer
+back.
+For example I found out how to include the schema in a PostgreSQL connection
+string from
+&lt;a href="https://stackoverflow.com/questions/59298580/how-to-specify-schema-in-psycopg2-connection-method"&gt;Stack Overflow&lt;/a&gt;.
+That note have the link where I found the information and a quick description
+how to do it.
+I then included tags &lt;code&gt;#postgresql&lt;/code&gt; and &lt;code&gt;#psycopg2&lt;/code&gt; so that I can find it
+later.
+My goal is to keep the note atomic and not too many things.
+Notes from webinars, conferences, etc. I try and keep the notes to a particular
+topic and will split into multiple notes when needed.&lt;/p&gt;
+&lt;p&gt;Longer training and books I also keep the notes atomic and separate to a
+particular topic.
+I include a &lt;code&gt;#book&lt;/code&gt; tag for books are &lt;code&gt;#training&lt;/code&gt; for training videos.
+I also include the author's name as well as where the training came from to
+again ease in searching.&lt;/p&gt;
+&lt;p&gt;My meeting notes I don't separate.
+Each note is for a particular meeting.
+I also use a super tag &lt;code&gt;##company_name&lt;/code&gt; so that I can look for them in my
+super/structured index.
+My previous jobs this would be unwieldy since I was in a lot of meetings.
+Instead I would use a super tag by project since my projects had a specific
+start and end.&lt;/p&gt;
+&lt;p&gt;I don't use it for any task list, just notes.
+I don't plan on removing any old notes though I am contemplating removing
+obsolete notes from an old version of Python that no longer exists in the
+current version.&lt;/p&gt;
+&lt;h3&gt;Personal&lt;/h3&gt;
+&lt;p&gt;During my weekly review, I will go through any work notes that could be useful
+in my personal life.
+For example, I found out about Zettelkasten at work and continued researching at
+home.
+I then copy those notes over as well as any personal notes that could be useful
+for work.
+This usually only takes less than 5 minutes so I will continue to keep my notes
+separated.&lt;/p&gt;
+&lt;p&gt;I also include notes like if I did some maintenance around the house so that I
+can search later if I need to know when something was done.
+I don't put any task list and only keep notes.
+Any temporary notes don't go here but I use Apple Notes as I will delete the
+notes within a few days.&lt;/p&gt;
+&lt;h3&gt;Other&lt;/h3&gt;
+&lt;p&gt;I use the scripts created for my notes to keep track of my SQL scripts.
+I have a separate git repository and rename &lt;code&gt;zn&lt;/code&gt;, &lt;code&gt;zs&lt;/code&gt;, &lt;code&gt;zt&lt;/code&gt; to &lt;code&gt;qn&lt;/code&gt;, &lt;code&gt;qs&lt;/code&gt;
+and &lt;code&gt;qt&lt;/code&gt;.
+I use this for both work and personal queries for the past 4-5 months and it
+has worked pretty well.
+Similar to my notes, it makes it easy to find that scripts and code snippet
+to use with a particular project.&lt;/p&gt;
+&lt;h2&gt;Summary&lt;/h2&gt;
+&lt;p&gt;I included my &lt;a href="https://github.com/cetyler/notes/tree/main"&gt;public notes&lt;/a&gt; to
+show how the tooling works.
+This workflow has stuck much more than other methods that I have tried.
+Keeping the notes atomic and keeping the tags for each notes to a minimum, I
+can search my notes quickly.&lt;/p&gt;</content><category term="Workflow"></category><category term="workflow"></category><category term="zettel"></category><category term="zettelkasten"></category></entry><entry><title>Python Workflow</title><link href="https://cetyler.github.io/python-workflow.html" rel="alternate"></link><published>2021-06-05T21:00:00-05:00</published><updated>2021-06-05T21:00:00-05:00</updated><author><name>Christopher Tyler</name></author><id>tag:cetyler.github.io,2021-06-05:/python-workflow.html</id><summary type="html">&lt;p&gt;My python project workflow.&lt;/p&gt;</summary><content type="html">&lt;p&gt;After listening to
 &lt;a href="https://talkpython.fm/episodes/show/314/ask-us-about-modern-python-projects-and-tools"&gt;Talk Python to Me #314&lt;/a&gt;,
 I decided that I need to update my Python workflow.
 I am leaning towards buying

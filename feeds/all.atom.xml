@@ -1,7 +1,160 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Christopher Tyler R&amp;D Test Engineer</title><link href="https://cetyler.github.io/" rel="alternate"></link><link href="https://cetyler.github.io/feeds/all.atom.xml" rel="self"></link><id>https://cetyler.github.io/</id><updated>2023-05-06T20:00:00-05:00</updated><entry><title>Using psql to put JSON Data into a Table</title><link href="https://cetyler.github.io/using-psql-to-put-json-data-into-a-table.html" rel="alternate"></link><published>2023-05-06T20:00:00-05:00</published><updated>2023-05-06T20:00:00-05:00</updated><author><name>Christopher</name></author><id>tag:cetyler.github.io,2023-05-06:/using-psql-to-put-json-data-into-a-table.html</id><summary type="html">&lt;p&gt;Show how you can take JSON data and insert that data into a table.&lt;/p&gt;</summary><content type="html">&lt;h2&gt;Overview&lt;/h2&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Christopher Tyler R&amp;D Test Engineer</title><link href="https://cetyler.github.io/" rel="alternate"></link><link href="https://cetyler.github.io/feeds/all.atom.xml" rel="self"></link><id>https://cetyler.github.io/</id><updated>2023-05-26T20:00:00-05:00</updated><entry><title>Setup Python Package to use with Pipx</title><link href="https://cetyler.github.io/setup-python-package-to-use-with-pipx.html" rel="alternate"></link><published>2023-05-26T20:00:00-05:00</published><updated>2023-05-26T20:00:00-05:00</updated><author><name>Christopher</name></author><id>tag:cetyler.github.io,2023-05-26:/setup-python-package-to-use-with-pipx.html</id><summary type="html">&lt;p&gt;Setting up your Python project to work with pipx and pyproject.toml&lt;/p&gt;</summary><content type="html">&lt;p&gt;comment_id til_pipx&lt;/p&gt;
+&lt;p&gt;Found the information at
+https://flit.pypa.io/en/latest/pyproject_toml.html#pyproject-project-scripts.&lt;/p&gt;
+&lt;h2&gt;pyproject.toml&lt;/h2&gt;
+&lt;p&gt;Add the following entry:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="k"&gt;[project.scripts]&lt;/span&gt;
+&lt;span class="na"&gt;ms_access_check&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;ms_access_check.cli:main&amp;quot;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;This should work with programs like
+&lt;a href="https://flit.pypa.io/en/latest/index.html"&gt;flit&lt;/a&gt;.
+This will do the following:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&amp;gt; pipx install ms_access_check
+  installed package ms-access-check 0.6.0, installed using Python 3.11.1
+  These apps are now globally available
+    - ms_access_check.exe
+done! ✨ 🌟 ✨
+&amp;gt; ms_access_check --version
+ms_access_check, version 0.5.0
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt; that in Windows, pipx puts the files in
+&lt;code&gt;C:\Users\&amp;lt;Your User Name&amp;gt;\.local\bin&lt;/code&gt;.&lt;/p&gt;</content><category term="TIL"></category><category term="til"></category><category term="python"></category><category term="pipx"></category><category term="pyproject"></category><category term="flit"></category></entry><entry><title>Zettelkasten Workflow</title><link href="https://cetyler.github.io/zettelkasten-workflow.html" rel="alternate"></link><published>2023-05-20T15:00:00-05:00</published><updated>2023-05-20T15:00:00-05:00</updated><author><name>Christopher Tyler</name></author><id>tag:cetyler.github.io,2023-05-20:/zettelkasten-workflow.html</id><summary type="html">&lt;p&gt;How I use Zettelkasten using vim and fzf.&lt;/p&gt;</summary><content type="html">&lt;h2&gt;Overview&lt;/h2&gt;
+&lt;p&gt;Over the years I tried different methods of note taking from paper notes, using
+apps and none quite worked because I each method have certain downsides.
+Paper notes have a low friction how putting in notes but can be difficult to
+search for stuff.
+Using apps I had to conform to their paradigm and trying to sync with my
+different devices (getting Linux support and iOS support at the same time was
+more difficult than I thought).&lt;/p&gt;
+&lt;p&gt;Using &lt;a href="https://zettelkasten.de/introduction/"&gt;Zettelkasten&lt;/a&gt; helped me organize
+my notes and seeing
+&lt;a href="https://www.youtube.com/watch?v=Rxgi12c3sEY"&gt;Bob Belderbos's video&lt;/a&gt; made it
+easy for me adopt.&lt;/p&gt;
+&lt;h2&gt;Quick Primer on Digital Zettelkasten&lt;/h2&gt;
+&lt;p&gt;Basically instead of having detailed potentially long notes, instead keep
+atomic notes that has the following:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;A single focus to make it easier to scan and understand.&lt;/li&gt;
+&lt;li&gt;Source references so you know where the info came from.&lt;/li&gt;
+&lt;li&gt;Tags though keep the tags to around 3 or so.&lt;/li&gt;
+&lt;li&gt;Useful links so that it can make it easier to see potential connections.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Since I decided to do a digital instead of a paper one, I needed a method to
+employ tags to aid in searching.
+I also use what I call super tags, though I did get the idea from
+&lt;a href="https://zettelkasten.de/posts/three-layers-structure-zettelkasten/"&gt;Structural Layers in Note Taking article&lt;/a&gt;.
+My super tags is how I link my notes together.
+For example, I may be working on a project that involves weather, SQL and
+machine learning.
+Each of those notes would have tags like &lt;code&gt;#temperature&lt;/code&gt;, &lt;code&gt;#postgresql&lt;/code&gt; and
+&lt;code&gt;#scikitlearn&lt;/code&gt; for example.
+None of those notes would link together but I could add
+&lt;code&gt;##predict_weather_project&lt;/code&gt; to link those notes together.&lt;/p&gt;
+&lt;h2&gt;My Digital Zettelkasten Tooling&lt;/h2&gt;
+&lt;p&gt;Prior to seeing Bob's video, I was reading
+&lt;a href="https://www.edwinwenink.xyz/posts/42-vim_notetaking/"&gt;Edwin's series&lt;/a&gt; on how
+he was using vim.
+It gave me the idea of using CLI tools since I am usually on the computer,
+especially at work.
+The tools he used besides vim I don't normally use and he was trying to
+replicate the Zettelkasten paper method.
+After watching Bob's video I took a look at his
+&lt;a href="https://github.com/bbelderbos/bobcodesit"&gt;git repo&lt;/a&gt; as well as
+&lt;a href="https://gist.github.com/benevidesh/d78f7681120a13d5386ea55b39d82c9b"&gt;the gist&lt;/a&gt;
+that gave him the idea.&lt;/p&gt;
+&lt;p&gt;I use CLI tools that should work in either Linux or a Unix-like such as MacOS
+or FreeBSD.
+However the tools are not required to create/view/search notes either.
+I also use git to store the notes.
+While I have my notes in my private &lt;a href="https://gitea.io/en-us/"&gt;Gitea&lt;/a&gt;, you could
+use something like GitHub or GitLab.
+Using git means that I can view my notes using a web browser or putting the
+git repo on said device.
+All my notes are written in Markdown which will get rendered in
+Gitea/GitHub/GitLab.
+I have an index which has a table of contents at the top so that I can quickly
+jump around.&lt;/p&gt;
+&lt;p&gt;On the CLI, I have scripts to create new notes &lt;code&gt;zn&lt;/code&gt;, search notes by title &lt;code&gt;zs&lt;/code&gt;
+and search notes by tag &lt;code&gt;zt&lt;/code&gt;.
+I use vim to create my notes as that is my editor of choice though
+&lt;a href="https://micro-editor.github.io/"&gt;micro&lt;/a&gt; would be my second choice.
+Using &lt;code&gt;zn&lt;/code&gt; will automatically create a timestamp file located in my notes
+folder and open vim.
+Searching notes is a combination of &lt;a href="https://github.com/junegunn/fzf"&gt;fzf&lt;/a&gt;,
+grep, sed and &lt;a href="https://github.com/sharkdp/bat"&gt;bat&lt;/a&gt; (cat could be used instead)
+in a bash script.
+Finally I have a python script that will build the index.
+I have two indexes; one for notes and the other that I call super notes.
+My super notes (structured notes) is when I want to link notes together.&lt;/p&gt;
+&lt;p&gt;My code and example of notes are located https://github.com/cetyler/notes which
+will have the TILs that I have in my blog.&lt;/p&gt;
+&lt;h2&gt;My Zettelkasten Workflow&lt;/h2&gt;
+&lt;p&gt;I initially used this workflow for work but then expanded it for everything
+else.
+I keep separate Zettelkasten for work and personal.
+I also use the tooling for other projects.&lt;/p&gt;
+&lt;h3&gt;Work&lt;/h3&gt;
+&lt;p&gt;Most of my notes are finding snippets of information that I will need to refer
+back.
+For example I found out how to include the schema in a PostgreSQL connection
+string from
+&lt;a href="https://stackoverflow.com/questions/59298580/how-to-specify-schema-in-psycopg2-connection-method"&gt;Stack Overflow&lt;/a&gt;.
+That note have the link where I found the information and a quick description
+how to do it.
+I then included tags &lt;code&gt;#postgresql&lt;/code&gt; and &lt;code&gt;#psycopg2&lt;/code&gt; so that I can find it
+later.
+My goal is to keep the note atomic and not too many things.
+Notes from webinars, conferences, etc. I try and keep the notes to a particular
+topic and will split into multiple notes when needed.&lt;/p&gt;
+&lt;p&gt;Longer training and books I also keep the notes atomic and separate to a
+particular topic.
+I include a &lt;code&gt;#book&lt;/code&gt; tag for books are &lt;code&gt;#training&lt;/code&gt; for training videos.
+I also include the author's name as well as where the training came from to
+again ease in searching.&lt;/p&gt;
+&lt;p&gt;My meeting notes I don't separate.
+Each note is for a particular meeting.
+I also use a super tag &lt;code&gt;##company_name&lt;/code&gt; so that I can look for them in my
+super/structured index.
+My previous jobs this would be unwieldy since I was in a lot of meetings.
+Instead I would use a super tag by project since my projects had a specific
+start and end.&lt;/p&gt;
+&lt;p&gt;I don't use it for any task list, just notes.
+I don't plan on removing any old notes though I am contemplating removing
+obsolete notes from an old version of Python that no longer exists in the
+current version.&lt;/p&gt;
+&lt;h3&gt;Personal&lt;/h3&gt;
+&lt;p&gt;During my weekly review, I will go through any work notes that could be useful
+in my personal life.
+For example, I found out about Zettelkasten at work and continued researching at
+home.
+I then copy those notes over as well as any personal notes that could be useful
+for work.
+This usually only takes less than 5 minutes so I will continue to keep my notes
+separated.&lt;/p&gt;
+&lt;p&gt;I also include notes like if I did some maintenance around the house so that I
+can search later if I need to know when something was done.
+I don't put any task list and only keep notes.
+Any temporary notes don't go here but I use Apple Notes as I will delete the
+notes within a few days.&lt;/p&gt;
+&lt;h3&gt;Other&lt;/h3&gt;
+&lt;p&gt;I use the scripts created for my notes to keep track of my SQL scripts.
+I have a separate git repository and rename &lt;code&gt;zn&lt;/code&gt;, &lt;code&gt;zs&lt;/code&gt;, &lt;code&gt;zt&lt;/code&gt; to &lt;code&gt;qn&lt;/code&gt;, &lt;code&gt;qs&lt;/code&gt;
+and &lt;code&gt;qt&lt;/code&gt;.
+I use this for both work and personal queries for the past 4-5 months and it
+has worked pretty well.
+Similar to my notes, it makes it easy to find that scripts and code snippet
+to use with a particular project.&lt;/p&gt;
+&lt;h2&gt;Summary&lt;/h2&gt;
+&lt;p&gt;I included my &lt;a href="https://github.com/cetyler/notes/tree/main"&gt;public notes&lt;/a&gt; to
+show how the tooling works.
+This workflow has stuck much more than other methods that I have tried.
+Keeping the notes atomic and keeping the tags for each notes to a minimum, I
+can search my notes quickly.&lt;/p&gt;</content><category term="Workflow"></category><category term="workflow"></category><category term="zettel"></category><category term="zettelkasten"></category></entry><entry><title>Using psql to put JSON Data into a Table</title><link href="https://cetyler.github.io/using-psql-to-put-json-data-into-a-table.html" rel="alternate"></link><published>2023-05-06T20:00:00-05:00</published><updated>2023-05-06T20:00:00-05:00</updated><author><name>Christopher</name></author><id>tag:cetyler.github.io,2023-05-06:/using-psql-to-put-json-data-into-a-table.html</id><summary type="html">&lt;p&gt;Show how you can take JSON data and insert that data into a table.&lt;/p&gt;</summary><content type="html">&lt;h2&gt;Overview&lt;/h2&gt;
 &lt;p&gt;After creating my program
-(&lt;a href="(https://github.com/cetyler/openweather_report)"&gt;openweather_report&lt;/a&gt; that
+(&lt;a href="https://github.com/cetyler/openweather_report"&gt;openweather_report&lt;/a&gt;) that
 pulls in data from &lt;a href="https://openweathermap.org"&gt;OpenWeather&lt;/a&gt;, the data is being
 saved into PostgreSQL as JSON but I would like to do some basic analysis.
 In order to query JSON data:&lt;/p&gt;
@@ -662,181 +815,4 @@ database to use for dashboards.&lt;/p&gt;
 &lt;h2&gt;Next Steps&lt;/h2&gt;
 &lt;p&gt;The requirements and initial Roadmap is complete.
 Will now work on using Github's project management features and start doing
-some actual coding.&lt;/p&gt;</content><category term="Python"></category><category term="python"></category><category term="project"></category><category term="documentation"></category></entry><entry><title>Weather Project - PyPi</title><link href="https://cetyler.github.io/weather-project-pypi.html" rel="alternate"></link><published>2022-08-11T20:00:00-05:00</published><updated>2023-04-30T20:00:00-05:00</updated><author><name>Christopher</name></author><id>tag:cetyler.github.io,2022-08-11:/weather-project-pypi.html</id><summary type="html">&lt;p&gt;Setup PyPi with an empty project to lock in the project name.&lt;/p&gt;</summary><content type="html">&lt;h2&gt;Overview&lt;/h2&gt;
-&lt;p&gt;From the &lt;a href="https://cetyler.github.io/weather-project.html"&gt;previous article&lt;/a&gt;,
-the Weather Project will be put on PyPi to help me understand that process and
-to also share with others.
-This article will go over how to put a skeleton project on PyPi.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt; prior to the completion of this article, I found 
-&lt;a href="https://mathspp.com/blog/how-to-create-a-python-package-in-2022"&gt;Rodrigo's article&lt;/a&gt;
-though keep in mind that his article is much more comprehensive.&lt;/p&gt;
-&lt;h2&gt;Create PyPi Account&lt;/h2&gt;
-&lt;p&gt;It is fairly straightforward to create an account.
-Go to https://pypi.org/account/register/ and follow the instructions.
-I would suggest adding at least two emails to your account in case something
-happens to one of your email accounts.
-I would also setup Two Factor Authentication (2FA).
-In order to push our packages to PyPi, create an API token.
-I put it in my password manage since I created one to use for all my packages
-in PyPi.&lt;/p&gt;
-&lt;p&gt;You should do the same steps and create an account on https://test.pypi.org/.&lt;/p&gt;
-&lt;h2&gt;Create Weather Package on PyPi&lt;/h2&gt;
-&lt;p&gt;This may seem backwards, but it is easier to check if a name exists first as
-opposed to coming up with a name, creating a git project, then finding out that
-your name you selected is too similar to an existing project.
-I did a search to make sure that &lt;code&gt;openweather-report&lt;/code&gt; was not in use though it
-took a couple of tries.
-I use &lt;a href="https://github.com/pyenv/pyenv"&gt;pyenv&lt;/a&gt; to set my Python version so I
-created a folder and set the version to 3.10.6 (current at the time of this
-article) as well as create my virtual environment.
-I created a project using &lt;a href="https://www.python-poetry.org/"&gt;Poetry&lt;/a&gt;.
-This will be an empty project just to lock in the package name.
-Add the API token for both PyPi and Test PyPi using:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="n"&gt;$&lt;/span&gt; &lt;span class="n"&gt;poetry&lt;/span&gt; &lt;span class="n"&gt;new&lt;/span&gt; &lt;span class="n"&gt;openweather&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;report&lt;/span&gt;
-&lt;span class="n"&gt;$&lt;/span&gt; &lt;span class="n"&gt;poetry&lt;/span&gt; &lt;span class="n"&gt;config&lt;/span&gt; &lt;span class="n"&gt;repositories&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;testpypi&lt;/span&gt; &lt;span class="nl"&gt;https&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="c1"&gt;//test.pypi.org/legacy/&lt;/span&gt;
-&lt;span class="n"&gt;$&lt;/span&gt; &lt;span class="n"&gt;poetry&lt;/span&gt; &lt;span class="n"&gt;config&lt;/span&gt; &lt;span class="n"&gt;pypi&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;token&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;pypi&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;API&lt;/span&gt; &lt;span class="n"&gt;KEY&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
-&lt;span class="n"&gt;$&lt;/span&gt; &lt;span class="n"&gt;poetry&lt;/span&gt; &lt;span class="n"&gt;config&lt;/span&gt; &lt;span class="n"&gt;http&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;basic&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;testpypi&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;API&lt;/span&gt; &lt;span class="n"&gt;KEY&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
-&lt;span class="n"&gt;$&lt;/span&gt; &lt;span class="n"&gt;poetry&lt;/span&gt; &lt;span class="n"&gt;build&lt;/span&gt;
-&lt;span class="n"&gt;$&lt;/span&gt; &lt;span class="n"&gt;poetry&lt;/span&gt; &lt;span class="n"&gt;publish&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;r&lt;/span&gt; &lt;span class="n"&gt;testpypi&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;If everything works, then the package name is unique enough and it now locked
-in.&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;&lt;strong&gt;Update:&lt;/strong&gt;
-I switched from using Poetry and use Flit.&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;h3&gt;Using Flit&lt;/h3&gt;
-&lt;p&gt;Create a token at &lt;a href="https://pypi.org/manage/account/"&gt;PyPi&lt;/a&gt;.
-Using &lt;a href="https://packaging.python.org/en/latest/specifications/pypirc/"&gt;PyPa&lt;/a&gt;
-instructions, I updated &lt;code&gt;.pypirc&lt;/code&gt;:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="k"&gt;[distutils]&lt;/span&gt;
-&lt;span class="na"&gt;index-servers&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt;
-        &lt;span class="na"&gt;pypi&lt;/span&gt;
-        &lt;span class="na"&gt;testpypi&lt;/span&gt;
-
-&lt;span class="k"&gt;[pypi]&lt;/span&gt;
-&lt;span class="na"&gt;username&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;__token__&lt;/span&gt;
-&lt;span class="na"&gt;password&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;lt;api-token&amp;gt;&lt;/span&gt;
-
-&lt;span class="k"&gt;[testpypi]&lt;/span&gt;
-&lt;span class="na"&gt;username&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;__token__&lt;/span&gt;
-&lt;span class="na"&gt;password&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;lt;api-token&amp;gt;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;Now to build and publish using flit:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;$ flit init
-$ flit build
-$ flit publish --repository testpypi
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;h2&gt;Create Project on Github&lt;/h2&gt;
-&lt;p&gt;Normally I use a private &lt;a href="https://gitea.io/en-us/"&gt;Gitea&lt;/a&gt; instance on my local
-network for personal projects and another one while I am work.
-Openweather-report I would like to share with others.
-While I have a &lt;a href="https://about.gitlab.com/"&gt;Gitlab&lt;/a&gt; account, most of the
-momentum is on &lt;a href="https://github.com/"&gt;Github&lt;/a&gt; so at least initially I was start
-there.
-Add a new repository called
-&lt;a href="https://github.com/cetyler/openweather_report"&gt;openweather_report&lt;/a&gt;.
-My goal is to use this project to try and understand some of the features that
-are Github provides.
-This project is going to be more than just a toy project but this project won't
-be overly complicated.
-There is enough to the project that I can learn how to use &lt;a href="https://github.com/features/actions"&gt;Github
-Actions&lt;/a&gt; for example.&lt;/p&gt;
-&lt;h2&gt;Git Flow&lt;/h2&gt;
-&lt;p&gt;Prior to pushing my project to Github, I use 
-&lt;a href="https://github.com/petervanderdoes/gitflow-avh/"&gt;Git Flow&lt;/a&gt; but I plan on using
-it differently than I have in the past.
-This project will have the following branches:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;main&lt;ul&gt;
-&lt;li&gt;This branch will be considered the stable branch.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;release_xxx&lt;ul&gt;
-&lt;li&gt;This will be the next release.&lt;/li&gt;
-&lt;li&gt;There can be multiple releases open (as pull requests).&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;feature&lt;ul&gt;
-&lt;li&gt;Any feature to add to develop branch.&lt;/li&gt;
-&lt;li&gt;This will be a short running branch no more than a couple of days.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;bug&lt;ul&gt;
-&lt;li&gt;This can be off either main.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;I also plan on doing pull requests instead of just branching from my local git
-repository.
-This may remove the need to use Git Flow.&lt;/p&gt;
-&lt;h2&gt;Next Steps&lt;/h2&gt;
-&lt;p&gt;I now have PyPi set up and my project on PyPi and on Github.
-The goal is the next release will be a functional release.
-The next article will be to start working on the requirements and create a
-Roadmap.&lt;/p&gt;</content><category term="Python"></category><category term="python"></category><category term="project"></category></entry><entry><title>Weather Project</title><link href="https://cetyler.github.io/weather-project.html" rel="alternate"></link><published>2022-07-19T20:00:00-05:00</published><updated>2022-07-19T20:00:00-05:00</updated><author><name>Christopher</name></author><id>tag:cetyler.github.io,2022-07-19:/weather-project.html</id><summary type="html">&lt;p&gt;Create a simple weather project to document how to add projects to PyPi and to aid with data analysis.&lt;/p&gt;</summary><content type="html">&lt;h2&gt;Overview&lt;/h2&gt;
-&lt;p&gt;I haven't added anything to PyPi.
-Also I wanted to continue to refine my Python workflow and want to use a
-project that is beyond a toy project like my 
-&lt;a href="https://cetyler.github.io/calculator-project.html"&gt;Calculator Project&lt;/a&gt;.
-Finally I wanted something to help generate data so that I can work on my data
-analysis.
-This article will cover what my requirements and goals are for this project.&lt;/p&gt;
-&lt;h2&gt;Requirements&lt;/h2&gt;
-&lt;p&gt;I have three requirement sections:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;The weather program itself.&lt;/li&gt;
-&lt;li&gt;Data analysis.&lt;/li&gt;
-&lt;li&gt;Evaluating and updating Python workflow.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3&gt;Weather Program&lt;/h3&gt;
-&lt;p&gt;I will go in more detail when I actually create the User Requirements but for
-now I want to provide some high level requirements.
-The program should be able to run using a scheduler like cron in Linux or the
-Windows Scheduler.
-This will enable getting data over time.
-I want to use weather data from &lt;a href="https://openweathermap.org/"&gt;OpenWeather&lt;/a&gt;
-since I would like to try their 
-&lt;a href="https://openweathermap.org/api/one-call-3"&gt;One API Call&lt;/a&gt;.
-I also would like to save the data to &lt;a href="https://www.postgresql.org/"&gt;PostgreSQL&lt;/a&gt;
-to practice using PostgreSQL since I use PostgreSQL quite a bit at work.
-Eventually it would nice that this program to set everything with in the
-program itself.&lt;/p&gt;
-&lt;h3&gt;Data Analysis&lt;/h3&gt;
-&lt;p&gt;I know I could go to websites like &lt;a href="https://www.kaggle.com/"&gt;Kaggle&lt;/a&gt; but I
-think it is more interesting getting data that I am actually interested in.
-Obviously I can't use any data from work.
-I also would like to practice with forecasting and while I could use stock
-data, I think weather data would be a nice start.
-I will have historical data to compare to and the forecast data from
-OpenWeather.
-I could see how accurate my forecast is as well as OpenWeather's forecast.
-Then I can create dashboards to view and analyze the data.&lt;/p&gt;
-&lt;h3&gt;Python Workflow&lt;/h3&gt;
-&lt;p&gt;I would like to evaluate my current workflow and use this project to continue
-to make improvements.
-I am currently evaluating &lt;a href="https://www.jetbrains.com/pycharm/"&gt;Pycharm&lt;/a&gt; at work
-while I am evaluating &lt;a href="https://github.com/coder/code-server"&gt;Coder&lt;/a&gt; at home.&lt;/p&gt;
-&lt;h2&gt;Roadmap&lt;/h2&gt;
-&lt;p&gt;I will include a roadmap in the project but I want to do a very high level
-initial roadmap to get a minimal viable product.&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Create initial PyPi release to lock in project name.&lt;/li&gt;
-&lt;li&gt;Create User Requirements.&lt;/li&gt;
-&lt;li&gt;Create Design Requirements.&lt;/li&gt;
-&lt;li&gt;Create README.&lt;/li&gt;
-&lt;li&gt;Create Roadmap.&lt;/li&gt;
-&lt;li&gt;Create tests.&lt;/li&gt;
-&lt;li&gt;Create initial release.&lt;/li&gt;
-&lt;li&gt;Review remaining roadmap and continue through the roadmap.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;My plan unlike the Calculator Project is to continue to create article as I
-work on this weather project.&lt;/p&gt;
-&lt;h2&gt;Next Steps&lt;/h2&gt;
-&lt;p&gt;I will create a bare bones project so that I can lock in the project name on
-&lt;a href="https://pypi.org/"&gt;PyPi&lt;/a&gt;.
-I also want to be able to publish to TestPyPI as well as PyPi without needing
-to input my username and password each time.&lt;/p&gt;</content><category term="Python"></category><category term="python"></category><category term="project"></category></entry></feed>
+some actual coding.&lt;/p&gt;</content><category term="Python"></category><category term="python"></category><category term="project"></category><category term="documentation"></category></entry></feed>
