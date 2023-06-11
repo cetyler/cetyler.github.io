@@ -19,7 +19,7 @@ Six Sigma trained and well-versed in UL, ISO 17025 and ISO 9001:2001.
   
 - Operating Systems: Microsoft Windows, Linux, UNIX
 - Software: Microsoft Office, Project Link
-- Computer Languages: Python, Labview
+- Computer Languages: Python
 - Engineering Software: BqStudio, Roadrunner, BenchVue, PLC Directsoft
 - Equipment: Picoscope, MACCOR, GW Instek Programmable Load, Chamber with Watlow
   Controller
