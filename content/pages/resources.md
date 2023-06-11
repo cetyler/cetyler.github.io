@@ -63,7 +63,7 @@ level training.
 So far I have taken his Python courses but I also his Practice Makes Regexp and
 his [Pandas Workout](https://www.manning.com/books/pandas-workout) books.
 I did a review on
-[Object-Orient Python]({filename}/python/2022-01-08_reuven_oop.md)
+[Object-Orient Python]({filename}/python/2022-01-08-reuven_oop.md)
 and [Weekly Python Exercise A3]({filename}/python/2022-01-14-reuven_wpe.md).
 
 ### [Talk Python to Me](https://talkpython.fm/)
