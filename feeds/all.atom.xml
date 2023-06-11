@@ -1,6 +1,107 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Christopher Tyler R&amp;D Test Engineer</title><link href="https://cetyler.github.io/" rel="alternate"></link><link href="https://cetyler.github.io/feeds/all.atom.xml" rel="self"></link><id>https://cetyler.github.io/</id><updated>2023-05-26T20:00:00-05:00</updated><entry><title>Setup Python Package to use with Pipx</title><link href="https://cetyler.github.io/setup-python-package-to-use-with-pipx.html" rel="alternate"></link><published>2023-05-26T20:00:00-05:00</published><updated>2023-05-26T20:00:00-05:00</updated><author><name>Christopher</name></author><id>tag:cetyler.github.io,2023-05-26:/setup-python-package-to-use-with-pipx.html</id><summary type="html">&lt;p&gt;Setting up your Python project to work with pipx and pyproject.toml&lt;/p&gt;</summary><content type="html">&lt;p&gt;comment_id til_pipx&lt;/p&gt;
-&lt;p&gt;Found the information at
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Christopher Tyler R&amp;D Test Engineer</title><link href="https://cetyler.github.io/" rel="alternate"></link><link href="https://cetyler.github.io/feeds/all.atom.xml" rel="self"></link><id>https://cetyler.github.io/</id><updated>2023-06-10T14:30:00-05:00</updated><entry><title>SQL Window Functions Explained</title><link href="https://cetyler.github.io/sql-window-functions-explained.html" rel="alternate"></link><published>2023-06-10T14:30:00-05:00</published><updated>2023-06-10T14:30:00-05:00</updated><author><name>Christopher</name></author><id>tag:cetyler.github.io,2023-06-10:/sql-window-functions-explained.html</id><summary type="html">&lt;p&gt;Book review summary of Anton's SQL Window Functions.&lt;/p&gt;</summary><content type="html">&lt;h2&gt;Overview&lt;/h2&gt;
+&lt;p&gt;I recently finished Anton's book
+&lt;a href="https://antonz.org/sql-window-functions-book/"&gt;SQL Window Functions Explained&lt;/a&gt;.
+While I seen window functions, I only had a basic knowledge.
+I originally bought the e-book at the beginning of the year but it has been
+recent completed (the last part of the book he released last month).
+My review is based on the e-book though keep in mind there is a physical book
+available.&lt;/p&gt;
+&lt;h2&gt;Structure&lt;/h2&gt;
+&lt;p&gt;Anton structured the book into three parts:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Windows and functions&lt;/li&gt;
+&lt;li&gt;Frames&lt;/li&gt;
+&lt;li&gt;Practice&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Keep in mind that there are practice questions throughout the book.
+The last part is more of an advance section that shows what you can do with
+window functions.
+The book is meant to go through in a linear fashion as he builds up the query
+based on the what the requested information each problem is seeking.
+While the e-book is a PDF, I didn't have a problem using either my Kindle, iPad
+or my computer as the text is quite large.&lt;/p&gt;
+&lt;h2&gt;Setup&lt;/h2&gt;
+&lt;p&gt;Anton provides &lt;code&gt;.sql&lt;/code&gt; files that you can download at his website or you can do
+it online at his website (I didn't try this out).
+I used PostgreSQL as I use that with a lot of my projects but Anton did test
+the code with SQLite and MySQL so it should work with those.
+I have a training database and created a &lt;code&gt;wfe&lt;/code&gt; schema for this book, so I had
+to modify the &lt;code&gt;.sql&lt;/code&gt; files.
+I then used &lt;a href="https://www.pgcli.com/"&gt;pgcli&lt;/a&gt; though using psql would be nearly
+as good.
+I also went through and took &lt;a href="https://cetyler.github.io/zettelkasten-workflow.html"&gt;notes&lt;/a&gt; so
+that I can search a little quicker than trying to remember which book I got an
+idea how to do something from.&lt;/p&gt;
+&lt;h2&gt;Impressions&lt;/h2&gt;
+&lt;p&gt;I usually go through a book and skim to see how useful it could be.
+This book specifically I bought to help me with my work.
+About a third of the way through, I was learning things that I was immediately
+applying to my work projects.
+For example, generating row numbers was useful as I need to know the test order
+for the units under test (UUT).
+Some UUTs if they fail the first time may need to get retested and pass two
+times in a row in order to be accepted.
+I was able to determine which UUTs were able to pass after retest by using a
+reverse order by UUT by tester and confirming that the those tests passed.&lt;/p&gt;
+&lt;p&gt;Understanding frames really help bring home how I can use window functions and
+understanding the behavior.
+Further, knowing that I could use groups and range beyond just rows expanded on
+what I plan on doing with window functions.&lt;/p&gt;
+&lt;p&gt;The last part of the book Finance, Clustering and Data Cleaning were useful on
+how to go through my complex problems step by step creating the window function
+before filtering to ensure that it works or using techniques on cleaning data.
+Clustering I plan on trying to use when comparing my indoor conditions to the
+weather data I get from &lt;a href="https://openweathermap.org/"&gt;OpenWeatherMap&lt;/a&gt;.
+This part I feel like I am going to go through multiple times before I really
+understand the concepts.&lt;/p&gt;
+&lt;p&gt;I went through pretty much all the exercises and didn't really get tripped up.
+The quality of the e-book was great and I think I only saw maybe one or two
+errors (both were queries missing &lt;code&gt;round()&lt;/code&gt; based on the results).&lt;/p&gt;
+&lt;h2&gt;Conclusion&lt;/h2&gt;
+&lt;p&gt;I think that is book is great after progressing through an introduction to SQL.
+I would recommend starting with &lt;a href="https://payhip.com/b/oXJs"&gt;Memorable SQL&lt;/a&gt; if
+you haven't done any SQL coding before getting this book.
+If you know some basic SQL coding, I would still read either
+&lt;a href="https://sqlfordatascientists.com"&gt;SQL for Data Scientists&lt;/a&gt; or
+&lt;a href="https://www.practicalsql.com"&gt;Practical SQL&lt;/a&gt; before reading Anton's book.&lt;/p&gt;
+&lt;p&gt;Anton does an excellent job focusing on window functions and showing you the
+various ways window functions can help solve problems.
+Other books that try to cover everything can't focus on window functions and
+tend to provide a high level on how to use them.
+For example, in SQL for Data Scientists, Renee dedicates one chapter to window
+functions and acknowledges that she is only covering a small amount.
+Other books either don't cover window functions or do only a passing remark.&lt;/p&gt;
+&lt;p&gt;I would say that
+&lt;a href="https://antonz.org/sql-window-functions-book/"&gt;SQL Window Functions Explained&lt;/a&gt;
+is a great buy and an excellent reference.
+His &lt;a href="https://antonz.org/all/"&gt;blog&lt;/a&gt; is also very useful especially if you use
+SQLite.&lt;/p&gt;</content><category term="SQL"></category><category term="review"></category><category term="Anton Zhiyanov"></category></entry><entry><title>Escape Keys using psycopg2</title><link href="https://cetyler.github.io/escape-keys-using-psycopg2.html" rel="alternate"></link><published>2023-06-02T20:00:00-05:00</published><updated>2023-06-02T20:00:00-05:00</updated><author><name>Christopher</name></author><id>tag:cetyler.github.io,2023-06-02:/escape-keys-using-psycopg2.html</id><summary type="html">&lt;p&gt;Making sure that using &lt;code&gt;%&lt;/code&gt; in PostgreSQL works with psycopg2.&lt;/p&gt;</summary><content type="html">&lt;p&gt;Found the information at
+https://www.psycopg.org/docs/usage.html#query-parameters.&lt;/p&gt;
+&lt;p&gt;Since &lt;code&gt;%&lt;/code&gt; is used in both Python and in Postgres I need to use &lt;code&gt;%%&lt;/code&gt; instead:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&amp;gt;&amp;gt;&amp;gt; cur.execute(&amp;quot;SELECT (%s % 2) = 0 AS even&amp;quot;, (10,))       # WRONG
+&amp;gt;&amp;gt;&amp;gt; cur.execute(&amp;quot;SELECT (%s %% 2) = 0 AS even&amp;quot;, (10,))      # correct
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;or this:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;f&amp;quot;&amp;quot;&amp;quot; AND &amp;#39;{findings}&amp;#39; %%&amp;gt; ANY(STRING_TO_ARRAY(
+      CONCAT(&amp;quot;Finding1&amp;quot;,&amp;quot;Finding2&amp;quot;,&amp;quot;Finding3&amp;quot;,&amp;quot;Finding4&amp;quot;,&amp;quot;Finding5&amp;quot;,&amp;quot;Finding6&amp;quot;)
+      ,&amp;#39; &amp;#39;
+      )
+     )
+&amp;quot;&amp;quot;&amp;quot;
+```
+
+instead of this:
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;f""" AND '{findings}' %&amp;gt; ANY(STRING_TO_ARRAY(
+      CONCAT("Finding1","Finding2","Finding3","Finding4","Finding5","Finding6")
+      ,' '
+      )
+     )
+"""
+```&lt;/p&gt;</content><category term="TIL"></category><category term="til"></category><category term="psycopg2"></category><category term="python"></category><category term="postgresql"></category></entry><entry><title>Setup Python Package to use with Pipx</title><link href="https://cetyler.github.io/setup-python-package-to-use-with-pipx.html" rel="alternate"></link><published>2023-05-26T20:00:00-05:00</published><updated>2023-05-26T20:00:00-05:00</updated><author><name>Christopher</name></author><id>tag:cetyler.github.io,2023-05-26:/setup-python-package-to-use-with-pipx.html</id><summary type="html">&lt;p&gt;Setting up your Python project to work with pipx and pyproject.toml&lt;/p&gt;</summary><content type="html">&lt;p&gt;Found the information at
 https://flit.pypa.io/en/latest/pyproject_toml.html#pyproject-project-scripts.&lt;/p&gt;
 &lt;h2&gt;pyproject.toml&lt;/h2&gt;
 &lt;p&gt;Add the following entry:&lt;/p&gt;
@@ -659,160 +760,4 @@ the data is being created.&lt;/p&gt;
 &lt;span class="n"&gt;EXECUTE&lt;/span&gt; &lt;span class="kr"&gt;PROCEDURE&lt;/span&gt; &lt;span class="n"&gt;trigger_set_timestamp&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-&lt;p&gt;This will execute anytime a row is updated in &lt;code&gt;todos&lt;/code&gt;.&lt;/p&gt;</content><category term="TIL"></category><category term="til"></category><category term="postgresql"></category><category term="timestamp"></category><category term="function"></category></entry><entry><title>TIL - Today I Learned</title><link href="https://cetyler.github.io/til-today-i-learned.html" rel="alternate"></link><published>2022-12-16T17:00:00-06:00</published><updated>2022-12-16T17:00:00-06:00</updated><author><name>Christopher</name></author><id>tag:cetyler.github.io,2022-12-16:/til-today-i-learned.html</id><summary type="html">&lt;p&gt;Start posting TIL to potentially help others as well as myself.&lt;/p&gt;</summary><content type="html">&lt;h2&gt;Overview&lt;/h2&gt;
-&lt;p&gt;I currently put my notes in a
-&lt;a href="https://zettelkasten.de/introduction/"&gt;Zettelkasten&lt;/a&gt; and currently have it in
-a private git repo.
-What I found is that there are some notes that are more like Today I Learned
-(TIL).&lt;/p&gt;
-&lt;h2&gt;Why Post TIL&lt;/h2&gt;
-&lt;p&gt;I originally heard on a podcast but
-&lt;a href="https://simonwillison.net/2022/Nov/6/what-to-blog-about/"&gt;Simon wrote an article&lt;/a&gt;
-about blogging and doing Today I Learned.
-My original thinking was that 9 times out of 10 I found out something by
-reading it from somewhere so why share as it is not new?
-Afterwards and also noticing others using social media for TIL, I realized that
-if I found something useful, others may find it useful.
-Also if the source of the information was so useful to me, then I should share
-that with everyone else.&lt;/p&gt;
-&lt;h2&gt;Why Not Share My Zettelkasten&lt;/h2&gt;
-&lt;p&gt;I could just either share my private Zettelkasten or share a sanitized one.
-The method to created it I learned watching
-&lt;a href="https://www.youtube.com/watch?v=Rxgi12c3sEY"&gt;PyBites' video&lt;/a&gt;.
-Beyond the issue of making sure that I don't share something that I shouldn't
-or isn't useful, the main issue it would be in a git repo and not my blog.
-Also I already have over 200 personal notes using this method and I only
-started a couple of months ago.
-This to me would cause potentially more noise than I would like.&lt;/p&gt;
-&lt;p&gt;Simon has a &lt;a href="https://til.simonwillison.net/"&gt;good method&lt;/a&gt; but for now, I will
-just include them in my blog and create a separate category for them.
-Since my notes are in Markdown, I just need to add the header block to work
-with Pelican.&lt;/p&gt;
-&lt;h2&gt;Next Steps&lt;/h2&gt;
-&lt;p&gt;While I may have some TIL only on social media, I think my primary vehicle will
-be this site.
-I can use the search feature when I need to find my TIL and unlike my notes,
-can expand a little further on how the TIL helps me.&lt;/p&gt;</content><category term="Blog"></category><category term="til"></category><category term="zettelkasten"></category></entry><entry><title>Weather Project - Requirements and Roadmap</title><link href="https://cetyler.github.io/weather-project-requirements-and-roadmap.html" rel="alternate"></link><published>2022-09-16T20:00:00-05:00</published><updated>2022-09-16T20:00:00-05:00</updated><author><name>Christopher</name></author><id>tag:cetyler.github.io,2022-09-16:/weather-project-requirements-and-roadmap.html</id><summary type="html">&lt;p&gt;Create a roadmap and requirements.&lt;/p&gt;</summary><content type="html">&lt;h2&gt;Overview&lt;/h2&gt;
-&lt;p&gt;From the &lt;a href="https://cetyler.github.io/weather-project-pypi.html"&gt;previous article&lt;/a&gt;,
-the Weather Project is now on
-&lt;a href="https://pypi.org/project/openweather-report/"&gt;PyPi&lt;/a&gt; and is on
-&lt;a href="https://github.com/cetyler/openweather_report"&gt;Github&lt;/a&gt;.
-This article will start going through the requirements and to develop a
-Roadmap.&lt;/p&gt;
-&lt;h2&gt;Requirements&lt;/h2&gt;
-&lt;p&gt;Initially, all documentation will reside on
-&lt;a href="https://github.com/cetyler/openweather_report/wiki"&gt;Github&lt;/a&gt; in the wiki.
-The &lt;a href="https://github.com/cetyler/openweather_report/blob/main/README.md"&gt;README&lt;/a&gt;
-will also include some of the initial documentation until it is necessary to
-have a dedicated, detailed documentation.&lt;/p&gt;
-&lt;h3&gt;User Requirements&lt;/h3&gt;
-&lt;p&gt;The initial requirements will be based on what I would like this program to do.
-The
-&lt;a href="https://github.com/cetyler/openweather_report/wiki/User-Requirements"&gt;wiki&lt;/a&gt;
-will have more detail, but I will describe at a high level what is in the User
-Requirements.
-User requirements go through and list what are the requirements that the
-program should be able to do.
-User requirements don't go into details in terms of what programming language,
-software, etc. to use unless it is an absolute requirement.&lt;/p&gt;
-&lt;p&gt;The program should have the ability to pull data using &lt;a href="https://openweathermap.org/api"&gt;OpenWeather's
-API&lt;/a&gt;.
-The data should be able to save to either a file or database.
-My requirements that the data should be saved to
-&lt;a href="https://www.postgresql.org/"&gt;PostgreSQL&lt;/a&gt; due to how much I use PostgreSQL at
-work.
-Optionally the data should be able to save to
-&lt;a href="https://www.sqlite.org/index.html"&gt;SQLite&lt;/a&gt; because it would be easier to share
-the data since it would be a single file.&lt;/p&gt;
-&lt;p&gt;The program should be able to provide some reporting capabilities.
-The program should have the option to display the last recorded values, the
-forecast and historical data.&lt;/p&gt;
-&lt;p&gt;The goal of the program is to save the data and report the data initially in a
-simplified format.
-In the future the reporting can get more complex and have a robust interface.&lt;/p&gt;
-&lt;h3&gt;Design Requirements&lt;/h3&gt;
-&lt;p&gt;The initial design requirements are how I would like to structure the program,
-which programming language to use, etc.
-The
-&lt;a href="https://github.com/cetyler/openweather_report/wiki/Design-Requirements"&gt;wiki&lt;/a&gt;
-will have more detail but I would like describe at a high level here similar to
-what I did for the User Requirements.
-Due to this programming being used as a learning tool, it will be coded in
-Python.
-The design should be setup to use as either a standalone program or the ability
-to import as a library.&lt;/p&gt;
-&lt;h4&gt;Pulling OpenWeather Data&lt;/h4&gt;
-&lt;p&gt;This should be straight forward since the data will be saved into the database
-as a JSON column.
-The &lt;a href="https://openweathermap.org/api/one-call-3"&gt;One Call API&lt;/a&gt; JSON format won't 
-be checked as the data being saved will be considered raw data.
-I define raw data as data that is minimally modified from the source.
-The data will then be saved either a text file or a database (SQLite and
-PostgreSQL).
-When that data is being saved to a database, there should at least an entry
-date, what type of API call and the raw data.&lt;/p&gt;
-&lt;p&gt;At least initially, error checking will be minimal.
-Testing will be minimal initially as well, though the goal is to have at least
-all critical sections of the code tested.&lt;/p&gt;
-&lt;p&gt;The config file will store the following:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;API key required for OpenWeather.&lt;/li&gt;
-&lt;li&gt;PostgreSQL login information.&lt;/li&gt;
-&lt;li&gt;SQLite file location.&lt;/li&gt;
-&lt;li&gt;Folder location to save text files.&lt;/li&gt;
-&lt;li&gt;Default save type (PostgreSQL, SQLite, text).&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;City information.&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Longitude.&lt;/li&gt;
-&lt;li&gt;Latitude.&lt;/li&gt;
-&lt;li&gt;City ID from OpenWeather.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;The program should be able to run using a cron job or if in Windows Task
-Scheduler.&lt;/p&gt;
-&lt;h4&gt;Displaying/Reporting Data&lt;/h4&gt;
-&lt;p&gt;Initially it will be very basic.
-For files, just return the JSON in a pretty format.
-For databases, initially will support returning the data by entry date and
-return the JSON in a pretty format.&lt;/p&gt;
-&lt;p&gt;The more complicated reports such as current conditions, forecast and
-historical data, will prefer to do as much of the calculations in SQL if
-possible.
-The plan is to use &lt;a href="https://www.sqlalchemy.org/"&gt;SQLAlchemy&lt;/a&gt; so that I can
-learn how to use an ORM instead of doing raw SQL.&lt;/p&gt;
-&lt;p&gt;Testing and error checking here will much more robust than pulling in the data.
-Logging probably is not needed since at least initially will not be run using a
-cron job.&lt;/p&gt;
-&lt;h2&gt;Roadmap&lt;/h2&gt;
-&lt;p&gt;Instead of creating a file or using the wiki, I will use utilize 
-&lt;a href="https://github.com/cetyler/openweather_report/projects"&gt;Github Projects&lt;/a&gt; as my
-Roadmap.
-Each project will be a major release (1.0.0, 2.0.0, etc.).
-Each &lt;a href="https://github.com/cetyler/openweather_report/milestones"&gt;milestone&lt;/a&gt; will 
-be a minor or bug fix release.
-The goal is to have a living Roadmap that shouldn't go out of date.&lt;/p&gt;
-&lt;h3&gt;Initial Release&lt;/h3&gt;
-&lt;p&gt;Be able to pull data from OpenWeather using their One Call API.
-Initially be able to save to a text file or to a database.&lt;/p&gt;
-&lt;h3&gt;Basic Displaying the Data&lt;/h3&gt;
-&lt;p&gt;Be able to return results by location, date and data type.
-The results will be displayed in the console.&lt;/p&gt;
-&lt;h3&gt;Basic Reporting&lt;/h3&gt;
-&lt;p&gt;Be able to save a report to file or display the report.&lt;/p&gt;
-&lt;h3&gt;Basic Logging/Testing&lt;/h3&gt;
-&lt;p&gt;Make sure that all critical areas of the code is tested.
-Add some logging capabilities to note when there is an error.&lt;/p&gt;
-&lt;h3&gt;1.0.0 Release&lt;/h3&gt;
-&lt;p&gt;This release should have the features above as well as documentation.&lt;/p&gt;
-&lt;h3&gt;Interactive Display&lt;/h3&gt;
-&lt;p&gt;Be able to display a dashboard to show current weather conditions and forecast.
-Should have the option to export the report.&lt;/p&gt;
-&lt;h3&gt;Add Display API&lt;/h3&gt;
-&lt;p&gt;Be able to use program as a library and do an API call to pull data from the
-database to use for dashboards.&lt;/p&gt;
-&lt;h2&gt;Next Steps&lt;/h2&gt;
-&lt;p&gt;The requirements and initial Roadmap is complete.
-Will now work on using Github's project management features and start doing
-some actual coding.&lt;/p&gt;</content><category term="Python"></category><category term="python"></category><category term="project"></category><category term="documentation"></category></entry></feed>
+&lt;p&gt;This will execute anytime a row is updated in &lt;code&gt;todos&lt;/code&gt;.&lt;/p&gt;</content><category term="TIL"></category><category term="til"></category><category term="postgresql"></category><category term="timestamp"></category><category term="function"></category></entry></feed>

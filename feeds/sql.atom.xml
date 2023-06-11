@@ -1,5 +1,82 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Christopher Tyler R&amp;D Test Engineer - SQL</title><link href="https://cetyler.github.io/" rel="alternate"></link><link href="https://cetyler.github.io/feeds/sql.atom.xml" rel="self"></link><id>https://cetyler.github.io/</id><updated>2023-05-06T20:00:00-05:00</updated><entry><title>Using psql to put JSON Data into a Table</title><link href="https://cetyler.github.io/using-psql-to-put-json-data-into-a-table.html" rel="alternate"></link><published>2023-05-06T20:00:00-05:00</published><updated>2023-05-06T20:00:00-05:00</updated><author><name>Christopher</name></author><id>tag:cetyler.github.io,2023-05-06:/using-psql-to-put-json-data-into-a-table.html</id><summary type="html">&lt;p&gt;Show how you can take JSON data and insert that data into a table.&lt;/p&gt;</summary><content type="html">&lt;h2&gt;Overview&lt;/h2&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Christopher Tyler R&amp;D Test Engineer - SQL</title><link href="https://cetyler.github.io/" rel="alternate"></link><link href="https://cetyler.github.io/feeds/sql.atom.xml" rel="self"></link><id>https://cetyler.github.io/</id><updated>2023-06-10T14:30:00-05:00</updated><entry><title>SQL Window Functions Explained</title><link href="https://cetyler.github.io/sql-window-functions-explained.html" rel="alternate"></link><published>2023-06-10T14:30:00-05:00</published><updated>2023-06-10T14:30:00-05:00</updated><author><name>Christopher</name></author><id>tag:cetyler.github.io,2023-06-10:/sql-window-functions-explained.html</id><summary type="html">&lt;p&gt;Book review summary of Anton's SQL Window Functions.&lt;/p&gt;</summary><content type="html">&lt;h2&gt;Overview&lt;/h2&gt;
+&lt;p&gt;I recently finished Anton's book
+&lt;a href="https://antonz.org/sql-window-functions-book/"&gt;SQL Window Functions Explained&lt;/a&gt;.
+While I seen window functions, I only had a basic knowledge.
+I originally bought the e-book at the beginning of the year but it has been
+recent completed (the last part of the book he released last month).
+My review is based on the e-book though keep in mind there is a physical book
+available.&lt;/p&gt;
+&lt;h2&gt;Structure&lt;/h2&gt;
+&lt;p&gt;Anton structured the book into three parts:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Windows and functions&lt;/li&gt;
+&lt;li&gt;Frames&lt;/li&gt;
+&lt;li&gt;Practice&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Keep in mind that there are practice questions throughout the book.
+The last part is more of an advance section that shows what you can do with
+window functions.
+The book is meant to go through in a linear fashion as he builds up the query
+based on the what the requested information each problem is seeking.
+While the e-book is a PDF, I didn't have a problem using either my Kindle, iPad
+or my computer as the text is quite large.&lt;/p&gt;
+&lt;h2&gt;Setup&lt;/h2&gt;
+&lt;p&gt;Anton provides &lt;code&gt;.sql&lt;/code&gt; files that you can download at his website or you can do
+it online at his website (I didn't try this out).
+I used PostgreSQL as I use that with a lot of my projects but Anton did test
+the code with SQLite and MySQL so it should work with those.
+I have a training database and created a &lt;code&gt;wfe&lt;/code&gt; schema for this book, so I had
+to modify the &lt;code&gt;.sql&lt;/code&gt; files.
+I then used &lt;a href="https://www.pgcli.com/"&gt;pgcli&lt;/a&gt; though using psql would be nearly
+as good.
+I also went through and took &lt;a href="https://cetyler.github.io/zettelkasten-workflow.html"&gt;notes&lt;/a&gt; so
+that I can search a little quicker than trying to remember which book I got an
+idea how to do something from.&lt;/p&gt;
+&lt;h2&gt;Impressions&lt;/h2&gt;
+&lt;p&gt;I usually go through a book and skim to see how useful it could be.
+This book specifically I bought to help me with my work.
+About a third of the way through, I was learning things that I was immediately
+applying to my work projects.
+For example, generating row numbers was useful as I need to know the test order
+for the units under test (UUT).
+Some UUTs if they fail the first time may need to get retested and pass two
+times in a row in order to be accepted.
+I was able to determine which UUTs were able to pass after retest by using a
+reverse order by UUT by tester and confirming that the those tests passed.&lt;/p&gt;
+&lt;p&gt;Understanding frames really help bring home how I can use window functions and
+understanding the behavior.
+Further, knowing that I could use groups and range beyond just rows expanded on
+what I plan on doing with window functions.&lt;/p&gt;
+&lt;p&gt;The last part of the book Finance, Clustering and Data Cleaning were useful on
+how to go through my complex problems step by step creating the window function
+before filtering to ensure that it works or using techniques on cleaning data.
+Clustering I plan on trying to use when comparing my indoor conditions to the
+weather data I get from &lt;a href="https://openweathermap.org/"&gt;OpenWeatherMap&lt;/a&gt;.
+This part I feel like I am going to go through multiple times before I really
+understand the concepts.&lt;/p&gt;
+&lt;p&gt;I went through pretty much all the exercises and didn't really get tripped up.
+The quality of the e-book was great and I think I only saw maybe one or two
+errors (both were queries missing &lt;code&gt;round()&lt;/code&gt; based on the results).&lt;/p&gt;
+&lt;h2&gt;Conclusion&lt;/h2&gt;
+&lt;p&gt;I think that is book is great after progressing through an introduction to SQL.
+I would recommend starting with &lt;a href="https://payhip.com/b/oXJs"&gt;Memorable SQL&lt;/a&gt; if
+you haven't done any SQL coding before getting this book.
+If you know some basic SQL coding, I would still read either
+&lt;a href="https://sqlfordatascientists.com"&gt;SQL for Data Scientists&lt;/a&gt; or
+&lt;a href="https://www.practicalsql.com"&gt;Practical SQL&lt;/a&gt; before reading Anton's book.&lt;/p&gt;
+&lt;p&gt;Anton does an excellent job focusing on window functions and showing you the
+various ways window functions can help solve problems.
+Other books that try to cover everything can't focus on window functions and
+tend to provide a high level on how to use them.
+For example, in SQL for Data Scientists, Renee dedicates one chapter to window
+functions and acknowledges that she is only covering a small amount.
+Other books either don't cover window functions or do only a passing remark.&lt;/p&gt;
+&lt;p&gt;I would say that
+&lt;a href="https://antonz.org/sql-window-functions-book/"&gt;SQL Window Functions Explained&lt;/a&gt;
+is a great buy and an excellent reference.
+His &lt;a href="https://antonz.org/all/"&gt;blog&lt;/a&gt; is also very useful especially if you use
+SQLite.&lt;/p&gt;</content><category term="SQL"></category><category term="review"></category><category term="Anton Zhiyanov"></category></entry><entry><title>Using psql to put JSON Data into a Table</title><link href="https://cetyler.github.io/using-psql-to-put-json-data-into-a-table.html" rel="alternate"></link><published>2023-05-06T20:00:00-05:00</published><updated>2023-05-06T20:00:00-05:00</updated><author><name>Christopher</name></author><id>tag:cetyler.github.io,2023-05-06:/using-psql-to-put-json-data-into-a-table.html</id><summary type="html">&lt;p&gt;Show how you can take JSON data and insert that data into a table.&lt;/p&gt;</summary><content type="html">&lt;h2&gt;Overview&lt;/h2&gt;
 &lt;p&gt;After creating my program
 (&lt;a href="https://github.com/cetyler/openweather_report"&gt;openweather_report&lt;/a&gt;) that
 pulls in data from &lt;a href="https://openweathermap.org"&gt;OpenWeather&lt;/a&gt;, the data is being
