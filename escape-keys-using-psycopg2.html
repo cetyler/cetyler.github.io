@@ -9,18 +9,18 @@
         <meta property="og:type" content="article" />
         <meta name="twitter:card" content="summary">
 
-<meta name="keywords" content="python, project, library, package, Python, " />
+<meta name="keywords" content="til, psycopg2, python, postgresql, TIL, " />
 
-<meta property="og:title" content="Calculator Project -- Requirements "/>
-<meta property="og:url" content="/calculator-project-requirements.html" />
-<meta property="og:description" content="Creating the initial documentation of the calculator project." />
+<meta property="og:title" content="Escape Keys using psycopg2 "/>
+<meta property="og:url" content="/escape-keys-using-psycopg2.html" />
+<meta property="og:description" content="Making sure that using % in PostgreSQL works with psycopg2." />
 <meta property="og:site_name" content="Christopher Tyler R&amp;D Test Engineer" />
 <meta property="og:article:author" content="Christopher" />
-<meta property="og:article:published_time" content="2022-01-29T15:00:00-06:00" />
-<meta name="twitter:title" content="Calculator Project -- Requirements ">
-<meta name="twitter:description" content="Creating the initial documentation of the calculator project.">
+<meta property="og:article:published_time" content="2023-06-02T20:00:00-05:00" />
+<meta name="twitter:title" content="Escape Keys using psycopg2 ">
+<meta name="twitter:description" content="Making sure that using % in PostgreSQL works with psycopg2.">
 
-        <title>Calculator Project -- Requirements  · Christopher Tyler R&amp;D Test Engineer
+        <title>Escape Keys using psycopg2  · Christopher Tyler R&amp;D Test Engineer
 </title>
         <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet">
         <link rel="stylesheet" type="text/css" href="/theme/css/elegant.prod.css" media="screen">
@@ -67,8 +67,8 @@
 <div class="row-fluid">
     <header class="page-header span10 offset2">
         <h1>
-            <a href="/calculator-project-requirements.html">
-                Calculator Project -- Requirements
+            <a href="/escape-keys-using-psycopg2.html">
+                Escape Keys using psycopg2
             </a>
         </h1>
     </header>
@@ -77,72 +77,32 @@
 <div class="row-fluid">
         <div class="span8 offset2 article-content">
             
-            <h2>Overview</h2>
-<p>From the 
-<a href="/calculator-project-setup.html">previous article</a>,
-the plan is to create <a href="https://github.com/cetyler/calculator">calculator</a> in
-order to update my Python workflow.
-This article will cover creating User Requirements, Design Requirements and a
-Roadmap.</p>
-<h2>Location of Documents</h2>
-<p>While we do have Sphinx already set up, in my opinion these documents should be
-related to what the calculator package does and how to use it.
-User Requirements and Design Requirements will be in Gitea/Github wiki.
-Both these documents are more for the developer than the user.
-The Roadmap should be in Sphinx as it is useful to the user when features are
-planned to be released.</p>
-<h2>User Requirements</h2>
-<p>User Requirements generally are what the developer thinks the user wants based
-either by observation, feedback or a spec document.
-This document is to translate the available information into something that
-could be used to help build a design.</p>
-<p>As you see, the
-<a href="https://github.com/cetyler/calculator/wiki/User-Requirements">User Requirements</a>
-describes that this will be a simple program that can also be used as a
-library.
-There are a couple more requirements but for the most part, this describes what
-I think the user would want.</p>
-<p>The goal is to create the requirements without thinking about how to implement.
-For the calculator project, naming Python as the language is a requirement
-since this project is to specifically determine a Python workflow.</p>
-<h2>Design Requirements</h2>
-<p>Design Requirements generally are how the developer is planning on how to
-implement the program based on the User Requirements.
-This document is usually what an 1.0 version of the program.</p>
-<p>As you see
-<a href="https://github.com/cetyler/calculator/wiki/Design-Requirements">Design Requirements</a>
-shows that there will be two parts -- GUI and API.</p>
-<h3>GUI</h3>
-<p>The GUI will be an interactive terminal interface similar to the Python shell
-or like
-<a href="https://www.pgcli.com/">pgcli</a>.
-Due to how simple this program is, I don't really need to do a long description
-on how I plan on implementing the GUI.</p>
-<h3>API</h3>
-<p>The API will be able to call functions to add, subtract, etc.
-I did not include a separate section describing <code>basic.py</code> but it will support
-addition, subtracting, multiplication and division.</p>
-<h2>Roadmap</h2>
-<p>The Roadmap is a proposed feature release plan.
-For this calculator, there is not much of a Roadmap.
-First need to create <code>Roadmap.rst</code> and create a simple release schedule.
-Will need to update <code>index.rst</code> to include the Roadmap.</p>
-<p>As you can see
-<a href="https://github.com/cetyler/calculator/blob/develop/ROADMAP.rst">Roadmap</a> shows
-that it is a fairly basic Roadmap.
-There is not really a plan for a 2.0.0 release and a 1.0.0 release will cover
-everything that was in User Requirements.</p>
-<p>Will need to update my fork of Audrey's cookiecutter template to include a
-Roadmap file.</p>
-<h2>Next Steps</h2>
-<p>The rest of the documentation is not done but the rest of the documentation can
-be completed prior to a release.
-Using a combination of the wiki and Sphinx, it keeps a good separation to what
-will stay with the repository and what could eventually go to
-<a href="https://readthedocs.org/">Read The Docs</a> or an internal website.</p>
-<p>Prior to any writing any code, I will first write tests to ensure that we will
-comply with our User Requirements.
-The initial tests should cover the API as much as possible.</p>
+            <p>Found the information at
+https://www.psycopg.org/docs/usage.html#query-parameters.</p>
+<p>Since <code>%</code> is used in both Python and in Postgres I need to use <code>%%</code> instead:</p>
+<div class="highlight"><pre><span></span><code>&gt;&gt;&gt; cur.execute(&quot;SELECT (%s % 2) = 0 AS even&quot;, (10,))       # WRONG
+&gt;&gt;&gt; cur.execute(&quot;SELECT (%s %% 2) = 0 AS even&quot;, (10,))      # correct
+</code></pre></div>
+
+<p>or this:</p>
+<div class="highlight"><pre><span></span><code>f&quot;&quot;&quot; AND &#39;{findings}&#39; %%&gt; ANY(STRING_TO_ARRAY(
+      CONCAT(&quot;Finding1&quot;,&quot;Finding2&quot;,&quot;Finding3&quot;,&quot;Finding4&quot;,&quot;Finding5&quot;,&quot;Finding6&quot;)
+      ,&#39; &#39;
+      )
+     )
+&quot;&quot;&quot;
+```
+
+instead of this:
+</code></pre></div>
+
+<p>f""" AND '{findings}' %&gt; ANY(STRING_TO_ARRAY(
+      CONCAT("Finding1","Finding2","Finding3","Finding4","Finding5","Finding6")
+      ,' '
+      )
+     )
+"""
+```</p>
 
 
              
@@ -166,7 +126,7 @@ The initial tests should cover the API as much as possible.</p>
                 <a class="accordion-toggle disqus-comment-count comment-count"
                    data-toggle="collapse"
                    data-parent="#accordion2"
-                   href="/calculator-project-requirements.html#comment_thread"
+                   href="/escape-keys-using-psycopg2.html#comment_thread"
                    id="comment-accordion-toggle">
                     Comments
                 </a>
@@ -177,7 +137,7 @@ The initial tests should cover the API as much as possible.</p>
 
                         <script src="https://utteranc.es/client.js"
         data-repo="cetyler/cetyler.github.io"
-        data-issue-term="calculator_requirements"
+        data-issue-term="til_escape_psycopg2"
         data-label="Comments"
         data-theme="github-light"
         crossorigin="anonymous"
@@ -195,49 +155,22 @@ The initial tests should cover the API as much as possible.</p>
         </div>
         <section id="article-sidebar" class="span2">
             <h4>Published</h4>
-            <time itemprop="dateCreated" datetime="2022-01-29T15:00:00-06:00">Jan 29, 2022</time>
-        <h4>More in This Series</h4>
-    <ul class="multi-parts-list">
-            <li >
-            <a href="/calculator-project.html" title="Calculator Project">Part 1: Calculator Project</a>
-            </li>
-            <li >
-            <a href="/calculator-project-setup.html" title="Calculator Project -- Setup">Part 2: Calculator Project -- Setup</a>
-            </li>
-            <li  class="active-part">
-            Part 3: Calculator Project -- Requirements
-            </li>
-            <li >
-            <a href="/calculator-project-tests.html" title="Calculator Project -- Tests">Part 4: Calculator Project -- Tests</a>
-            </li>
-            <li >
-            <a href="/calculator-project-api.html" title="Calculator Project -- API">Part 5: Calculator Project -- API</a>
-            </li>
-            <li >
-            <a href="/calculator-project-cli.html" title="Calculator Project -- CLI">Part 6: Calculator Project -- CLI</a>
-            </li>
-            <li >
-            <a href="/calculator-project-documentation.html" title="Calculator Project -- Documentation">Part 7: Calculator Project -- Documentation</a>
-            </li>
-            <li >
-            <a href="/calculator-project-package.html" title="Calculator Project -- Package">Part 8: Calculator Project -- Package</a>
-            </li>
-    </ul>
+            <time itemprop="dateCreated" datetime="2023-06-02T20:00:00-05:00">Jun 2, 2023</time>
             <h4>Category</h4>
-            <a class="category-link" href="/categories.html#python-ref">Python</a>
+            <a class="category-link" href="/categories.html#til-ref">TIL</a>
             <h4>Tags</h4>
             <ul class="list-of-tags tags-in-article">
-                <li><a href="/tags.html#library-ref">library
-                    <span>8</span>
+                <li><a href="/tags.html#postgresql-ref">postgresql
+                    <span>6</span>
 </a></li>
-                <li><a href="/tags.html#package-ref">package
-                    <span>10</span>
-</a></li>
-                <li><a href="/tags.html#project-ref">project
-                    <span>12</span>
+                <li><a href="/tags.html#psycopg2-ref">psycopg2
+                    <span>2</span>
 </a></li>
                 <li><a href="/tags.html#python-ref">python
                     <span>22</span>
+</a></li>
+                <li><a href="/tags.html#til-ref">til
+                    <span>12</span>
 </a></li>
             </ul>
 <h4>Contact</h4>

@@ -5,72 +5,86 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>/search.html</loc>
-<lastmod>2023-05-27T13:02:27-00:00</lastmod>
+<lastmod>2023-06-11T00:53:54-00:00</lastmod>
 <changefreq>hourly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>/</loc>
-<lastmod>2023-05-27T13:02:27-00:00</lastmod>
+<lastmod>2023-06-11T00:53:54-00:00</lastmod>
 <changefreq>hourly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>/archives.html</loc>
-<lastmod>2023-05-27T13:02:27-00:00</lastmod>
+<lastmod>2023-06-11T00:53:54-00:00</lastmod>
 <changefreq>hourly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>/authors.html</loc>
-<lastmod>2023-05-27T13:02:27-00:00</lastmod>
+<lastmod>2023-06-11T00:53:54-00:00</lastmod>
 <changefreq>hourly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>/tags.html</loc>
-<lastmod>2023-05-27T13:02:27-00:00</lastmod>
+<lastmod>2023-06-11T00:53:54-00:00</lastmod>
 <changefreq>hourly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>/categories.html</loc>
-<lastmod>2023-05-27T13:02:27-00:00</lastmod>
+<lastmod>2023-06-11T00:53:54-00:00</lastmod>
 <changefreq>hourly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>/404.html</loc>
-<lastmod>2023-05-27T13:02:27-00:00</lastmod>
+<lastmod>2023-06-11T00:53:54-00:00</lastmod>
 <changefreq>hourly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>/pages/about-me.html</loc>
-<lastmod>2023-05-27T13:02:27-00:00</lastmod>
+<lastmod>2023-06-11T00:53:54-00:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>/pages/resources.html</loc>
-<lastmod>2022-08-11T00:00:00-05:00</lastmod>
+<lastmod>2023-06-10T00:00:00-05:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>/pages/my-resume.html</loc>
-<lastmod>2023-05-27T13:02:27-00:00</lastmod>
+<lastmod>2023-06-11T00:53:54-00:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
+</url>
+
+<url>
+<loc>/sql-window-functions-explained.html</loc>
+<lastmod>2023-06-10T14:30:00-05:00</lastmod>
+<changefreq>always</changefreq>
+<priority>1</priority>
+</url>
+
+<url>
+<loc>/escape-keys-using-psycopg2.html</loc>
+<lastmod>2023-06-02T20:00:00-05:00</lastmod>
+<changefreq>always</changefreq>
+<priority>1</priority>
 </url>
 
 <url>
@@ -369,14 +383,14 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>/category/sql.html</loc>
-<lastmod>2023-05-06T20:00:00-05:51</lastmod>
+<lastmod>2023-06-10T14:30:00-05:51</lastmod>
 <changefreq>hourly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>/category/til.html</loc>
-<lastmod>2023-05-26T20:00:00-05:51</lastmod>
+<lastmod>2023-06-02T20:00:00-05:51</lastmod>
 <changefreq>hourly</changefreq>
 <priority>0.5</priority>
 </url>
@@ -389,15 +403,43 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 </url>
 
 <url>
+<loc>/tag/review.html</loc>
+<lastmod>2023-06-10T14:30:00-05:51</lastmod>
+<changefreq>hourly</changefreq>
+<priority>0.5</priority>
+</url>
+
+<url>
+<loc>/tag/anton-zhiyanov.html</loc>
+<lastmod>2023-06-10T14:30:00-05:51</lastmod>
+<changefreq>hourly</changefreq>
+<priority>0.5</priority>
+</url>
+
+<url>
 <loc>/tag/til.html</loc>
-<lastmod>2023-05-26T20:00:00-05:51</lastmod>
+<lastmod>2023-06-02T20:00:00-05:51</lastmod>
+<changefreq>hourly</changefreq>
+<priority>0.5</priority>
+</url>
+
+<url>
+<loc>/tag/psycopg2.html</loc>
+<lastmod>2023-06-02T20:00:00-05:51</lastmod>
 <changefreq>hourly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>/tag/python.html</loc>
-<lastmod>2023-05-26T20:00:00-05:51</lastmod>
+<lastmod>2023-06-02T20:00:00-05:51</lastmod>
+<changefreq>hourly</changefreq>
+<priority>0.5</priority>
+</url>
+
+<url>
+<loc>/tag/postgresql.html</loc>
+<lastmod>2023-06-02T20:00:00-05:51</lastmod>
 <changefreq>hourly</changefreq>
 <priority>0.5</priority>
 </url>
@@ -522,13 +564,6 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 </url>
 
 <url>
-<loc>/tag/postgresql.html</loc>
-<lastmod>2023-03-31T00:00:00-05:51</lastmod>
-<changefreq>hourly</changefreq>
-<priority>0.5</priority>
-</url>
-
-<url>
 <loc>/tag/application_name.html</loc>
 <lastmod>2023-03-31T00:00:00-05:51</lastmod>
 <changefreq>hourly</changefreq>
@@ -587,13 +622,6 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
 <loc>/tag/pg_database.html</loc>
 <lastmod>2023-03-10T00:00:00-05:51</lastmod>
-<changefreq>hourly</changefreq>
-<priority>0.5</priority>
-</url>
-
-<url>
-<loc>/tag/psycopg2.html</loc>
-<lastmod>2022-12-19T17:00:00-05:51</lastmod>
 <changefreq>hourly</changefreq>
 <priority>0.5</priority>
 </url>
@@ -781,13 +809,6 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 </url>
 
 <url>
-<loc>/tag/review.html</loc>
-<lastmod>2022-01-14T00:00:00-05:51</lastmod>
-<changefreq>hourly</changefreq>
-<priority>0.5</priority>
-</url>
-
-<url>
 <loc>/tag/pandas.html</loc>
 <lastmod>2021-06-13T20:30:00-05:51</lastmod>
 <changefreq>hourly</changefreq>
@@ -894,7 +915,7 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>/author/christopher.html</loc>
-<lastmod>2023-05-26T20:00:00-05:51</lastmod>
+<lastmod>2023-06-10T14:30:00-05:51</lastmod>
 <changefreq>hourly</changefreq>
 <priority>0.5</priority>
 </url>

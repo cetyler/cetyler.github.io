@@ -9,18 +9,18 @@
         <meta property="og:type" content="article" />
         <meta name="twitter:card" content="summary">
 
-<meta name="keywords" content="python, project, library, package, Python, " />
+<meta name="keywords" content="review, Anton Zhiyanov, SQL, " />
 
-<meta property="og:title" content="Calculator Project -- Requirements "/>
-<meta property="og:url" content="/calculator-project-requirements.html" />
-<meta property="og:description" content="Creating the initial documentation of the calculator project." />
+<meta property="og:title" content="SQL Window Functions Explained "/>
+<meta property="og:url" content="/sql-window-functions-explained.html" />
+<meta property="og:description" content="Book review summary of Anton&#39;s SQL Window Functions." />
 <meta property="og:site_name" content="Christopher Tyler R&amp;D Test Engineer" />
 <meta property="og:article:author" content="Christopher" />
-<meta property="og:article:published_time" content="2022-01-29T15:00:00-06:00" />
-<meta name="twitter:title" content="Calculator Project -- Requirements ">
-<meta name="twitter:description" content="Creating the initial documentation of the calculator project.">
+<meta property="og:article:published_time" content="2023-06-10T14:30:00-05:00" />
+<meta name="twitter:title" content="SQL Window Functions Explained ">
+<meta name="twitter:description" content="Book review summary of Anton&#39;s SQL Window Functions.">
 
-        <title>Calculator Project -- Requirements  · Christopher Tyler R&amp;D Test Engineer
+        <title>SQL Window Functions Explained  · Christopher Tyler R&amp;D Test Engineer
 </title>
         <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet">
         <link rel="stylesheet" type="text/css" href="/theme/css/elegant.prod.css" media="screen">
@@ -67,8 +67,8 @@
 <div class="row-fluid">
     <header class="page-header span10 offset2">
         <h1>
-            <a href="/calculator-project-requirements.html">
-                Calculator Project -- Requirements
+            <a href="/sql-window-functions-explained.html">
+                SQL Window Functions Explained
             </a>
         </h1>
     </header>
@@ -78,71 +78,83 @@
         <div class="span8 offset2 article-content">
             
             <h2>Overview</h2>
-<p>From the 
-<a href="/calculator-project-setup.html">previous article</a>,
-the plan is to create <a href="https://github.com/cetyler/calculator">calculator</a> in
-order to update my Python workflow.
-This article will cover creating User Requirements, Design Requirements and a
-Roadmap.</p>
-<h2>Location of Documents</h2>
-<p>While we do have Sphinx already set up, in my opinion these documents should be
-related to what the calculator package does and how to use it.
-User Requirements and Design Requirements will be in Gitea/Github wiki.
-Both these documents are more for the developer than the user.
-The Roadmap should be in Sphinx as it is useful to the user when features are
-planned to be released.</p>
-<h2>User Requirements</h2>
-<p>User Requirements generally are what the developer thinks the user wants based
-either by observation, feedback or a spec document.
-This document is to translate the available information into something that
-could be used to help build a design.</p>
-<p>As you see, the
-<a href="https://github.com/cetyler/calculator/wiki/User-Requirements">User Requirements</a>
-describes that this will be a simple program that can also be used as a
-library.
-There are a couple more requirements but for the most part, this describes what
-I think the user would want.</p>
-<p>The goal is to create the requirements without thinking about how to implement.
-For the calculator project, naming Python as the language is a requirement
-since this project is to specifically determine a Python workflow.</p>
-<h2>Design Requirements</h2>
-<p>Design Requirements generally are how the developer is planning on how to
-implement the program based on the User Requirements.
-This document is usually what an 1.0 version of the program.</p>
-<p>As you see
-<a href="https://github.com/cetyler/calculator/wiki/Design-Requirements">Design Requirements</a>
-shows that there will be two parts -- GUI and API.</p>
-<h3>GUI</h3>
-<p>The GUI will be an interactive terminal interface similar to the Python shell
-or like
-<a href="https://www.pgcli.com/">pgcli</a>.
-Due to how simple this program is, I don't really need to do a long description
-on how I plan on implementing the GUI.</p>
-<h3>API</h3>
-<p>The API will be able to call functions to add, subtract, etc.
-I did not include a separate section describing <code>basic.py</code> but it will support
-addition, subtracting, multiplication and division.</p>
-<h2>Roadmap</h2>
-<p>The Roadmap is a proposed feature release plan.
-For this calculator, there is not much of a Roadmap.
-First need to create <code>Roadmap.rst</code> and create a simple release schedule.
-Will need to update <code>index.rst</code> to include the Roadmap.</p>
-<p>As you can see
-<a href="https://github.com/cetyler/calculator/blob/develop/ROADMAP.rst">Roadmap</a> shows
-that it is a fairly basic Roadmap.
-There is not really a plan for a 2.0.0 release and a 1.0.0 release will cover
-everything that was in User Requirements.</p>
-<p>Will need to update my fork of Audrey's cookiecutter template to include a
-Roadmap file.</p>
-<h2>Next Steps</h2>
-<p>The rest of the documentation is not done but the rest of the documentation can
-be completed prior to a release.
-Using a combination of the wiki and Sphinx, it keeps a good separation to what
-will stay with the repository and what could eventually go to
-<a href="https://readthedocs.org/">Read The Docs</a> or an internal website.</p>
-<p>Prior to any writing any code, I will first write tests to ensure that we will
-comply with our User Requirements.
-The initial tests should cover the API as much as possible.</p>
+<p>I recently finished Anton's book
+<a href="https://antonz.org/sql-window-functions-book/">SQL Window Functions Explained</a>.
+While I seen window functions, I only had a basic knowledge.
+I originally bought the e-book at the beginning of the year but it has been
+recent completed (the last part of the book he released last month).
+My review is based on the e-book though keep in mind there is a physical book
+available.</p>
+<h2>Structure</h2>
+<p>Anton structured the book into three parts:</p>
+<ul>
+<li>Windows and functions</li>
+<li>Frames</li>
+<li>Practice</li>
+</ul>
+<p>Keep in mind that there are practice questions throughout the book.
+The last part is more of an advance section that shows what you can do with
+window functions.
+The book is meant to go through in a linear fashion as he builds up the query
+based on the what the requested information each problem is seeking.
+While the e-book is a PDF, I didn't have a problem using either my Kindle, iPad
+or my computer as the text is quite large.</p>
+<h2>Setup</h2>
+<p>Anton provides <code>.sql</code> files that you can download at his website or you can do
+it online at his website (I didn't try this out).
+I used PostgreSQL as I use that with a lot of my projects but Anton did test
+the code with SQLite and MySQL so it should work with those.
+I have a training database and created a <code>wfe</code> schema for this book, so I had
+to modify the <code>.sql</code> files.
+I then used <a href="https://www.pgcli.com/">pgcli</a> though using psql would be nearly
+as good.
+I also went through and took [notes[({filename}/workflow/20230512-zettel.md) so
+that I can search a little quicker than trying to remember which book I got an
+idea how to do something from.</p>
+<h2>Impressions</h2>
+<p>I usually go through a book and skim to see how useful it could be.
+This book specifically I bought to help me with my work.
+About a third of the way through, I was learning things that I was immediately
+applying to my work projects.
+For example, generating row numbers was useful as I need to know the test order
+for the units under test (UUT).
+Some UUTs if they fail the first time may need to get retested and pass two
+times in a row in order to be accepted.
+I was able to determine which UUTs were able to pass after retest by using a
+reverse order by UUT by tester and confirming that the those tests passed.</p>
+<p>Understanding frames really help bring home how I can use window functions and
+understanding the behavior.
+Further, knowing that I could use groups and range beyond just rows expanded on
+what I plan on doing with window functions.</p>
+<p>The last part of the book Finance, Clustering and Data Cleaning were useful on
+how to go through my complex problems step by step creating the window function
+before filtering to ensure that it works or using techniques on cleaning data.
+Clustering I plan on trying to use when comparing my indoor conditions to the
+weather data I get from <a href="https://openweathermap.org/">OpenWeatherMap</a>.
+This part I feel like I am going to go through multiple times before I really
+understand the concepts.</p>
+<p>I went through pretty much all the exercises and didn't really get tripped up.
+The quality of the e-book was great and I think I only saw maybe one or two
+errors (both were queries missing <code>round()</code> based on the results).</p>
+<h2>Conclusion</h2>
+<p>I think that is book is great after progressing through an introduction to SQL.
+I would recommend starting with <a href="https://payhip.com/b/oXJs">Memorable SQL</a> if
+you haven't done any SQL coding before getting this book.
+If you know some basic SQL coding, I would still read either
+<a href="https://sqlfordatascientists.com">SQL for Data Scientists</a> or
+<a href="https://www.practicalsql.com">Practical SQL</a> before reading Anton's book.</p>
+<p>Anton does an excellent job focusing on window functions and showing you the
+various ways window functions can help solve problems.
+Other books that try to cover everything can't focus on window functions and
+tend to provide a high level on how to use them.
+For example, in SQL for Data Scientists, Renee dedicates one chapter to window
+functions and acknowledges that she is only covering a small amount.
+Other books either don't cover window functions or do only a passing remark.</p>
+<p>I would say that
+<a href="https://antonz.org/sql-window-functions-book/">SQL Window Functions Explained</a>
+is a great buy and an excellent reference.
+His <a href="https://antonz.org/all/">blog</a> is also very useful especially if you use
+SQLite.</p>
 
 
              
@@ -166,7 +178,7 @@ The initial tests should cover the API as much as possible.</p>
                 <a class="accordion-toggle disqus-comment-count comment-count"
                    data-toggle="collapse"
                    data-parent="#accordion2"
-                   href="/calculator-project-requirements.html#comment_thread"
+                   href="/sql-window-functions-explained.html#comment_thread"
                    id="comment-accordion-toggle">
                     Comments
                 </a>
@@ -177,7 +189,7 @@ The initial tests should cover the API as much as possible.</p>
 
                         <script src="https://utteranc.es/client.js"
         data-repo="cetyler/cetyler.github.io"
-        data-issue-term="calculator_requirements"
+        data-issue-term="sql_window_functions_review"
         data-label="Comments"
         data-theme="github-light"
         crossorigin="anonymous"
@@ -195,49 +207,16 @@ The initial tests should cover the API as much as possible.</p>
         </div>
         <section id="article-sidebar" class="span2">
             <h4>Published</h4>
-            <time itemprop="dateCreated" datetime="2022-01-29T15:00:00-06:00">Jan 29, 2022</time>
-        <h4>More in This Series</h4>
-    <ul class="multi-parts-list">
-            <li >
-            <a href="/calculator-project.html" title="Calculator Project">Part 1: Calculator Project</a>
-            </li>
-            <li >
-            <a href="/calculator-project-setup.html" title="Calculator Project -- Setup">Part 2: Calculator Project -- Setup</a>
-            </li>
-            <li  class="active-part">
-            Part 3: Calculator Project -- Requirements
-            </li>
-            <li >
-            <a href="/calculator-project-tests.html" title="Calculator Project -- Tests">Part 4: Calculator Project -- Tests</a>
-            </li>
-            <li >
-            <a href="/calculator-project-api.html" title="Calculator Project -- API">Part 5: Calculator Project -- API</a>
-            </li>
-            <li >
-            <a href="/calculator-project-cli.html" title="Calculator Project -- CLI">Part 6: Calculator Project -- CLI</a>
-            </li>
-            <li >
-            <a href="/calculator-project-documentation.html" title="Calculator Project -- Documentation">Part 7: Calculator Project -- Documentation</a>
-            </li>
-            <li >
-            <a href="/calculator-project-package.html" title="Calculator Project -- Package">Part 8: Calculator Project -- Package</a>
-            </li>
-    </ul>
+            <time itemprop="dateCreated" datetime="2023-06-10T14:30:00-05:00">Jun 10, 2023</time>
             <h4>Category</h4>
-            <a class="category-link" href="/categories.html#python-ref">Python</a>
+            <a class="category-link" href="/categories.html#sql-ref">SQL</a>
             <h4>Tags</h4>
             <ul class="list-of-tags tags-in-article">
-                <li><a href="/tags.html#library-ref">library
-                    <span>8</span>
+                <li><a href="/tags.html#anton-zhiyanov-ref">Anton Zhiyanov
+                    <span>1</span>
 </a></li>
-                <li><a href="/tags.html#package-ref">package
-                    <span>10</span>
-</a></li>
-                <li><a href="/tags.html#project-ref">project
-                    <span>12</span>
-</a></li>
-                <li><a href="/tags.html#python-ref">python
-                    <span>22</span>
+                <li><a href="/tags.html#review-ref">review
+                    <span>3</span>
 </a></li>
             </ul>
 <h4>Contact</h4>
