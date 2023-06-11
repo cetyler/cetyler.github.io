@@ -43,7 +43,7 @@ I have a training database and created a `wfe` schema for this book, so I had
 to modify the `.sql` files.
 I then used [pgcli](https://www.pgcli.com/) though using psql would be nearly
 as good.
-I also went through and took [notes[({filename}/workflow/20230512-zettel.md) so
+I also went through and took [notes]({filename}/workflow/20230512-zettel.md) so
 that I can search a little quicker than trying to remember which book I got an
 idea how to do something from.
 
