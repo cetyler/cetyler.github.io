@@ -1,5 +1,6 @@
 Title: Using psql to put JSON Data into a Table
 Date: 2023-05-06 20:00
+Modified: 2023-08-01 22:50
 Category: SQL
 Tags: sql, openweathermap, json, cross lateral join, jsonb_to_recordset()
 Author: Christopher
@@ -166,7 +167,7 @@ where r.raw_data -> 'current' is not null
 ```
 
 There is a lot here but it is not difficult to go through.
-Now with the view, it is not easy to insert the data into
+Now with the view, it is now easy to insert the data into
 `weather.current_conditions` table.
 
 ```
