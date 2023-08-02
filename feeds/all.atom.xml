@@ -1,5 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Christopher Tyler R&amp;D Test Engineer</title><link href="https://cetyler.github.io/" rel="alternate"></link><link href="https://cetyler.github.io/feeds/all.atom.xml" rel="self"></link><id>https://cetyler.github.io/</id><updated>2023-06-10T14:30:00-05:00</updated><entry><title>SQL Window Functions Explained</title><link href="https://cetyler.github.io/sql-window-functions-explained.html" rel="alternate"></link><published>2023-06-10T14:30:00-05:00</published><updated>2023-06-10T14:30:00-05:00</updated><author><name>Christopher</name></author><id>tag:cetyler.github.io,2023-06-10:/sql-window-functions-explained.html</id><summary type="html">&lt;p&gt;Book review summary of Anton's SQL Window Functions.&lt;/p&gt;</summary><content type="html">&lt;h2&gt;Overview&lt;/h2&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Christopher Tyler R&amp;D Test Engineer</title><link href="https://cetyler.github.io/" rel="alternate"></link><link href="https://cetyler.github.io/feeds/all.atom.xml" rel="self"></link><id>https://cetyler.github.io/</id><updated>2023-08-01T23:00:00-05:00</updated><entry><title>Set Statement Timeout</title><link href="https://cetyler.github.io/set-statement-timeout.html" rel="alternate"></link><published>2023-08-01T22:55:00-05:00</published><updated>2023-08-01T22:55:00-05:00</updated><author><name>Christopher</name></author><id>tag:cetyler.github.io,2023-08-01:/set-statement-timeout.html</id><summary type="html">&lt;p&gt;Set a timeout in case you want to terminate a long running query.&lt;/p&gt;</summary><content type="html">&lt;p&gt;I don't recall where I saw this, but in PostgreSQL, you can set a statement
+timeout to potentially prevent problems with a long running query running.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;$ alter database mydatabase &lt;span class="nb"&gt;set&lt;/span&gt; &lt;span class="nv"&gt;statement_timeout&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;60s&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Another thing you may want to set is &lt;code&gt;idle_in_transaction&lt;/code&gt; timeout as well
+which will cancel long running transaction that are no longer performing work.&lt;/p&gt;
+&lt;p&gt;There is more information in PostgreSQL
+&lt;a href="https://www.postgresql.org/docs/current/config-setting.html"&gt;documentation&lt;/a&gt;.&lt;/p&gt;</content><category term="TIL"></category><category term="til"></category><category term="timeout"></category><category term="statement_timeout"></category><category term="postgresql"></category><category term="idle_in_transaction"></category></entry><entry><title>SQL Window Functions Explained</title><link href="https://cetyler.github.io/sql-window-functions-explained.html" rel="alternate"></link><published>2023-06-10T14:30:00-05:00</published><updated>2023-06-10T14:30:00-05:00</updated><author><name>Christopher</name></author><id>tag:cetyler.github.io,2023-06-10:/sql-window-functions-explained.html</id><summary type="html">&lt;p&gt;Book review summary of Anton's SQL Window Functions.&lt;/p&gt;</summary><content type="html">&lt;h2&gt;Overview&lt;/h2&gt;
 &lt;p&gt;I recently finished Anton's book
 &lt;a href="https://antonz.org/sql-window-functions-book/"&gt;SQL Window Functions Explained&lt;/a&gt;.
 While I seen window functions, I only had a basic knowledge.
@@ -76,7 +84,7 @@ Other books either don't cover window functions or do only a passing remark.&lt;
 &lt;a href="https://antonz.org/sql-window-functions-book/"&gt;SQL Window Functions Explained&lt;/a&gt;
 is a great buy and an excellent reference.
 His &lt;a href="https://antonz.org/all/"&gt;blog&lt;/a&gt; is also very useful especially if you use
-SQLite.&lt;/p&gt;</content><category term="SQL"></category><category term="review"></category><category term="Anton Zhiyanov"></category></entry><entry><title>Escape Keys using psycopg2</title><link href="https://cetyler.github.io/escape-keys-using-psycopg2.html" rel="alternate"></link><published>2023-06-02T20:00:00-05:00</published><updated>2023-06-02T20:00:00-05:00</updated><author><name>Christopher</name></author><id>tag:cetyler.github.io,2023-06-02:/escape-keys-using-psycopg2.html</id><summary type="html">&lt;p&gt;Making sure that using &lt;code&gt;%&lt;/code&gt; in PostgreSQL works with psycopg2.&lt;/p&gt;</summary><content type="html">&lt;p&gt;Found the information at
+SQLite.&lt;/p&gt;</content><category term="SQL"></category><category term="review"></category><category term="Anton Zhiyanov"></category></entry><entry><title>Escape Keys using psycopg2</title><link href="https://cetyler.github.io/escape-keys-using-psycopg2.html" rel="alternate"></link><published>2023-06-02T20:00:00-05:00</published><updated>2023-08-01T23:00:00-05:00</updated><author><name>Christopher</name></author><id>tag:cetyler.github.io,2023-06-02:/escape-keys-using-psycopg2.html</id><summary type="html">&lt;p&gt;Making sure that using &lt;code&gt;%&lt;/code&gt; in PostgreSQL works with psycopg2.&lt;/p&gt;</summary><content type="html">&lt;p&gt;Found the information at
 https://www.psycopg.org/docs/usage.html#query-parameters.&lt;/p&gt;
 &lt;p&gt;Since &lt;code&gt;%&lt;/code&gt; is used in both Python and in Postgres I need to use &lt;code&gt;%%&lt;/code&gt; instead:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&amp;gt;&amp;gt;&amp;gt; cur.execute(&amp;quot;SELECT (%s % 2) = 0 AS even&amp;quot;, (10,))       # WRONG
@@ -90,18 +98,16 @@ https://www.psycopg.org/docs/usage.html#query-parameters.&lt;/p&gt;
       )
      )
 &amp;quot;&amp;quot;&amp;quot;
-```
-
-instead of this:
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-&lt;p&gt;f""" AND '{findings}' %&amp;gt; ANY(STRING_TO_ARRAY(
-      CONCAT("Finding1","Finding2","Finding3","Finding4","Finding5","Finding6")
-      ,' '
+&lt;p&gt;instead of this:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;f&amp;quot;&amp;quot;&amp;quot; AND &amp;#39;{findings}&amp;#39; %&amp;gt; ANY(STRING_TO_ARRAY(
+      CONCAT(&amp;quot;Finding1&amp;quot;,&amp;quot;Finding2&amp;quot;,&amp;quot;Finding3&amp;quot;,&amp;quot;Finding4&amp;quot;,&amp;quot;Finding5&amp;quot;,&amp;quot;Finding6&amp;quot;)
+      ,&amp;#39; &amp;#39;
       )
      )
-"""
-```&lt;/p&gt;</content><category term="TIL"></category><category term="til"></category><category term="psycopg2"></category><category term="python"></category><category term="postgresql"></category></entry><entry><title>Setup Python Package to use with Pipx</title><link href="https://cetyler.github.io/setup-python-package-to-use-with-pipx.html" rel="alternate"></link><published>2023-05-26T20:00:00-05:00</published><updated>2023-05-26T20:00:00-05:00</updated><author><name>Christopher</name></author><id>tag:cetyler.github.io,2023-05-26:/setup-python-package-to-use-with-pipx.html</id><summary type="html">&lt;p&gt;Setting up your Python project to work with pipx and pyproject.toml&lt;/p&gt;</summary><content type="html">&lt;p&gt;Found the information at
+&amp;quot;&amp;quot;&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</content><category term="TIL"></category><category term="til"></category><category term="psycopg2"></category><category term="python"></category><category term="postgresql"></category></entry><entry><title>Setup Python Package to use with Pipx</title><link href="https://cetyler.github.io/setup-python-package-to-use-with-pipx.html" rel="alternate"></link><published>2023-05-26T20:00:00-05:00</published><updated>2023-05-26T20:00:00-05:00</updated><author><name>Christopher</name></author><id>tag:cetyler.github.io,2023-05-26:/setup-python-package-to-use-with-pipx.html</id><summary type="html">&lt;p&gt;Setting up your Python project to work with pipx and pyproject.toml&lt;/p&gt;</summary><content type="html">&lt;p&gt;Found the information at
 https://flit.pypa.io/en/latest/pyproject_toml.html#pyproject-project-scripts.&lt;/p&gt;
 &lt;h2&gt;pyproject.toml&lt;/h2&gt;
 &lt;p&gt;Add the following entry:&lt;/p&gt;
@@ -253,7 +259,7 @@ to use with a particular project.&lt;/p&gt;
 show how the tooling works.
 This workflow has stuck much more than other methods that I have tried.
 Keeping the notes atomic and keeping the tags for each notes to a minimum, I
-can search my notes quickly.&lt;/p&gt;</content><category term="Workflow"></category><category term="workflow"></category><category term="zettel"></category><category term="zettelkasten"></category></entry><entry><title>Using psql to put JSON Data into a Table</title><link href="https://cetyler.github.io/using-psql-to-put-json-data-into-a-table.html" rel="alternate"></link><published>2023-05-06T20:00:00-05:00</published><updated>2023-05-06T20:00:00-05:00</updated><author><name>Christopher</name></author><id>tag:cetyler.github.io,2023-05-06:/using-psql-to-put-json-data-into-a-table.html</id><summary type="html">&lt;p&gt;Show how you can take JSON data and insert that data into a table.&lt;/p&gt;</summary><content type="html">&lt;h2&gt;Overview&lt;/h2&gt;
+can search my notes quickly.&lt;/p&gt;</content><category term="Workflow"></category><category term="workflow"></category><category term="zettel"></category><category term="zettelkasten"></category></entry><entry><title>Using psql to put JSON Data into a Table</title><link href="https://cetyler.github.io/using-psql-to-put-json-data-into-a-table.html" rel="alternate"></link><published>2023-05-06T20:00:00-05:00</published><updated>2023-08-01T22:50:00-05:00</updated><author><name>Christopher</name></author><id>tag:cetyler.github.io,2023-05-06:/using-psql-to-put-json-data-into-a-table.html</id><summary type="html">&lt;p&gt;Show how you can take JSON data and insert that data into a table.&lt;/p&gt;</summary><content type="html">&lt;h2&gt;Overview&lt;/h2&gt;
 &lt;p&gt;After creating my program
 (&lt;a href="https://github.com/cetyler/openweather_report"&gt;openweather_report&lt;/a&gt;) that
 pulls in data from &lt;a href="https://openweathermap.org"&gt;OpenWeather&lt;/a&gt;, the data is being
@@ -393,7 +399,7 @@ I also want to make it as a view since I will use this to insert data.&lt;/p&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;There is a lot here but it is not difficult to go through.
-Now with the view, it is not easy to insert the data into
+Now with the view, it is now easy to insert the data into
 &lt;code&gt;weather.current_conditions&lt;/code&gt; table.&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="cm"&gt;/* Insert Current Conditions Weather Data from JSON&lt;/span&gt;
 &lt;span class="cm"&gt;Created by Christopher Tyler&lt;/span&gt;
@@ -725,39 +731,4 @@ For my use case, I am going through
 &lt;a href="https://theartofpostgresql.com/"&gt;The Art of PostgreSQL&lt;/a&gt; and I want to put the
 training data in a schema &lt;code&gt;taop&lt;/code&gt;.
 Instead of updating each Python file for each query, I can just update the
-connection string.&lt;/p&gt;</content><category term="TIL"></category><category term="til"></category><category term="postgresql"></category><category term="psycopg2"></category><category term="sqlalchemy"></category></entry><entry><title>Create Automatic Timestamps in PostgreSQL</title><link href="https://cetyler.github.io/create-automatic-timestamps-in-postgresql.html" rel="alternate"></link><published>2022-12-16T18:00:00-06:00</published><updated>2022-12-16T18:00:00-06:00</updated><author><name>Christopher</name></author><id>tag:cetyler.github.io,2022-12-16:/create-automatic-timestamps-in-postgresql.html</id><summary type="html">&lt;p&gt;Create automatic timestamps by default.&lt;/p&gt;</summary><content type="html">&lt;p&gt;Found this at
-&lt;a href="https://x-team.com/blog/automatic-timestamps-with-postgresql/"&gt;X-Team&lt;/a&gt;.&lt;/p&gt;
-&lt;h2&gt;Create Table with Default Timestamp&lt;/h2&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;CREATE TABLE todos (
- id SERIAL NOT NULL PRIMARY KEY,
- content TEXT,
- created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
- updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
- completed_at TIMESTAMPTZ
-);
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;In creating the &lt;code&gt;todos&lt;/code&gt; table, both &lt;code&gt;created_at&lt;/code&gt; and &lt;code&gt;updated_at&lt;/code&gt; will default
-with the current timestamp if one is not given.
-This is great for if you are adding items from a CSV and you want to know when
-the data is being created.&lt;/p&gt;
-&lt;h2&gt;Update Timestamp on Update&lt;/h2&gt;
-&lt;p&gt;The article also explains how to create a trigger function.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="n"&gt;CREATE&lt;/span&gt; &lt;span class="kr"&gt;OR&lt;/span&gt; &lt;span class="n"&gt;REPLACE&lt;/span&gt; &lt;span class="n"&gt;FUNCTION&lt;/span&gt; &lt;span class="n"&gt;trigger_set_timestamp&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
-&lt;span class="n"&gt;RETURNS&lt;/span&gt; &lt;span class="n"&gt;TRIGGER&lt;/span&gt; &lt;span class="n"&gt;AS&lt;/span&gt; &lt;span class="o"&gt;$$&lt;/span&gt;
-&lt;span class="kr"&gt;BEGIN&lt;/span&gt;
- &lt;span class="kr"&gt;NEW&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;updated_at&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;NOW&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
- &lt;span class="kr"&gt;RETURN&lt;/span&gt; &lt;span class="kr"&gt;NEW&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-&lt;span class="kr"&gt;END&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-&lt;span class="o"&gt;$$&lt;/span&gt; &lt;span class="n"&gt;LANGUAGE&lt;/span&gt; &lt;span class="n"&gt;plpgsql&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;With this function, when can update a table and automatically update column
-&lt;code&gt;updated_at&lt;/code&gt; with the current timestamp.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="n"&gt;CREATE&lt;/span&gt; &lt;span class="n"&gt;TRIGGER&lt;/span&gt; &lt;span class="n"&gt;set_timestamp&lt;/span&gt;
-&lt;span class="n"&gt;BEFORE&lt;/span&gt; &lt;span class="n"&gt;UPDATE&lt;/span&gt; &lt;span class="n"&gt;ON&lt;/span&gt; &lt;span class="n"&gt;todos&lt;/span&gt;
-&lt;span class="kr"&gt;FOR&lt;/span&gt; &lt;span class="mh"&gt;EACH&lt;/span&gt; &lt;span class="n"&gt;ROW&lt;/span&gt;
-&lt;span class="n"&gt;EXECUTE&lt;/span&gt; &lt;span class="kr"&gt;PROCEDURE&lt;/span&gt; &lt;span class="n"&gt;trigger_set_timestamp&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;This will execute anytime a row is updated in &lt;code&gt;todos&lt;/code&gt;.&lt;/p&gt;</content><category term="TIL"></category><category term="til"></category><category term="postgresql"></category><category term="timestamp"></category><category term="function"></category></entry></feed>
+connection string.&lt;/p&gt;</content><category term="TIL"></category><category term="til"></category><category term="postgresql"></category><category term="psycopg2"></category><category term="sqlalchemy"></category></entry></feed>

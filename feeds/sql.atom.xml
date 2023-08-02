@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Christopher Tyler R&amp;D Test Engineer - SQL</title><link href="https://cetyler.github.io/" rel="alternate"></link><link href="https://cetyler.github.io/feeds/sql.atom.xml" rel="self"></link><id>https://cetyler.github.io/</id><updated>2023-06-10T14:30:00-05:00</updated><entry><title>SQL Window Functions Explained</title><link href="https://cetyler.github.io/sql-window-functions-explained.html" rel="alternate"></link><published>2023-06-10T14:30:00-05:00</published><updated>2023-06-10T14:30:00-05:00</updated><author><name>Christopher</name></author><id>tag:cetyler.github.io,2023-06-10:/sql-window-functions-explained.html</id><summary type="html">&lt;p&gt;Book review summary of Anton's SQL Window Functions.&lt;/p&gt;</summary><content type="html">&lt;h2&gt;Overview&lt;/h2&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Christopher Tyler R&amp;D Test Engineer - SQL</title><link href="https://cetyler.github.io/" rel="alternate"></link><link href="https://cetyler.github.io/feeds/sql.atom.xml" rel="self"></link><id>https://cetyler.github.io/</id><updated>2023-08-01T22:50:00-05:00</updated><entry><title>SQL Window Functions Explained</title><link href="https://cetyler.github.io/sql-window-functions-explained.html" rel="alternate"></link><published>2023-06-10T14:30:00-05:00</published><updated>2023-06-10T14:30:00-05:00</updated><author><name>Christopher</name></author><id>tag:cetyler.github.io,2023-06-10:/sql-window-functions-explained.html</id><summary type="html">&lt;p&gt;Book review summary of Anton's SQL Window Functions.&lt;/p&gt;</summary><content type="html">&lt;h2&gt;Overview&lt;/h2&gt;
 &lt;p&gt;I recently finished Anton's book
 &lt;a href="https://antonz.org/sql-window-functions-book/"&gt;SQL Window Functions Explained&lt;/a&gt;.
 While I seen window functions, I only had a basic knowledge.
@@ -76,7 +76,7 @@ Other books either don't cover window functions or do only a passing remark.&lt;
 &lt;a href="https://antonz.org/sql-window-functions-book/"&gt;SQL Window Functions Explained&lt;/a&gt;
 is a great buy and an excellent reference.
 His &lt;a href="https://antonz.org/all/"&gt;blog&lt;/a&gt; is also very useful especially if you use
-SQLite.&lt;/p&gt;</content><category term="SQL"></category><category term="review"></category><category term="Anton Zhiyanov"></category></entry><entry><title>Using psql to put JSON Data into a Table</title><link href="https://cetyler.github.io/using-psql-to-put-json-data-into-a-table.html" rel="alternate"></link><published>2023-05-06T20:00:00-05:00</published><updated>2023-05-06T20:00:00-05:00</updated><author><name>Christopher</name></author><id>tag:cetyler.github.io,2023-05-06:/using-psql-to-put-json-data-into-a-table.html</id><summary type="html">&lt;p&gt;Show how you can take JSON data and insert that data into a table.&lt;/p&gt;</summary><content type="html">&lt;h2&gt;Overview&lt;/h2&gt;
+SQLite.&lt;/p&gt;</content><category term="SQL"></category><category term="review"></category><category term="Anton Zhiyanov"></category></entry><entry><title>Using psql to put JSON Data into a Table</title><link href="https://cetyler.github.io/using-psql-to-put-json-data-into-a-table.html" rel="alternate"></link><published>2023-05-06T20:00:00-05:00</published><updated>2023-08-01T22:50:00-05:00</updated><author><name>Christopher</name></author><id>tag:cetyler.github.io,2023-05-06:/using-psql-to-put-json-data-into-a-table.html</id><summary type="html">&lt;p&gt;Show how you can take JSON data and insert that data into a table.&lt;/p&gt;</summary><content type="html">&lt;h2&gt;Overview&lt;/h2&gt;
 &lt;p&gt;After creating my program
 (&lt;a href="https://github.com/cetyler/openweather_report"&gt;openweather_report&lt;/a&gt;) that
 pulls in data from &lt;a href="https://openweathermap.org"&gt;OpenWeather&lt;/a&gt;, the data is being
@@ -216,7 +216,7 @@ I also want to make it as a view since I will use this to insert data.&lt;/p&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;There is a lot here but it is not difficult to go through.
-Now with the view, it is not easy to insert the data into
+Now with the view, it is now easy to insert the data into
 &lt;code&gt;weather.current_conditions&lt;/code&gt; table.&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="cm"&gt;/* Insert Current Conditions Weather Data from JSON&lt;/span&gt;
 &lt;span class="cm"&gt;Created by Christopher Tyler&lt;/span&gt;

@@ -1,5 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Christopher Tyler R&amp;D Test Engineer - TIL</title><link href="https://cetyler.github.io/" rel="alternate"></link><link href="https://cetyler.github.io/feeds/til.atom.xml" rel="self"></link><id>https://cetyler.github.io/</id><updated>2023-06-02T20:00:00-05:00</updated><entry><title>Escape Keys using psycopg2</title><link href="https://cetyler.github.io/escape-keys-using-psycopg2.html" rel="alternate"></link><published>2023-06-02T20:00:00-05:00</published><updated>2023-06-02T20:00:00-05:00</updated><author><name>Christopher</name></author><id>tag:cetyler.github.io,2023-06-02:/escape-keys-using-psycopg2.html</id><summary type="html">&lt;p&gt;Making sure that using &lt;code&gt;%&lt;/code&gt; in PostgreSQL works with psycopg2.&lt;/p&gt;</summary><content type="html">&lt;p&gt;Found the information at
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Christopher Tyler R&amp;D Test Engineer - TIL</title><link href="https://cetyler.github.io/" rel="alternate"></link><link href="https://cetyler.github.io/feeds/til.atom.xml" rel="self"></link><id>https://cetyler.github.io/</id><updated>2023-08-01T23:00:00-05:00</updated><entry><title>Set Statement Timeout</title><link href="https://cetyler.github.io/set-statement-timeout.html" rel="alternate"></link><published>2023-08-01T22:55:00-05:00</published><updated>2023-08-01T22:55:00-05:00</updated><author><name>Christopher</name></author><id>tag:cetyler.github.io,2023-08-01:/set-statement-timeout.html</id><summary type="html">&lt;p&gt;Set a timeout in case you want to terminate a long running query.&lt;/p&gt;</summary><content type="html">&lt;p&gt;I don't recall where I saw this, but in PostgreSQL, you can set a statement
+timeout to potentially prevent problems with a long running query running.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;$ alter database mydatabase &lt;span class="nb"&gt;set&lt;/span&gt; &lt;span class="nv"&gt;statement_timeout&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;60s&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Another thing you may want to set is &lt;code&gt;idle_in_transaction&lt;/code&gt; timeout as well
+which will cancel long running transaction that are no longer performing work.&lt;/p&gt;
+&lt;p&gt;There is more information in PostgreSQL
+&lt;a href="https://www.postgresql.org/docs/current/config-setting.html"&gt;documentation&lt;/a&gt;.&lt;/p&gt;</content><category term="TIL"></category><category term="til"></category><category term="timeout"></category><category term="statement_timeout"></category><category term="postgresql"></category><category term="idle_in_transaction"></category></entry><entry><title>Escape Keys using psycopg2</title><link href="https://cetyler.github.io/escape-keys-using-psycopg2.html" rel="alternate"></link><published>2023-06-02T20:00:00-05:00</published><updated>2023-08-01T23:00:00-05:00</updated><author><name>Christopher</name></author><id>tag:cetyler.github.io,2023-06-02:/escape-keys-using-psycopg2.html</id><summary type="html">&lt;p&gt;Making sure that using &lt;code&gt;%&lt;/code&gt; in PostgreSQL works with psycopg2.&lt;/p&gt;</summary><content type="html">&lt;p&gt;Found the information at
 https://www.psycopg.org/docs/usage.html#query-parameters.&lt;/p&gt;
 &lt;p&gt;Since &lt;code&gt;%&lt;/code&gt; is used in both Python and in Postgres I need to use &lt;code&gt;%%&lt;/code&gt; instead:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&amp;gt;&amp;gt;&amp;gt; cur.execute(&amp;quot;SELECT (%s % 2) = 0 AS even&amp;quot;, (10,))       # WRONG
@@ -13,18 +21,16 @@ https://www.psycopg.org/docs/usage.html#query-parameters.&lt;/p&gt;
       )
      )
 &amp;quot;&amp;quot;&amp;quot;
-```
-
-instead of this:
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-&lt;p&gt;f""" AND '{findings}' %&amp;gt; ANY(STRING_TO_ARRAY(
-      CONCAT("Finding1","Finding2","Finding3","Finding4","Finding5","Finding6")
-      ,' '
+&lt;p&gt;instead of this:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;f&amp;quot;&amp;quot;&amp;quot; AND &amp;#39;{findings}&amp;#39; %&amp;gt; ANY(STRING_TO_ARRAY(
+      CONCAT(&amp;quot;Finding1&amp;quot;,&amp;quot;Finding2&amp;quot;,&amp;quot;Finding3&amp;quot;,&amp;quot;Finding4&amp;quot;,&amp;quot;Finding5&amp;quot;,&amp;quot;Finding6&amp;quot;)
+      ,&amp;#39; &amp;#39;
       )
      )
-"""
-```&lt;/p&gt;</content><category term="TIL"></category><category term="til"></category><category term="psycopg2"></category><category term="python"></category><category term="postgresql"></category></entry><entry><title>Setup Python Package to use with Pipx</title><link href="https://cetyler.github.io/setup-python-package-to-use-with-pipx.html" rel="alternate"></link><published>2023-05-26T20:00:00-05:00</published><updated>2023-05-26T20:00:00-05:00</updated><author><name>Christopher</name></author><id>tag:cetyler.github.io,2023-05-26:/setup-python-package-to-use-with-pipx.html</id><summary type="html">&lt;p&gt;Setting up your Python project to work with pipx and pyproject.toml&lt;/p&gt;</summary><content type="html">&lt;p&gt;Found the information at
+&amp;quot;&amp;quot;&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</content><category term="TIL"></category><category term="til"></category><category term="psycopg2"></category><category term="python"></category><category term="postgresql"></category></entry><entry><title>Setup Python Package to use with Pipx</title><link href="https://cetyler.github.io/setup-python-package-to-use-with-pipx.html" rel="alternate"></link><published>2023-05-26T20:00:00-05:00</published><updated>2023-05-26T20:00:00-05:00</updated><author><name>Christopher</name></author><id>tag:cetyler.github.io,2023-05-26:/setup-python-package-to-use-with-pipx.html</id><summary type="html">&lt;p&gt;Setting up your Python project to work with pipx and pyproject.toml&lt;/p&gt;</summary><content type="html">&lt;p&gt;Found the information at
 https://flit.pypa.io/en/latest/pyproject_toml.html#pyproject-project-scripts.&lt;/p&gt;
 &lt;h2&gt;pyproject.toml&lt;/h2&gt;
 &lt;p&gt;Add the following entry:&lt;/p&gt;
