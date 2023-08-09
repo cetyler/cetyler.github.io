@@ -9,18 +9,18 @@
         <meta property="og:type" content="article" />
         <meta name="twitter:card" content="summary">
 
-<meta name="keywords" content="til, vim, highlighting, TIL, " />
+<meta name="keywords" content="python, circuit python, adafruit, feather board, esp32s2, Python, " />
 
-<meta property="og:title" content="Clear Highlighting in Vim "/>
-<meta property="og:url" content="/clear-highlighting-in-vim.html" />
-<meta property="og:description" content="Clearing highlighting after performing a search for an example." />
+<meta property="og:title" content="Measure Ambient Conditions with Circuit Python "/>
+<meta property="og:url" content="/drafts/measure-ambient-conditions-with-circuit-python.html" />
+<meta property="og:description" content="Overview on Circuit Python using AdaFruit&#39;s Feather boards." />
 <meta property="og:site_name" content="Christopher Tyler R&amp;D Test Engineer" />
 <meta property="og:article:author" content="Christopher" />
-<meta property="og:article:published_time" content="2023-04-14T00:00:00-05:00" />
-<meta name="twitter:title" content="Clear Highlighting in Vim ">
-<meta name="twitter:description" content="Clearing highlighting after performing a search for an example.">
+<meta property="og:article:published_time" content="2023-08-13T15:00:00-05:00" />
+<meta name="twitter:title" content="Measure Ambient Conditions with Circuit Python ">
+<meta name="twitter:description" content="Overview on Circuit Python using AdaFruit&#39;s Feather boards.">
 
-        <title>Clear Highlighting in Vim  · Christopher Tyler R&amp;D Test Engineer
+        <title>Measure Ambient Conditions with Circuit Python  · Christopher Tyler R&amp;D Test Engineer
 </title>
         <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet">
         <link rel="stylesheet" type="text/css" href="/theme/css/elegant.prod.css" media="screen">
@@ -67,8 +67,8 @@
 <div class="row-fluid">
     <header class="page-header span10 offset2">
         <h1>
-            <a href="/clear-highlighting-in-vim.html">
-                Clear Highlighting in Vim
+            <a href="/drafts/measure-ambient-conditions-with-circuit-python.html">
+                Measure Ambient Conditions with Circuit Python
             </a>
         </h1>
     </header>
@@ -77,11 +77,48 @@
 <div class="row-fluid">
         <div class="span8 offset2 article-content">
             
-            <p>To clear highlighting:</p>
-<div class="highlight"><pre><span></span><code>:noh
-</code></pre></div>
-
-<p>This will clear any highlighting.</p>
+            <h2>Overview</h2>
+<p>I have been meaning to try out <a href="https://circuitpython.org/">Circuit Python</a> but
+I didn't quite have a project in mind.
+I had a janky setup using a Raspberry Pi, some thermistors and a
+temperature/humidity sensor on a bread board to measure the input and output of
+my air conditioner.
+It was meant to be temporary but I ended up using it far after determining that
+my air conditioner needed to be replaced.
+I moved the setup which caused all the wires to popped out.
+I also had a Sparkfun's
+<a href="https://www.sparkfun.com/products/16467">Humidity Breakout Board</a> but didn't
+realized that they only had an Arduino library.
+The plan was to compare the ambient conditions of my house relative to the
+outside weather conditions.
+Instead of trying to create a better setup with my existing parts, I decided to
+use the opportunity start over.
+I had the following requirements:</p>
+<ul>
+<li>Be able to measure conditions at multiple locations in my house.</li>
+<li>Be able to measure temperature and optionally humidity.</li>
+<li>Be able to send the data wirelessly to my PC.</li>
+</ul>
+<p>This lead me to
+<a href="https://learn.adafruit.com/adafruit-esp32-s2-tft-feather">AdaFruit ESP32-S2 Feather</a>
+(I got the one with <a href="https://www.adafruit.com/product/5303">BME280 Sensor</a> and
+using <a href="https://circuitpython.org">Circuit Python</a>.
+This article will be less about the board and more about using Circuit Python.</p>
+<h2>What is Circuit Python?</h2>
+<p><a href="https://micropython.org/">MicroPython</a> created a cutdown version of Python
+that could run in microcontrollers.
+<a href="https://circuitpython.org">Circuit Python</a> is based on MicroPython and you can
+see the differences
+<a href="https://docs.circuitpython.org/en/latest/README.html#differences-from-micropython">here</a>.
+<a href="https://circuitpython.org/downloads">Many of AdaFruit boards</a> as well as
+Raspberry Pis and other boards can be programmed with Circuit Python.</p>
+<p>If you have used Python, most likely you used the
+<a href="https://github.com/python/cpython">CPython</a> implementation.
+The differences between CPython and MicroPython/CircuitPython it is easier to
+remember that CPython is not meant for microcontrollers.
+CircuitPython and MicroPython has a much smaller standard library, may not have
+all the features that CPython has (details
+<a href="https://github.com/micropython/micropython/wiki/Differences">here</a>).</p>
 
 
              
@@ -95,58 +132,25 @@
 
 
 
-<section>
-    <h6 style="display:none;">Comments</h6>
-    <p id="comment-message">Leave your comments below. </p>
-
-    <div class="accordion" id="accordion2">
-        <div class="accordion-group">
-            <div class="accordion-heading">
-                <a class="accordion-toggle disqus-comment-count comment-count"
-                   data-toggle="collapse"
-                   data-parent="#accordion2"
-                   href="/clear-highlighting-in-vim.html#comment_thread"
-                   id="comment-accordion-toggle">
-                    Comments
-                </a>
-            </div>
-            <div id="comment_thread" class="accordion-body collapse">
-                <div class="accordion-inner">
-                    <div class="comments">
-
-                        <script src="https://utteranc.es/client.js"
-        data-repo="cetyler/cetyler.github.io"
-        data-issue-term="til_20230414_clear_vim"
-        data-label="Comments"
-        data-theme="github-light"
-        crossorigin="anonymous"
-        async>
-</script>
-
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
             <hr/>
         </div>
         <section id="article-sidebar" class="span2">
             <h4>Published</h4>
-            <time itemprop="dateCreated" datetime="2023-04-14T00:00:00-05:00">Apr 14, 2023</time>
+            <time itemprop="dateCreated" datetime="2023-08-13T15:00:00-05:00">Aug 13, 2023</time>
             <h4>Category</h4>
-            <a class="category-link" href="/categories.html#til-ref">TIL</a>
+            <a class="category-link" href="/categories.html#python-ref">Python</a>
             <h4>Tags</h4>
             <ul class="list-of-tags tags-in-article">
-                <li><a href="/tags.html#highlighting-ref">highlighting
-                    <span>1</span>
+                <li><a href="/tags.html#adafruit-ref">adafruit
 </a></li>
-                <li><a href="/tags.html#til-ref">til
-                    <span>14</span>
+                <li><a href="/tags.html#circuit-python-ref">circuit python
 </a></li>
-                <li><a href="/tags.html#vim-ref">vim
-                    <span>3</span>
+                <li><a href="/tags.html#esp32s2-ref">esp32s2
+</a></li>
+                <li><a href="/tags.html#feather-board-ref">feather board
+</a></li>
+                <li><a href="/tags.html#python-ref">python
+                    <span>22</span>
 </a></li>
             </ul>
 <h4>Contact</h4>
