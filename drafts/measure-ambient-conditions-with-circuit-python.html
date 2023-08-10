@@ -116,9 +116,50 @@ Raspberry Pis and other boards can be programmed with Circuit Python.</p>
 <a href="https://github.com/python/cpython">CPython</a> implementation.
 The differences between CPython and MicroPython/CircuitPython it is easier to
 remember that CPython is not meant for microcontrollers.
-CircuitPython and MicroPython has a much smaller standard library, may not have
-all the features that CPython has (details
+CircuitPython and MicroPython have a much smaller standard library and may not
+have all the features that CPython has (details
 <a href="https://github.com/micropython/micropython/wiki/Differences">here</a>).</p>
+<h2>Setting Up to Use Circuit Python</h2>
+<p>AdaFruit has a good
+<a href="https://learn.adafruit.com/welcome-to-circuitpython">guide</a> which can be good
+if you are new to microcontrollers as well as Python.
+My workflow is currently the following:</p>
+<ul>
+<li>Code using <a href="https://www.vim.org/">vim</a> or <a href="https://apps.kde.org/kate/">Kate</a>.</li>
+<li>Sometimes will change the code directly on the board but usually will work
+    in my Git repo.</li>
+<li>If I need an output, I use <a href="https://www.gnu.org/software/screen/">screen</a>
+  (ex. <code>screen /dev/ttyACM0 115200</code>).</li>
+<li>Remember to not keep my board connected to my PC if I want it to go to sleep.</li>
+</ul>
+<p>When I got my board, I had to update it so that I could a) be able to have it
+plug in to my PC and be treated as a USB drive and b) update to the latest
+version of Circuit Python.
+I used AdaFruit's
+<a href="https://adafruit.github.io/Adafruit_WebSerial_ESPTool/">Web Serial</a> though it
+does require Chrome 89 or higher.
+Keep in mind that AdaFruit does have documentation for
+<a href="https://circuitpython.org/board/adafruit_feather_esp32s2/">specific boards</a>.</p>
+<h2>AdaFruit Feather ESP32-S2</h2>
+<p>I mainly got <a href="https://www.adafruit.com/product/5303">this board</a> because it
+have BME280 temperature/humidity/pressure sensor.
+AdaFruit does have <a href="https://www.adafruit.com/product/2652">BME280</a> as a
+separate board using their STEMMA QT connector.
+The nice thing about AdaFruit is that they have great documentation and good
+examples.
+There is an
+<a href="https://learn.adafruit.com/adafruit-bme280-humidity-barometric-pressure-temperature-sensor-breakout">example</a>
+on how to use BME280 sensor.</p>
+<h3>Code Overview</h3>
+<p>Since the BME280 sensor is on the board, I found out that the board will heat
+up enough to affect the readings.
+I put the board asleep and on wake up, get the readings before turning on WiFi.
+After the WiFi is turned on, I try and connect to my server to get the sea
+level pressure.
+Sea level pressure is required if I want to return the altitude.
+Then the board will send temperature, humidity, pressure and altitude to my
+server.
+The board will go to sleep for 5 minutes.</p>
 
 
              
