@@ -4,23 +4,23 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="author" content="pybites" />
+        <meta name="author" content="Christopher" />
 
         <meta property="og:type" content="article" />
         <meta name="twitter:card" content="summary">
 
-<meta name="keywords" content="til, vim, pybites, TIL, " />
+<meta name="keywords" content="til, git, branch, checkout, TIL, " />
 
-<meta property="og:title" content="Vim Tips "/>
-<meta property="og:url" content="/drafts/vim-tips.html" />
-<meta property="og:description" content="Notes from the VIM Workshop from pybites" />
+<meta property="og:title" content="Create Git Branch and Checkout "/>
+<meta property="og:url" content="/create-git-branch-and-checkout.html" />
+<meta property="og:description" content="Create a git branch and checkout at once." />
 <meta property="og:site_name" content="Christopher Tyler R&amp;D Test Engineer" />
-<meta property="og:article:author" content="pybites" />
-<meta property="og:article:published_time" content="2023-08-22T11:00:00-05:00" />
-<meta name="twitter:title" content="Vim Tips ">
-<meta name="twitter:description" content="Notes from the VIM Workshop from pybites">
+<meta property="og:article:author" content="Christopher" />
+<meta property="og:article:published_time" content="2023-08-15T11:00:00-05:00" />
+<meta name="twitter:title" content="Create Git Branch and Checkout ">
+<meta name="twitter:description" content="Create a git branch and checkout at once.">
 
-        <title>Vim Tips  · Christopher Tyler R&amp;D Test Engineer
+        <title>Create Git Branch and Checkout  · Christopher Tyler R&amp;D Test Engineer
 </title>
         <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet">
         <link rel="stylesheet" type="text/css" href="/theme/css/elegant.prod.css" media="screen">
@@ -67,8 +67,8 @@
 <div class="row-fluid">
     <header class="page-header span10 offset2">
         <h1>
-            <a href="/drafts/vim-tips.html">
-                Vim Tips
+            <a href="/create-git-branch-and-checkout.html">
+                Create Git Branch and Checkout
             </a>
         </h1>
     </header>
@@ -77,22 +77,10 @@
 <div class="row-fluid">
         <div class="span8 offset2 article-content">
             
-            <p>From
-https://docs.google.com/presentation/d/1bUNgL3fpKzGIcJeb63a9mSFdo9_rr2WsLUC7xHaA0JI/edit#slide=id.ge12ee3bc9c_0_0</p>
-<h2>Navigation</h2>
-<ul>
-<li><code>gg</code>: go to start of the file</li>
-<li><code>G</code>: go to end of the file</li>
-<li><code>10G</code>: to go to line 10 (you can also <code>vim file.py +11</code>)</li>
-<li><code>10j</code>: to go 10 lines down</li>
-<li><code>ctrl b/f</code>: to scroll entire screen (or <code>d</code> half screen)</li>
-<li><code>ctrl i/o</code>: to jump through last visited places</li>
-<li><code>b/w</code>: to jump over words</li>
-</ul>
-<h2>Built-in Auotcomplete</h2>
-<ul>
-<li><code>ctrl + n</code>: this will show potential answer to complete with.</li>
-</ul>
+            <p>To create a git branch and checkout and go into that branch:</p>
+<div class="highlight"><pre><span></span><code>(main) &gt; git checkout -b new_branch_name
+(new_branch_name) &gt;
+</code></pre></div>
 
 
              
@@ -106,22 +94,61 @@ https://docs.google.com/presentation/d/1bUNgL3fpKzGIcJeb63a9mSFdo9_rr2WsLUC7xHaA
 
 
 
+<section>
+    <h6 style="display:none;">Comments</h6>
+    <p id="comment-message">Leave your comments below. </p>
+
+    <div class="accordion" id="accordion2">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                <a class="accordion-toggle disqus-comment-count comment-count"
+                   data-toggle="collapse"
+                   data-parent="#accordion2"
+                   href="/create-git-branch-and-checkout.html#comment_thread"
+                   id="comment-accordion-toggle">
+                    Comments
+                </a>
+            </div>
+            <div id="comment_thread" class="accordion-body collapse">
+                <div class="accordion-inner">
+                    <div class="comments">
+
+                        <script src="https://utteranc.es/client.js"
+        data-repo="cetyler/cetyler.github.io"
+        data-issue-term="til_git_checkoutb"
+        data-label="Comments"
+        data-theme="github-light"
+        crossorigin="anonymous"
+        async>
+</script>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
             <hr/>
         </div>
         <section id="article-sidebar" class="span2">
             <h4>Published</h4>
-            <time itemprop="dateCreated" datetime="2023-08-22T11:00:00-05:00">Aug 22, 2023</time>
+            <time itemprop="dateCreated" datetime="2023-08-15T11:00:00-05:00">Aug 15, 2023</time>
             <h4>Category</h4>
             <a class="category-link" href="/categories.html#til-ref">TIL</a>
             <h4>Tags</h4>
             <ul class="list-of-tags tags-in-article">
-                <li><a href="/tags.html#pybites-ref">pybites
+                <li><a href="/tags.html#branch-ref">branch
+                    <span>1</span>
+</a></li>
+                <li><a href="/tags.html#checkout-ref">checkout
+                    <span>1</span>
+</a></li>
+                <li><a href="/tags.html#git-ref">git
+                    <span>2</span>
 </a></li>
                 <li><a href="/tags.html#til-ref">til
                     <span>15</span>
-</a></li>
-                <li><a href="/tags.html#vim-ref">vim
-                    <span>3</span>
 </a></li>
             </ul>
 <h4>Contact</h4>
