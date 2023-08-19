@@ -1,4 +1,7 @@
 User-agent: *
 Disallow:
 
+User-agent: GPTBot
+Disallow: /
+
 Sitemap: https://cetyler.github.io/sitemap.xml
