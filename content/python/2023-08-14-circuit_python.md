@@ -5,7 +5,7 @@ Tags: python, circuit python, adafruit, feather board, esp32s2
 Author: Christopher
 Summary: Overview on Circuit Python using AdaFruit's Feather boards.
 comment_id: circuit_python_ambient
-Status: draft
+Status: Published
 
 ## Overview
 
