@@ -16,7 +16,7 @@
 <meta property="og:description" content="Overview on Circuit Python using AdaFruit&#39;s Feather boards." />
 <meta property="og:site_name" content="Christopher Tyler R&amp;D Test Engineer" />
 <meta property="og:article:author" content="Christopher" />
-<meta property="og:article:published_time" content="2023-08-13T15:00:00-05:00" />
+<meta property="og:article:published_time" content="2023-08-20T20:00:00-05:00" />
 <meta name="twitter:title" content="Measure Ambient Conditions with Circuit Python ">
 <meta name="twitter:description" content="Overview on Circuit Python using AdaFruit&#39;s Feather boards.">
 
@@ -160,6 +160,58 @@ Sea level pressure is required if I want to return the altitude.
 Then the board will send temperature, humidity, pressure and altitude to my
 server.
 The board will go to sleep for 5 minutes.</p>
+<p>My server gets the sea level pressure when I poll
+<a href="https://openweathermap.org/api/one-call-3">OpenWeatherMap</a>.
+The server keeps all the data in a <a href="https://postgresql.org/">PostgreSQL</a>
+database.</p>
+<h3>Feather Board</h3>
+<p>The only libraries I needed to get was
+<a href="https://docs.circuitpython.org/projects/bme280/en/latest/index.html">BME280</a>
+and
+<a href="https://docs.circuitpython.org/projects/requests/en/latest/index.html">requests</a>.
+The examples gave me a good start on how to use both libraries.
+The rest of the libraries are part of Circuit Python and I didn't need to
+download anything.
+In <code>secrets.py</code>, I put my WiFi, board name and server info there.</p>
+<p>I found getting multiple readings help ensure that I get an actual reading.
+I don't do any averaging or comparing the readings though.
+In the future, I may do some checks to compare the readings, throw out any
+outliers and take an average.</p>
+<p>I then turn on the WiFi and attempt to connect to make a connection.
+If I am not successful, I sleep for a minute and try everything again.
+If I am successful, I will then attempt to communicate with my server.</p>
+<p>The board will try and get a sea level pressure reading.
+If it fails for some reason, the board will use a default value of 1013.25 kPa.</p>
+<p>I turn on the LED so that I know that my board is attempting to send data.
+The board will try and send the readings to the server.
+If it fails, will sleep for a minute and try everything again.
+If successful, will sleep for 5 minutes.</p>
+<p>As you can see it is a fairly basic program.
+I plan on sharing the source once I do some cleaning up.
+I also have boards with LCD screens but I need to figure out a way to display
+the data when pressing one of the buttons.
+That code will also eventually be shared.</p>
+<h3>Server</h3>
+<p>I will briefly cover this but I use the following third party libraries:</p>
+<ul>
+<li><a href="https://nackjicholson.github.io/aiosql/">aiosql</a></li>
+<li><a href="https://flask.palletsprojects.com/">Flask</a></li>
+<li><a href="https://www.psycopg.org/">pyscopg2</a></li>
+</ul>
+<p>Using aiosql I can turn SQL code into a Python function, keeping my SQL and
+Python code in separate files.
+This is my first project using Flask and right now I am still using the
+development server.
+Before I attempt to share this, I will need to do some major cleaning of the
+code.
+I have some basic checks but it is still very much in an alpha state.
+I basically have a couple of routes.
+<code>board_data</code> is so that I can look at the last board that send data in a basic
+JSON format.
+<code>sea_level_data</code> is so that the boards can get the current sea level data for
+my location.
+In the future, I should support asking for a city instead of having it
+hardcoded.</p>
 
 
              
@@ -177,7 +229,7 @@ The board will go to sleep for 5 minutes.</p>
         </div>
         <section id="article-sidebar" class="span2">
             <h4>Published</h4>
-            <time itemprop="dateCreated" datetime="2023-08-13T15:00:00-05:00">Aug 13, 2023</time>
+            <time itemprop="dateCreated" datetime="2023-08-20T20:00:00-05:00">Aug 20, 2023</time>
             <h4>Category</h4>
             <a class="category-link" href="/categories.html#python-ref">Python</a>
             <h4>Tags</h4>
