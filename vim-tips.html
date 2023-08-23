@@ -4,23 +4,23 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="author" content="Christopher" />
+        <meta name="author" content="pybites" />
 
         <meta property="og:type" content="article" />
         <meta name="twitter:card" content="summary">
 
-<meta name="keywords" content="til, pg_dump, postgresql, TIL, " />
+<meta name="keywords" content="til, vim, pybites, TIL, " />
 
-<meta property="og:title" content="pg_dump Only a Table "/>
-<meta property="og:url" content="/pg_dump-only-a-table.html" />
-<meta property="og:description" content="Only save a table to help transfer to another database." />
+<meta property="og:title" content="Vim Tips "/>
+<meta property="og:url" content="/vim-tips.html" />
+<meta property="og:description" content="Notes from the VIM Workshop from pybites" />
 <meta property="og:site_name" content="Christopher Tyler R&amp;D Test Engineer" />
-<meta property="og:article:author" content="Christopher" />
-<meta property="og:article:published_time" content="2023-08-08T11:00:00-05:00" />
-<meta name="twitter:title" content="pg_dump Only a Table ">
-<meta name="twitter:description" content="Only save a table to help transfer to another database.">
+<meta property="og:article:author" content="pybites" />
+<meta property="og:article:published_time" content="2023-08-22T11:00:00-05:00" />
+<meta name="twitter:title" content="Vim Tips ">
+<meta name="twitter:description" content="Notes from the VIM Workshop from pybites">
 
-        <title>pg_dump Only a Table  · Christopher Tyler R&amp;D Test Engineer
+        <title>Vim Tips  · Christopher Tyler R&amp;D Test Engineer
 </title>
         <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet">
         <link rel="stylesheet" type="text/css" href="/theme/css/elegant.prod.css" media="screen">
@@ -67,8 +67,8 @@
 <div class="row-fluid">
     <header class="page-header span10 offset2">
         <h1>
-            <a href="/pg_dump-only-a-table.html">
-                pg_dump Only a Table
+            <a href="/vim-tips.html">
+                Vim Tips
             </a>
         </h1>
     </header>
@@ -77,14 +77,22 @@
 <div class="row-fluid">
         <div class="span8 offset2 article-content">
             
-            <p>This can be use get the data transferred from on DB to another just for that
-table.</p>
-<div class="highlight"><pre><span></span><code>❯ .\pg_dump.exe --format=c --clean --username=postgres --dbname=raw_test_data --table=&#39;&quot;raw&quot;.&quot;test_results&quot;&#39; --file=&#39;C:\Users\ctyler\OneDrive - DMI\temp_30\test_results_20230504-1.sql&#39;
-❯ .\pg_dump.exe --format=c --clean --username=postgres --dbname=raw_test_data --table=&#39;&quot;raw&quot;.&quot;step_results&quot;&#39; --file=&#39;C:\Users\ctyler\OneDrive - DMI\temp_30\step_results_20230504-1.sql&#39;
-</code></pre></div>
-
-<p>This example will copy <code>test_results</code> and <code>step_results</code> in the
-schema <code>raw</code>.</p>
+            <p>From
+https://docs.google.com/presentation/d/1bUNgL3fpKzGIcJeb63a9mSFdo9_rr2WsLUC7xHaA0JI/edit#slide=id.ge12ee3bc9c_0_0</p>
+<h2>Navigation</h2>
+<ul>
+<li><code>gg</code>: go to start of the file</li>
+<li><code>G</code>: go to end of the file</li>
+<li><code>10G</code>: to go to line 10 (you can also <code>vim file.py +11</code>)</li>
+<li><code>10j</code>: to go 10 lines down</li>
+<li><code>ctrl b/f</code>: to scroll entire screen (or <code>d</code> half screen)</li>
+<li><code>ctrl i/o</code>: to jump through last visited places</li>
+<li><code>b/w</code>: to jump over words</li>
+</ul>
+<h2>Built-in Auotcomplete</h2>
+<ul>
+<li><code>ctrl + n</code>: this will show potential answer to complete with.</li>
+</ul>
 
 
              
@@ -108,7 +116,7 @@ schema <code>raw</code>.</p>
                 <a class="accordion-toggle disqus-comment-count comment-count"
                    data-toggle="collapse"
                    data-parent="#accordion2"
-                   href="/pg_dump-only-a-table.html#comment_thread"
+                   href="/vim-tips.html#comment_thread"
                    id="comment-accordion-toggle">
                     Comments
                 </a>
@@ -119,7 +127,7 @@ schema <code>raw</code>.</p>
 
                         <script src="https://utteranc.es/client.js"
         data-repo="cetyler/cetyler.github.io"
-        data-issue-term="til_pg_dump_table"
+        data-issue-term="/vim-tips.html"
         data-label="Comments"
         data-theme="github-light"
         crossorigin="anonymous"
@@ -137,19 +145,19 @@ schema <code>raw</code>.</p>
         </div>
         <section id="article-sidebar" class="span2">
             <h4>Published</h4>
-            <time itemprop="dateCreated" datetime="2023-08-08T11:00:00-05:00">Aug 8, 2023</time>
+            <time itemprop="dateCreated" datetime="2023-08-22T11:00:00-05:00">Aug 22, 2023</time>
             <h4>Category</h4>
             <a class="category-link" href="/categories.html#til-ref">TIL</a>
             <h4>Tags</h4>
             <ul class="list-of-tags tags-in-article">
-                <li><a href="/tags.html#pg_dump-ref">pg_dump
+                <li><a href="/tags.html#pybites-ref">pybites
                     <span>1</span>
-</a></li>
-                <li><a href="/tags.html#postgresql-ref">postgresql
-                    <span>8</span>
 </a></li>
                 <li><a href="/tags.html#til-ref">til
                     <span>16</span>
+</a></li>
+                <li><a href="/tags.html#vim-ref">vim
+                    <span>4</span>
 </a></li>
             </ul>
 <h4>Contact</h4>
