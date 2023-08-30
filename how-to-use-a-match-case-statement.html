@@ -4,23 +4,23 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="author" content="Christopher" />
+        <meta name="author" content="Luke Hande" />
 
         <meta property="og:type" content="article" />
         <meta name="twitter:card" content="summary">
 
-<meta name="keywords" content="til, pg_dump, postgresql, TIL, " />
+<meta name="keywords" content="til, python 3.10, match case, TIL, " />
 
-<meta property="og:title" content="pg_dump Only a Table "/>
-<meta property="og:url" content="/pg_dump-only-a-table.html" />
-<meta property="og:description" content="Only save a table to help transfer to another database." />
+<meta property="og:title" content="How to Use a match case Statement "/>
+<meta property="og:url" content="/how-to-use-a-match-case-statement.html" />
+<meta property="og:description" content="Some examples of how to use match case statement in Python." />
 <meta property="og:site_name" content="Christopher Tyler R&amp;D Test Engineer" />
-<meta property="og:article:author" content="Christopher" />
-<meta property="og:article:published_time" content="2023-08-08T11:00:00-05:00" />
-<meta name="twitter:title" content="pg_dump Only a Table ">
-<meta name="twitter:description" content="Only save a table to help transfer to another database.">
+<meta property="og:article:author" content="Luke Hande" />
+<meta property="og:article:published_time" content="2023-08-29T11:00:00-05:00" />
+<meta name="twitter:title" content="How to Use a match case Statement ">
+<meta name="twitter:description" content="Some examples of how to use match case statement in Python.">
 
-        <title>pg_dump Only a Table  · Christopher Tyler R&amp;D Test Engineer
+        <title>How to Use a match case Statement  · Christopher Tyler R&amp;D Test Engineer
 </title>
         <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet">
         <link rel="stylesheet" type="text/css" href="/theme/css/elegant.prod.css" media="screen">
@@ -67,8 +67,8 @@
 <div class="row-fluid">
     <header class="page-header span10 offset2">
         <h1>
-            <a href="/pg_dump-only-a-table.html">
-                pg_dump Only a Table
+            <a href="/how-to-use-a-match-case-statement.html">
+                How to Use a match case Statement
             </a>
         </h1>
     </header>
@@ -77,14 +77,42 @@
 <div class="row-fluid">
         <div class="span8 offset2 article-content">
             
-            <p>This can be use get the data transferred from on DB to another just for that
-table.</p>
-<div class="highlight"><pre><span></span><code>❯ .\pg_dump.exe --format=c --clean --username=postgres --dbname=raw_test_data --table=&#39;&quot;raw&quot;.&quot;test_results&quot;&#39; --file=&#39;C:\Users\ctyler\OneDrive - DMI\temp_30\test_results_20230504-1.sql&#39;
-❯ .\pg_dump.exe --format=c --clean --username=postgres --dbname=raw_test_data --table=&#39;&quot;raw&quot;.&quot;step_results&quot;&#39; --file=&#39;C:\Users\ctyler\OneDrive - DMI\temp_30\step_results_20230504-1.sql&#39;
+            <p>From Luke at https://learnpython.com/blog/python-match-case-statement/</p>
+<p><strong>Note</strong> that this will only work with Python 3.10 and above.</p>
+<h2>The <em>match case</em> Statement in Python</h2>
+<p>A basic implementation of <code>match case</code> statements looks like an <code>if</code> statement
+in Python.</p>
+<div class="highlight"><pre><span></span><code>&gt;&gt;&gt; command = &#39;Hello, World!&#39;
+&gt;&gt;&gt; match command:
+...     case &#39;Hello, World!&#39;:
+...         print(&#39;Hello to you too!&#39;)
+...     case &#39;Goodbye, World!&#39;:
+...         print(&#39;See you later&#39;)
+...     case other:
+...         print(&#39;No match found&#39;)
+
+Hello to you too!
 </code></pre></div>
 
-<p>This example will copy <code>test_results</code> and <code>step_results</code> in the
-schema <code>raw</code>.</p>
+<p>It can simplify the flow control statements and make them a little bit more
+readable.</p>
+<div class="highlight"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="nv">def</span> <span class="nv">file_handler_v2</span><span class="ss">(</span><span class="nv">command</span><span class="ss">)</span>:
+...     <span class="nv">match</span> <span class="nv">command</span>.<span class="nv">split</span><span class="ss">()</span>:
+...         <span class="nv">case</span> [<span class="s1">&#39;</span><span class="s">show</span><span class="s1">&#39;</span>]:
+...             <span class="nv">print</span><span class="ss">(</span><span class="s1">&#39;</span><span class="s">List all files and directories: </span><span class="s1">&#39;</span><span class="ss">)</span>
+...             # <span class="nv">code</span> <span class="nv">to</span> <span class="nv">list</span> <span class="nv">files</span>
+...         <span class="nv">case</span> [<span class="s1">&#39;</span><span class="s">remove</span><span class="s1">&#39;</span> <span class="o">|</span> <span class="s1">&#39;</span><span class="s">delete</span><span class="s1">&#39;</span>, <span class="o">*</span><span class="nv">files</span>] <span class="k">if</span> <span class="s1">&#39;</span><span class="s">--ask</span><span class="s1">&#39;</span> <span class="nv">in</span> <span class="nv">files</span>:
+...             <span class="nv">del_files</span> <span class="o">=</span> [<span class="nv">f</span> <span class="k">for</span> <span class="nv">f</span> <span class="nv">in</span> <span class="nv">files</span> <span class="k">if</span> <span class="nv">len</span><span class="ss">(</span><span class="nv">f</span>.<span class="nv">split</span><span class="ss">(</span><span class="s1">&#39;</span><span class="s">.</span><span class="s1">&#39;</span><span class="ss">))</span><span class="o">&gt;</span><span class="mi">1</span>]
+...             <span class="nv">print</span><span class="ss">(</span><span class="s1">&#39;</span><span class="s">Please confirm: Removing files: {}</span><span class="s1">&#39;</span>.<span class="nv">format</span><span class="ss">(</span><span class="nv">del_files</span><span class="ss">))</span>
+...             # <span class="nv">code</span> <span class="nv">to</span> <span class="nv">accept</span> <span class="nv">user</span> <span class="nv">input</span>, <span class="k">then</span> <span class="nv">remove</span> <span class="nv">files</span>
+...         <span class="nv">case</span> [<span class="s1">&#39;</span><span class="s">remove</span><span class="s1">&#39;</span> <span class="o">|</span> <span class="s1">&#39;</span><span class="s">delete</span><span class="s1">&#39;</span>, <span class="o">*</span><span class="nv">files</span>]:
+...             <span class="nv">print</span><span class="ss">(</span><span class="s1">&#39;</span><span class="s">Removing files: {}</span><span class="s1">&#39;</span>.<span class="nv">format</span><span class="ss">(</span><span class="nv">files</span><span class="ss">))</span>
+...             # <span class="nv">code</span> <span class="nv">to</span> <span class="nv">remove</span> <span class="nv">files</span>
+...         <span class="nv">case</span> <span class="nv">_</span>:
+...             <span class="nv">print</span><span class="ss">(</span><span class="s1">&#39;</span><span class="s">Command not recognized</span><span class="s1">&#39;</span><span class="ss">)</span>
+</code></pre></div>
+
+<p>This is easier than a <code>if-elif-else</code> or using something like a <code>dict()</code>.</p>
 
 
              
@@ -108,7 +136,7 @@ schema <code>raw</code>.</p>
                 <a class="accordion-toggle disqus-comment-count comment-count"
                    data-toggle="collapse"
                    data-parent="#accordion2"
-                   href="/pg_dump-only-a-table.html#comment_thread"
+                   href="/how-to-use-a-match-case-statement.html#comment_thread"
                    id="comment-accordion-toggle">
                     Comments
                 </a>
@@ -119,7 +147,7 @@ schema <code>raw</code>.</p>
 
                         <script src="https://utteranc.es/client.js"
         data-repo="cetyler/cetyler.github.io"
-        data-issue-term="til_pg_dump_table"
+        data-issue-term="til_match_case"
         data-label="Comments"
         data-theme="github-light"
         crossorigin="anonymous"
@@ -137,16 +165,16 @@ schema <code>raw</code>.</p>
         </div>
         <section id="article-sidebar" class="span2">
             <h4>Published</h4>
-            <time itemprop="dateCreated" datetime="2023-08-08T11:00:00-05:00">Aug 8, 2023</time>
+            <time itemprop="dateCreated" datetime="2023-08-29T11:00:00-05:00">Aug 29, 2023</time>
             <h4>Category</h4>
             <a class="category-link" href="/categories.html#til-ref">TIL</a>
             <h4>Tags</h4>
             <ul class="list-of-tags tags-in-article">
-                <li><a href="/tags.html#pg_dump-ref">pg_dump
+                <li><a href="/tags.html#match-case-ref">match case
                     <span>1</span>
 </a></li>
-                <li><a href="/tags.html#postgresql-ref">postgresql
-                    <span>8</span>
+                <li><a href="/tags.html#python-310-ref">python 3.10
+                    <span>1</span>
 </a></li>
                 <li><a href="/tags.html#til-ref">til
                     <span>17</span>
