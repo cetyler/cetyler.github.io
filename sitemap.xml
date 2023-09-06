@@ -5,56 +5,56 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>/search.html</loc>
-<lastmod>2023-09-05T04:11:01-00:00</lastmod>
+<lastmod>2023-09-06T04:11:02-00:00</lastmod>
 <changefreq>hourly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>/</loc>
-<lastmod>2023-09-05T04:11:01-00:00</lastmod>
+<lastmod>2023-09-06T04:11:02-00:00</lastmod>
 <changefreq>hourly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>/archives.html</loc>
-<lastmod>2023-09-05T04:11:01-00:00</lastmod>
+<lastmod>2023-09-06T04:11:02-00:00</lastmod>
 <changefreq>hourly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>/authors.html</loc>
-<lastmod>2023-09-05T04:11:01-00:00</lastmod>
+<lastmod>2023-09-06T04:11:02-00:00</lastmod>
 <changefreq>hourly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>/tags.html</loc>
-<lastmod>2023-09-05T04:11:01-00:00</lastmod>
+<lastmod>2023-09-06T04:11:02-00:00</lastmod>
 <changefreq>hourly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>/categories.html</loc>
-<lastmod>2023-09-05T04:11:01-00:00</lastmod>
+<lastmod>2023-09-06T04:11:02-00:00</lastmod>
 <changefreq>hourly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>/404.html</loc>
-<lastmod>2023-09-05T04:11:01-00:00</lastmod>
+<lastmod>2023-09-06T04:11:02-00:00</lastmod>
 <changefreq>hourly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>/pages/about-me.html</loc>
-<lastmod>2023-09-05T04:11:01-00:00</lastmod>
+<lastmod>2023-09-06T04:11:02-00:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
@@ -68,9 +68,16 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>/pages/my-resume.html</loc>
-<lastmod>2023-09-05T04:11:01-00:00</lastmod>
+<lastmod>2023-09-06T04:11:02-00:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
+</url>
+
+<url>
+<loc>/delete-files-older-than-x-days-on-linux.html</loc>
+<lastmod>2023-09-05T11:00:00-05:00</lastmod>
+<changefreq>always</changefreq>
+<priority>1</priority>
 </url>
 
 <url>
@@ -439,7 +446,7 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>/category/til.html</loc>
-<lastmod>2023-08-29T11:00:00-05:51</lastmod>
+<lastmod>2023-09-05T11:00:00-05:51</lastmod>
 <changefreq>hourly</changefreq>
 <priority>0.5</priority>
 </url>
@@ -453,7 +460,35 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>/tag/til.html</loc>
-<lastmod>2023-08-29T11:00:00-05:51</lastmod>
+<lastmod>2023-09-05T11:00:00-05:51</lastmod>
+<changefreq>hourly</changefreq>
+<priority>0.5</priority>
+</url>
+
+<url>
+<loc>/tag/linux.html</loc>
+<lastmod>2023-09-05T11:00:00-05:51</lastmod>
+<changefreq>hourly</changefreq>
+<priority>0.5</priority>
+</url>
+
+<url>
+<loc>/tag/find.html</loc>
+<lastmod>2023-09-05T11:00:00-05:51</lastmod>
+<changefreq>hourly</changefreq>
+<priority>0.5</priority>
+</url>
+
+<url>
+<loc>/tag/rm.html</loc>
+<lastmod>2023-09-05T11:00:00-05:51</lastmod>
+<changefreq>hourly</changefreq>
+<priority>0.5</priority>
+</url>
+
+<url>
+<loc>/tag/mtime.html</loc>
+<lastmod>2023-09-05T11:00:00-05:51</lastmod>
 <changefreq>hourly</changefreq>
 <priority>0.5</priority>
 </url>
@@ -748,13 +783,6 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
 <loc>/tag/the-art-of-postgresql.html</loc>
 <lastmod>2023-03-31T00:00:00-05:51</lastmod>
-<changefreq>hourly</changefreq>
-<priority>0.5</priority>
-</url>
-
-<url>
-<loc>/tag/find.html</loc>
-<lastmod>2023-03-24T00:00:00-05:51</lastmod>
 <changefreq>hourly</changefreq>
 <priority>0.5</priority>
 </url>
@@ -1084,6 +1112,13 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
 <loc>/author/christopher-tyler.html</loc>
 <lastmod>2023-08-03T11:00:00-05:51</lastmod>
+<changefreq>hourly</changefreq>
+<priority>0.5</priority>
+</url>
+
+<url>
+<loc>/author/lowell-heddings.html</loc>
+<lastmod>2023-09-05T11:00:00-05:51</lastmod>
 <changefreq>hourly</changefreq>
 <priority>0.5</priority>
 </url>

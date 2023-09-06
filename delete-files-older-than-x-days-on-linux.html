@@ -4,23 +4,23 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="author" content="Christopher" />
+        <meta name="author" content="Lowell Heddings" />
 
         <meta property="og:type" content="article" />
         <meta name="twitter:card" content="summary">
 
-<meta name="keywords" content="til, vim, find, replace, substitute, TIL, " />
+<meta name="keywords" content="til, linux, find, rm, mtime, TIL, " />
 
-<meta property="og:title" content="Find and Replace in Vim "/>
-<meta property="og:url" content="/find-and-replace-in-vim.html" />
-<meta property="og:description" content="Different ways to find and replace items using vim." />
+<meta property="og:title" content="Delete Files Older Than x Days on Linux "/>
+<meta property="og:url" content="/delete-files-older-than-x-days-on-linux.html" />
+<meta property="og:description" content="Quickly delete files older than a certain number of days." />
 <meta property="og:site_name" content="Christopher Tyler R&amp;D Test Engineer" />
-<meta property="og:article:author" content="Christopher" />
-<meta property="og:article:published_time" content="2023-03-24T00:00:00-05:00" />
-<meta name="twitter:title" content="Find and Replace in Vim ">
-<meta name="twitter:description" content="Different ways to find and replace items using vim.">
+<meta property="og:article:author" content="Lowell Heddings" />
+<meta property="og:article:published_time" content="2023-09-05T11:00:00-05:00" />
+<meta name="twitter:title" content="Delete Files Older Than x Days on Linux ">
+<meta name="twitter:description" content="Quickly delete files older than a certain number of days.">
 
-        <title>Find and Replace in Vim  · Christopher Tyler R&amp;D Test Engineer
+        <title>Delete Files Older Than x Days on Linux  · Christopher Tyler R&amp;D Test Engineer
 </title>
         <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet">
         <link rel="stylesheet" type="text/css" href="/theme/css/elegant.prod.css" media="screen">
@@ -67,8 +67,8 @@
 <div class="row-fluid">
     <header class="page-header span10 offset2">
         <h1>
-            <a href="/find-and-replace-in-vim.html">
-                Find and Replace in Vim
+            <a href="/delete-files-older-than-x-days-on-linux.html">
+                Delete Files Older Than x Days on Linux
             </a>
         </h1>
     </header>
@@ -77,75 +77,26 @@
 <div class="row-fluid">
         <div class="span8 offset2 article-content">
             
-            <p>From https://linuxize.com/post/vim-find-replace/</p>
-<h2>Basic Find and Replace</h2>
-<p>In Vim you use <code>:substitute</code> (<code>:s</code>) command.</p>
-<div class="highlight"><pre><span></span><code><span class="err">:</span><span class="o">[</span><span class="n">range</span><span class="o">]</span><span class="n">s</span><span class="o">/</span><span class="err">{</span><span class="n">pattern</span><span class="err">}</span><span class="o">/</span><span class="err">{</span><span class="n">string</span><span class="err">}</span><span class="o">/[</span><span class="n">flags</span><span class="o">]</span><span class="w"> </span><span class="o">[</span><span class="n">count</span><span class="o">]</span><span class="w"></span>
+            <p>From Lowell at 
+https://www.howtogeek.com/288/delete-files-older-than-x-days-on-linux/</p>
+<p>The find utility on Linux allows you to pass in a bunch of interesting
+arguments, including one to execute another command on each file.
+We’ll use this in order to figure out what files are older than a certain
+number of days, and then use the rm command to delete them.</p>
+<p>Command Syntax</p>
+<div class="highlight"><pre><span></span><code><span class="nv">find</span> <span class="o">/</span><span class="nv">path</span><span class="o">/</span><span class="nv">to</span><span class="o">/</span><span class="nv">files</span><span class="o">*</span> <span class="o">-</span><span class="nv">mtime</span> <span class="o">+</span><span class="mi">5</span> <span class="o">-</span><span class="k">exec</span> <span class="nv">rm</span> {} \<span class="c1">;</span>
 </code></pre></div>
 
-<p>If no <code>[range]</code> and <code>[count]</code> are given, only the pattern found in the current
-line is replace.</p>
-<p>If you want to replace all occurrences of foo with bar:</p>
-<div class="highlight"><pre><span></span><code>:%s/foo/bar/g
-</code></pre></div>
-
-<p>The <code>%</code> is for the entire file and <code>g</code> would be all occurrences.
-The <code>/</code> can be replaced with any non-alphanumeric single-byte character as a
-delimiter.
-This is useful if you are replacing <code>/</code>.</p>
-<h2>Case Sensitivity</h2>
-<p>By default the search is case sensitive so include <code>i</code> to make it ignore the
-case.</p>
-<div class="highlight"><pre><span></span><code>:s/Foo/bar/gi
-</code></pre></div>
-
-<h2>Search Range</h2>
-<p>To search for certain line ranges, include the line numbers:</p>
-<div class="highlight"><pre><span></span><code>:3,10s/foo/bar/g
-</code></pre></div>
-
-<p>This will be for lines 3 to 10 (this is inclusive).</p>
-<p>To make changes from the current line to the end of the file using <code>.</code> and <code>$</code>.</p>
-<div class="highlight"><pre><span></span><code>:.,$/foo/bar/
-</code></pre></div>
-
-<p>Finally you can use <code>+</code> and <code>-</code> to denote the number of rows above or below a
-certain linIf no <code>[range]</code> and <code>[count]</code> are given, only the pattern found in
-the current line is replace.</p>
-<p>If you want to replace all occurrences of foo with bar:</p>
-<div class="highlight"><pre><span></span><code>:%s/foo/bar/g
-</code></pre></div>
-
-<p>The <code>%</code> is for the entire file and <code>g</code> would be all occurrences.
-The <code>/</code> can be replaced with any non-alphanumeric single-byte character as a
-delimiter.
-This is useful if you are replacing <code>/</code>.</p>
-<h2>Case Sensitivity</h2>
-<p>By default the search is case sensitive so include <code>i</code> to make it ignore the
-case.</p>
-<div class="highlight"><pre><span></span><code>:s/Foo/bar/gi
-</code></pre></div>
-
-<h2>Search Range</h2>
-<p>To search for certain line ranges, include the line numbers:</p>
-<div class="highlight"><pre><span></span><code>:3,10s/foo/bar/g
-</code></pre></div>
-
-<p>This will be for lines 3 to 10 (this is inclusive).</p>
-<p>To make changes from the current line to the end of the file using <code>.</code> and <code>$</code>.</p>
-<div class="highlight"><pre><span></span><code>:.,$/foo/bar/
-</code></pre></div>
-
-<p>Finally you can use <code>+</code> and <code>-</code> to denote the number of rows above or below a
-certain line.</p>
-<div class="highlight"><pre><span></span><code>:.,+4s/foo/bar/g
-</code></pre></div>
-
-<h2>Substituting Whole Word</h2>
-<p>To only replace the whole word and not portions, type <code>\&lt;</code> to mark the
-beginning of a word and <code>\&gt;</code> to mark the end of a word.</p>
-<div class="highlight"><pre><span></span><code>:s/\&lt;foo\&gt;/bar/
-</code></pre></div>
+<p>Note that there are spaces between <code>rm</code>, <code>{}</code>, and <code>\;</code>.</p>
+<h2>Explanation</h2>
+<p>The first argument is the path to the files.
+This can be a path, a directory, or a wildcard as in the example above.
+I would recommend using the full path, and make sure that you run the command
+without the exec rm to make sure you are getting the right results.</p>
+<p>The second argument, <code>-mtime</code>, is used to specify the number of days old that
+the file is. If you enter +5, it will find files older than 5 days.</p>
+<p>The third argument, <code>-exec</code>, allows you to pass in a command such as <code>rm</code>.
+The <code>{} \;</code> at the end is required to end the command.</p>
 
 
              
@@ -169,7 +120,7 @@ beginning of a word and <code>\&gt;</code> to mark the end of a word.</p>
                 <a class="accordion-toggle disqus-comment-count comment-count"
                    data-toggle="collapse"
                    data-parent="#accordion2"
-                   href="/find-and-replace-in-vim.html#comment_thread"
+                   href="/delete-files-older-than-x-days-on-linux.html#comment_thread"
                    id="comment-accordion-toggle">
                     Comments
                 </a>
@@ -180,7 +131,7 @@ beginning of a word and <code>\&gt;</code> to mark the end of a word.</p>
 
                         <script src="https://utteranc.es/client.js"
         data-repo="cetyler/cetyler.github.io"
-        data-issue-term="til_20230324_find_replace_vim"
+        data-issue-term="til_delete_files"
         data-label="Comments"
         data-theme="github-light"
         crossorigin="anonymous"
@@ -198,7 +149,7 @@ beginning of a word and <code>\&gt;</code> to mark the end of a word.</p>
         </div>
         <section id="article-sidebar" class="span2">
             <h4>Published</h4>
-            <time itemprop="dateCreated" datetime="2023-03-24T00:00:00-05:00">Mar 24, 2023</time>
+            <time itemprop="dateCreated" datetime="2023-09-05T11:00:00-05:00">Sep 5, 2023</time>
             <h4>Category</h4>
             <a class="category-link" href="/categories.html#til-ref">TIL</a>
             <h4>Tags</h4>
@@ -206,17 +157,17 @@ beginning of a word and <code>\&gt;</code> to mark the end of a word.</p>
                 <li><a href="/tags.html#find-ref">find
                     <span>2</span>
 </a></li>
-                <li><a href="/tags.html#replace-ref">replace
+                <li><a href="/tags.html#linux-ref">linux
                     <span>1</span>
 </a></li>
-                <li><a href="/tags.html#substitute-ref">substitute
+                <li><a href="/tags.html#mtime-ref">mtime
+                    <span>1</span>
+</a></li>
+                <li><a href="/tags.html#rm-ref">rm
                     <span>1</span>
 </a></li>
                 <li><a href="/tags.html#til-ref">til
                     <span>18</span>
-</a></li>
-                <li><a href="/tags.html#vim-ref">vim
-                    <span>4</span>
 </a></li>
             </ul>
 <h4>Contact</h4>
