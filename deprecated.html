@@ -9,18 +9,18 @@
         <meta property="og:type" content="article" />
         <meta name="twitter:card" content="summary">
 
-<meta name="keywords" content="til, timeout, statement_timeout, postgresql, idle_in_transaction, TIL, " />
+<meta name="keywords" content="til, python, deprecated, TIL, " />
 
-<meta property="og:title" content="Set Statement Timeout "/>
-<meta property="og:url" content="/set-statement-timeout.html" />
-<meta property="og:description" content="Set a timeout in case you want to terminate a long running query." />
+<meta property="og:title" content="Deprecated "/>
+<meta property="og:url" content="/deprecated.html" />
+<meta property="og:description" content="I neat way to deprecate parts of a Python program." />
 <meta property="og:site_name" content="Christopher Tyler R&amp;D Test Engineer" />
 <meta property="og:article:author" content="Christopher" />
-<meta property="og:article:published_time" content="2023-08-01T22:55:00-05:00" />
-<meta name="twitter:title" content="Set Statement Timeout ">
-<meta name="twitter:description" content="Set a timeout in case you want to terminate a long running query.">
+<meta property="og:article:published_time" content="2023-09-19T11:00:00-05:00" />
+<meta name="twitter:title" content="Deprecated ">
+<meta name="twitter:description" content="I neat way to deprecate parts of a Python program.">
 
-        <title>Set Statement Timeout  · Christopher Tyler R&amp;D Test Engineer
+        <title>Deprecated  · Christopher Tyler R&amp;D Test Engineer
 </title>
         <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet">
         <link rel="stylesheet" type="text/css" href="/theme/css/elegant.prod.css" media="screen">
@@ -67,8 +67,8 @@
 <div class="row-fluid">
     <header class="page-header span10 offset2">
         <h1>
-            <a href="/set-statement-timeout.html">
-                Set Statement Timeout
+            <a href="/deprecated.html">
+                Deprecated
             </a>
         </h1>
     </header>
@@ -77,15 +77,21 @@
 <div class="row-fluid">
         <div class="span8 offset2 article-content">
             
-            <p>I don't recall where I saw this, but in PostgreSQL, you can set a statement
-timeout to potentially prevent problems with a long running query running.</p>
-<div class="highlight"><pre><span></span><code>$ alter database mydatabase <span class="nb">set</span> <span class="nv">statement_timeout</span> <span class="o">=</span> <span class="s1">&#39;60s&#39;</span><span class="p">;</span>
-</code></pre></div>
+            <p>Look at https://deprecated.readthedocs.io to use to deprecate parts of a
+program.
+I think this will be useful for libraries.</p>
+<p>For example:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">deprecated</span> <span class="kn">import</span> <span class="n">deprecated</span>
 
-<p>Another thing you may want to set is <code>idle_in_transaction</code> timeout as well
-which will cancel long running transaction that are no longer performing work.</p>
-<p>There is more information in PostgreSQL
-<a href="https://www.postgresql.org/docs/current/config-setting.html">documentation</a>.</p>
+<span class="nd">@deprecated</span><span class="p">(</span><span class="n">version</span><span class="o">=</span><span class="s1">&#39;1.2.0&#39;</span><span class="p">,</span> <span class="n">reason</span><span class="o">=</span><span class="s2">&quot;You should use another function&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">some_old_function</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span>
+
+<span class="k">class</span> <span class="nc">someClass</span><span class="p">:</span>
+    <span class="nd">@deprecated</span><span class="p">(</span><span class="n">version</span><span class="o">=</span><span class="s1">&#39;1.3.0&#39;</span><span class="p">,</span> <span class="n">reason</span><span class="o">=</span><span class="s2">&quot;This method is deprecated&quot;</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">some_old_method</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span>
+</code></pre></div>
 
 
              
@@ -109,7 +115,7 @@ which will cancel long running transaction that are no longer performing work.</
                 <a class="accordion-toggle disqus-comment-count comment-count"
                    data-toggle="collapse"
                    data-parent="#accordion2"
-                   href="/set-statement-timeout.html#comment_thread"
+                   href="/deprecated.html#comment_thread"
                    id="comment-accordion-toggle">
                     Comments
                 </a>
@@ -120,7 +126,7 @@ which will cancel long running transaction that are no longer performing work.</
 
                         <script src="https://utteranc.es/client.js"
         data-repo="cetyler/cetyler.github.io"
-        data-issue-term="til_statement_timeout"
+        data-issue-term="til_deprecated"
         data-label="Comments"
         data-theme="github-light"
         crossorigin="anonymous"
@@ -138,25 +144,19 @@ which will cancel long running transaction that are no longer performing work.</
         </div>
         <section id="article-sidebar" class="span2">
             <h4>Published</h4>
-            <time itemprop="dateCreated" datetime="2023-08-01T22:55:00-05:00">Aug 1, 2023</time>
+            <time itemprop="dateCreated" datetime="2023-09-19T11:00:00-05:00">Sep 19, 2023</time>
             <h4>Category</h4>
             <a class="category-link" href="/categories.html#til-ref">TIL</a>
             <h4>Tags</h4>
             <ul class="list-of-tags tags-in-article">
-                <li><a href="/tags.html#idle_in_transaction-ref">idle_in_transaction
+                <li><a href="/tags.html#deprecated-ref">deprecated
                     <span>1</span>
 </a></li>
-                <li><a href="/tags.html#postgresql-ref">postgresql
-                    <span>8</span>
-</a></li>
-                <li><a href="/tags.html#statement_timeout-ref">statement_timeout
-                    <span>1</span>
+                <li><a href="/tags.html#python-ref">python
+                    <span>24</span>
 </a></li>
                 <li><a href="/tags.html#til-ref">til
                     <span>21</span>
-</a></li>
-                <li><a href="/tags.html#timeout-ref">timeout
-                    <span>1</span>
 </a></li>
             </ul>
 <h4>Contact</h4>

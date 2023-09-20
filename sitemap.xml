@@ -5,56 +5,56 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>/search.html</loc>
-<lastmod>2023-09-19T04:11:02-00:00</lastmod>
+<lastmod>2023-09-20T04:11:01-00:00</lastmod>
 <changefreq>hourly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>/</loc>
-<lastmod>2023-09-19T04:11:02-00:00</lastmod>
+<lastmod>2023-09-20T04:11:01-00:00</lastmod>
 <changefreq>hourly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>/archives.html</loc>
-<lastmod>2023-09-19T04:11:02-00:00</lastmod>
+<lastmod>2023-09-20T04:11:01-00:00</lastmod>
 <changefreq>hourly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>/authors.html</loc>
-<lastmod>2023-09-19T04:11:02-00:00</lastmod>
+<lastmod>2023-09-20T04:11:01-00:00</lastmod>
 <changefreq>hourly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>/tags.html</loc>
-<lastmod>2023-09-19T04:11:02-00:00</lastmod>
+<lastmod>2023-09-20T04:11:01-00:00</lastmod>
 <changefreq>hourly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>/categories.html</loc>
-<lastmod>2023-09-19T04:11:02-00:00</lastmod>
+<lastmod>2023-09-20T04:11:01-00:00</lastmod>
 <changefreq>hourly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>/404.html</loc>
-<lastmod>2023-09-19T04:11:02-00:00</lastmod>
+<lastmod>2023-09-20T04:11:01-00:00</lastmod>
 <changefreq>hourly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>/pages/about-me.html</loc>
-<lastmod>2023-09-19T04:11:02-00:00</lastmod>
+<lastmod>2023-09-20T04:11:01-00:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
@@ -68,9 +68,16 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>/pages/my-resume.html</loc>
-<lastmod>2023-09-19T04:11:02-00:00</lastmod>
+<lastmod>2023-09-20T04:11:01-00:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
+</url>
+
+<url>
+<loc>/deprecated.html</loc>
+<lastmod>2023-09-19T11:00:00-05:00</lastmod>
+<changefreq>always</changefreq>
+<priority>1</priority>
 </url>
 
 <url>
@@ -460,7 +467,7 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>/category/til.html</loc>
-<lastmod>2023-09-12T11:00:00-05:51</lastmod>
+<lastmod>2023-09-19T11:00:00-05:51</lastmod>
 <changefreq>hourly</changefreq>
 <priority>0.5</priority>
 </url>
@@ -474,7 +481,21 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>/tag/til.html</loc>
-<lastmod>2023-09-12T11:00:00-05:51</lastmod>
+<lastmod>2023-09-19T11:00:00-05:51</lastmod>
+<changefreq>hourly</changefreq>
+<priority>0.5</priority>
+</url>
+
+<url>
+<loc>/tag/python.html</loc>
+<lastmod>2023-09-19T11:00:00-05:51</lastmod>
+<changefreq>hourly</changefreq>
+<priority>0.5</priority>
+</url>
+
+<url>
+<loc>/tag/deprecated.html</loc>
+<lastmod>2023-09-19T11:00:00-05:51</lastmod>
 <changefreq>hourly</changefreq>
 <priority>0.5</priority>
 </url>
@@ -552,13 +573,6 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
 <loc>/tag/pybites.html</loc>
 <lastmod>2023-08-22T11:00:00-05:51</lastmod>
-<changefreq>hourly</changefreq>
-<priority>0.5</priority>
-</url>
-
-<url>
-<loc>/tag/python.html</loc>
-<lastmod>2023-08-20T20:00:00-05:51</lastmod>
 <changefreq>hourly</changefreq>
 <priority>0.5</priority>
 </url>
@@ -1146,7 +1160,7 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>/author/christopher.html</loc>
-<lastmod>2023-08-20T20:00:00-05:51</lastmod>
+<lastmod>2023-09-19T11:00:00-05:51</lastmod>
 <changefreq>hourly</changefreq>
 <priority>0.5</priority>
 </url>
