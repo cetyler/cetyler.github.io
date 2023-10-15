@@ -9,18 +9,18 @@
         <meta property="og:type" content="article" />
         <meta name="twitter:card" content="summary">
 
-<meta name="keywords" content="til, postgresql, timestamp, function, TIL, " />
+<meta name="keywords" content="til, postgresql, constraints, pg_constraint, mastodon, TIL, " />
 
-<meta property="og:title" content="Create Automatic Timestamps in PostgreSQL "/>
-<meta property="og:url" content="/create-automatic-timestamps-in-postgresql.html" />
-<meta property="og:description" content="Create automatic timestamps by default." />
+<meta property="og:title" content="Check for Unvalidated Database Constraints "/>
+<meta property="og:url" content="/check-for-unvalidated-database-constraints.html" />
+<meta property="og:description" content="Verify that you don&#39;t have a constraint created without validation." />
 <meta property="og:site_name" content="Christopher Tyler R&amp;D Test Engineer" />
 <meta property="og:article:author" content="Christopher" />
-<meta property="og:article:published_time" content="2022-12-16T18:00:00-06:00" />
-<meta name="twitter:title" content="Create Automatic Timestamps in PostgreSQL ">
-<meta name="twitter:description" content="Create automatic timestamps by default.">
+<meta property="og:article:published_time" content="2023-10-10T11:00:00-05:00" />
+<meta name="twitter:title" content="Check for Unvalidated Database Constraints ">
+<meta name="twitter:description" content="Verify that you don&#39;t have a constraint created without validation.">
 
-        <title>Create Automatic Timestamps in PostgreSQL  · Christopher Tyler R&amp;D Test Engineer
+        <title>Check for Unvalidated Database Constraints  · Christopher Tyler R&amp;D Test Engineer
 </title>
         <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet">
         <link rel="stylesheet" type="text/css" href="/theme/css/elegant.prod.css" media="screen">
@@ -67,8 +67,8 @@
 <div class="row-fluid">
     <header class="page-header span10 offset2">
         <h1>
-            <a href="/create-automatic-timestamps-in-postgresql.html">
-                Create Automatic Timestamps in PostgreSQL
+            <a href="/check-for-unvalidated-database-constraints.html">
+                Check for Unvalidated Database Constraints
             </a>
         </h1>
     </header>
@@ -77,42 +77,17 @@
 <div class="row-fluid">
         <div class="span8 offset2 article-content">
             
-            <p>Found this at
-<a href="https://x-team.com/blog/automatic-timestamps-with-postgresql/">X-Team</a>.</p>
-<h2>Create Table with Default Timestamp</h2>
-<div class="highlight"><pre><span></span><code>CREATE TABLE todos (
- id SERIAL NOT NULL PRIMARY KEY,
- content TEXT,
- created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
- updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
- completed_at TIMESTAMPTZ
-);
+            <p>I am not sure who I saw this on Mastodon but it was something that is quick and
+easy to check.
+Use the following:</p>
+<div class="highlight"><pre><span></span><code><span class="n">select</span> <span class="n">conrelid</span><span class="p">::</span><span class="n">regclass</span>
+      <span class="p">,</span><span class="n">conname</span>
+  <span class="n">from</span> <span class="n">pg_constraint</span>
+ <span class="n">where</span> <span class="ow">not</span> <span class="n">convalidated</span>
 </code></pre></div>
 
-<p>In creating the <code>todos</code> table, both <code>created_at</code> and <code>updated_at</code> will default
-with the current timestamp if one is not given.
-This is great for if you are adding items from a CSV and you want to know when
-the data is being created.</p>
-<h2>Update Timestamp on Update</h2>
-<p>The article also explains how to create a trigger function.</p>
-<div class="highlight"><pre><span></span><code><span class="n">CREATE</span> <span class="kr">OR</span> <span class="n">REPLACE</span> <span class="n">FUNCTION</span> <span class="n">trigger_set_timestamp</span><span class="p">()</span>
-<span class="n">RETURNS</span> <span class="n">TRIGGER</span> <span class="n">AS</span> <span class="o">$$</span>
-<span class="kr">BEGIN</span>
- <span class="kr">NEW</span><span class="p">.</span><span class="n">updated_at</span> <span class="o">=</span> <span class="n">NOW</span><span class="p">();</span>
- <span class="kr">RETURN</span> <span class="kr">NEW</span><span class="p">;</span>
-<span class="kr">END</span><span class="p">;</span>
-<span class="o">$$</span> <span class="n">LANGUAGE</span> <span class="n">plpgsql</span><span class="p">;</span>
-</code></pre></div>
-
-<p>With this function, when can update a table and automatically update column
-<code>updated_at</code> with the current timestamp.</p>
-<div class="highlight"><pre><span></span><code><span class="n">CREATE</span> <span class="n">TRIGGER</span> <span class="n">set_timestamp</span>
-<span class="n">BEFORE</span> <span class="n">UPDATE</span> <span class="n">ON</span> <span class="n">todos</span>
-<span class="kr">FOR</span> <span class="mh">EACH</span> <span class="n">ROW</span>
-<span class="n">EXECUTE</span> <span class="kr">PROCEDURE</span> <span class="n">trigger_set_timestamp</span><span class="p">();</span>
-</code></pre></div>
-
-<p>This will execute anytime a row is updated in <code>todos</code>.</p>
+<p>Nothing should be returned but if there is you know if a constraint was created
+without validation.</p>
 
 
              
@@ -136,7 +111,7 @@ the data is being created.</p>
                 <a class="accordion-toggle disqus-comment-count comment-count"
                    data-toggle="collapse"
                    data-parent="#accordion2"
-                   href="/create-automatic-timestamps-in-postgresql.html#comment_thread"
+                   href="/check-for-unvalidated-database-constraints.html#comment_thread"
                    id="comment-accordion-toggle">
                     Comments
                 </a>
@@ -147,7 +122,7 @@ the data is being created.</p>
 
                         <script src="https://utteranc.es/client.js"
         data-repo="cetyler/cetyler.github.io"
-        data-issue-term="til_202212_timestamps"
+        data-issue-term="til_pg_constraint"
         data-label="Comments"
         data-theme="github-light"
         crossorigin="anonymous"
@@ -165,12 +140,18 @@ the data is being created.</p>
         </div>
         <section id="article-sidebar" class="span2">
             <h4>Published</h4>
-            <time itemprop="dateCreated" datetime="2022-12-16T18:00:00-06:00">Dec 16, 2022</time>
+            <time itemprop="dateCreated" datetime="2023-10-10T11:00:00-05:00">Oct 10, 2023</time>
             <h4>Category</h4>
             <a class="category-link" href="/categories.html#til-ref">TIL</a>
             <h4>Tags</h4>
             <ul class="list-of-tags tags-in-article">
-                <li><a href="/tags.html#function-ref">function
+                <li><a href="/tags.html#constraints-ref">constraints
+                    <span>1</span>
+</a></li>
+                <li><a href="/tags.html#mastodon-ref">mastodon
+                    <span>1</span>
+</a></li>
+                <li><a href="/tags.html#pg_constraint-ref">pg_constraint
                     <span>1</span>
 </a></li>
                 <li><a href="/tags.html#postgresql-ref">postgresql
@@ -178,9 +159,6 @@ the data is being created.</p>
 </a></li>
                 <li><a href="/tags.html#til-ref">til
                     <span>22</span>
-</a></li>
-                <li><a href="/tags.html#timestamp-ref">timestamp
-                    <span>1</span>
 </a></li>
             </ul>
 <h4>Contact</h4>
