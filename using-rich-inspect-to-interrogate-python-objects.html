@@ -9,18 +9,18 @@
         <meta property="og:type" content="article" />
         <meta name="twitter:card" content="summary">
 
-<meta name="keywords" content="til, python, pipx, pyproject, flit, TIL, " />
+<meta name="keywords" content="til, python, rich, inspect, TIL, " />
 
-<meta property="og:title" content="Setup Python Package to use with Pipx "/>
-<meta property="og:url" content="/setup-python-package-to-use-with-pipx.html" />
-<meta property="og:description" content="Setting up your Python project to work with pipx and pyproject.toml" />
+<meta property="og:title" content="Using Rich Inspect to Interrogate Python Objects "/>
+<meta property="og:url" content="/using-rich-inspect-to-interrogate-python-objects.html" />
+<meta property="og:description" content="Using Rich can help format an object in the REPL." />
 <meta property="og:site_name" content="Christopher Tyler R&amp;D Test Engineer" />
 <meta property="og:article:author" content="Christopher" />
-<meta property="og:article:published_time" content="2023-05-26T20:00:00-05:00" />
-<meta name="twitter:title" content="Setup Python Package to use with Pipx ">
-<meta name="twitter:description" content="Setting up your Python project to work with pipx and pyproject.toml">
+<meta property="og:article:published_time" content="2022-11-13T14:00:00-06:00" />
+<meta name="twitter:title" content="Using Rich Inspect to Interrogate Python Objects ">
+<meta name="twitter:description" content="Using Rich can help format an object in the REPL.">
 
-        <title>Setup Python Package to use with Pipx  · Christopher Tyler R&amp;D Test Engineer
+        <title>Using Rich Inspect to Interrogate Python Objects  · Christopher Tyler R&amp;D Test Engineer
 </title>
         <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet">
         <link rel="stylesheet" type="text/css" href="/theme/css/elegant.prod.css" media="screen">
@@ -67,8 +67,8 @@
 <div class="row-fluid">
     <header class="page-header span10 offset2">
         <h1>
-            <a href="/setup-python-package-to-use-with-pipx.html">
-                Setup Python Package to use with Pipx
+            <a href="/using-rich-inspect-to-interrogate-python-objects.html">
+                Using Rich Inspect to Interrogate Python Objects
             </a>
         </h1>
     </header>
@@ -77,28 +77,26 @@
 <div class="row-fluid">
         <div class="span8 offset2 article-content">
             
-            <p>Found the information at
-https://flit.pypa.io/en/latest/pyproject_toml.html#pyproject-project-scripts.</p>
-<h2>pyproject.toml</h2>
-<p>Add the following entry:</p>
-<div class="highlight"><pre><span></span><code><span class="k">[project.scripts]</span>
-<span class="na">ms_access_check</span> <span class="o">=</span> <span class="s">&quot;ms_access_check.cli:main&quot;</span>
+            <p><a href="https://textual.textualize.io/blog/2023/07/27/using-rich-inspect-to-interrogate-python-objects">Will McGugan's article</a>
+goes through another way Rich can help with formatting.
+The rest of the article are my notes.</p>
+<p>If you invoke it with any object <code>inspect</code> will display a nicely formatted
+report on that object -- which makes it great for interrogating objects from
+the REPL.</p>
+<div class="highlight"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="kn">from</span> <span class="nn">rich</span> <span class="kn">import</span> <span class="n">inspect</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">text_file</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;foo.txt&quot;</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">inspect</span><span class="p">(</span><span class="n">text_file</span><span class="p">)</span>
 </code></pre></div>
 
-<p>This should work with programs like
-<a href="https://flit.pypa.io/en/latest/index.html">flit</a>.
-This will do the following:</p>
-<div class="highlight"><pre><span></span><code>&gt; pipx install ms_access_check
-  installed package ms-access-check 0.6.0, installed using Python 3.11.1
-  These apps are now globally available
-    - ms_access_check.exe
-done! ✨ 🌟 ✨
-&gt; ms_access_check --version
-ms_access_check, version 0.5.0
+<p><img alt="inspect_output" src="/images/20230805-1_rich.png"></p>
+<p>By default, <code>inspect</code> will generate a data-oriented summary with a text
+representation of the object and its data attributes.
+You can also add <code>methods=True</code> to show all the methods in the public API.
+Also if you want to see the full unabbreviated help you can add <code>help=True</code>.</p>
+<p>Finally there are few more arguments to refine the level of detail you need.
+You can see the full range of options with this delightful little incantation:</p>
+<div class="highlight"><pre><span></span><code>&gt;&gt;&gt; inspect(inspect)
 </code></pre></div>
-
-<p><strong>Note</strong> that in Windows, pipx puts the files in
-<code>C:\Users\&lt;Your User Name&gt;\.local\bin</code>.</p>
 
 
              
@@ -122,7 +120,7 @@ ms_access_check, version 0.5.0
                 <a class="accordion-toggle disqus-comment-count comment-count"
                    data-toggle="collapse"
                    data-parent="#accordion2"
-                   href="/setup-python-package-to-use-with-pipx.html#comment_thread"
+                   href="/using-rich-inspect-to-interrogate-python-objects.html#comment_thread"
                    id="comment-accordion-toggle">
                     Comments
                 </a>
@@ -133,7 +131,7 @@ ms_access_check, version 0.5.0
 
                         <script src="https://utteranc.es/client.js"
         data-repo="cetyler/cetyler.github.io"
-        data-issue-term="til_pipx"
+        data-issue-term="til_rich_inspect"
         data-label="Comments"
         data-theme="github-light"
         crossorigin="anonymous"
@@ -151,22 +149,19 @@ ms_access_check, version 0.5.0
         </div>
         <section id="article-sidebar" class="span2">
             <h4>Published</h4>
-            <time itemprop="dateCreated" datetime="2023-05-26T20:00:00-05:00">May 26, 2023</time>
+            <time itemprop="dateCreated" datetime="2022-11-13T14:00:00-06:00">Nov 13, 2022</time>
             <h4>Category</h4>
             <a class="category-link" href="/categories.html#til-ref">TIL</a>
             <h4>Tags</h4>
             <ul class="list-of-tags tags-in-article">
-                <li><a href="/tags.html#flit-ref">flit
-                    <span>2</span>
-</a></li>
-                <li><a href="/tags.html#pipx-ref">pipx
-                    <span>2</span>
-</a></li>
-                <li><a href="/tags.html#pyproject-ref">pyproject
+                <li><a href="/tags.html#inspect-ref">inspect
                     <span>1</span>
 </a></li>
                 <li><a href="/tags.html#python-ref">python
                     <span>25</span>
+</a></li>
+                <li><a href="/tags.html#rich-ref">rich
+                    <span>1</span>
 </a></li>
                 <li><a href="/tags.html#til-ref">til
                     <span>24</span>
