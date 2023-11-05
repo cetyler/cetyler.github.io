@@ -1,5 +1,165 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Christopher Tyler R&amp;D Test Engineer - Python</title><link href="https://cetyler.github.io/" rel="alternate"></link><link href="https://cetyler.github.io/feeds/python.atom.xml" rel="self"></link><id>https://cetyler.github.io/</id><updated>2023-04-30T20:10:00-05:00</updated><entry><title>Weather Project - Initial Release</title><link href="https://cetyler.github.io/weather-project-initial-release.html" rel="alternate"></link><published>2023-04-30T20:10:00-05:00</published><updated>2023-04-30T20:10:00-05:00</updated><author><name>Christopher</name></author><id>tag:cetyler.github.io,2023-04-30:/weather-project-initial-release.html</id><summary type="html">&lt;p&gt;Initial working release.&lt;/p&gt;</summary><content type="html">&lt;h2&gt;Overview&lt;/h2&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Christopher Tyler R&amp;D Test Engineer - Python</title><link href="https://cetyler.github.io/" rel="alternate"></link><link href="https://cetyler.github.io/feeds/python.atom.xml" rel="self"></link><id>https://cetyler.github.io/</id><updated>2023-08-20T20:00:00-05:00</updated><entry><title>Measure Ambient Conditions with Circuit Python</title><link href="https://cetyler.github.io/measure-ambient-conditions-with-circuit-python.html" rel="alternate"></link><published>2023-08-20T20:00:00-05:00</published><updated>2023-08-20T20:00:00-05:00</updated><author><name>Christopher</name></author><id>tag:cetyler.github.io,2023-08-20:/measure-ambient-conditions-with-circuit-python.html</id><summary type="html">&lt;p&gt;Overview on Circuit Python using AdaFruit's Feather boards.&lt;/p&gt;</summary><content type="html">&lt;h2&gt;Overview&lt;/h2&gt;
+&lt;p&gt;I have been meaning to try out &lt;a href="https://circuitpython.org/"&gt;Circuit Python&lt;/a&gt; but
+I didn't quite have a project in mind.
+I had a janky setup using a Raspberry Pi, some thermistors and a
+temperature/humidity sensor on a bread board to measure the input and output of
+my air conditioner.
+It was meant to be temporary but I ended up using it far after determining that
+my air conditioner needed to be replaced.
+I moved the setup which caused all the wires to popped out.
+I also had a Sparkfun's
+&lt;a href="https://www.sparkfun.com/products/16467"&gt;Humidity Breakout Board&lt;/a&gt; but didn't
+realized that they only had an Arduino library.
+The plan was to compare the ambient conditions of my house relative to the
+outside weather conditions.
+Instead of trying to create a better setup with my existing parts, I decided to
+use the opportunity start over.
+I had the following requirements:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Be able to measure conditions at multiple locations in my house.&lt;/li&gt;
+&lt;li&gt;Be able to measure temperature and optionally humidity.&lt;/li&gt;
+&lt;li&gt;Be able to send the data wirelessly to my PC.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;This lead me to
+&lt;a href="https://learn.adafruit.com/adafruit-esp32-s2-tft-feather"&gt;AdaFruit ESP32-S2 Feather&lt;/a&gt;
+(I got the one with &lt;a href="https://www.adafruit.com/product/5303"&gt;BME280 Sensor&lt;/a&gt; and
+using &lt;a href="https://circuitpython.org"&gt;Circuit Python&lt;/a&gt;.
+This article will be less about the board and more about using Circuit Python.&lt;/p&gt;
+&lt;h2&gt;What is Circuit Python?&lt;/h2&gt;
+&lt;p&gt;&lt;a href="https://micropython.org/"&gt;MicroPython&lt;/a&gt; created a cutdown version of Python
+that could run in microcontrollers.
+&lt;a href="https://circuitpython.org"&gt;Circuit Python&lt;/a&gt; is based on MicroPython and you can
+see the differences
+&lt;a href="https://docs.circuitpython.org/en/latest/README.html#differences-from-micropython"&gt;here&lt;/a&gt;.
+&lt;a href="https://circuitpython.org/downloads"&gt;Many of AdaFruit boards&lt;/a&gt; as well as
+Raspberry Pis and other boards can be programmed with Circuit Python.&lt;/p&gt;
+&lt;p&gt;If you have used Python, most likely you used the
+&lt;a href="https://github.com/python/cpython"&gt;CPython&lt;/a&gt; implementation.
+The differences between CPython and MicroPython/CircuitPython it is easier to
+remember that CPython is not meant for microcontrollers.
+CircuitPython and MicroPython have a much smaller standard library and may not
+have all the features that CPython has (details
+&lt;a href="https://github.com/micropython/micropython/wiki/Differences"&gt;here&lt;/a&gt;).&lt;/p&gt;
+&lt;h2&gt;Setting Up to Use Circuit Python&lt;/h2&gt;
+&lt;p&gt;AdaFruit has a good
+&lt;a href="https://learn.adafruit.com/welcome-to-circuitpython"&gt;guide&lt;/a&gt; which can be good
+if you are new to microcontrollers as well as Python.
+My workflow is currently the following:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Code using &lt;a href="https://www.vim.org/"&gt;vim&lt;/a&gt; or &lt;a href="https://apps.kde.org/kate/"&gt;Kate&lt;/a&gt;.&lt;/li&gt;
+&lt;li&gt;Sometimes will change the code directly on the board but usually will work
+    in my Git repo.&lt;/li&gt;
+&lt;li&gt;If I need an output, I use &lt;a href="https://www.gnu.org/software/screen/"&gt;screen&lt;/a&gt;
+  (ex. &lt;code&gt;screen /dev/ttyACM0 115200&lt;/code&gt;).&lt;/li&gt;
+&lt;li&gt;Remember to not keep to board connected to the PC if I want it to go to sleep.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;When I got my board, I had to update it so that I could a) be able to have it
+plug in to my PC and be treated as a USB drive and b) update to the latest
+version of Circuit Python.
+I used AdaFruit's
+&lt;a href="https://adafruit.github.io/Adafruit_WebSerial_ESPTool/"&gt;Web Serial&lt;/a&gt; though it
+does require Chrome 89 or higher.
+Keep in mind that AdaFruit does have documentation for
+&lt;a href="https://circuitpython.org/board/adafruit_feather_esp32s2/"&gt;specific boards&lt;/a&gt;.&lt;/p&gt;
+&lt;h2&gt;AdaFruit Feather ESP32-S2&lt;/h2&gt;
+&lt;p&gt;I mainly got &lt;a href="https://www.adafruit.com/product/5303"&gt;this board&lt;/a&gt; because it
+have BME280 temperature/humidity/pressure sensor.
+AdaFruit does have &lt;a href="https://www.adafruit.com/product/2652"&gt;BME280&lt;/a&gt; as a
+separate board using their STEMMA QT connector.
+The nice thing about AdaFruit is that they have great documentation and good
+examples.
+There is an
+&lt;a href="https://learn.adafruit.com/adafruit-bme280-humidity-barometric-pressure-temperature-sensor-breakout"&gt;example&lt;/a&gt;
+on how to use BME280 sensor.&lt;/p&gt;
+&lt;h3&gt;Code Overview&lt;/h3&gt;
+&lt;p&gt;Since the BME280 sensor is on the board, I found out that the board will heat
+up enough to affect the readings.
+I put the board asleep and on wake up, get the readings before turning on WiFi.
+After the WiFi is turned on, I try and connect to my server to get the sea
+level pressure.
+Sea level pressure is required if I want to return the altitude.
+Then the board will send temperature, humidity, pressure and altitude to my
+server.
+The board will go to sleep for 5 minutes.&lt;/p&gt;
+&lt;p&gt;My server gets the sea level pressure when I poll
+&lt;a href="https://openweathermap.org/api/one-call-3"&gt;OpenWeatherMap&lt;/a&gt;.
+The server keeps all the data in a &lt;a href="https://postgresql.org/"&gt;PostgreSQL&lt;/a&gt;
+database.&lt;/p&gt;
+&lt;h3&gt;Feather Board&lt;/h3&gt;
+&lt;p&gt;The only libraries I needed to get was
+&lt;a href="https://docs.circuitpython.org/projects/bme280/en/latest/index.html"&gt;BME280&lt;/a&gt;
+and
+&lt;a href="https://docs.circuitpython.org/projects/requests/en/latest/index.html"&gt;requests&lt;/a&gt;.
+The examples gave me a good start on how to use both libraries.
+The rest of the libraries are part of Circuit Python and I didn't need to
+download anything.
+In &lt;code&gt;secrets.py&lt;/code&gt;, I put my WiFi, board name and server info there.&lt;/p&gt;
+&lt;p&gt;I found getting multiple readings help ensure that I get an actual reading.
+I don't do any averaging or comparing the readings though.
+In the future, I may do some checks to compare the readings, throw out any
+outliers and take an average.&lt;/p&gt;
+&lt;p&gt;I then turn on the WiFi and attempt to connect to make a connection.
+If I am not successful, I sleep for a minute and try everything again.
+If I am successful, I will then attempt to communicate with my server.&lt;/p&gt;
+&lt;p&gt;The board will try and get a sea level pressure reading.
+If it fails for some reason, the board will use a default value of 1013.25 kPa.&lt;/p&gt;
+&lt;p&gt;I turn on the LED so that I know that my board is attempting to send data.
+The board will try and send the readings to the server.
+If it fails, will sleep for a minute and try everything again.
+If successful, will sleep for 5 minutes.&lt;/p&gt;
+&lt;p&gt;As you can see it is a fairly basic program.
+I plan on sharing the source once I do some cleaning up.
+I also have boards with LCD screens but I need to figure out a way to display
+the data when pressing one of the buttons.
+That code will also eventually be shared.&lt;/p&gt;
+&lt;h3&gt;Server&lt;/h3&gt;
+&lt;p&gt;I will briefly cover this but I use the following third party libraries:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://nackjicholson.github.io/aiosql/"&gt;aiosql&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://flask.palletsprojects.com/"&gt;Flask&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://www.psycopg.org/"&gt;pyscopg2&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Using aiosql I can turn SQL code into a Python function, keeping my SQL and
+Python code in separate files.
+This is my first project using Flask and right now I am still using the
+development server.
+Before I attempt to share this, I will need to do some major cleaning of the
+code.
+I have some basic checks but it is still very much in an alpha state.
+I basically have a couple of routes.
+&lt;code&gt;board_data&lt;/code&gt; is so that I can look at the last board that send data in a basic
+JSON format.
+&lt;code&gt;sea_level_data&lt;/code&gt; is so that the boards can get the current sea level data for
+my location.
+In the future, I should support asking for a city instead of having it
+hardcoded.
+I would like to create a settings file so that I can remove some hardcoded
+configuration and turn it into a &lt;a href="https://pypa.github.io/pipx/"&gt;pipx&lt;/a&gt;
+installable package.
+I also would like to create a simple landing page that can show some stats like
+the readings from the last 24hrs., latest readings for all active boards, etc.
+Finally I would like the server to have an initialization step to setup the
+PostgreSQL/&lt;a href="https://www.sqlite.org/index.html"&gt;SQLite&lt;/a&gt; database before I think
+about sharing the code.&lt;/p&gt;
+&lt;h2&gt;Next Steps&lt;/h2&gt;
+&lt;p&gt;I will either update this article or add a more detailed article once I release
+the board and server code.
+However I was able to use AdaFruit excellent examples to create something that
+has been working for the last 6 months or so.
+My current board code is mostly a mashup of their examples to get something
+working.&lt;/p&gt;
+&lt;p&gt;Similar to
+&lt;a href="https://github.com/cetyler/openweather_report"&gt;OpenWeather Report package&lt;/a&gt; I
+created, I would like to clean up my code before I feel comfortable sharing.
+I also would like to create some tests to build my habits creating tests much
+earlier in the development.
+I do have some boards with LCD screens that I would like experiment with either
+using the button to get the current readings or see if an always on display can
+work without affecting the readings.
+My server probably need the most work as it is truly a minimal viable product
+(MVP). I would like something that I could have some sort of dashboard or at
+the very least be able to do some API calls to get data from my database.&lt;/p&gt;</content><category term="Python"></category><category term="python"></category><category term="circuit python"></category><category term="adafruit"></category><category term="feather board"></category><category term="esp32s2"></category></entry><entry><title>Weather Project - Initial Release</title><link href="https://cetyler.github.io/weather-project-initial-release.html" rel="alternate"></link><published>2023-04-30T20:10:00-05:00</published><updated>2023-04-30T20:10:00-05:00</updated><author><name>Christopher</name></author><id>tag:cetyler.github.io,2023-04-30:/weather-project-initial-release.html</id><summary type="html">&lt;p&gt;Initial working release.&lt;/p&gt;</summary><content type="html">&lt;h2&gt;Overview&lt;/h2&gt;
 &lt;p&gt;From the &lt;a href="https://cetyler.github.io/weather-project-requirements-and-roadmap.html"&gt;previous article&lt;/a&gt;,
 the Weather Project is now on
 &lt;a href="https://pypi.org/project/openweather-report/"&gt;PyPi&lt;/a&gt; and is on
@@ -1097,53 +1257,4 @@ Having the ability to talk with Reuven, how he included tests and type hints
 make this 15 week course a better value.
 However, I am glad that I had the opportunity to do both.
 Both courses have different styles which gave me a couple of different
-viewpoints.&lt;/p&gt;</content><category term="Python"></category><category term="training"></category><category term="Reuven Lerner"></category><category term="oop"></category><category term="python"></category><category term="review"></category></entry><entry><title>Reuven Lerner's Object-orient Python</title><link href="https://cetyler.github.io/reuven-lerners-object-orient-python.html" rel="alternate"></link><published>2022-01-08T00:00:00-06:00</published><updated>2022-01-08T00:00:00-06:00</updated><author><name>Christopher</name></author><id>tag:cetyler.github.io,2022-01-08:/reuven-lerners-object-orient-python.html</id><summary type="html">&lt;p&gt;Review of Reuven's OOP Python self pace course.&lt;/p&gt;</summary><content type="html">&lt;h2&gt;Overview&lt;/h2&gt;
-&lt;p&gt;I recently completed Reuven Lerner's
-&lt;a href="https://store.lerner.co.il/object-oriented-python"&gt;Object-orient Python&lt;/a&gt; self
-pace course.
-My goal was to better understand how to do OOP using Python.
-For context, I know of OOP but never could understand it well enough to use in
-my programs.&lt;/p&gt;
-&lt;h2&gt;Course Topics&lt;/h2&gt;
-&lt;p&gt;Taken from Reuven's Overview:&lt;/p&gt;
-&lt;p&gt;Through numerous video lessons and exercises, this course will teach you what
-you need in order to take advantage of Python's objects. I cover such topics
-as:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;What is an object?&lt;/li&gt;
-&lt;li&gt;Setting and retrieving attributes&lt;/li&gt;
-&lt;li&gt;Creating classes&lt;/li&gt;
-&lt;li&gt;The role of &lt;code&gt;__init__&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;The role of self&lt;/li&gt;
-&lt;li&gt;Writing and calling methods&lt;/li&gt;
-&lt;li&gt;Attribute search, and why we care&lt;/li&gt;
-&lt;li&gt;Class attributes&lt;/li&gt;
-&lt;li&gt;Inheritance&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2&gt;Impressions&lt;/h2&gt;
-&lt;p&gt;First of all I like the self pace nature and that Reuven provided the Jupyter
-Notebook and slides.
-Also the videos are a manageable length around 15 minutes.
-The first 6 sections I was able to work on a section a week.
-The summary project was a little quicker since there was only one video which
-gave me more time to complete the final project.&lt;/p&gt;
-&lt;p&gt;The exercises build on each other.
-Reuven used a couple different things to model like a bank account, ice cream,
-etc.
-The final exercise did a good job covering most of what Reuven covered in the
-course.
-I felt comfortable with the knowledge that I learn to complete the exercise.&lt;/p&gt;
-&lt;p&gt;This course does not include tests to verify your work instead there are
-solution videos.
-I believe there were not tests since I think Reuven assumes that you will
-also be using Jupyter Notebooks to work through the exercises.
-I instead created Python scripts and ran in the console.
-The final exercise, I created tests using pytest to ensure that I met the
-requirements.&lt;/p&gt;
-&lt;h2&gt;Conclusion&lt;/h2&gt;
-&lt;p&gt;Overall I think it was a good beginner course on Object-orient programming
-using Python.
-For me it was a good value as I purchased the course through Humble Bundle
-Python Super Power Bundle.
-This course was the first time that OOP clicked for me and the way I think.
-Finally I just simply enjoyed Reuven's teaching style.&lt;/p&gt;</content><category term="Python"></category><category term="training"></category><category term="Reuven Lerner"></category><category term="oop"></category><category term="python"></category><category term="review"></category></entry></feed>
+viewpoints.&lt;/p&gt;</content><category term="Python"></category><category term="training"></category><category term="Reuven Lerner"></category><category term="oop"></category><category term="python"></category><category term="review"></category></entry></feed>

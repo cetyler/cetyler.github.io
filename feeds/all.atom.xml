@@ -1,5 +1,372 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Christopher Tyler R&amp;D Test Engineer</title><link href="https://cetyler.github.io/" rel="alternate"></link><link href="https://cetyler.github.io/feeds/all.atom.xml" rel="self"></link><id>https://cetyler.github.io/</id><updated>2023-08-01T23:00:00-05:00</updated><entry><title>Set Statement Timeout</title><link href="https://cetyler.github.io/set-statement-timeout.html" rel="alternate"></link><published>2023-08-01T22:55:00-05:00</published><updated>2023-08-01T22:55:00-05:00</updated><author><name>Christopher</name></author><id>tag:cetyler.github.io,2023-08-01:/set-statement-timeout.html</id><summary type="html">&lt;p&gt;Set a timeout in case you want to terminate a long running query.&lt;/p&gt;</summary><content type="html">&lt;p&gt;I don't recall where I saw this, but in PostgreSQL, you can set a statement
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Christopher Tyler R&amp;D Test Engineer</title><link href="https://cetyler.github.io/" rel="alternate"></link><link href="https://cetyler.github.io/feeds/all.atom.xml" rel="self"></link><id>https://cetyler.github.io/</id><updated>2023-10-17T11:00:00-05:00</updated><entry><title>How to List Active Connections on PostgreSQL</title><link href="https://cetyler.github.io/how-to-list-active-connections-on-postgresql.html" rel="alternate"></link><published>2023-10-17T11:00:00-05:00</published><updated>2023-10-17T11:00:00-05:00</updated><author><name>Christopher</name></author><id>tag:cetyler.github.io,2023-10-17:/how-to-list-active-connections-on-postgresql.html</id><summary type="html">&lt;p&gt;How to check using a query what is actively running.&lt;/p&gt;</summary><content type="html">&lt;p&gt;From
+https://stackoverflow.com/questions/27435839/how-to-list-active-connections-on-postgresql&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;SELECT 
+    pid
+    ,datname
+    ,usename
+    ,application_name
+    ,client_hostname
+    ,client_port
+    ,backend_start
+    ,query_start
+    ,query
+    ,state
+FROM pg_stat_activity
+WHERE state = &amp;#39;active&amp;#39;;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;If you want to know the idle ones, use &lt;code&gt;idle&lt;/code&gt;.&lt;/p&gt;</content><category term="TIL"></category><category term="til"></category><category term="pg_stat_activity"></category><category term="postgresql"></category></entry><entry><title>Check for Unvalidated Database Constraints</title><link href="https://cetyler.github.io/check-for-unvalidated-database-constraints.html" rel="alternate"></link><published>2023-10-10T11:00:00-05:00</published><updated>2023-10-10T11:00:00-05:00</updated><author><name>Christopher</name></author><id>tag:cetyler.github.io,2023-10-10:/check-for-unvalidated-database-constraints.html</id><summary type="html">&lt;p&gt;Verify that you don't have a constraint created without validation.&lt;/p&gt;</summary><content type="html">&lt;p&gt;I am not sure who I saw this on Mastodon but it was something that is quick and
+easy to check.
+Use the following:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="n"&gt;select&lt;/span&gt; &lt;span class="n"&gt;conrelid&lt;/span&gt;&lt;span class="p"&gt;::&lt;/span&gt;&lt;span class="n"&gt;regclass&lt;/span&gt;
+      &lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;conname&lt;/span&gt;
+  &lt;span class="n"&gt;from&lt;/span&gt; &lt;span class="n"&gt;pg_constraint&lt;/span&gt;
+ &lt;span class="n"&gt;where&lt;/span&gt; &lt;span class="ow"&gt;not&lt;/span&gt; &lt;span class="n"&gt;convalidated&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Nothing should be returned but if there is you know if a constraint was created
+without validation.&lt;/p&gt;</content><category term="TIL"></category><category term="til"></category><category term="postgresql"></category><category term="constraints"></category><category term="pg_constraint"></category><category term="mastodon"></category></entry><entry><title>Deprecated</title><link href="https://cetyler.github.io/deprecated.html" rel="alternate"></link><published>2023-09-19T11:00:00-05:00</published><updated>2023-09-19T11:00:00-05:00</updated><author><name>Christopher</name></author><id>tag:cetyler.github.io,2023-09-19:/deprecated.html</id><summary type="html">&lt;p&gt;I neat way to deprecate parts of a Python program.&lt;/p&gt;</summary><content type="html">&lt;p&gt;Look at https://deprecated.readthedocs.io to use to deprecate parts of a
+program.
+I think this will be useful for libraries.&lt;/p&gt;
+&lt;p&gt;For example:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;deprecated&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;deprecated&lt;/span&gt;
+
+&lt;span class="nd"&gt;@deprecated&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;version&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;1.2.0&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;reason&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;You should use another function&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;some_old_function&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;y&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;y&lt;/span&gt;
+
+&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;someClass&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="nd"&gt;@deprecated&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;version&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;1.3.0&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;reason&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;This method is deprecated&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;some_old_method&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;y&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;y&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</content><category term="TIL"></category><category term="til"></category><category term="python"></category><category term="deprecated"></category></entry><entry><title>Get Battery Status in CLI</title><link href="https://cetyler.github.io/get-battery-status-in-cli.html" rel="alternate"></link><published>2023-09-12T11:00:00-05:00</published><updated>2023-09-12T11:00:00-05:00</updated><author><name>Suparna Ganguly</name></author><id>tag:cetyler.github.io,2023-09-12:/get-battery-status-in-cli.html</id><summary type="html">&lt;p&gt;How to get the battery status using standard CLI tools in Linux.&lt;/p&gt;</summary><content type="html">&lt;p&gt;From Suparna at
+https://www.linuxjournal.com/content/how-check-battery-status-using-linux-command-line&lt;/p&gt;
+&lt;h2&gt;Use cat and find&lt;/h2&gt;
+&lt;p&gt;The “cat” and “find” commands also help find details about your battery and power source.&lt;/p&gt;
+&lt;p&gt;Syntax&lt;/p&gt;
+&lt;p&gt;For the battery capacity, the syntax would be:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;cat /sys/class/power_supply/BAT0/capacity
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;For more detailed battery information use the find command.&lt;/p&gt;
+&lt;p&gt;Syntax&lt;/p&gt;
+&lt;p&gt;And the syntax is,&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;find /sys/class/power_supply/BAT0/ -type f | xargs -tn1 cat
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</content><category term="TIL"></category><category term="til"></category><category term="linux"></category><category term="battery"></category><category term="cat"></category><category term="find"></category></entry><entry><title>How to Read a Vim Swapfile</title><link href="https://cetyler.github.io/how-to-read-a-vim-swapfile.html" rel="alternate"></link><published>2023-09-12T11:00:00-05:00</published><updated>2023-09-12T11:00:00-05:00</updated><author><name>baeldung</name></author><id>tag:cetyler.github.io,2023-09-12:/how-to-read-a-vim-swapfile.html</id><summary type="html">&lt;p&gt;How to read a swapfile, especially where there isn't an reference file.&lt;/p&gt;</summary><content type="html">&lt;p&gt;From https://www.baeldung.com/linux/vim-swap-files&lt;/p&gt;
+&lt;p&gt;To read the swap file:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&amp;gt; vim -r file1.swp
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</content><category term="TIL"></category><category term="til"></category><category term="swapfile"></category><category term="vim"></category></entry><entry><title>Delete Files Older Than x Days on Linux</title><link href="https://cetyler.github.io/delete-files-older-than-x-days-on-linux.html" rel="alternate"></link><published>2023-09-05T11:00:00-05:00</published><updated>2023-09-05T11:00:00-05:00</updated><author><name>Lowell Heddings</name></author><id>tag:cetyler.github.io,2023-09-05:/delete-files-older-than-x-days-on-linux.html</id><summary type="html">&lt;p&gt;Quickly delete files older than a certain number of days.&lt;/p&gt;</summary><content type="html">&lt;p&gt;From Lowell at 
+https://www.howtogeek.com/288/delete-files-older-than-x-days-on-linux/&lt;/p&gt;
+&lt;p&gt;The find utility on Linux allows you to pass in a bunch of interesting
+arguments, including one to execute another command on each file.
+We’ll use this in order to figure out what files are older than a certain
+number of days, and then use the rm command to delete them.&lt;/p&gt;
+&lt;p&gt;Command Syntax&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="nv"&gt;find&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nv"&gt;path&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nv"&gt;to&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nv"&gt;files&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;mtime&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="mi"&gt;5&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="k"&gt;exec&lt;/span&gt; &lt;span class="nv"&gt;rm&lt;/span&gt; {} \&lt;span class="c1"&gt;;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Note that there are spaces between &lt;code&gt;rm&lt;/code&gt;, &lt;code&gt;{}&lt;/code&gt;, and &lt;code&gt;\;&lt;/code&gt;.&lt;/p&gt;
+&lt;h2&gt;Explanation&lt;/h2&gt;
+&lt;p&gt;The first argument is the path to the files.
+This can be a path, a directory, or a wildcard as in the example above.
+I would recommend using the full path, and make sure that you run the command
+without the exec rm to make sure you are getting the right results.&lt;/p&gt;
+&lt;p&gt;The second argument, &lt;code&gt;-mtime&lt;/code&gt;, is used to specify the number of days old that
+the file is. If you enter +5, it will find files older than 5 days.&lt;/p&gt;
+&lt;p&gt;The third argument, &lt;code&gt;-exec&lt;/code&gt;, allows you to pass in a command such as &lt;code&gt;rm&lt;/code&gt;.
+The &lt;code&gt;{} \;&lt;/code&gt; at the end is required to end the command.&lt;/p&gt;</content><category term="TIL"></category><category term="til"></category><category term="linux"></category><category term="find"></category><category term="rm"></category><category term="mtime"></category></entry><entry><title>How to Use a match case Statement</title><link href="https://cetyler.github.io/how-to-use-a-match-case-statement.html" rel="alternate"></link><published>2023-08-29T11:00:00-05:00</published><updated>2023-08-29T11:00:00-05:00</updated><author><name>Luke Hande</name></author><id>tag:cetyler.github.io,2023-08-29:/how-to-use-a-match-case-statement.html</id><summary type="html">&lt;p&gt;Some examples of how to use match case statement in Python.&lt;/p&gt;</summary><content type="html">&lt;p&gt;From Luke at https://learnpython.com/blog/python-match-case-statement/&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt; that this will only work with Python 3.10 and above.&lt;/p&gt;
+&lt;h2&gt;The &lt;em&gt;match case&lt;/em&gt; Statement in Python&lt;/h2&gt;
+&lt;p&gt;A basic implementation of &lt;code&gt;match case&lt;/code&gt; statements looks like an &lt;code&gt;if&lt;/code&gt; statement
+in Python.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&amp;gt;&amp;gt;&amp;gt; command = &amp;#39;Hello, World!&amp;#39;
+&amp;gt;&amp;gt;&amp;gt; match command:
+...     case &amp;#39;Hello, World!&amp;#39;:
+...         print(&amp;#39;Hello to you too!&amp;#39;)
+...     case &amp;#39;Goodbye, World!&amp;#39;:
+...         print(&amp;#39;See you later&amp;#39;)
+...     case other:
+...         print(&amp;#39;No match found&amp;#39;)
+
+Hello to you too!
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;It can simplify the flow control statements and make them a little bit more
+readable.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="nv"&gt;def&lt;/span&gt; &lt;span class="nv"&gt;file_handler_v2&lt;/span&gt;&lt;span class="ss"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;command&lt;/span&gt;&lt;span class="ss"&gt;)&lt;/span&gt;:
+...     &lt;span class="nv"&gt;match&lt;/span&gt; &lt;span class="nv"&gt;command&lt;/span&gt;.&lt;span class="nv"&gt;split&lt;/span&gt;&lt;span class="ss"&gt;()&lt;/span&gt;:
+...         &lt;span class="nv"&gt;case&lt;/span&gt; [&lt;span class="s1"&gt;&amp;#39;&lt;/span&gt;&lt;span class="s"&gt;show&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;&lt;/span&gt;]:
+...             &lt;span class="nv"&gt;print&lt;/span&gt;&lt;span class="ss"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;&lt;/span&gt;&lt;span class="s"&gt;List all files and directories: &lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;&lt;/span&gt;&lt;span class="ss"&gt;)&lt;/span&gt;
+...             # &lt;span class="nv"&gt;code&lt;/span&gt; &lt;span class="nv"&gt;to&lt;/span&gt; &lt;span class="nv"&gt;list&lt;/span&gt; &lt;span class="nv"&gt;files&lt;/span&gt;
+...         &lt;span class="nv"&gt;case&lt;/span&gt; [&lt;span class="s1"&gt;&amp;#39;&lt;/span&gt;&lt;span class="s"&gt;remove&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;&lt;/span&gt;&lt;span class="s"&gt;delete&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;&lt;/span&gt;, &lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="nv"&gt;files&lt;/span&gt;] &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;&lt;/span&gt;&lt;span class="s"&gt;--ask&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;&lt;/span&gt; &lt;span class="nv"&gt;in&lt;/span&gt; &lt;span class="nv"&gt;files&lt;/span&gt;:
+...             &lt;span class="nv"&gt;del_files&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; [&lt;span class="nv"&gt;f&lt;/span&gt; &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="nv"&gt;f&lt;/span&gt; &lt;span class="nv"&gt;in&lt;/span&gt; &lt;span class="nv"&gt;files&lt;/span&gt; &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="nv"&gt;len&lt;/span&gt;&lt;span class="ss"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;f&lt;/span&gt;.&lt;span class="nv"&gt;split&lt;/span&gt;&lt;span class="ss"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;&lt;/span&gt;&lt;span class="s"&gt;.&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;&lt;/span&gt;&lt;span class="ss"&gt;))&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;]
+...             &lt;span class="nv"&gt;print&lt;/span&gt;&lt;span class="ss"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;&lt;/span&gt;&lt;span class="s"&gt;Please confirm: Removing files: {}&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;&lt;/span&gt;.&lt;span class="nv"&gt;format&lt;/span&gt;&lt;span class="ss"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;del_files&lt;/span&gt;&lt;span class="ss"&gt;))&lt;/span&gt;
+...             # &lt;span class="nv"&gt;code&lt;/span&gt; &lt;span class="nv"&gt;to&lt;/span&gt; &lt;span class="nv"&gt;accept&lt;/span&gt; &lt;span class="nv"&gt;user&lt;/span&gt; &lt;span class="nv"&gt;input&lt;/span&gt;, &lt;span class="k"&gt;then&lt;/span&gt; &lt;span class="nv"&gt;remove&lt;/span&gt; &lt;span class="nv"&gt;files&lt;/span&gt;
+...         &lt;span class="nv"&gt;case&lt;/span&gt; [&lt;span class="s1"&gt;&amp;#39;&lt;/span&gt;&lt;span class="s"&gt;remove&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;&lt;/span&gt;&lt;span class="s"&gt;delete&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;&lt;/span&gt;, &lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="nv"&gt;files&lt;/span&gt;]:
+...             &lt;span class="nv"&gt;print&lt;/span&gt;&lt;span class="ss"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;&lt;/span&gt;&lt;span class="s"&gt;Removing files: {}&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;&lt;/span&gt;.&lt;span class="nv"&gt;format&lt;/span&gt;&lt;span class="ss"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;files&lt;/span&gt;&lt;span class="ss"&gt;))&lt;/span&gt;
+...             # &lt;span class="nv"&gt;code&lt;/span&gt; &lt;span class="nv"&gt;to&lt;/span&gt; &lt;span class="nv"&gt;remove&lt;/span&gt; &lt;span class="nv"&gt;files&lt;/span&gt;
+...         &lt;span class="nv"&gt;case&lt;/span&gt; &lt;span class="nv"&gt;_&lt;/span&gt;:
+...             &lt;span class="nv"&gt;print&lt;/span&gt;&lt;span class="ss"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;&lt;/span&gt;&lt;span class="s"&gt;Command not recognized&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;&lt;/span&gt;&lt;span class="ss"&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;This is easier than a &lt;code&gt;if-elif-else&lt;/code&gt; or using something like a &lt;code&gt;dict()&lt;/code&gt;.&lt;/p&gt;</content><category term="TIL"></category><category term="til"></category><category term="python 3.10"></category><category term="match case"></category></entry><entry><title>Vim Tips</title><link href="https://cetyler.github.io/vim-tips.html" rel="alternate"></link><published>2023-08-22T11:00:00-05:00</published><updated>2023-08-22T11:00:00-05:00</updated><author><name>pybites</name></author><id>tag:cetyler.github.io,2023-08-22:/vim-tips.html</id><summary type="html">&lt;p&gt;Notes from the VIM Workshop from pybites&lt;/p&gt;</summary><content type="html">&lt;p&gt;From
+https://docs.google.com/presentation/d/1bUNgL3fpKzGIcJeb63a9mSFdo9_rr2WsLUC7xHaA0JI/edit#slide=id.ge12ee3bc9c_0_0&lt;/p&gt;
+&lt;h2&gt;Navigation&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;gg&lt;/code&gt;: go to start of the file&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;G&lt;/code&gt;: go to end of the file&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;10G&lt;/code&gt;: to go to line 10 (you can also &lt;code&gt;vim file.py +11&lt;/code&gt;)&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;10j&lt;/code&gt;: to go 10 lines down&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;ctrl b/f&lt;/code&gt;: to scroll entire screen (or &lt;code&gt;d&lt;/code&gt; half screen)&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;ctrl i/o&lt;/code&gt;: to jump through last visited places&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;b/w&lt;/code&gt;: to jump over words&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;Built-in Auotcomplete&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;ctrl + n&lt;/code&gt;: this will show potential answer to complete with.&lt;/li&gt;
+&lt;/ul&gt;</content><category term="TIL"></category><category term="til"></category><category term="vim"></category><category term="pybites"></category></entry><entry><title>Measure Ambient Conditions with Circuit Python</title><link href="https://cetyler.github.io/measure-ambient-conditions-with-circuit-python.html" rel="alternate"></link><published>2023-08-20T20:00:00-05:00</published><updated>2023-08-20T20:00:00-05:00</updated><author><name>Christopher</name></author><id>tag:cetyler.github.io,2023-08-20:/measure-ambient-conditions-with-circuit-python.html</id><summary type="html">&lt;p&gt;Overview on Circuit Python using AdaFruit's Feather boards.&lt;/p&gt;</summary><content type="html">&lt;h2&gt;Overview&lt;/h2&gt;
+&lt;p&gt;I have been meaning to try out &lt;a href="https://circuitpython.org/"&gt;Circuit Python&lt;/a&gt; but
+I didn't quite have a project in mind.
+I had a janky setup using a Raspberry Pi, some thermistors and a
+temperature/humidity sensor on a bread board to measure the input and output of
+my air conditioner.
+It was meant to be temporary but I ended up using it far after determining that
+my air conditioner needed to be replaced.
+I moved the setup which caused all the wires to popped out.
+I also had a Sparkfun's
+&lt;a href="https://www.sparkfun.com/products/16467"&gt;Humidity Breakout Board&lt;/a&gt; but didn't
+realized that they only had an Arduino library.
+The plan was to compare the ambient conditions of my house relative to the
+outside weather conditions.
+Instead of trying to create a better setup with my existing parts, I decided to
+use the opportunity start over.
+I had the following requirements:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Be able to measure conditions at multiple locations in my house.&lt;/li&gt;
+&lt;li&gt;Be able to measure temperature and optionally humidity.&lt;/li&gt;
+&lt;li&gt;Be able to send the data wirelessly to my PC.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;This lead me to
+&lt;a href="https://learn.adafruit.com/adafruit-esp32-s2-tft-feather"&gt;AdaFruit ESP32-S2 Feather&lt;/a&gt;
+(I got the one with &lt;a href="https://www.adafruit.com/product/5303"&gt;BME280 Sensor&lt;/a&gt; and
+using &lt;a href="https://circuitpython.org"&gt;Circuit Python&lt;/a&gt;.
+This article will be less about the board and more about using Circuit Python.&lt;/p&gt;
+&lt;h2&gt;What is Circuit Python?&lt;/h2&gt;
+&lt;p&gt;&lt;a href="https://micropython.org/"&gt;MicroPython&lt;/a&gt; created a cutdown version of Python
+that could run in microcontrollers.
+&lt;a href="https://circuitpython.org"&gt;Circuit Python&lt;/a&gt; is based on MicroPython and you can
+see the differences
+&lt;a href="https://docs.circuitpython.org/en/latest/README.html#differences-from-micropython"&gt;here&lt;/a&gt;.
+&lt;a href="https://circuitpython.org/downloads"&gt;Many of AdaFruit boards&lt;/a&gt; as well as
+Raspberry Pis and other boards can be programmed with Circuit Python.&lt;/p&gt;
+&lt;p&gt;If you have used Python, most likely you used the
+&lt;a href="https://github.com/python/cpython"&gt;CPython&lt;/a&gt; implementation.
+The differences between CPython and MicroPython/CircuitPython it is easier to
+remember that CPython is not meant for microcontrollers.
+CircuitPython and MicroPython have a much smaller standard library and may not
+have all the features that CPython has (details
+&lt;a href="https://github.com/micropython/micropython/wiki/Differences"&gt;here&lt;/a&gt;).&lt;/p&gt;
+&lt;h2&gt;Setting Up to Use Circuit Python&lt;/h2&gt;
+&lt;p&gt;AdaFruit has a good
+&lt;a href="https://learn.adafruit.com/welcome-to-circuitpython"&gt;guide&lt;/a&gt; which can be good
+if you are new to microcontrollers as well as Python.
+My workflow is currently the following:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Code using &lt;a href="https://www.vim.org/"&gt;vim&lt;/a&gt; or &lt;a href="https://apps.kde.org/kate/"&gt;Kate&lt;/a&gt;.&lt;/li&gt;
+&lt;li&gt;Sometimes will change the code directly on the board but usually will work
+    in my Git repo.&lt;/li&gt;
+&lt;li&gt;If I need an output, I use &lt;a href="https://www.gnu.org/software/screen/"&gt;screen&lt;/a&gt;
+  (ex. &lt;code&gt;screen /dev/ttyACM0 115200&lt;/code&gt;).&lt;/li&gt;
+&lt;li&gt;Remember to not keep to board connected to the PC if I want it to go to sleep.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;When I got my board, I had to update it so that I could a) be able to have it
+plug in to my PC and be treated as a USB drive and b) update to the latest
+version of Circuit Python.
+I used AdaFruit's
+&lt;a href="https://adafruit.github.io/Adafruit_WebSerial_ESPTool/"&gt;Web Serial&lt;/a&gt; though it
+does require Chrome 89 or higher.
+Keep in mind that AdaFruit does have documentation for
+&lt;a href="https://circuitpython.org/board/adafruit_feather_esp32s2/"&gt;specific boards&lt;/a&gt;.&lt;/p&gt;
+&lt;h2&gt;AdaFruit Feather ESP32-S2&lt;/h2&gt;
+&lt;p&gt;I mainly got &lt;a href="https://www.adafruit.com/product/5303"&gt;this board&lt;/a&gt; because it
+have BME280 temperature/humidity/pressure sensor.
+AdaFruit does have &lt;a href="https://www.adafruit.com/product/2652"&gt;BME280&lt;/a&gt; as a
+separate board using their STEMMA QT connector.
+The nice thing about AdaFruit is that they have great documentation and good
+examples.
+There is an
+&lt;a href="https://learn.adafruit.com/adafruit-bme280-humidity-barometric-pressure-temperature-sensor-breakout"&gt;example&lt;/a&gt;
+on how to use BME280 sensor.&lt;/p&gt;
+&lt;h3&gt;Code Overview&lt;/h3&gt;
+&lt;p&gt;Since the BME280 sensor is on the board, I found out that the board will heat
+up enough to affect the readings.
+I put the board asleep and on wake up, get the readings before turning on WiFi.
+After the WiFi is turned on, I try and connect to my server to get the sea
+level pressure.
+Sea level pressure is required if I want to return the altitude.
+Then the board will send temperature, humidity, pressure and altitude to my
+server.
+The board will go to sleep for 5 minutes.&lt;/p&gt;
+&lt;p&gt;My server gets the sea level pressure when I poll
+&lt;a href="https://openweathermap.org/api/one-call-3"&gt;OpenWeatherMap&lt;/a&gt;.
+The server keeps all the data in a &lt;a href="https://postgresql.org/"&gt;PostgreSQL&lt;/a&gt;
+database.&lt;/p&gt;
+&lt;h3&gt;Feather Board&lt;/h3&gt;
+&lt;p&gt;The only libraries I needed to get was
+&lt;a href="https://docs.circuitpython.org/projects/bme280/en/latest/index.html"&gt;BME280&lt;/a&gt;
+and
+&lt;a href="https://docs.circuitpython.org/projects/requests/en/latest/index.html"&gt;requests&lt;/a&gt;.
+The examples gave me a good start on how to use both libraries.
+The rest of the libraries are part of Circuit Python and I didn't need to
+download anything.
+In &lt;code&gt;secrets.py&lt;/code&gt;, I put my WiFi, board name and server info there.&lt;/p&gt;
+&lt;p&gt;I found getting multiple readings help ensure that I get an actual reading.
+I don't do any averaging or comparing the readings though.
+In the future, I may do some checks to compare the readings, throw out any
+outliers and take an average.&lt;/p&gt;
+&lt;p&gt;I then turn on the WiFi and attempt to connect to make a connection.
+If I am not successful, I sleep for a minute and try everything again.
+If I am successful, I will then attempt to communicate with my server.&lt;/p&gt;
+&lt;p&gt;The board will try and get a sea level pressure reading.
+If it fails for some reason, the board will use a default value of 1013.25 kPa.&lt;/p&gt;
+&lt;p&gt;I turn on the LED so that I know that my board is attempting to send data.
+The board will try and send the readings to the server.
+If it fails, will sleep for a minute and try everything again.
+If successful, will sleep for 5 minutes.&lt;/p&gt;
+&lt;p&gt;As you can see it is a fairly basic program.
+I plan on sharing the source once I do some cleaning up.
+I also have boards with LCD screens but I need to figure out a way to display
+the data when pressing one of the buttons.
+That code will also eventually be shared.&lt;/p&gt;
+&lt;h3&gt;Server&lt;/h3&gt;
+&lt;p&gt;I will briefly cover this but I use the following third party libraries:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://nackjicholson.github.io/aiosql/"&gt;aiosql&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://flask.palletsprojects.com/"&gt;Flask&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://www.psycopg.org/"&gt;pyscopg2&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Using aiosql I can turn SQL code into a Python function, keeping my SQL and
+Python code in separate files.
+This is my first project using Flask and right now I am still using the
+development server.
+Before I attempt to share this, I will need to do some major cleaning of the
+code.
+I have some basic checks but it is still very much in an alpha state.
+I basically have a couple of routes.
+&lt;code&gt;board_data&lt;/code&gt; is so that I can look at the last board that send data in a basic
+JSON format.
+&lt;code&gt;sea_level_data&lt;/code&gt; is so that the boards can get the current sea level data for
+my location.
+In the future, I should support asking for a city instead of having it
+hardcoded.
+I would like to create a settings file so that I can remove some hardcoded
+configuration and turn it into a &lt;a href="https://pypa.github.io/pipx/"&gt;pipx&lt;/a&gt;
+installable package.
+I also would like to create a simple landing page that can show some stats like
+the readings from the last 24hrs., latest readings for all active boards, etc.
+Finally I would like the server to have an initialization step to setup the
+PostgreSQL/&lt;a href="https://www.sqlite.org/index.html"&gt;SQLite&lt;/a&gt; database before I think
+about sharing the code.&lt;/p&gt;
+&lt;h2&gt;Next Steps&lt;/h2&gt;
+&lt;p&gt;I will either update this article or add a more detailed article once I release
+the board and server code.
+However I was able to use AdaFruit excellent examples to create something that
+has been working for the last 6 months or so.
+My current board code is mostly a mashup of their examples to get something
+working.&lt;/p&gt;
+&lt;p&gt;Similar to
+&lt;a href="https://github.com/cetyler/openweather_report"&gt;OpenWeather Report package&lt;/a&gt; I
+created, I would like to clean up my code before I feel comfortable sharing.
+I also would like to create some tests to build my habits creating tests much
+earlier in the development.
+I do have some boards with LCD screens that I would like experiment with either
+using the button to get the current readings or see if an always on display can
+work without affecting the readings.
+My server probably need the most work as it is truly a minimal viable product
+(MVP). I would like something that I could have some sort of dashboard or at
+the very least be able to do some API calls to get data from my database.&lt;/p&gt;</content><category term="Python"></category><category term="python"></category><category term="circuit python"></category><category term="adafruit"></category><category term="feather board"></category><category term="esp32s2"></category></entry><entry><title>Create Git Branch and Checkout</title><link href="https://cetyler.github.io/create-git-branch-and-checkout.html" rel="alternate"></link><published>2023-08-15T11:00:00-05:00</published><updated>2023-08-15T11:00:00-05:00</updated><author><name>Christopher</name></author><id>tag:cetyler.github.io,2023-08-15:/create-git-branch-and-checkout.html</id><summary type="html">&lt;p&gt;Create a git branch and checkout at once.&lt;/p&gt;</summary><content type="html">&lt;p&gt;To create a git branch and checkout and go into that branch:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;(main) &amp;gt; git checkout -b new_branch_name
+(new_branch_name) &amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</content><category term="TIL"></category><category term="til"></category><category term="git"></category><category term="branch"></category><category term="checkout"></category></entry><entry><title>pg_dump Only a Table</title><link href="https://cetyler.github.io/pg_dump-only-a-table.html" rel="alternate"></link><published>2023-08-08T11:00:00-05:00</published><updated>2023-08-08T11:00:00-05:00</updated><author><name>Christopher</name></author><id>tag:cetyler.github.io,2023-08-08:/pg_dump-only-a-table.html</id><summary type="html">&lt;p&gt;Only save a table to help transfer to another database.&lt;/p&gt;</summary><content type="html">&lt;p&gt;This can be use get the data transferred from on DB to another just for that
+table.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;❯ .\pg_dump.exe --format=c --clean --username=postgres --dbname=raw_test_data --table=&amp;#39;&amp;quot;raw&amp;quot;.&amp;quot;test_results&amp;quot;&amp;#39; --file=&amp;#39;C:\Users\ctyler\OneDrive - DMI\temp_30\test_results_20230504-1.sql&amp;#39;
+❯ .\pg_dump.exe --format=c --clean --username=postgres --dbname=raw_test_data --table=&amp;#39;&amp;quot;raw&amp;quot;.&amp;quot;step_results&amp;quot;&amp;#39; --file=&amp;#39;C:\Users\ctyler\OneDrive - DMI\temp_30\step_results_20230504-1.sql&amp;#39;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;This example will copy &lt;code&gt;test_results&lt;/code&gt; and &lt;code&gt;step_results&lt;/code&gt; in the
+schema &lt;code&gt;raw&lt;/code&gt;.&lt;/p&gt;</content><category term="TIL"></category><category term="til"></category><category term="pg_dump"></category><category term="postgresql"></category></entry><entry><title>Pip Chill</title><link href="https://cetyler.github.io/pip-chill.html" rel="alternate"></link><published>2023-08-03T11:00:00-05:00</published><updated>2023-08-03T11:00:00-05:00</updated><author><name>Christopher Tyler</name></author><id>tag:cetyler.github.io,2023-08-03:/pip-chill.html</id><summary type="html">&lt;p&gt;Make requirements with only the packages you need.&lt;/p&gt;</summary><content type="html">&lt;p&gt;&lt;a href="https://github.com/rbanffy/pip-chill"&gt;pip-chill&lt;/a&gt; as explained by Ricardo is
+like pip freeze but will only list the packages that are not dependencies of
+installed packages.&lt;/p&gt;
+&lt;h2&gt;Usage&lt;/h2&gt;
+&lt;p&gt;To install, just &lt;code&gt;pip install pip-chill&lt;/code&gt;.
+Running the command will return a list of the packages installed without the
+dependencies.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="err"&gt;❯&lt;/span&gt; &lt;span class="n"&gt;pip&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;chill&lt;/span&gt;
+&lt;span class="n"&gt;aiosql&lt;/span&gt;&lt;span class="o"&gt;==&lt;/span&gt;&lt;span class="mf"&gt;8.0&lt;/span&gt;
+&lt;span class="n"&gt;black&lt;/span&gt;&lt;span class="o"&gt;==&lt;/span&gt;&lt;span class="mf"&gt;23.3&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;
+&lt;span class="n"&gt;flit&lt;/span&gt;&lt;span class="o"&gt;==&lt;/span&gt;&lt;span class="mf"&gt;3.8&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;
+&lt;span class="n"&gt;mypy&lt;/span&gt;&lt;span class="o"&gt;==&lt;/span&gt;&lt;span class="mf"&gt;1.2&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;
+&lt;span class="n"&gt;pip&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;chill&lt;/span&gt;&lt;span class="o"&gt;==&lt;/span&gt;&lt;span class="mf"&gt;1.0&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;3&lt;/span&gt;
+&lt;span class="n"&gt;pip&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;tools&lt;/span&gt;&lt;span class="o"&gt;==&lt;/span&gt;&lt;span class="mf"&gt;6.13&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;
+&lt;span class="n"&gt;pre&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;commit&lt;/span&gt;&lt;span class="o"&gt;==&lt;/span&gt;&lt;span class="mf"&gt;3.2&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;
+&lt;span class="n"&gt;psycopg2&lt;/span&gt;&lt;span class="o"&gt;==&lt;/span&gt;&lt;span class="mf"&gt;2.9&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;6&lt;/span&gt;
+&lt;span class="n"&gt;pytest&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;cov&lt;/span&gt;&lt;span class="o"&gt;==&lt;/span&gt;&lt;span class="mf"&gt;4.0&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;
+&lt;span class="n"&gt;pytest&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;picked&lt;/span&gt;&lt;span class="o"&gt;==&lt;/span&gt;&lt;span class="mf"&gt;0.4&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;6&lt;/span&gt;
+&lt;span class="n"&gt;pytest&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;randomly&lt;/span&gt;&lt;span class="o"&gt;==&lt;/span&gt;&lt;span class="mf"&gt;3.12&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;
+&lt;span class="n"&gt;ruff&lt;/span&gt;&lt;span class="o"&gt;==&lt;/span&gt;&lt;span class="mf"&gt;0.0&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;263&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Where as if I do a &lt;code&gt;pip-freeze&lt;/code&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="err"&gt;❯&lt;/span&gt; &lt;span class="n"&gt;pip&lt;/span&gt; &lt;span class="n"&gt;freeze&lt;/span&gt;
+&lt;span class="n"&gt;aiosql&lt;/span&gt;&lt;span class="o"&gt;==&lt;/span&gt;&lt;span class="mf"&gt;8.0&lt;/span&gt;
+&lt;span class="n"&gt;black&lt;/span&gt;&lt;span class="o"&gt;==&lt;/span&gt;&lt;span class="mf"&gt;23.3&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;
+&lt;span class="n"&gt;build&lt;/span&gt;&lt;span class="o"&gt;==&lt;/span&gt;&lt;span class="mf"&gt;0.10&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;
+&lt;span class="n"&gt;certifi&lt;/span&gt;&lt;span class="o"&gt;==&lt;/span&gt;&lt;span class="mf"&gt;2022.12&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;7&lt;/span&gt;
+&lt;span class="n"&gt;cfgv&lt;/span&gt;&lt;span class="o"&gt;==&lt;/span&gt;&lt;span class="mf"&gt;3.3&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;
+&lt;span class="n"&gt;charset&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;normalizer&lt;/span&gt;&lt;span class="o"&gt;==&lt;/span&gt;&lt;span class="mf"&gt;3.1&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;
+&lt;span class="n"&gt;click&lt;/span&gt;&lt;span class="o"&gt;==&lt;/span&gt;&lt;span class="mf"&gt;8.1&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;3&lt;/span&gt;
+&lt;span class="n"&gt;coverage&lt;/span&gt;&lt;span class="o"&gt;==&lt;/span&gt;&lt;span class="mf"&gt;7.2&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;5&lt;/span&gt;
+&lt;span class="n"&gt;distlib&lt;/span&gt;&lt;span class="o"&gt;==&lt;/span&gt;&lt;span class="mf"&gt;0.3&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;6&lt;/span&gt;
+&lt;span class="n"&gt;docutils&lt;/span&gt;&lt;span class="o"&gt;==&lt;/span&gt;&lt;span class="mf"&gt;0.19&lt;/span&gt;
+&lt;span class="n"&gt;filelock&lt;/span&gt;&lt;span class="o"&gt;==&lt;/span&gt;&lt;span class="mf"&gt;3.12&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;
+&lt;span class="n"&gt;flit&lt;/span&gt;&lt;span class="o"&gt;==&lt;/span&gt;&lt;span class="mf"&gt;3.8&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;
+&lt;span class="n"&gt;flit_core&lt;/span&gt;&lt;span class="o"&gt;==&lt;/span&gt;&lt;span class="mf"&gt;3.8&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;
+&lt;span class="n"&gt;identify&lt;/span&gt;&lt;span class="o"&gt;==&lt;/span&gt;&lt;span class="mf"&gt;2.5&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;23&lt;/span&gt;
+&lt;span class="n"&gt;idna&lt;/span&gt;&lt;span class="o"&gt;==&lt;/span&gt;&lt;span class="mf"&gt;3.4&lt;/span&gt;
+&lt;span class="n"&gt;iniconfig&lt;/span&gt;&lt;span class="o"&gt;==&lt;/span&gt;&lt;span class="mf"&gt;2.0&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;
+&lt;span class="n"&gt;mypy&lt;/span&gt;&lt;span class="o"&gt;==&lt;/span&gt;&lt;span class="mf"&gt;1.2&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;
+&lt;span class="n"&gt;mypy&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;extensions&lt;/span&gt;&lt;span class="o"&gt;==&lt;/span&gt;&lt;span class="mf"&gt;1.0&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;
+&lt;span class="n"&gt;nodeenv&lt;/span&gt;&lt;span class="o"&gt;==&lt;/span&gt;&lt;span class="mf"&gt;1.7&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;
+&lt;span class="n"&gt;packaging&lt;/span&gt;&lt;span class="o"&gt;==&lt;/span&gt;&lt;span class="mf"&gt;23.1&lt;/span&gt;
+&lt;span class="n"&gt;pathspec&lt;/span&gt;&lt;span class="o"&gt;==&lt;/span&gt;&lt;span class="mf"&gt;0.11&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;
+&lt;span class="n"&gt;pip&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;chill&lt;/span&gt;&lt;span class="o"&gt;==&lt;/span&gt;&lt;span class="mf"&gt;1.0&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;3&lt;/span&gt;
+&lt;span class="n"&gt;pip&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;tools&lt;/span&gt;&lt;span class="o"&gt;==&lt;/span&gt;&lt;span class="mf"&gt;6.13&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;
+&lt;span class="n"&gt;platformdirs&lt;/span&gt;&lt;span class="o"&gt;==&lt;/span&gt;&lt;span class="mf"&gt;3.5&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;
+&lt;span class="n"&gt;pluggy&lt;/span&gt;&lt;span class="o"&gt;==&lt;/span&gt;&lt;span class="mf"&gt;1.0&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;
+&lt;span class="n"&gt;pre&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;commit&lt;/span&gt;&lt;span class="o"&gt;==&lt;/span&gt;&lt;span class="mf"&gt;3.2&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;
+&lt;span class="n"&gt;psycopg2&lt;/span&gt;&lt;span class="o"&gt;==&lt;/span&gt;&lt;span class="mf"&gt;2.9&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;6&lt;/span&gt;
+&lt;span class="n"&gt;pyproject_hooks&lt;/span&gt;&lt;span class="o"&gt;==&lt;/span&gt;&lt;span class="mf"&gt;1.0&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;
+&lt;span class="n"&gt;pytest&lt;/span&gt;&lt;span class="o"&gt;==&lt;/span&gt;&lt;span class="mf"&gt;7.3&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;
+&lt;span class="n"&gt;pytest&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;cov&lt;/span&gt;&lt;span class="o"&gt;==&lt;/span&gt;&lt;span class="mf"&gt;4.0&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;
+&lt;span class="n"&gt;pytest&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;picked&lt;/span&gt;&lt;span class="o"&gt;==&lt;/span&gt;&lt;span class="mf"&gt;0.4&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;6&lt;/span&gt;
+&lt;span class="n"&gt;pytest&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;randomly&lt;/span&gt;&lt;span class="o"&gt;==&lt;/span&gt;&lt;span class="mf"&gt;3.12&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;
+&lt;span class="n"&gt;PyYAML&lt;/span&gt;&lt;span class="o"&gt;==&lt;/span&gt;&lt;span class="mf"&gt;6.0&lt;/span&gt;
+&lt;span class="n"&gt;requests&lt;/span&gt;&lt;span class="o"&gt;==&lt;/span&gt;&lt;span class="mf"&gt;2.28&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;
+&lt;span class="n"&gt;ruff&lt;/span&gt;&lt;span class="o"&gt;==&lt;/span&gt;&lt;span class="mf"&gt;0.0&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;263&lt;/span&gt;
+&lt;span class="n"&gt;tomli_w&lt;/span&gt;&lt;span class="o"&gt;==&lt;/span&gt;&lt;span class="mf"&gt;1.0&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;
+&lt;span class="n"&gt;typing_extensions&lt;/span&gt;&lt;span class="o"&gt;==&lt;/span&gt;&lt;span class="mf"&gt;4.5&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;
+&lt;span class="n"&gt;urllib3&lt;/span&gt;&lt;span class="o"&gt;==&lt;/span&gt;&lt;span class="mf"&gt;1.26&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;15&lt;/span&gt;
+&lt;span class="n"&gt;virtualenv&lt;/span&gt;&lt;span class="o"&gt;==&lt;/span&gt;&lt;span class="mf"&gt;20.23&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;You can include the dependencies using &lt;code&gt;pip-chill -v&lt;/code&gt; but the dependencies will
+be commented out with a description of which package that package is depended
+on, neat!&lt;/p&gt;
+&lt;p&gt;This can be more useful for projects where you are not building a package.
+&lt;a href="https://github.com/jazzband/pip-tools/"&gt;pip-tools&lt;/a&gt; works well with packages
+since it can use &lt;code&gt;Setuptools&lt;/code&gt; or &lt;code&gt;pyproject.toml&lt;/code&gt; but will fall down if those
+don't exists.&lt;/p&gt;</content><category term="TIL"></category><category term="pip-chill"></category><category term="requirements"></category><category term="pip"></category></entry><entry><title>Set Statement Timeout</title><link href="https://cetyler.github.io/set-statement-timeout.html" rel="alternate"></link><published>2023-08-01T22:55:00-05:00</published><updated>2023-08-01T22:55:00-05:00</updated><author><name>Christopher</name></author><id>tag:cetyler.github.io,2023-08-01:/set-statement-timeout.html</id><summary type="html">&lt;p&gt;Set a timeout in case you want to terminate a long running query.&lt;/p&gt;</summary><content type="html">&lt;p&gt;I don't recall where I saw this, but in PostgreSQL, you can set a statement
 timeout to potentially prevent problems with a long running query running.&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;$ alter database mydatabase &lt;span class="nb"&gt;set&lt;/span&gt; &lt;span class="nv"&gt;statement_timeout&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;60s&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
@@ -107,628 +474,4 @@ https://www.psycopg.org/docs/usage.html#query-parameters.&lt;/p&gt;
       )
      )
 &amp;quot;&amp;quot;&amp;quot;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</content><category term="TIL"></category><category term="til"></category><category term="psycopg2"></category><category term="python"></category><category term="postgresql"></category></entry><entry><title>Setup Python Package to use with Pipx</title><link href="https://cetyler.github.io/setup-python-package-to-use-with-pipx.html" rel="alternate"></link><published>2023-05-26T20:00:00-05:00</published><updated>2023-05-26T20:00:00-05:00</updated><author><name>Christopher</name></author><id>tag:cetyler.github.io,2023-05-26:/setup-python-package-to-use-with-pipx.html</id><summary type="html">&lt;p&gt;Setting up your Python project to work with pipx and pyproject.toml&lt;/p&gt;</summary><content type="html">&lt;p&gt;Found the information at
-https://flit.pypa.io/en/latest/pyproject_toml.html#pyproject-project-scripts.&lt;/p&gt;
-&lt;h2&gt;pyproject.toml&lt;/h2&gt;
-&lt;p&gt;Add the following entry:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="k"&gt;[project.scripts]&lt;/span&gt;
-&lt;span class="na"&gt;ms_access_check&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;ms_access_check.cli:main&amp;quot;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;This should work with programs like
-&lt;a href="https://flit.pypa.io/en/latest/index.html"&gt;flit&lt;/a&gt;.
-This will do the following:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&amp;gt; pipx install ms_access_check
-  installed package ms-access-check 0.6.0, installed using Python 3.11.1
-  These apps are now globally available
-    - ms_access_check.exe
-done! ✨ 🌟 ✨
-&amp;gt; ms_access_check --version
-ms_access_check, version 0.5.0
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt; that in Windows, pipx puts the files in
-&lt;code&gt;C:\Users\&amp;lt;Your User Name&amp;gt;\.local\bin&lt;/code&gt;.&lt;/p&gt;</content><category term="TIL"></category><category term="til"></category><category term="python"></category><category term="pipx"></category><category term="pyproject"></category><category term="flit"></category></entry><entry><title>Zettelkasten Workflow</title><link href="https://cetyler.github.io/zettelkasten-workflow.html" rel="alternate"></link><published>2023-05-20T15:00:00-05:00</published><updated>2023-05-20T15:00:00-05:00</updated><author><name>Christopher Tyler</name></author><id>tag:cetyler.github.io,2023-05-20:/zettelkasten-workflow.html</id><summary type="html">&lt;p&gt;How I use Zettelkasten using vim and fzf.&lt;/p&gt;</summary><content type="html">&lt;h2&gt;Overview&lt;/h2&gt;
-&lt;p&gt;Over the years I tried different methods of note taking from paper notes, using
-apps and none quite worked because I each method have certain downsides.
-Paper notes have a low friction how putting in notes but can be difficult to
-search for stuff.
-Using apps I had to conform to their paradigm and trying to sync with my
-different devices (getting Linux support and iOS support at the same time was
-more difficult than I thought).&lt;/p&gt;
-&lt;p&gt;Using &lt;a href="https://zettelkasten.de/introduction/"&gt;Zettelkasten&lt;/a&gt; helped me organize
-my notes and seeing
-&lt;a href="https://www.youtube.com/watch?v=Rxgi12c3sEY"&gt;Bob Belderbos's video&lt;/a&gt; made it
-easy for me adopt.&lt;/p&gt;
-&lt;h2&gt;Quick Primer on Digital Zettelkasten&lt;/h2&gt;
-&lt;p&gt;Basically instead of having detailed potentially long notes, instead keep
-atomic notes that has the following:&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;A single focus to make it easier to scan and understand.&lt;/li&gt;
-&lt;li&gt;Source references so you know where the info came from.&lt;/li&gt;
-&lt;li&gt;Tags though keep the tags to around 3 or so.&lt;/li&gt;
-&lt;li&gt;Useful links so that it can make it easier to see potential connections.&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;Since I decided to do a digital instead of a paper one, I needed a method to
-employ tags to aid in searching.
-I also use what I call super tags, though I did get the idea from
-&lt;a href="https://zettelkasten.de/posts/three-layers-structure-zettelkasten/"&gt;Structural Layers in Note Taking article&lt;/a&gt;.
-My super tags is how I link my notes together.
-For example, I may be working on a project that involves weather, SQL and
-machine learning.
-Each of those notes would have tags like &lt;code&gt;#temperature&lt;/code&gt;, &lt;code&gt;#postgresql&lt;/code&gt; and
-&lt;code&gt;#scikitlearn&lt;/code&gt; for example.
-None of those notes would link together but I could add
-&lt;code&gt;##predict_weather_project&lt;/code&gt; to link those notes together.&lt;/p&gt;
-&lt;h2&gt;My Digital Zettelkasten Tooling&lt;/h2&gt;
-&lt;p&gt;Prior to seeing Bob's video, I was reading
-&lt;a href="https://www.edwinwenink.xyz/posts/42-vim_notetaking/"&gt;Edwin's series&lt;/a&gt; on how
-he was using vim.
-It gave me the idea of using CLI tools since I am usually on the computer,
-especially at work.
-The tools he used besides vim I don't normally use and he was trying to
-replicate the Zettelkasten paper method.
-After watching Bob's video I took a look at his
-&lt;a href="https://github.com/bbelderbos/bobcodesit"&gt;git repo&lt;/a&gt; as well as
-&lt;a href="https://gist.github.com/benevidesh/d78f7681120a13d5386ea55b39d82c9b"&gt;the gist&lt;/a&gt;
-that gave him the idea.&lt;/p&gt;
-&lt;p&gt;I use CLI tools that should work in either Linux or a Unix-like such as MacOS
-or FreeBSD.
-However the tools are not required to create/view/search notes either.
-I also use git to store the notes.
-While I have my notes in my private &lt;a href="https://gitea.io/en-us/"&gt;Gitea&lt;/a&gt;, you could
-use something like GitHub or GitLab.
-Using git means that I can view my notes using a web browser or putting the
-git repo on said device.
-All my notes are written in Markdown which will get rendered in
-Gitea/GitHub/GitLab.
-I have an index which has a table of contents at the top so that I can quickly
-jump around.&lt;/p&gt;
-&lt;p&gt;On the CLI, I have scripts to create new notes &lt;code&gt;zn&lt;/code&gt;, search notes by title &lt;code&gt;zs&lt;/code&gt;
-and search notes by tag &lt;code&gt;zt&lt;/code&gt;.
-I use vim to create my notes as that is my editor of choice though
-&lt;a href="https://micro-editor.github.io/"&gt;micro&lt;/a&gt; would be my second choice.
-Using &lt;code&gt;zn&lt;/code&gt; will automatically create a timestamp file located in my notes
-folder and open vim.
-Searching notes is a combination of &lt;a href="https://github.com/junegunn/fzf"&gt;fzf&lt;/a&gt;,
-grep, sed and &lt;a href="https://github.com/sharkdp/bat"&gt;bat&lt;/a&gt; (cat could be used instead)
-in a bash script.
-Finally I have a python script that will build the index.
-I have two indexes; one for notes and the other that I call super notes.
-My super notes (structured notes) is when I want to link notes together.&lt;/p&gt;
-&lt;p&gt;My code and example of notes are located https://github.com/cetyler/notes which
-will have the TILs that I have in my blog.&lt;/p&gt;
-&lt;h2&gt;My Zettelkasten Workflow&lt;/h2&gt;
-&lt;p&gt;I initially used this workflow for work but then expanded it for everything
-else.
-I keep separate Zettelkasten for work and personal.
-I also use the tooling for other projects.&lt;/p&gt;
-&lt;h3&gt;Work&lt;/h3&gt;
-&lt;p&gt;Most of my notes are finding snippets of information that I will need to refer
-back.
-For example I found out how to include the schema in a PostgreSQL connection
-string from
-&lt;a href="https://stackoverflow.com/questions/59298580/how-to-specify-schema-in-psycopg2-connection-method"&gt;Stack Overflow&lt;/a&gt;.
-That note have the link where I found the information and a quick description
-how to do it.
-I then included tags &lt;code&gt;#postgresql&lt;/code&gt; and &lt;code&gt;#psycopg2&lt;/code&gt; so that I can find it
-later.
-My goal is to keep the note atomic and not too many things.
-Notes from webinars, conferences, etc. I try and keep the notes to a particular
-topic and will split into multiple notes when needed.&lt;/p&gt;
-&lt;p&gt;Longer training and books I also keep the notes atomic and separate to a
-particular topic.
-I include a &lt;code&gt;#book&lt;/code&gt; tag for books are &lt;code&gt;#training&lt;/code&gt; for training videos.
-I also include the author's name as well as where the training came from to
-again ease in searching.&lt;/p&gt;
-&lt;p&gt;My meeting notes I don't separate.
-Each note is for a particular meeting.
-I also use a super tag &lt;code&gt;##company_name&lt;/code&gt; so that I can look for them in my
-super/structured index.
-My previous jobs this would be unwieldy since I was in a lot of meetings.
-Instead I would use a super tag by project since my projects had a specific
-start and end.&lt;/p&gt;
-&lt;p&gt;I don't use it for any task list, just notes.
-I don't plan on removing any old notes though I am contemplating removing
-obsolete notes from an old version of Python that no longer exists in the
-current version.&lt;/p&gt;
-&lt;h3&gt;Personal&lt;/h3&gt;
-&lt;p&gt;During my weekly review, I will go through any work notes that could be useful
-in my personal life.
-For example, I found out about Zettelkasten at work and continued researching at
-home.
-I then copy those notes over as well as any personal notes that could be useful
-for work.
-This usually only takes less than 5 minutes so I will continue to keep my notes
-separated.&lt;/p&gt;
-&lt;p&gt;I also include notes like if I did some maintenance around the house so that I
-can search later if I need to know when something was done.
-I don't put any task list and only keep notes.
-Any temporary notes don't go here but I use Apple Notes as I will delete the
-notes within a few days.&lt;/p&gt;
-&lt;h3&gt;Other&lt;/h3&gt;
-&lt;p&gt;I use the scripts created for my notes to keep track of my SQL scripts.
-I have a separate git repository and rename &lt;code&gt;zn&lt;/code&gt;, &lt;code&gt;zs&lt;/code&gt;, &lt;code&gt;zt&lt;/code&gt; to &lt;code&gt;qn&lt;/code&gt;, &lt;code&gt;qs&lt;/code&gt;
-and &lt;code&gt;qt&lt;/code&gt;.
-I use this for both work and personal queries for the past 4-5 months and it
-has worked pretty well.
-Similar to my notes, it makes it easy to find that scripts and code snippet
-to use with a particular project.&lt;/p&gt;
-&lt;h2&gt;Summary&lt;/h2&gt;
-&lt;p&gt;I included my &lt;a href="https://github.com/cetyler/notes/tree/main"&gt;public notes&lt;/a&gt; to
-show how the tooling works.
-This workflow has stuck much more than other methods that I have tried.
-Keeping the notes atomic and keeping the tags for each notes to a minimum, I
-can search my notes quickly.&lt;/p&gt;</content><category term="Workflow"></category><category term="workflow"></category><category term="zettel"></category><category term="zettelkasten"></category></entry><entry><title>Using psql to put JSON Data into a Table</title><link href="https://cetyler.github.io/using-psql-to-put-json-data-into-a-table.html" rel="alternate"></link><published>2023-05-06T20:00:00-05:00</published><updated>2023-08-01T22:50:00-05:00</updated><author><name>Christopher</name></author><id>tag:cetyler.github.io,2023-05-06:/using-psql-to-put-json-data-into-a-table.html</id><summary type="html">&lt;p&gt;Show how you can take JSON data and insert that data into a table.&lt;/p&gt;</summary><content type="html">&lt;h2&gt;Overview&lt;/h2&gt;
-&lt;p&gt;After creating my program
-(&lt;a href="https://github.com/cetyler/openweather_report"&gt;openweather_report&lt;/a&gt;) that
-pulls in data from &lt;a href="https://openweathermap.org"&gt;OpenWeather&lt;/a&gt;, the data is being
-saved into PostgreSQL as JSON but I would like to do some basic analysis.
-In order to query JSON data:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="n"&gt;postgres&lt;/span&gt;&lt;span class="nv"&gt;@raw_data&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="err"&gt;#&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;select&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;raw_data&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;-&amp;gt;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;minutely&amp;#39;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;-&amp;gt;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;from&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;weather&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;raw_json_data&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;limit&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
-&lt;span class="w"&gt;                &lt;/span&gt;&lt;span class="vm"&gt;?&lt;/span&gt;&lt;span class="k"&gt;column&lt;/span&gt;&lt;span class="vm"&gt;?&lt;/span&gt;&lt;span class="w"&gt;                &lt;/span&gt;
-&lt;span class="o"&gt;----------------------------------------&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
-&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="err"&gt;{&lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;dt&amp;quot;&lt;/span&gt;&lt;span class="err"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mi"&gt;1678704060&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;precipitation&amp;quot;&lt;/span&gt;&lt;span class="err"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="err"&gt;}&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
-&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;row&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;I will go in more detail later in the article but this can be a little clunky
-but worse it slow down the query.
-This article will show how to query JSON data and how to then insert that data
-into a table to help with analysis and query performance.&lt;/p&gt;
-&lt;h2&gt;Querying JSON&lt;/h2&gt;
-&lt;p&gt;The data is using &lt;a href="https://openweathermap.org/api/one-call-3"&gt;One Call API&lt;/a&gt;.
-An example of the JSON:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;{
-  &amp;quot;lat&amp;quot;: 39.31,
-  &amp;quot;lon&amp;quot;: -74.5,
-  &amp;quot;timezone&amp;quot;: &amp;quot;America/New_York&amp;quot;,
-  &amp;quot;timezone_offset&amp;quot;: -18000,
-  &amp;quot;current&amp;quot;: {
-    &amp;quot;dt&amp;quot;: 1646318698,
-    &amp;quot;sunrise&amp;quot;: 1646306882,
-    &amp;quot;sunset&amp;quot;: 1646347929,
-    &amp;quot;temp&amp;quot;: 282.21,
-    &amp;quot;feels_like&amp;quot;: 278.41,
-   ...
-}
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;For example, I can do a query to get the timezone for each location that I have
-data for the past month:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="n"&gt;postgres&lt;/span&gt;&lt;span class="nv"&gt;@raw_data&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="err"&gt;#&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;select&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;distinct&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;raw_data&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;-&amp;gt;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;timezone&amp;#39;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;as&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;timezone&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
-&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="k"&gt;from&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;weather&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;raw_json_data&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;
-&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;where&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;entry_date&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;&amp;gt;=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;2023-04-01&amp;#39;&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
-&lt;span class="w"&gt;   &lt;/span&gt;&lt;span class="ow"&gt;and&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;entry_date&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;&amp;lt;=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;2023-04-30&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
-&lt;span class="w"&gt;       &lt;/span&gt;&lt;span class="n"&gt;timezone&lt;/span&gt;&lt;span class="w"&gt;        &lt;/span&gt;
-&lt;span class="o"&gt;-----------------------&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
-&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;America/Chicago&amp;quot;&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
-&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;America/Denver&amp;quot;&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
-&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;America/Los_Angeles&amp;quot;&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
-&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;America/New_York&amp;quot;&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
-&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;4&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;rows&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;The JSON data is in the &lt;code&gt;raw_data&lt;/code&gt; column and using &lt;code&gt;-&amp;gt;&lt;/code&gt; I can go through each
-key in the JSON.
-In this example, I didn't need to do anything with the type since it will get
-returned as &lt;code&gt;text&lt;/code&gt;.
-If the data was suppose to be numbers, then I would need to use &lt;code&gt;numeric&lt;/code&gt; for
-example.
-As you can see, the method to get data out of a JSON column, it is fairly
-straightforward.&lt;/p&gt;
-&lt;h2&gt;Breaking Out JSON to Table&lt;/h2&gt;
-&lt;p&gt;I have about a year's worth of data for 10 locations that I get data for each
-location every 20 minutes:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="n"&gt;postgres&lt;/span&gt;&lt;span class="nv"&gt;@raw_data&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="err"&gt;#&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="err"&gt;\&lt;/span&gt;&lt;span class="n"&gt;dt&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;weather&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;raw_json_data&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;
-&lt;span class="w"&gt;                                        &lt;/span&gt;&lt;span class="n"&gt;List&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;of&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;relations&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
-&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;Schema&lt;/span&gt;&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="w"&gt;     &lt;/span&gt;&lt;span class="n"&gt;Name&lt;/span&gt;&lt;span class="w"&gt;      &lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;Type&lt;/span&gt;&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="n"&gt;Owner&lt;/span&gt;&lt;span class="w"&gt;   &lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;Persistence&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;Access&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;method&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="k"&gt;Size&lt;/span&gt;&lt;span class="w"&gt;   &lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;Description&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;
-&lt;span class="o"&gt;---------+---------------+-------+----------+-------------+---------------+---------+-------------&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
-&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;weather&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;raw_json_data&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nc"&gt;table&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;postgres&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;permanent&lt;/span&gt;&lt;span class="w"&gt;   &lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;heap&lt;/span&gt;&lt;span class="w"&gt;          &lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mi"&gt;1235&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;MB&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;
-&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;row&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;If I put just the current weather data into a table:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;raw_data=# \dt+ weather.current_conditions 
-                                          List of relations
- Schema  |        Name        | Type  |  Owner   | Persistence | Access method | Size  | Description 
----------+--------------------+-------+----------+-------------+---------------+-------+-------------
- weather | current_conditions | table | postgres | permanent   | heap          | 30 MB | 
-(1 row)
-
-raw_data=# select count(*) from weather.current_conditions;
- count  
---------
- 222522
-(1 row)
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;Also by having the data into a table, I can add indexes, set up the data in
-such a way to make it easier for analyze (ex. convert all the EPOCH to 
-timestamp).&lt;/p&gt;
-&lt;p&gt;The current data is a flat JSON so it should be easy to build the query.
-I also want to make it as a view since I will use this to insert data.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="cm"&gt;/* Create View Current Conditions Weather Data from JSON&lt;/span&gt;
-&lt;span class="cm"&gt;Created by Christopher Tyler&lt;/span&gt;
-
-&lt;span class="cm"&gt;This will create a view from the JSON data for current weather conditions.&lt;/span&gt;
-&lt;span class="cm"&gt;*/&lt;/span&gt;
-
-&lt;span class="n"&gt;drop&lt;/span&gt; &lt;span class="n"&gt;view&lt;/span&gt; &lt;span class="nf"&gt;if&lt;/span&gt; &lt;span class="nf"&gt;exists&lt;/span&gt; &lt;span class="n"&gt;weather&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;vw_current&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-&lt;span class="n"&gt;create&lt;/span&gt; &lt;span class="n"&gt;view&lt;/span&gt; &lt;span class="n"&gt;weather&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;vw_current&lt;/span&gt; &lt;span class="kr"&gt;as&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;
-&lt;span class="n"&gt;select&lt;/span&gt; &lt;span class="n"&gt;l&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;id&lt;/span&gt; 
- &lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;timezone&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt; 
-         &lt;span class="s"&gt;&amp;#39;UTC&amp;#39;&lt;/span&gt;
-        &lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;to_timestamp&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt; 
-                &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;r&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;raw_data&lt;/span&gt; &lt;span class="o"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;current&amp;#39;&lt;/span&gt; &lt;span class="o"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;dt&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="kt"&gt;integer&lt;/span&gt; 
-                &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;r&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;raw_data&lt;/span&gt; &lt;span class="o"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;timezone_offset&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="n"&gt;integer&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-  &lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="n"&gt;timestamptz&lt;/span&gt; &lt;span class="kr"&gt;as&lt;/span&gt; &lt;span class="n"&gt;measured&lt;/span&gt; 
- &lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;timezone&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;
-         &lt;span class="s"&gt;&amp;#39;UTC&amp;#39;&lt;/span&gt;
-        &lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;to_timestamp&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;
-                &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;r&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;raw_data&lt;/span&gt; &lt;span class="o"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;current&amp;#39;&lt;/span&gt; &lt;span class="o"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;sunrise&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="kt"&gt;integer&lt;/span&gt;
-                &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;r&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;raw_data&lt;/span&gt; &lt;span class="o"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;timezone_offset&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="n"&gt;integer&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-  &lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="n"&gt;timestamptz&lt;/span&gt; &lt;span class="kr"&gt;as&lt;/span&gt; &lt;span class="n"&gt;sunrise&lt;/span&gt;
- &lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;timezone&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;
-         &lt;span class="s"&gt;&amp;#39;UTC&amp;#39;&lt;/span&gt;
-        &lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;to_timestamp&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;
-                &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;r&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;raw_data&lt;/span&gt; &lt;span class="o"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;current&amp;#39;&lt;/span&gt; &lt;span class="o"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;sunset&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="kt"&gt;integer&lt;/span&gt;
-                &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;r&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;raw_data&lt;/span&gt; &lt;span class="o"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;timezone_offset&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="n"&gt;integer&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-  &lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="n"&gt;timestamptz&lt;/span&gt; &lt;span class="kr"&gt;as&lt;/span&gt; &lt;span class="n"&gt;sunset&lt;/span&gt;
- &lt;span class="p"&gt;,(&lt;/span&gt;&lt;span class="n"&gt;r&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;raw_data&lt;/span&gt; &lt;span class="o"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;current&amp;#39;&lt;/span&gt; &lt;span class="o"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;temp&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="n"&gt;numeric&lt;/span&gt; &lt;span class="kr"&gt;as&lt;/span&gt; &lt;span class="n"&gt;temperature&lt;/span&gt;
- &lt;span class="p"&gt;,(&lt;/span&gt;&lt;span class="n"&gt;r&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;raw_data&lt;/span&gt; &lt;span class="o"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;current&amp;#39;&lt;/span&gt; &lt;span class="o"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;feels_like&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="n"&gt;numeric&lt;/span&gt; &lt;span class="kr"&gt;as&lt;/span&gt; &lt;span class="n"&gt;feels_like&lt;/span&gt;
- &lt;span class="p"&gt;,(&lt;/span&gt;&lt;span class="n"&gt;r&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;raw_data&lt;/span&gt; &lt;span class="o"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;current&amp;#39;&lt;/span&gt; &lt;span class="o"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;pressure&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="n"&gt;numeric&lt;/span&gt; &lt;span class="kr"&gt;as&lt;/span&gt; &lt;span class="n"&gt;pressure&lt;/span&gt;
- &lt;span class="p"&gt;,(&lt;/span&gt;&lt;span class="n"&gt;r&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;raw_data&lt;/span&gt; &lt;span class="o"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;current&amp;#39;&lt;/span&gt; &lt;span class="o"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;humidity&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="n"&gt;numeric&lt;/span&gt; &lt;span class="kr"&gt;as&lt;/span&gt; &lt;span class="n"&gt;humidity&lt;/span&gt;
- &lt;span class="p"&gt;,(&lt;/span&gt;&lt;span class="n"&gt;r&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;raw_data&lt;/span&gt; &lt;span class="o"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;current&amp;#39;&lt;/span&gt; &lt;span class="o"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;dew_point&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="n"&gt;numeric&lt;/span&gt; &lt;span class="kr"&gt;as&lt;/span&gt; &lt;span class="n"&gt;dew_point&lt;/span&gt;
- &lt;span class="p"&gt;,(&lt;/span&gt;&lt;span class="n"&gt;r&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;raw_data&lt;/span&gt; &lt;span class="o"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;current&amp;#39;&lt;/span&gt; &lt;span class="o"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;clouds&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="n"&gt;numeric&lt;/span&gt; &lt;span class="kr"&gt;as&lt;/span&gt; &lt;span class="n"&gt;clouds&lt;/span&gt;
- &lt;span class="p"&gt;,(&lt;/span&gt;&lt;span class="n"&gt;r&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;raw_data&lt;/span&gt; &lt;span class="o"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;current&amp;#39;&lt;/span&gt; &lt;span class="o"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;uvi&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="n"&gt;numeric&lt;/span&gt; &lt;span class="kr"&gt;as&lt;/span&gt; &lt;span class="n"&gt;uv_index&lt;/span&gt;
- &lt;span class="p"&gt;,(&lt;/span&gt;&lt;span class="n"&gt;r&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;raw_data&lt;/span&gt; &lt;span class="o"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;current&amp;#39;&lt;/span&gt; &lt;span class="o"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;visibility&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="n"&gt;numeric&lt;/span&gt; &lt;span class="kr"&gt;as&lt;/span&gt; &lt;span class="n"&gt;visibility&lt;/span&gt;
- &lt;span class="p"&gt;,(&lt;/span&gt;&lt;span class="n"&gt;r&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;raw_data&lt;/span&gt; &lt;span class="o"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;current&amp;#39;&lt;/span&gt; &lt;span class="o"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;wind_speed&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="n"&gt;numeric&lt;/span&gt; &lt;span class="kr"&gt;as&lt;/span&gt; &lt;span class="n"&gt;wind_speed&lt;/span&gt;
- &lt;span class="p"&gt;,(&lt;/span&gt;&lt;span class="n"&gt;r&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;raw_data&lt;/span&gt; &lt;span class="o"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;current&amp;#39;&lt;/span&gt; &lt;span class="o"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;wind_gust&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="n"&gt;numeric&lt;/span&gt; &lt;span class="kr"&gt;as&lt;/span&gt; &lt;span class="n"&gt;wind_gust&lt;/span&gt;
- &lt;span class="p"&gt;,(&lt;/span&gt;&lt;span class="n"&gt;r&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;raw_data&lt;/span&gt; &lt;span class="o"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;current&amp;#39;&lt;/span&gt; &lt;span class="o"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;wind_deg&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="n"&gt;numeric&lt;/span&gt; &lt;span class="kr"&gt;as&lt;/span&gt; &lt;span class="n"&gt;wind_deg&lt;/span&gt;
- &lt;span class="p"&gt;,(&lt;/span&gt;&lt;span class="n"&gt;r&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;raw_data&lt;/span&gt; &lt;span class="o"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;current&amp;#39;&lt;/span&gt; &lt;span class="o"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;rain&amp;#39;&lt;/span&gt; &lt;span class="o"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;1h&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="n"&gt;numeric&lt;/span&gt; &lt;span class="kr"&gt;as&lt;/span&gt; &lt;span class="n"&gt;rain&lt;/span&gt;
- &lt;span class="p"&gt;,(&lt;/span&gt;&lt;span class="n"&gt;r&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;raw_data&lt;/span&gt; &lt;span class="o"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;current&amp;#39;&lt;/span&gt; &lt;span class="o"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;snow&amp;#39;&lt;/span&gt; &lt;span class="o"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;1h&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="n"&gt;numeric&lt;/span&gt; &lt;span class="kr"&gt;as&lt;/span&gt; &lt;span class="n"&gt;snow&lt;/span&gt;
- &lt;span class="p"&gt;,(&lt;/span&gt;&lt;span class="n"&gt;r&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;raw_data&lt;/span&gt; &lt;span class="o"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;current&amp;#39;&lt;/span&gt; &lt;span class="o"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;weather&amp;#39;&lt;/span&gt; &lt;span class="o"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;id&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="n"&gt;int&lt;/span&gt; &lt;span class="kr"&gt;as&lt;/span&gt; &lt;span class="n"&gt;weather_id&lt;/span&gt;
- &lt;span class="p"&gt;,(&lt;/span&gt;&lt;span class="n"&gt;r&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;raw_data&lt;/span&gt; &lt;span class="o"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;current&amp;#39;&lt;/span&gt; &lt;span class="o"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;weather&amp;#39;&lt;/span&gt; &lt;span class="o"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;main&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="n"&gt;text&lt;/span&gt; &lt;span class="kr"&gt;as&lt;/span&gt; &lt;span class="n"&gt;weather_main&lt;/span&gt;
- &lt;span class="p"&gt;,(&lt;/span&gt;&lt;span class="n"&gt;r&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;raw_data&lt;/span&gt; &lt;span class="o"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;current&amp;#39;&lt;/span&gt; &lt;span class="o"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;weather&amp;#39;&lt;/span&gt; &lt;span class="o"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;description&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="n"&gt;text&lt;/span&gt; &lt;span class="kr"&gt;as&lt;/span&gt; &lt;span class="n"&gt;weather_description&lt;/span&gt;
- &lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;r&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;entry_date&lt;/span&gt; &lt;span class="kr"&gt;as&lt;/span&gt; &lt;span class="n"&gt;entry&lt;/span&gt;
-&lt;span class="n"&gt;from&lt;/span&gt; &lt;span class="n"&gt;weather&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;raw_json_data&lt;/span&gt; &lt;span class="kr"&gt;as&lt;/span&gt; &lt;span class="n"&gt;r&lt;/span&gt;
- &lt;span class="kr"&gt;left&lt;/span&gt; &lt;span class="nf"&gt;join&lt;/span&gt; &lt;span class="n"&gt;weather&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;locations&lt;/span&gt; &lt;span class="kr"&gt;as&lt;/span&gt; &lt;span class="n"&gt;l&lt;/span&gt; &lt;span class="n"&gt;on&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;r&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;raw_data&lt;/span&gt; &lt;span class="o"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;lon&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="n"&gt;numeric&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;l&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;longitude&lt;/span&gt;
-&lt;span class="n"&gt;where&lt;/span&gt; &lt;span class="n"&gt;r&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;raw_data&lt;/span&gt; &lt;span class="o"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;current&amp;#39;&lt;/span&gt; &lt;span class="n"&gt;is&lt;/span&gt; &lt;span class="kr"&gt;not&lt;/span&gt; &lt;span class="n"&gt;null&lt;/span&gt;
-&lt;span class="p"&gt;);&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;There is a lot here but it is not difficult to go through.
-Now with the view, it is now easy to insert the data into
-&lt;code&gt;weather.current_conditions&lt;/code&gt; table.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="cm"&gt;/* Insert Current Conditions Weather Data from JSON&lt;/span&gt;
-&lt;span class="cm"&gt;Created by Christopher Tyler&lt;/span&gt;
-
-&lt;span class="cm"&gt;This script will insert data from weather.raw_json_data and put into&lt;/span&gt;
-&lt;span class="cm"&gt;weather.current_conditions.&lt;/span&gt;
-&lt;span class="cm"&gt;The script will only add data that is current not in current_conditions.&lt;/span&gt;
-&lt;span class="cm"&gt;*/&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
-
-begin&lt;span class="err"&gt;;&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
-
-insert&lt;span class="w"&gt; &lt;/span&gt;into&lt;span class="w"&gt; &lt;/span&gt;weather&lt;span class="o"&gt;.&lt;/span&gt;current_conditions&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;city_id&lt;span class="o"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;measured&lt;span class="o"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;sunrise&lt;span class="o"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;sunset&lt;span class="o"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;temperature&lt;span class="o"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;feels_like&lt;span class="o"&gt;,&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
-&lt;span class="w"&gt;        &lt;/span&gt;pressure&lt;span class="o"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;humidity&lt;span class="o"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;dew_point&lt;span class="o"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;clouds&lt;span class="o"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;uv_index&lt;span class="o"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;visibility&lt;span class="o"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;wind_speed&lt;span class="o"&gt;,&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
-&lt;span class="w"&gt;        &lt;/span&gt;wind_gust&lt;span class="o"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;wind_deg&lt;span class="o"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;rain&lt;span class="o"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;snow&lt;span class="o"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;weather_id&lt;span class="o"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;weather_main&lt;span class="o"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;weather_description&lt;span class="o"&gt;,&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
-&lt;span class="w"&gt;        &lt;/span&gt;entry&lt;span class="w"&gt;&lt;/span&gt;
-&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
-&lt;span class="kr"&gt;select&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
-from&lt;span class="w"&gt; &lt;/span&gt;weather&lt;span class="o"&gt;.&lt;/span&gt;vw_current&lt;span class="w"&gt;&lt;/span&gt;
-where&lt;span class="w"&gt; &lt;/span&gt;entry&lt;span class="w"&gt; &lt;/span&gt;not&lt;span class="w"&gt; &lt;/span&gt;in&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="kr"&gt;select&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;entry&lt;span class="w"&gt; &lt;/span&gt;from&lt;span class="w"&gt; &lt;/span&gt;weather&lt;span class="o"&gt;.&lt;/span&gt;current_conditions&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
-&lt;span class="w"&gt; &lt;/span&gt;and&lt;span class="w"&gt; &lt;/span&gt;id&lt;span class="w"&gt; &lt;/span&gt;is&lt;span class="w"&gt; &lt;/span&gt;not&lt;span class="w"&gt; &lt;/span&gt;null&lt;span class="w"&gt;&lt;/span&gt;
-&lt;span class="w"&gt; &lt;/span&gt;and&lt;span class="w"&gt; &lt;/span&gt;measured&lt;span class="w"&gt; &lt;/span&gt;is&lt;span class="w"&gt; &lt;/span&gt;not&lt;span class="w"&gt; &lt;/span&gt;null&lt;span class="w"&gt;&lt;/span&gt;
-order&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="kr"&gt;by&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;entry&lt;span class="err"&gt;;&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
-
-commit&lt;span class="err"&gt;;&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;This script will use the view as a means to insert the data into the table.
-The where clause is to ensure that I am only adding new data, I don't want any
-null for id or measured.&lt;/p&gt;
-&lt;p&gt;This script can be run:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&amp;gt; psql &amp;quot;postgres://&amp;lt;username&amp;gt;:&amp;lt;password&amp;gt;@&amp;lt;hostname&amp;gt;:&amp;lt;port&amp;gt;/&amp;lt;db_name&amp;gt;&amp;quot; -X -f current.sql
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;h3&gt;Nested JSON Data as a List&lt;/h3&gt;
-&lt;p&gt;There is a 60 minute forecast in the JSON data as &lt;code&gt;minutely&lt;/code&gt;.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;{
-  ...
-  &amp;quot;minutely&amp;quot;: [
-    {
-      &amp;quot;dt&amp;quot;: 1646318700,
-      &amp;quot;precipitation&amp;quot;: 0
-    },
-    ...
-    ]
-  ...
-}
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;This list/array will repeat for another 59 times.
-I could do:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="n"&gt;raw_data&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="err"&gt;#&lt;/span&gt; &lt;span class="n"&gt;select&lt;/span&gt; &lt;span class="n"&gt;raw_data&lt;/span&gt; &lt;span class="o"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;minutely&amp;#39;&lt;/span&gt; &lt;span class="o"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt; &lt;span class="o"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;dt&amp;#39;&lt;/span&gt; &lt;span class="kr"&gt;as&lt;/span&gt; &lt;span class="n"&gt;forecast&lt;/span&gt;
- &lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;raw_data&lt;/span&gt; &lt;span class="o"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;minutely&amp;#39;&lt;/span&gt; &lt;span class="o"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt; &lt;span class="o"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;precipitation&amp;#39;&lt;/span&gt; &lt;span class="kr"&gt;as&lt;/span&gt; &lt;span class="n"&gt;precipitation&lt;/span&gt;
-&lt;span class="n"&gt;from&lt;/span&gt; &lt;span class="n"&gt;weather&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;raw_json_data&lt;/span&gt; 
-&lt;span class="kr"&gt;limit&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-  &lt;span class="n"&gt;forecast&lt;/span&gt;  &lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="n"&gt;precipitation&lt;/span&gt; 
-&lt;span class="o"&gt;------------+---------------&lt;/span&gt;
- &lt;span class="mi"&gt;1678704060&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;
-&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt; &lt;span class="nf"&gt;row&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;Again the query is not complicated but this can be annoying to do 60 times.
-Instead:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="n"&gt;raw_data&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="err"&gt;#&lt;/span&gt; &lt;span class="n"&gt;select&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;raw_data&lt;/span&gt; &lt;span class="o"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;current&amp;#39;&lt;/span&gt; &lt;span class="o"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;dt&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="kr"&gt;as&lt;/span&gt; &lt;span class="n"&gt;measured&lt;/span&gt;
- &lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;rows&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;dt&lt;/span&gt; &lt;span class="kr"&gt;as&lt;/span&gt; &lt;span class="n"&gt;forecast&lt;/span&gt;
- &lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;rows&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;precipitation&lt;/span&gt;
-&lt;span class="n"&gt;from&lt;/span&gt; &lt;span class="n"&gt;weather&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;raw_json_data&lt;/span&gt;
-&lt;span class="n"&gt;cross&lt;/span&gt; &lt;span class="nf"&gt;join&lt;/span&gt; &lt;span class="n"&gt;lateral&lt;/span&gt;
-&lt;span class="n"&gt;jsonb_to_recordset&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;raw_data&lt;/span&gt; &lt;span class="o"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;minutely&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="kr"&gt;as&lt;/span&gt; &lt;span class="n"&gt;rows&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;dt&lt;/span&gt; &lt;span class="n"&gt;int&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;precipitation&lt;/span&gt; &lt;span class="n"&gt;numeric&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;span class="kr"&gt;limit&lt;/span&gt; &lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-  &lt;span class="n"&gt;measured&lt;/span&gt;  &lt;span class="o"&gt;|&lt;/span&gt;  &lt;span class="n"&gt;forecast&lt;/span&gt;  &lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="n"&gt;precipitation&lt;/span&gt; 
-&lt;span class="o"&gt;------------+------------+---------------&lt;/span&gt;
- &lt;span class="mi"&gt;1678704002&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="mi"&gt;1678704060&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt;             &lt;span class="mi"&gt;0&lt;/span&gt;
- &lt;span class="mi"&gt;1678704002&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="mi"&gt;1678704120&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt;             &lt;span class="mi"&gt;0&lt;/span&gt;
- &lt;span class="mi"&gt;1678704002&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="mi"&gt;1678704180&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt;             &lt;span class="mi"&gt;0&lt;/span&gt;
- &lt;span class="mi"&gt;1678704002&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="mi"&gt;1678704240&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt;             &lt;span class="mi"&gt;0&lt;/span&gt;
- &lt;span class="mi"&gt;1678704002&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="mi"&gt;1678704300&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt;             &lt;span class="mi"&gt;0&lt;/span&gt;
- &lt;span class="mi"&gt;1678704002&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="mi"&gt;1678704360&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt;             &lt;span class="mi"&gt;0&lt;/span&gt;
- &lt;span class="mi"&gt;1678704002&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="mi"&gt;1678704420&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt;             &lt;span class="mi"&gt;0&lt;/span&gt;
- &lt;span class="mi"&gt;1678704002&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="mi"&gt;1678704480&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt;             &lt;span class="mi"&gt;0&lt;/span&gt;
- &lt;span class="mi"&gt;1678704002&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="mi"&gt;1678704540&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt;             &lt;span class="mi"&gt;0&lt;/span&gt;
- &lt;span class="mi"&gt;1678704002&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="mi"&gt;1678704600&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt;             &lt;span class="mi"&gt;0&lt;/span&gt;
-&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;10&lt;/span&gt; &lt;span class="n"&gt;rows&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;I included when the forecast was measured or another way when the forecast was
-made.
-I used &lt;code&gt;jsonb_to_recordset()&lt;/code&gt; (see
-&lt;a href="https://www.postgresql.org/docs/current/functions-json.html#FUNCTIONS-JSON-PROCESSING-TABLE"&gt;PostgreSQL's documentation&lt;/a&gt;)
-and &lt;code&gt;cross join lateral&lt;/code&gt; (see
-&lt;a href="https://www.postgresql.org/docs/15/queries-table-expressions.html"&gt;PostgreSQL's documentation&lt;/a&gt;)
-to be able to unpack the JSON to each forecast has its own row.
-&lt;strong&gt;Note&lt;/strong&gt; that I did get a hint from this
-&lt;a href="https://stackoverflow.com/questions/58124750/how-to-turn-a-json-array-into-rows-in-postgresql"&gt;Stack Overflow&lt;/a&gt;.&lt;/p&gt;
-&lt;h2&gt;Conclusion&lt;/h2&gt;
-&lt;p&gt;Being able to save JSON into PostgreSQL is very useful.
-In my example of OpenWeather data, I can bring in the data as JSON and process
-the JSON to put into tables later.
-I could keep the JSON as a backup but only the last 6 months if I wanted to.
-Also while I am only using the
-&lt;a href="https://openweathermap.org/api/one-call-3"&gt;One Call API&lt;/a&gt;, my
-&lt;code&gt;weather.raw_json_data&lt;/code&gt; can support any of OpenWeather's other API calls
-without changing the table.&lt;/p&gt;</content><category term="SQL"></category><category term="sql"></category><category term="openweathermap"></category><category term="json"></category><category term="cross lateral join"></category><category term="jsonb_to_recordset()"></category></entry><entry><title>Weather Project - Initial Release</title><link href="https://cetyler.github.io/weather-project-initial-release.html" rel="alternate"></link><published>2023-04-30T20:10:00-05:00</published><updated>2023-04-30T20:10:00-05:00</updated><author><name>Christopher</name></author><id>tag:cetyler.github.io,2023-04-30:/weather-project-initial-release.html</id><summary type="html">&lt;p&gt;Initial working release.&lt;/p&gt;</summary><content type="html">&lt;h2&gt;Overview&lt;/h2&gt;
-&lt;p&gt;From the &lt;a href="https://cetyler.github.io/weather-project-requirements-and-roadmap.html"&gt;previous article&lt;/a&gt;,
-the Weather Project is now on
-&lt;a href="https://pypi.org/project/openweather-report/"&gt;PyPi&lt;/a&gt; and is on
-&lt;a href="https://github.com/cetyler/openweather_report"&gt;Github&lt;/a&gt;.
-This article will be a bit of an update and the steps to the initial working
-release.&lt;/p&gt;
-&lt;h2&gt;Current Status&lt;/h2&gt;
-&lt;p&gt;The last update has been quite awhile ago.
-The initial goal the project more or less hasn't change but I have change
-some of the goals of the project.
-This program will still have the goal of pulling data from OpenWeather but for
-now only the &lt;a href="https://openweathermap.org/api/one-call-3"&gt;One Call API&lt;/a&gt; since
-this is a free API and contains a lot of data:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Current weather&lt;/li&gt;
-&lt;li&gt;Minute forecast for 1 hour&lt;/li&gt;
-&lt;li&gt;Hourly forecast for 48 hours&lt;/li&gt;
-&lt;li&gt;Daily forecast for 8 days&lt;/li&gt;
-&lt;li&gt;National weather alerts&lt;/li&gt;
-&lt;li&gt;Historical weather data for 40+ years back (since January 1, 1979)&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;The latest release (0.1.5), &lt;code&gt;openweather_report&lt;/code&gt; will only get all the data
-listed but the last bullet point.&lt;/p&gt;
-&lt;h2&gt;Switch from Poetry to Flit&lt;/h2&gt;
-&lt;p&gt;In the past year I used &lt;a href="https://python-poetry.org/"&gt;Poetry&lt;/a&gt; in multiple
-projects at work and the workflow was getting in my way.
-Most of my projects are relatively simple and a lot of the features that could
-help a large project was slowing me down.
-I went back to using &lt;a href="https://flit.pypa.io/"&gt;Flit&lt;/a&gt; with
-&lt;a href="https://pip-tools.readthedocs.io/en/latest/index.html"&gt;pip-tools&lt;/a&gt; and
-&lt;a href="http://pip-chill.readthedocs.io/en/latest/readme.html"&gt;pip-chill&lt;/a&gt;.
-This provides what I need while still being performant.&lt;/p&gt;
-&lt;p&gt;This release I didn't use &lt;code&gt;pip-tools&lt;/code&gt; and &lt;code&gt;pip-chill&lt;/code&gt; but will going forward.&lt;/p&gt;
-&lt;h2&gt;Getting 0.1.5 Released&lt;/h2&gt;
-&lt;p&gt;I already have a crude private version of this program that was getting data
-from OpenWeather but it wasn't generic enough to share.&lt;/p&gt;
-&lt;h3&gt;pyproject.toml&lt;/h3&gt;
-&lt;p&gt;Switching from Poetry to Flit was straightforward.
-Instead of using &lt;a href="https://www.sqlalchemy.org/"&gt;SQLAlchemy&lt;/a&gt;, I decided to use
-&lt;a href="https://nackjicholson.github.io/aiosql/"&gt;aiosql&lt;/a&gt;.
-The main reason is that the SQL required to save data is simple and I don't
-want it mixed within my Python code like my internal program had.
-SQLAlchemy would be overkill.
-I also included the development dependencies but only used
-&lt;a href="https://www.mypy-lang.org/"&gt;mypy&lt;/a&gt; on this release.
-Once I get the rest of the tools setup, I will go into more detail of the
-settings in my &lt;code&gt;pyproject.toml&lt;/code&gt;.&lt;/p&gt;
-&lt;p&gt;I did figure out how to get &lt;a href="https://pypa.github.io/pipx/"&gt;pipx&lt;/a&gt; to recognize
-that this was a CLI program and not a library by adding the following:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="k"&gt;[project.scripts]&lt;/span&gt;
-&lt;span class="na"&gt;openweather_report&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;openweather_report.cli:main&amp;quot;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;h3&gt;README.md&lt;/h3&gt;
-&lt;p&gt;I wanted to make sure that the &lt;code&gt;README.md&lt;/code&gt; had a quickstart as well as
-describing what is required to be able to save to PostgreSQL and SQLite.
-The &lt;a href="https://github.com/cetyler/openweather_report/wiki"&gt;wiki&lt;/a&gt; will still house
-the detail documentation.&lt;/p&gt;
-&lt;h3&gt;CLI Arguments&lt;/h3&gt;
-&lt;p&gt;The program will work using the latitude and longitude of the city you would
-like the weather conditions.
-The API Key is a required as well.
-An invalid API Key will cause OpenWeather to return JSON that describes the
-error.
-Optionally:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;--save&lt;/code&gt;: Will either save to JSON file, PostgreSQL or SQLite.&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;--save_path&lt;/code&gt;: This is only for saving to JSON and will default to a
-  timestamp filename.&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;--db_string&lt;/code&gt;: This is only for the databases.&lt;/li&gt;
-&lt;li&gt;For PostgreSQL it will be
-    &lt;code&gt;postgres://username:password@host:port/database&lt;/code&gt;.&lt;/li&gt;
-&lt;li&gt;For SQLite it will be the filename.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;The program will crash if the save location is incorrect or if a database the
-tables not set up ahead of time.&lt;/p&gt;
-&lt;h3&gt;Save to JSON&lt;/h3&gt;
-&lt;p&gt;This was straightforward since I would just dump to a file.
-There is an option to provide a filename but will default to a timestamp
-filename.&lt;/p&gt;
-&lt;h3&gt;PostgreSQL&lt;/h3&gt;
-&lt;p&gt;It requires a schema of &lt;code&gt;weather&lt;/code&gt; and a table &lt;code&gt;weather.raw_json_data&lt;/code&gt; which is
-described in the README.
-Will print to screen if there is an error but won't stop the program from
-running.&lt;/p&gt;
-&lt;h3&gt;SQLite&lt;/h3&gt;
-&lt;p&gt;It is similar to PostgreSQL except there isn't a schema.
-The class is similar to PostgreSQL and will get cleaned up in the next release.&lt;/p&gt;
-&lt;h3&gt;SQL Code&lt;/h3&gt;
-&lt;p&gt;By using &lt;code&gt;aiosql&lt;/code&gt;, I have the SQL separate from the Python code.
-Right now there are two function &lt;code&gt;save_json_data&lt;/code&gt; and
-&lt;code&gt;save_json_data_no_schema&lt;/code&gt;.
-I may decide to separate &lt;code&gt;openweather.sql&lt;/code&gt; into one from PostgreSQL and one
-from SQLite as the project grows.&lt;/p&gt;
-&lt;h2&gt;Next Steps&lt;/h2&gt;
-&lt;p&gt;I verified that the program works and was able to replace my crusty internal
-version.
-I did create a helper program so that I could use this program to loop through
-the cities I track the weather.
-I should provide at least an example of this file so others could do the same.
-I need to flesh out the Roadmap and get the program tested before it gets any
-larger.&lt;/p&gt;
-&lt;p&gt;I also would like to explain how to take this data and do some basic analysis.
-For example it can be slow to query JSON in PostgreSQL and I plan on showing
-how to take the JSON data and put it into separate indexed tables to make
-querying more performant.&lt;/p&gt;
-&lt;p&gt;Finally I really need to revisit &lt;a href="https://www.cookiecutter.io/"&gt;Cookiecutter&lt;/a&gt;
-to help me be more consistent with my projects.&lt;/p&gt;</content><category term="Python"></category><category term="python"></category><category term="project"></category></entry><entry><title>Prune Docker Images</title><link href="https://cetyler.github.io/prune-docker-images.html" rel="alternate"></link><published>2023-04-21T00:00:00-05:00</published><updated>2023-04-21T00:00:00-05:00</updated><author><name>Christopher</name></author><id>tag:cetyler.github.io,2023-04-21:/prune-docker-images.html</id><summary type="html">&lt;p&gt;Remove images that are not in use.&lt;/p&gt;</summary><content type="html">&lt;p&gt;Can run &lt;code&gt;docker image prune -a --filter "until=24h"&lt;/code&gt; which will get rid of any
-images older than 24hrs.
-It will also remove images that are currently not running and not attached to
-any containers.&lt;/p&gt;</content><category term="TIL"></category><category term="til"></category><category term="docker"></category><category term="prune"></category><category term="images"></category></entry><entry><title>Clear Highlighting in Vim</title><link href="https://cetyler.github.io/clear-highlighting-in-vim.html" rel="alternate"></link><published>2023-04-14T00:00:00-05:00</published><updated>2023-04-14T00:00:00-05:00</updated><author><name>Christopher</name></author><id>tag:cetyler.github.io,2023-04-14:/clear-highlighting-in-vim.html</id><summary type="html">&lt;p&gt;Clearing highlighting after performing a search for an example.&lt;/p&gt;</summary><content type="html">&lt;p&gt;To clear highlighting:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;:noh
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;This will clear any highlighting.&lt;/p&gt;</content><category term="TIL"></category><category term="til"></category><category term="vim"></category><category term="highlighting"></category></entry><entry><title>Inject Packages in pipx</title><link href="https://cetyler.github.io/inject-packages-in-pipx.html" rel="alternate"></link><published>2023-04-07T00:00:00-05:00</published><updated>2023-04-07T00:00:00-05:00</updated><author><name>Christopher</name></author><id>tag:cetyler.github.io,2023-04-07:/inject-packages-in-pipx.html</id><summary type="html">&lt;p&gt;Add packages to an existing virtual environment.&lt;/p&gt;</summary><content type="html">&lt;p&gt;I figured out how to inject and add multiple packages to an install:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;$ pipx inject visidata psycopg2-binary
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</content><category term="TIL"></category><category term="pipx"></category></entry><entry><title>Application Name in PostgreSQL</title><link href="https://cetyler.github.io/application-name-in-postgresql.html" rel="alternate"></link><published>2023-03-31T00:00:00-05:00</published><updated>2023-03-31T00:00:00-05:00</updated><author><name>Christopher</name></author><id>tag:cetyler.github.io,2023-03-31:/application-name-in-postgresql.html</id><summary type="html">&lt;p&gt;Send application name to PostgreSQL.&lt;/p&gt;</summary><content type="html">&lt;p&gt;From Dimitri's &lt;a href="https://theartofpostgresql.com/"&gt;The Art of PostgreSQL&lt;/a&gt;.
-PostgreSQL has an &lt;code&gt;application_name&lt;/code&gt; parameter, which you can set in the
-connection string.
-It is then possible have it reported in the server's logs and is also part of
-the system &lt;code&gt;pg_stat_activity&lt;/code&gt;.&lt;/p&gt;
-&lt;p&gt;For example:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="s"&gt;&amp;quot;postgres://user:pass@127.0.0.1:5432/db_name?application_name=app_name&amp;quot;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</content><category term="TIL"></category><category term="til"></category><category term="postgresql"></category><category term="application_name"></category><category term="taop"></category><category term="The Art of PostgreSQL"></category></entry><entry><title>Find and Replace in Vim</title><link href="https://cetyler.github.io/find-and-replace-in-vim.html" rel="alternate"></link><published>2023-03-24T00:00:00-05:00</published><updated>2023-03-24T00:00:00-05:00</updated><author><name>Christopher</name></author><id>tag:cetyler.github.io,2023-03-24:/find-and-replace-in-vim.html</id><summary type="html">&lt;p&gt;Different ways to find and replace items using vim.&lt;/p&gt;</summary><content type="html">&lt;p&gt;From https://linuxize.com/post/vim-find-replace/&lt;/p&gt;
-&lt;h2&gt;Basic Find and Replace&lt;/h2&gt;
-&lt;p&gt;In Vim you use &lt;code&gt;:substitute&lt;/code&gt; (&lt;code&gt;:s&lt;/code&gt;) command.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="err"&gt;:&lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="n"&gt;range&lt;/span&gt;&lt;span class="o"&gt;]&lt;/span&gt;&lt;span class="n"&gt;s&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="err"&gt;{&lt;/span&gt;&lt;span class="n"&gt;pattern&lt;/span&gt;&lt;span class="err"&gt;}&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="err"&gt;{&lt;/span&gt;&lt;span class="n"&gt;string&lt;/span&gt;&lt;span class="err"&gt;}&lt;/span&gt;&lt;span class="o"&gt;/[&lt;/span&gt;&lt;span class="n"&gt;flags&lt;/span&gt;&lt;span class="o"&gt;]&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="n"&gt;count&lt;/span&gt;&lt;span class="o"&gt;]&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;If no &lt;code&gt;[range]&lt;/code&gt; and &lt;code&gt;[count]&lt;/code&gt; are given, only the pattern found in the current
-line is replace.&lt;/p&gt;
-&lt;p&gt;If you want to replace all occurrences of foo with bar:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;:%s/foo/bar/g
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;The &lt;code&gt;%&lt;/code&gt; is for the entire file and &lt;code&gt;g&lt;/code&gt; would be all occurrences.
-The &lt;code&gt;/&lt;/code&gt; can be replaced with any non-alphanumeric single-byte character as a
-delimiter.
-This is useful if you are replacing &lt;code&gt;/&lt;/code&gt;.&lt;/p&gt;
-&lt;h2&gt;Case Sensitivity&lt;/h2&gt;
-&lt;p&gt;By default the search is case sensitive so include &lt;code&gt;i&lt;/code&gt; to make it ignore the
-case.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;:s/Foo/bar/gi
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;h2&gt;Search Range&lt;/h2&gt;
-&lt;p&gt;To search for certain line ranges, include the line numbers:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;:3,10s/foo/bar/g
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;This will be for lines 3 to 10 (this is inclusive).&lt;/p&gt;
-&lt;p&gt;To make changes from the current line to the end of the file using &lt;code&gt;.&lt;/code&gt; and &lt;code&gt;$&lt;/code&gt;.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;:.,$/foo/bar/
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;Finally you can use &lt;code&gt;+&lt;/code&gt; and &lt;code&gt;-&lt;/code&gt; to denote the number of rows above or below a
-certain linIf no &lt;code&gt;[range]&lt;/code&gt; and &lt;code&gt;[count]&lt;/code&gt; are given, only the pattern found in
-the current line is replace.&lt;/p&gt;
-&lt;p&gt;If you want to replace all occurrences of foo with bar:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;:%s/foo/bar/g
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;The &lt;code&gt;%&lt;/code&gt; is for the entire file and &lt;code&gt;g&lt;/code&gt; would be all occurrences.
-The &lt;code&gt;/&lt;/code&gt; can be replaced with any non-alphanumeric single-byte character as a
-delimiter.
-This is useful if you are replacing &lt;code&gt;/&lt;/code&gt;.&lt;/p&gt;
-&lt;h2&gt;Case Sensitivity&lt;/h2&gt;
-&lt;p&gt;By default the search is case sensitive so include &lt;code&gt;i&lt;/code&gt; to make it ignore the
-case.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;:s/Foo/bar/gi
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;h2&gt;Search Range&lt;/h2&gt;
-&lt;p&gt;To search for certain line ranges, include the line numbers:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;:3,10s/foo/bar/g
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;This will be for lines 3 to 10 (this is inclusive).&lt;/p&gt;
-&lt;p&gt;To make changes from the current line to the end of the file using &lt;code&gt;.&lt;/code&gt; and &lt;code&gt;$&lt;/code&gt;.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;:.,$/foo/bar/
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;Finally you can use &lt;code&gt;+&lt;/code&gt; and &lt;code&gt;-&lt;/code&gt; to denote the number of rows above or below a
-certain line.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;:.,+4s/foo/bar/g
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;h2&gt;Substituting Whole Word&lt;/h2&gt;
-&lt;p&gt;To only replace the whole word and not portions, type &lt;code&gt;\&amp;lt;&lt;/code&gt; to mark the
-beginning of a word and &lt;code&gt;\&amp;gt;&lt;/code&gt; to mark the end of a word.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;:s/\&amp;lt;foo\&amp;gt;/bar/
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</content><category term="TIL"></category><category term="til"></category><category term="vim"></category><category term="find"></category><category term="replace"></category><category term="substitute"></category></entry><entry><title>Calculate the Distance between two Latitudes and Longitudes</title><link href="https://cetyler.github.io/calculate-the-distance-between-two-latitudes-and-longitudes.html" rel="alternate"></link><published>2023-03-17T00:00:00-05:00</published><updated>2023-03-17T00:00:00-05:00</updated><author><name>Christoper</name></author><id>tag:cetyler.github.io,2023-03-17:/calculate-the-distance-between-two-latitudes-and-longitudes.html</id><summary type="html">&lt;p&gt;Calculation using SQL.&lt;/p&gt;</summary><content type="html">&lt;p&gt;From Renee's 
-&lt;a href="https://sqlfordatascientists.com/"&gt;SQL for Data Scientists&lt;/a&gt; found the
-calculation https://daynebatten.com/2015/latitude-longitude-distance-sql which
-can be useful for my weather data.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;ROUND(2 * 3961 * ASIN(SQRT(POWER(SIN(RADIANS((latitude - 38.4463) / 2)),2) +
-COS(RADIANS(38.4463)) * COS(RADIANS(latitude)) * POWER((SIN(RADIANS((longitude
-- -78.8712) / 2))), 2))))
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</content><category term="TIL"></category><category term="til"></category><category term="sql"></category><category term="SQL for Data Scientists"></category></entry><entry><title>Get Disk Size for Each Database</title><link href="https://cetyler.github.io/get-disk-size-for-each-database.html" rel="alternate"></link><published>2023-03-10T00:00:00-06:00</published><updated>2023-03-10T00:00:00-06:00</updated><author><name>Christopher</name></author><id>tag:cetyler.github.io,2023-03-10:/get-disk-size-for-each-database.html</id><summary type="html">&lt;p&gt;Get the disk size for each database in PostgreSQL.&lt;/p&gt;</summary><content type="html">&lt;p&gt;I learned this from Dimitri's
-&lt;a href="https://theartofpostgresql.com/"&gt;The Art of PostgreSQL&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;To get the size in megabytes&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="n"&gt;postgres&lt;/span&gt;&lt;span class="nv"&gt;@f1db&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="err"&gt;#&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;SELECT&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;datname&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
-&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;pg_database_size&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;datname&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;1024&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mi"&gt;1024&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;AS&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;megabytes&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
-&lt;span class="k"&gt;FROM&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;pg_database&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
-&lt;span class="k"&gt;ORDER&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;BY&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;megabytes&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;DESC&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
-
-&lt;span class="w"&gt;   &lt;/span&gt;&lt;span class="n"&gt;datname&lt;/span&gt;&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="err"&gt;│&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;megabytes&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;
-&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="err"&gt;═══════════╪═══════════&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
-&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="n"&gt;raw_data&lt;/span&gt;&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="err"&gt;│&lt;/span&gt;&lt;span class="w"&gt;       &lt;/span&gt;&lt;span class="mi"&gt;531&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
-&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="n"&gt;f1db&lt;/span&gt;&lt;span class="w"&gt;      &lt;/span&gt;&lt;span class="err"&gt;│&lt;/span&gt;&lt;span class="w"&gt;        &lt;/span&gt;&lt;span class="mi"&gt;73&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
-&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="n"&gt;chinook&lt;/span&gt;&lt;span class="w"&gt;   &lt;/span&gt;&lt;span class="err"&gt;│&lt;/span&gt;&lt;span class="w"&gt;         &lt;/span&gt;&lt;span class="mi"&gt;9&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
-&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="n"&gt;postgres&lt;/span&gt;&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="err"&gt;│&lt;/span&gt;&lt;span class="w"&gt;         &lt;/span&gt;&lt;span class="mi"&gt;7&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
-&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="n"&gt;template1&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="err"&gt;│&lt;/span&gt;&lt;span class="w"&gt;         &lt;/span&gt;&lt;span class="mi"&gt;7&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
-&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="n"&gt;template0&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="err"&gt;│&lt;/span&gt;&lt;span class="w"&gt;         &lt;/span&gt;&lt;span class="mi"&gt;7&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
-&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;6&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;rows&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</content><category term="TIL"></category><category term="til"></category><category term="taop"></category><category term="postgresql"></category><category term="psql"></category><category term="The Art of PostgreSQL"></category><category term="pg_database"></category></entry><entry><title>Include Schema in psycopg2 Connection String</title><link href="https://cetyler.github.io/include-schema-in-psycopg2-connection-string.html" rel="alternate"></link><published>2022-12-19T17:00:00-06:00</published><updated>2022-12-19T17:00:00-06:00</updated><author><name>Christopher</name></author><id>tag:cetyler.github.io,2022-12-19:/include-schema-in-psycopg2-connection-string.html</id><summary type="html">&lt;p&gt;Include schema in PostgreSQL connection string.&lt;/p&gt;</summary><content type="html">&lt;p&gt;Info from
-https://stackoverflow.com/questions/59298580/how-to-specify-schema-in-psycopg2-connection-method&lt;/p&gt;
-&lt;p&gt;If you are using the string form you need to URL escape the options argument:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="nl"&gt;postgresql&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="o"&gt;//&lt;/span&gt;&lt;span class="k"&gt;user&lt;/span&gt;&lt;span class="err"&gt;:&lt;/span&gt;&lt;span class="n"&gt;password&lt;/span&gt;&lt;span class="nv"&gt;@localhost&lt;/span&gt;&lt;span class="err"&gt;:&lt;/span&gt;&lt;span class="mi"&gt;5432&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;database_name&lt;/span&gt;&lt;span class="vm"&gt;?&lt;/span&gt;&lt;span class="n"&gt;options&lt;/span&gt;&lt;span class="o"&gt;=-&lt;/span&gt;&lt;span class="n"&gt;csearch_path&lt;/span&gt;&lt;span class="o"&gt;%&lt;/span&gt;&lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="n"&gt;Ddbo&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="k"&gt;public&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;This will connect to &lt;code&gt;localhost&lt;/code&gt; to database &lt;code&gt;database_name&lt;/code&gt; with &lt;code&gt;public&lt;/code&gt;
-schema.
-This can be useful to include the schema to reduce adding the schema to each
-query.
-For my use case, I am going through
-&lt;a href="https://theartofpostgresql.com/"&gt;The Art of PostgreSQL&lt;/a&gt; and I want to put the
-training data in a schema &lt;code&gt;taop&lt;/code&gt;.
-Instead of updating each Python file for each query, I can just update the
-connection string.&lt;/p&gt;</content><category term="TIL"></category><category term="til"></category><category term="postgresql"></category><category term="psycopg2"></category><category term="sqlalchemy"></category></entry></feed>
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</content><category term="TIL"></category><category term="til"></category><category term="psycopg2"></category><category term="python"></category><category term="postgresql"></category></entry></feed>

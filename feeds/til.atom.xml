@@ -1,5 +1,212 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Christopher Tyler R&amp;D Test Engineer - TIL</title><link href="https://cetyler.github.io/" rel="alternate"></link><link href="https://cetyler.github.io/feeds/til.atom.xml" rel="self"></link><id>https://cetyler.github.io/</id><updated>2023-08-01T23:00:00-05:00</updated><entry><title>Set Statement Timeout</title><link href="https://cetyler.github.io/set-statement-timeout.html" rel="alternate"></link><published>2023-08-01T22:55:00-05:00</published><updated>2023-08-01T22:55:00-05:00</updated><author><name>Christopher</name></author><id>tag:cetyler.github.io,2023-08-01:/set-statement-timeout.html</id><summary type="html">&lt;p&gt;Set a timeout in case you want to terminate a long running query.&lt;/p&gt;</summary><content type="html">&lt;p&gt;I don't recall where I saw this, but in PostgreSQL, you can set a statement
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Christopher Tyler R&amp;D Test Engineer - TIL</title><link href="https://cetyler.github.io/" rel="alternate"></link><link href="https://cetyler.github.io/feeds/til.atom.xml" rel="self"></link><id>https://cetyler.github.io/</id><updated>2023-10-17T11:00:00-05:00</updated><entry><title>How to List Active Connections on PostgreSQL</title><link href="https://cetyler.github.io/how-to-list-active-connections-on-postgresql.html" rel="alternate"></link><published>2023-10-17T11:00:00-05:00</published><updated>2023-10-17T11:00:00-05:00</updated><author><name>Christopher</name></author><id>tag:cetyler.github.io,2023-10-17:/how-to-list-active-connections-on-postgresql.html</id><summary type="html">&lt;p&gt;How to check using a query what is actively running.&lt;/p&gt;</summary><content type="html">&lt;p&gt;From
+https://stackoverflow.com/questions/27435839/how-to-list-active-connections-on-postgresql&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;SELECT 
+    pid
+    ,datname
+    ,usename
+    ,application_name
+    ,client_hostname
+    ,client_port
+    ,backend_start
+    ,query_start
+    ,query
+    ,state
+FROM pg_stat_activity
+WHERE state = &amp;#39;active&amp;#39;;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;If you want to know the idle ones, use &lt;code&gt;idle&lt;/code&gt;.&lt;/p&gt;</content><category term="TIL"></category><category term="til"></category><category term="pg_stat_activity"></category><category term="postgresql"></category></entry><entry><title>Check for Unvalidated Database Constraints</title><link href="https://cetyler.github.io/check-for-unvalidated-database-constraints.html" rel="alternate"></link><published>2023-10-10T11:00:00-05:00</published><updated>2023-10-10T11:00:00-05:00</updated><author><name>Christopher</name></author><id>tag:cetyler.github.io,2023-10-10:/check-for-unvalidated-database-constraints.html</id><summary type="html">&lt;p&gt;Verify that you don't have a constraint created without validation.&lt;/p&gt;</summary><content type="html">&lt;p&gt;I am not sure who I saw this on Mastodon but it was something that is quick and
+easy to check.
+Use the following:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="n"&gt;select&lt;/span&gt; &lt;span class="n"&gt;conrelid&lt;/span&gt;&lt;span class="p"&gt;::&lt;/span&gt;&lt;span class="n"&gt;regclass&lt;/span&gt;
+      &lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;conname&lt;/span&gt;
+  &lt;span class="n"&gt;from&lt;/span&gt; &lt;span class="n"&gt;pg_constraint&lt;/span&gt;
+ &lt;span class="n"&gt;where&lt;/span&gt; &lt;span class="ow"&gt;not&lt;/span&gt; &lt;span class="n"&gt;convalidated&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Nothing should be returned but if there is you know if a constraint was created
+without validation.&lt;/p&gt;</content><category term="TIL"></category><category term="til"></category><category term="postgresql"></category><category term="constraints"></category><category term="pg_constraint"></category><category term="mastodon"></category></entry><entry><title>Deprecated</title><link href="https://cetyler.github.io/deprecated.html" rel="alternate"></link><published>2023-09-19T11:00:00-05:00</published><updated>2023-09-19T11:00:00-05:00</updated><author><name>Christopher</name></author><id>tag:cetyler.github.io,2023-09-19:/deprecated.html</id><summary type="html">&lt;p&gt;I neat way to deprecate parts of a Python program.&lt;/p&gt;</summary><content type="html">&lt;p&gt;Look at https://deprecated.readthedocs.io to use to deprecate parts of a
+program.
+I think this will be useful for libraries.&lt;/p&gt;
+&lt;p&gt;For example:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;deprecated&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;deprecated&lt;/span&gt;
+
+&lt;span class="nd"&gt;@deprecated&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;version&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;1.2.0&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;reason&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;You should use another function&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;some_old_function&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;y&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;y&lt;/span&gt;
+
+&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;someClass&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="nd"&gt;@deprecated&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;version&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;1.3.0&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;reason&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;This method is deprecated&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;some_old_method&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;y&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;y&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</content><category term="TIL"></category><category term="til"></category><category term="python"></category><category term="deprecated"></category></entry><entry><title>Get Battery Status in CLI</title><link href="https://cetyler.github.io/get-battery-status-in-cli.html" rel="alternate"></link><published>2023-09-12T11:00:00-05:00</published><updated>2023-09-12T11:00:00-05:00</updated><author><name>Suparna Ganguly</name></author><id>tag:cetyler.github.io,2023-09-12:/get-battery-status-in-cli.html</id><summary type="html">&lt;p&gt;How to get the battery status using standard CLI tools in Linux.&lt;/p&gt;</summary><content type="html">&lt;p&gt;From Suparna at
+https://www.linuxjournal.com/content/how-check-battery-status-using-linux-command-line&lt;/p&gt;
+&lt;h2&gt;Use cat and find&lt;/h2&gt;
+&lt;p&gt;The “cat” and “find” commands also help find details about your battery and power source.&lt;/p&gt;
+&lt;p&gt;Syntax&lt;/p&gt;
+&lt;p&gt;For the battery capacity, the syntax would be:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;cat /sys/class/power_supply/BAT0/capacity
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;For more detailed battery information use the find command.&lt;/p&gt;
+&lt;p&gt;Syntax&lt;/p&gt;
+&lt;p&gt;And the syntax is,&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;find /sys/class/power_supply/BAT0/ -type f | xargs -tn1 cat
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</content><category term="TIL"></category><category term="til"></category><category term="linux"></category><category term="battery"></category><category term="cat"></category><category term="find"></category></entry><entry><title>How to Read a Vim Swapfile</title><link href="https://cetyler.github.io/how-to-read-a-vim-swapfile.html" rel="alternate"></link><published>2023-09-12T11:00:00-05:00</published><updated>2023-09-12T11:00:00-05:00</updated><author><name>baeldung</name></author><id>tag:cetyler.github.io,2023-09-12:/how-to-read-a-vim-swapfile.html</id><summary type="html">&lt;p&gt;How to read a swapfile, especially where there isn't an reference file.&lt;/p&gt;</summary><content type="html">&lt;p&gt;From https://www.baeldung.com/linux/vim-swap-files&lt;/p&gt;
+&lt;p&gt;To read the swap file:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&amp;gt; vim -r file1.swp
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</content><category term="TIL"></category><category term="til"></category><category term="swapfile"></category><category term="vim"></category></entry><entry><title>Delete Files Older Than x Days on Linux</title><link href="https://cetyler.github.io/delete-files-older-than-x-days-on-linux.html" rel="alternate"></link><published>2023-09-05T11:00:00-05:00</published><updated>2023-09-05T11:00:00-05:00</updated><author><name>Lowell Heddings</name></author><id>tag:cetyler.github.io,2023-09-05:/delete-files-older-than-x-days-on-linux.html</id><summary type="html">&lt;p&gt;Quickly delete files older than a certain number of days.&lt;/p&gt;</summary><content type="html">&lt;p&gt;From Lowell at 
+https://www.howtogeek.com/288/delete-files-older-than-x-days-on-linux/&lt;/p&gt;
+&lt;p&gt;The find utility on Linux allows you to pass in a bunch of interesting
+arguments, including one to execute another command on each file.
+We’ll use this in order to figure out what files are older than a certain
+number of days, and then use the rm command to delete them.&lt;/p&gt;
+&lt;p&gt;Command Syntax&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="nv"&gt;find&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nv"&gt;path&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nv"&gt;to&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nv"&gt;files&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;mtime&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="mi"&gt;5&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="k"&gt;exec&lt;/span&gt; &lt;span class="nv"&gt;rm&lt;/span&gt; {} \&lt;span class="c1"&gt;;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Note that there are spaces between &lt;code&gt;rm&lt;/code&gt;, &lt;code&gt;{}&lt;/code&gt;, and &lt;code&gt;\;&lt;/code&gt;.&lt;/p&gt;
+&lt;h2&gt;Explanation&lt;/h2&gt;
+&lt;p&gt;The first argument is the path to the files.
+This can be a path, a directory, or a wildcard as in the example above.
+I would recommend using the full path, and make sure that you run the command
+without the exec rm to make sure you are getting the right results.&lt;/p&gt;
+&lt;p&gt;The second argument, &lt;code&gt;-mtime&lt;/code&gt;, is used to specify the number of days old that
+the file is. If you enter +5, it will find files older than 5 days.&lt;/p&gt;
+&lt;p&gt;The third argument, &lt;code&gt;-exec&lt;/code&gt;, allows you to pass in a command such as &lt;code&gt;rm&lt;/code&gt;.
+The &lt;code&gt;{} \;&lt;/code&gt; at the end is required to end the command.&lt;/p&gt;</content><category term="TIL"></category><category term="til"></category><category term="linux"></category><category term="find"></category><category term="rm"></category><category term="mtime"></category></entry><entry><title>How to Use a match case Statement</title><link href="https://cetyler.github.io/how-to-use-a-match-case-statement.html" rel="alternate"></link><published>2023-08-29T11:00:00-05:00</published><updated>2023-08-29T11:00:00-05:00</updated><author><name>Luke Hande</name></author><id>tag:cetyler.github.io,2023-08-29:/how-to-use-a-match-case-statement.html</id><summary type="html">&lt;p&gt;Some examples of how to use match case statement in Python.&lt;/p&gt;</summary><content type="html">&lt;p&gt;From Luke at https://learnpython.com/blog/python-match-case-statement/&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt; that this will only work with Python 3.10 and above.&lt;/p&gt;
+&lt;h2&gt;The &lt;em&gt;match case&lt;/em&gt; Statement in Python&lt;/h2&gt;
+&lt;p&gt;A basic implementation of &lt;code&gt;match case&lt;/code&gt; statements looks like an &lt;code&gt;if&lt;/code&gt; statement
+in Python.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&amp;gt;&amp;gt;&amp;gt; command = &amp;#39;Hello, World!&amp;#39;
+&amp;gt;&amp;gt;&amp;gt; match command:
+...     case &amp;#39;Hello, World!&amp;#39;:
+...         print(&amp;#39;Hello to you too!&amp;#39;)
+...     case &amp;#39;Goodbye, World!&amp;#39;:
+...         print(&amp;#39;See you later&amp;#39;)
+...     case other:
+...         print(&amp;#39;No match found&amp;#39;)
+
+Hello to you too!
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;It can simplify the flow control statements and make them a little bit more
+readable.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="nv"&gt;def&lt;/span&gt; &lt;span class="nv"&gt;file_handler_v2&lt;/span&gt;&lt;span class="ss"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;command&lt;/span&gt;&lt;span class="ss"&gt;)&lt;/span&gt;:
+...     &lt;span class="nv"&gt;match&lt;/span&gt; &lt;span class="nv"&gt;command&lt;/span&gt;.&lt;span class="nv"&gt;split&lt;/span&gt;&lt;span class="ss"&gt;()&lt;/span&gt;:
+...         &lt;span class="nv"&gt;case&lt;/span&gt; [&lt;span class="s1"&gt;&amp;#39;&lt;/span&gt;&lt;span class="s"&gt;show&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;&lt;/span&gt;]:
+...             &lt;span class="nv"&gt;print&lt;/span&gt;&lt;span class="ss"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;&lt;/span&gt;&lt;span class="s"&gt;List all files and directories: &lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;&lt;/span&gt;&lt;span class="ss"&gt;)&lt;/span&gt;
+...             # &lt;span class="nv"&gt;code&lt;/span&gt; &lt;span class="nv"&gt;to&lt;/span&gt; &lt;span class="nv"&gt;list&lt;/span&gt; &lt;span class="nv"&gt;files&lt;/span&gt;
+...         &lt;span class="nv"&gt;case&lt;/span&gt; [&lt;span class="s1"&gt;&amp;#39;&lt;/span&gt;&lt;span class="s"&gt;remove&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;&lt;/span&gt;&lt;span class="s"&gt;delete&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;&lt;/span&gt;, &lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="nv"&gt;files&lt;/span&gt;] &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;&lt;/span&gt;&lt;span class="s"&gt;--ask&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;&lt;/span&gt; &lt;span class="nv"&gt;in&lt;/span&gt; &lt;span class="nv"&gt;files&lt;/span&gt;:
+...             &lt;span class="nv"&gt;del_files&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; [&lt;span class="nv"&gt;f&lt;/span&gt; &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="nv"&gt;f&lt;/span&gt; &lt;span class="nv"&gt;in&lt;/span&gt; &lt;span class="nv"&gt;files&lt;/span&gt; &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="nv"&gt;len&lt;/span&gt;&lt;span class="ss"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;f&lt;/span&gt;.&lt;span class="nv"&gt;split&lt;/span&gt;&lt;span class="ss"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;&lt;/span&gt;&lt;span class="s"&gt;.&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;&lt;/span&gt;&lt;span class="ss"&gt;))&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;]
+...             &lt;span class="nv"&gt;print&lt;/span&gt;&lt;span class="ss"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;&lt;/span&gt;&lt;span class="s"&gt;Please confirm: Removing files: {}&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;&lt;/span&gt;.&lt;span class="nv"&gt;format&lt;/span&gt;&lt;span class="ss"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;del_files&lt;/span&gt;&lt;span class="ss"&gt;))&lt;/span&gt;
+...             # &lt;span class="nv"&gt;code&lt;/span&gt; &lt;span class="nv"&gt;to&lt;/span&gt; &lt;span class="nv"&gt;accept&lt;/span&gt; &lt;span class="nv"&gt;user&lt;/span&gt; &lt;span class="nv"&gt;input&lt;/span&gt;, &lt;span class="k"&gt;then&lt;/span&gt; &lt;span class="nv"&gt;remove&lt;/span&gt; &lt;span class="nv"&gt;files&lt;/span&gt;
+...         &lt;span class="nv"&gt;case&lt;/span&gt; [&lt;span class="s1"&gt;&amp;#39;&lt;/span&gt;&lt;span class="s"&gt;remove&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;&lt;/span&gt;&lt;span class="s"&gt;delete&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;&lt;/span&gt;, &lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="nv"&gt;files&lt;/span&gt;]:
+...             &lt;span class="nv"&gt;print&lt;/span&gt;&lt;span class="ss"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;&lt;/span&gt;&lt;span class="s"&gt;Removing files: {}&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;&lt;/span&gt;.&lt;span class="nv"&gt;format&lt;/span&gt;&lt;span class="ss"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;files&lt;/span&gt;&lt;span class="ss"&gt;))&lt;/span&gt;
+...             # &lt;span class="nv"&gt;code&lt;/span&gt; &lt;span class="nv"&gt;to&lt;/span&gt; &lt;span class="nv"&gt;remove&lt;/span&gt; &lt;span class="nv"&gt;files&lt;/span&gt;
+...         &lt;span class="nv"&gt;case&lt;/span&gt; &lt;span class="nv"&gt;_&lt;/span&gt;:
+...             &lt;span class="nv"&gt;print&lt;/span&gt;&lt;span class="ss"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;&lt;/span&gt;&lt;span class="s"&gt;Command not recognized&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;&lt;/span&gt;&lt;span class="ss"&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;This is easier than a &lt;code&gt;if-elif-else&lt;/code&gt; or using something like a &lt;code&gt;dict()&lt;/code&gt;.&lt;/p&gt;</content><category term="TIL"></category><category term="til"></category><category term="python 3.10"></category><category term="match case"></category></entry><entry><title>Vim Tips</title><link href="https://cetyler.github.io/vim-tips.html" rel="alternate"></link><published>2023-08-22T11:00:00-05:00</published><updated>2023-08-22T11:00:00-05:00</updated><author><name>pybites</name></author><id>tag:cetyler.github.io,2023-08-22:/vim-tips.html</id><summary type="html">&lt;p&gt;Notes from the VIM Workshop from pybites&lt;/p&gt;</summary><content type="html">&lt;p&gt;From
+https://docs.google.com/presentation/d/1bUNgL3fpKzGIcJeb63a9mSFdo9_rr2WsLUC7xHaA0JI/edit#slide=id.ge12ee3bc9c_0_0&lt;/p&gt;
+&lt;h2&gt;Navigation&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;gg&lt;/code&gt;: go to start of the file&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;G&lt;/code&gt;: go to end of the file&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;10G&lt;/code&gt;: to go to line 10 (you can also &lt;code&gt;vim file.py +11&lt;/code&gt;)&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;10j&lt;/code&gt;: to go 10 lines down&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;ctrl b/f&lt;/code&gt;: to scroll entire screen (or &lt;code&gt;d&lt;/code&gt; half screen)&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;ctrl i/o&lt;/code&gt;: to jump through last visited places&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;b/w&lt;/code&gt;: to jump over words&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;Built-in Auotcomplete&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;ctrl + n&lt;/code&gt;: this will show potential answer to complete with.&lt;/li&gt;
+&lt;/ul&gt;</content><category term="TIL"></category><category term="til"></category><category term="vim"></category><category term="pybites"></category></entry><entry><title>Create Git Branch and Checkout</title><link href="https://cetyler.github.io/create-git-branch-and-checkout.html" rel="alternate"></link><published>2023-08-15T11:00:00-05:00</published><updated>2023-08-15T11:00:00-05:00</updated><author><name>Christopher</name></author><id>tag:cetyler.github.io,2023-08-15:/create-git-branch-and-checkout.html</id><summary type="html">&lt;p&gt;Create a git branch and checkout at once.&lt;/p&gt;</summary><content type="html">&lt;p&gt;To create a git branch and checkout and go into that branch:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;(main) &amp;gt; git checkout -b new_branch_name
+(new_branch_name) &amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</content><category term="TIL"></category><category term="til"></category><category term="git"></category><category term="branch"></category><category term="checkout"></category></entry><entry><title>pg_dump Only a Table</title><link href="https://cetyler.github.io/pg_dump-only-a-table.html" rel="alternate"></link><published>2023-08-08T11:00:00-05:00</published><updated>2023-08-08T11:00:00-05:00</updated><author><name>Christopher</name></author><id>tag:cetyler.github.io,2023-08-08:/pg_dump-only-a-table.html</id><summary type="html">&lt;p&gt;Only save a table to help transfer to another database.&lt;/p&gt;</summary><content type="html">&lt;p&gt;This can be use get the data transferred from on DB to another just for that
+table.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;❯ .\pg_dump.exe --format=c --clean --username=postgres --dbname=raw_test_data --table=&amp;#39;&amp;quot;raw&amp;quot;.&amp;quot;test_results&amp;quot;&amp;#39; --file=&amp;#39;C:\Users\ctyler\OneDrive - DMI\temp_30\test_results_20230504-1.sql&amp;#39;
+❯ .\pg_dump.exe --format=c --clean --username=postgres --dbname=raw_test_data --table=&amp;#39;&amp;quot;raw&amp;quot;.&amp;quot;step_results&amp;quot;&amp;#39; --file=&amp;#39;C:\Users\ctyler\OneDrive - DMI\temp_30\step_results_20230504-1.sql&amp;#39;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;This example will copy &lt;code&gt;test_results&lt;/code&gt; and &lt;code&gt;step_results&lt;/code&gt; in the
+schema &lt;code&gt;raw&lt;/code&gt;.&lt;/p&gt;</content><category term="TIL"></category><category term="til"></category><category term="pg_dump"></category><category term="postgresql"></category></entry><entry><title>Pip Chill</title><link href="https://cetyler.github.io/pip-chill.html" rel="alternate"></link><published>2023-08-03T11:00:00-05:00</published><updated>2023-08-03T11:00:00-05:00</updated><author><name>Christopher Tyler</name></author><id>tag:cetyler.github.io,2023-08-03:/pip-chill.html</id><summary type="html">&lt;p&gt;Make requirements with only the packages you need.&lt;/p&gt;</summary><content type="html">&lt;p&gt;&lt;a href="https://github.com/rbanffy/pip-chill"&gt;pip-chill&lt;/a&gt; as explained by Ricardo is
+like pip freeze but will only list the packages that are not dependencies of
+installed packages.&lt;/p&gt;
+&lt;h2&gt;Usage&lt;/h2&gt;
+&lt;p&gt;To install, just &lt;code&gt;pip install pip-chill&lt;/code&gt;.
+Running the command will return a list of the packages installed without the
+dependencies.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="err"&gt;❯&lt;/span&gt; &lt;span class="n"&gt;pip&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;chill&lt;/span&gt;
+&lt;span class="n"&gt;aiosql&lt;/span&gt;&lt;span class="o"&gt;==&lt;/span&gt;&lt;span class="mf"&gt;8.0&lt;/span&gt;
+&lt;span class="n"&gt;black&lt;/span&gt;&lt;span class="o"&gt;==&lt;/span&gt;&lt;span class="mf"&gt;23.3&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;
+&lt;span class="n"&gt;flit&lt;/span&gt;&lt;span class="o"&gt;==&lt;/span&gt;&lt;span class="mf"&gt;3.8&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;
+&lt;span class="n"&gt;mypy&lt;/span&gt;&lt;span class="o"&gt;==&lt;/span&gt;&lt;span class="mf"&gt;1.2&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;
+&lt;span class="n"&gt;pip&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;chill&lt;/span&gt;&lt;span class="o"&gt;==&lt;/span&gt;&lt;span class="mf"&gt;1.0&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;3&lt;/span&gt;
+&lt;span class="n"&gt;pip&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;tools&lt;/span&gt;&lt;span class="o"&gt;==&lt;/span&gt;&lt;span class="mf"&gt;6.13&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;
+&lt;span class="n"&gt;pre&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;commit&lt;/span&gt;&lt;span class="o"&gt;==&lt;/span&gt;&lt;span class="mf"&gt;3.2&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;
+&lt;span class="n"&gt;psycopg2&lt;/span&gt;&lt;span class="o"&gt;==&lt;/span&gt;&lt;span class="mf"&gt;2.9&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;6&lt;/span&gt;
+&lt;span class="n"&gt;pytest&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;cov&lt;/span&gt;&lt;span class="o"&gt;==&lt;/span&gt;&lt;span class="mf"&gt;4.0&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;
+&lt;span class="n"&gt;pytest&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;picked&lt;/span&gt;&lt;span class="o"&gt;==&lt;/span&gt;&lt;span class="mf"&gt;0.4&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;6&lt;/span&gt;
+&lt;span class="n"&gt;pytest&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;randomly&lt;/span&gt;&lt;span class="o"&gt;==&lt;/span&gt;&lt;span class="mf"&gt;3.12&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;
+&lt;span class="n"&gt;ruff&lt;/span&gt;&lt;span class="o"&gt;==&lt;/span&gt;&lt;span class="mf"&gt;0.0&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;263&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Where as if I do a &lt;code&gt;pip-freeze&lt;/code&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="err"&gt;❯&lt;/span&gt; &lt;span class="n"&gt;pip&lt;/span&gt; &lt;span class="n"&gt;freeze&lt;/span&gt;
+&lt;span class="n"&gt;aiosql&lt;/span&gt;&lt;span class="o"&gt;==&lt;/span&gt;&lt;span class="mf"&gt;8.0&lt;/span&gt;
+&lt;span class="n"&gt;black&lt;/span&gt;&lt;span class="o"&gt;==&lt;/span&gt;&lt;span class="mf"&gt;23.3&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;
+&lt;span class="n"&gt;build&lt;/span&gt;&lt;span class="o"&gt;==&lt;/span&gt;&lt;span class="mf"&gt;0.10&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;
+&lt;span class="n"&gt;certifi&lt;/span&gt;&lt;span class="o"&gt;==&lt;/span&gt;&lt;span class="mf"&gt;2022.12&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;7&lt;/span&gt;
+&lt;span class="n"&gt;cfgv&lt;/span&gt;&lt;span class="o"&gt;==&lt;/span&gt;&lt;span class="mf"&gt;3.3&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;
+&lt;span class="n"&gt;charset&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;normalizer&lt;/span&gt;&lt;span class="o"&gt;==&lt;/span&gt;&lt;span class="mf"&gt;3.1&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;
+&lt;span class="n"&gt;click&lt;/span&gt;&lt;span class="o"&gt;==&lt;/span&gt;&lt;span class="mf"&gt;8.1&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;3&lt;/span&gt;
+&lt;span class="n"&gt;coverage&lt;/span&gt;&lt;span class="o"&gt;==&lt;/span&gt;&lt;span class="mf"&gt;7.2&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;5&lt;/span&gt;
+&lt;span class="n"&gt;distlib&lt;/span&gt;&lt;span class="o"&gt;==&lt;/span&gt;&lt;span class="mf"&gt;0.3&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;6&lt;/span&gt;
+&lt;span class="n"&gt;docutils&lt;/span&gt;&lt;span class="o"&gt;==&lt;/span&gt;&lt;span class="mf"&gt;0.19&lt;/span&gt;
+&lt;span class="n"&gt;filelock&lt;/span&gt;&lt;span class="o"&gt;==&lt;/span&gt;&lt;span class="mf"&gt;3.12&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;
+&lt;span class="n"&gt;flit&lt;/span&gt;&lt;span class="o"&gt;==&lt;/span&gt;&lt;span class="mf"&gt;3.8&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;
+&lt;span class="n"&gt;flit_core&lt;/span&gt;&lt;span class="o"&gt;==&lt;/span&gt;&lt;span class="mf"&gt;3.8&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;
+&lt;span class="n"&gt;identify&lt;/span&gt;&lt;span class="o"&gt;==&lt;/span&gt;&lt;span class="mf"&gt;2.5&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;23&lt;/span&gt;
+&lt;span class="n"&gt;idna&lt;/span&gt;&lt;span class="o"&gt;==&lt;/span&gt;&lt;span class="mf"&gt;3.4&lt;/span&gt;
+&lt;span class="n"&gt;iniconfig&lt;/span&gt;&lt;span class="o"&gt;==&lt;/span&gt;&lt;span class="mf"&gt;2.0&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;
+&lt;span class="n"&gt;mypy&lt;/span&gt;&lt;span class="o"&gt;==&lt;/span&gt;&lt;span class="mf"&gt;1.2&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;
+&lt;span class="n"&gt;mypy&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;extensions&lt;/span&gt;&lt;span class="o"&gt;==&lt;/span&gt;&lt;span class="mf"&gt;1.0&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;
+&lt;span class="n"&gt;nodeenv&lt;/span&gt;&lt;span class="o"&gt;==&lt;/span&gt;&lt;span class="mf"&gt;1.7&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;
+&lt;span class="n"&gt;packaging&lt;/span&gt;&lt;span class="o"&gt;==&lt;/span&gt;&lt;span class="mf"&gt;23.1&lt;/span&gt;
+&lt;span class="n"&gt;pathspec&lt;/span&gt;&lt;span class="o"&gt;==&lt;/span&gt;&lt;span class="mf"&gt;0.11&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;
+&lt;span class="n"&gt;pip&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;chill&lt;/span&gt;&lt;span class="o"&gt;==&lt;/span&gt;&lt;span class="mf"&gt;1.0&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;3&lt;/span&gt;
+&lt;span class="n"&gt;pip&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;tools&lt;/span&gt;&lt;span class="o"&gt;==&lt;/span&gt;&lt;span class="mf"&gt;6.13&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;
+&lt;span class="n"&gt;platformdirs&lt;/span&gt;&lt;span class="o"&gt;==&lt;/span&gt;&lt;span class="mf"&gt;3.5&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;
+&lt;span class="n"&gt;pluggy&lt;/span&gt;&lt;span class="o"&gt;==&lt;/span&gt;&lt;span class="mf"&gt;1.0&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;
+&lt;span class="n"&gt;pre&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;commit&lt;/span&gt;&lt;span class="o"&gt;==&lt;/span&gt;&lt;span class="mf"&gt;3.2&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;
+&lt;span class="n"&gt;psycopg2&lt;/span&gt;&lt;span class="o"&gt;==&lt;/span&gt;&lt;span class="mf"&gt;2.9&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;6&lt;/span&gt;
+&lt;span class="n"&gt;pyproject_hooks&lt;/span&gt;&lt;span class="o"&gt;==&lt;/span&gt;&lt;span class="mf"&gt;1.0&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;
+&lt;span class="n"&gt;pytest&lt;/span&gt;&lt;span class="o"&gt;==&lt;/span&gt;&lt;span class="mf"&gt;7.3&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;
+&lt;span class="n"&gt;pytest&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;cov&lt;/span&gt;&lt;span class="o"&gt;==&lt;/span&gt;&lt;span class="mf"&gt;4.0&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;
+&lt;span class="n"&gt;pytest&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;picked&lt;/span&gt;&lt;span class="o"&gt;==&lt;/span&gt;&lt;span class="mf"&gt;0.4&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;6&lt;/span&gt;
+&lt;span class="n"&gt;pytest&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;randomly&lt;/span&gt;&lt;span class="o"&gt;==&lt;/span&gt;&lt;span class="mf"&gt;3.12&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;
+&lt;span class="n"&gt;PyYAML&lt;/span&gt;&lt;span class="o"&gt;==&lt;/span&gt;&lt;span class="mf"&gt;6.0&lt;/span&gt;
+&lt;span class="n"&gt;requests&lt;/span&gt;&lt;span class="o"&gt;==&lt;/span&gt;&lt;span class="mf"&gt;2.28&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;
+&lt;span class="n"&gt;ruff&lt;/span&gt;&lt;span class="o"&gt;==&lt;/span&gt;&lt;span class="mf"&gt;0.0&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;263&lt;/span&gt;
+&lt;span class="n"&gt;tomli_w&lt;/span&gt;&lt;span class="o"&gt;==&lt;/span&gt;&lt;span class="mf"&gt;1.0&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;
+&lt;span class="n"&gt;typing_extensions&lt;/span&gt;&lt;span class="o"&gt;==&lt;/span&gt;&lt;span class="mf"&gt;4.5&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;
+&lt;span class="n"&gt;urllib3&lt;/span&gt;&lt;span class="o"&gt;==&lt;/span&gt;&lt;span class="mf"&gt;1.26&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;15&lt;/span&gt;
+&lt;span class="n"&gt;virtualenv&lt;/span&gt;&lt;span class="o"&gt;==&lt;/span&gt;&lt;span class="mf"&gt;20.23&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;You can include the dependencies using &lt;code&gt;pip-chill -v&lt;/code&gt; but the dependencies will
+be commented out with a description of which package that package is depended
+on, neat!&lt;/p&gt;
+&lt;p&gt;This can be more useful for projects where you are not building a package.
+&lt;a href="https://github.com/jazzband/pip-tools/"&gt;pip-tools&lt;/a&gt; works well with packages
+since it can use &lt;code&gt;Setuptools&lt;/code&gt; or &lt;code&gt;pyproject.toml&lt;/code&gt; but will fall down if those
+don't exists.&lt;/p&gt;</content><category term="TIL"></category><category term="pip-chill"></category><category term="requirements"></category><category term="pip"></category></entry><entry><title>Set Statement Timeout</title><link href="https://cetyler.github.io/set-statement-timeout.html" rel="alternate"></link><published>2023-08-01T22:55:00-05:00</published><updated>2023-08-01T22:55:00-05:00</updated><author><name>Christopher</name></author><id>tag:cetyler.github.io,2023-08-01:/set-statement-timeout.html</id><summary type="html">&lt;p&gt;Set a timeout in case you want to terminate a long running query.&lt;/p&gt;</summary><content type="html">&lt;p&gt;I don't recall where I saw this, but in PostgreSQL, you can set a statement
 timeout to potentially prevent problems with a long running query running.&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;$ alter database mydatabase &lt;span class="nb"&gt;set&lt;/span&gt; &lt;span class="nv"&gt;statement_timeout&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;60s&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
@@ -54,163 +261,4 @@ ms_access_check, version 0.5.0
 &lt;code&gt;C:\Users\&amp;lt;Your User Name&amp;gt;\.local\bin&lt;/code&gt;.&lt;/p&gt;</content><category term="TIL"></category><category term="til"></category><category term="python"></category><category term="pipx"></category><category term="pyproject"></category><category term="flit"></category></entry><entry><title>Prune Docker Images</title><link href="https://cetyler.github.io/prune-docker-images.html" rel="alternate"></link><published>2023-04-21T00:00:00-05:00</published><updated>2023-04-21T00:00:00-05:00</updated><author><name>Christopher</name></author><id>tag:cetyler.github.io,2023-04-21:/prune-docker-images.html</id><summary type="html">&lt;p&gt;Remove images that are not in use.&lt;/p&gt;</summary><content type="html">&lt;p&gt;Can run &lt;code&gt;docker image prune -a --filter "until=24h"&lt;/code&gt; which will get rid of any
 images older than 24hrs.
 It will also remove images that are currently not running and not attached to
-any containers.&lt;/p&gt;</content><category term="TIL"></category><category term="til"></category><category term="docker"></category><category term="prune"></category><category term="images"></category></entry><entry><title>Clear Highlighting in Vim</title><link href="https://cetyler.github.io/clear-highlighting-in-vim.html" rel="alternate"></link><published>2023-04-14T00:00:00-05:00</published><updated>2023-04-14T00:00:00-05:00</updated><author><name>Christopher</name></author><id>tag:cetyler.github.io,2023-04-14:/clear-highlighting-in-vim.html</id><summary type="html">&lt;p&gt;Clearing highlighting after performing a search for an example.&lt;/p&gt;</summary><content type="html">&lt;p&gt;To clear highlighting:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;:noh
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;This will clear any highlighting.&lt;/p&gt;</content><category term="TIL"></category><category term="til"></category><category term="vim"></category><category term="highlighting"></category></entry><entry><title>Inject Packages in pipx</title><link href="https://cetyler.github.io/inject-packages-in-pipx.html" rel="alternate"></link><published>2023-04-07T00:00:00-05:00</published><updated>2023-04-07T00:00:00-05:00</updated><author><name>Christopher</name></author><id>tag:cetyler.github.io,2023-04-07:/inject-packages-in-pipx.html</id><summary type="html">&lt;p&gt;Add packages to an existing virtual environment.&lt;/p&gt;</summary><content type="html">&lt;p&gt;I figured out how to inject and add multiple packages to an install:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;$ pipx inject visidata psycopg2-binary
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</content><category term="TIL"></category><category term="pipx"></category></entry><entry><title>Application Name in PostgreSQL</title><link href="https://cetyler.github.io/application-name-in-postgresql.html" rel="alternate"></link><published>2023-03-31T00:00:00-05:00</published><updated>2023-03-31T00:00:00-05:00</updated><author><name>Christopher</name></author><id>tag:cetyler.github.io,2023-03-31:/application-name-in-postgresql.html</id><summary type="html">&lt;p&gt;Send application name to PostgreSQL.&lt;/p&gt;</summary><content type="html">&lt;p&gt;From Dimitri's &lt;a href="https://theartofpostgresql.com/"&gt;The Art of PostgreSQL&lt;/a&gt;.
-PostgreSQL has an &lt;code&gt;application_name&lt;/code&gt; parameter, which you can set in the
-connection string.
-It is then possible have it reported in the server's logs and is also part of
-the system &lt;code&gt;pg_stat_activity&lt;/code&gt;.&lt;/p&gt;
-&lt;p&gt;For example:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="s"&gt;&amp;quot;postgres://user:pass@127.0.0.1:5432/db_name?application_name=app_name&amp;quot;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</content><category term="TIL"></category><category term="til"></category><category term="postgresql"></category><category term="application_name"></category><category term="taop"></category><category term="The Art of PostgreSQL"></category></entry><entry><title>Find and Replace in Vim</title><link href="https://cetyler.github.io/find-and-replace-in-vim.html" rel="alternate"></link><published>2023-03-24T00:00:00-05:00</published><updated>2023-03-24T00:00:00-05:00</updated><author><name>Christopher</name></author><id>tag:cetyler.github.io,2023-03-24:/find-and-replace-in-vim.html</id><summary type="html">&lt;p&gt;Different ways to find and replace items using vim.&lt;/p&gt;</summary><content type="html">&lt;p&gt;From https://linuxize.com/post/vim-find-replace/&lt;/p&gt;
-&lt;h2&gt;Basic Find and Replace&lt;/h2&gt;
-&lt;p&gt;In Vim you use &lt;code&gt;:substitute&lt;/code&gt; (&lt;code&gt;:s&lt;/code&gt;) command.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="err"&gt;:&lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="n"&gt;range&lt;/span&gt;&lt;span class="o"&gt;]&lt;/span&gt;&lt;span class="n"&gt;s&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="err"&gt;{&lt;/span&gt;&lt;span class="n"&gt;pattern&lt;/span&gt;&lt;span class="err"&gt;}&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="err"&gt;{&lt;/span&gt;&lt;span class="n"&gt;string&lt;/span&gt;&lt;span class="err"&gt;}&lt;/span&gt;&lt;span class="o"&gt;/[&lt;/span&gt;&lt;span class="n"&gt;flags&lt;/span&gt;&lt;span class="o"&gt;]&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="n"&gt;count&lt;/span&gt;&lt;span class="o"&gt;]&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;If no &lt;code&gt;[range]&lt;/code&gt; and &lt;code&gt;[count]&lt;/code&gt; are given, only the pattern found in the current
-line is replace.&lt;/p&gt;
-&lt;p&gt;If you want to replace all occurrences of foo with bar:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;:%s/foo/bar/g
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;The &lt;code&gt;%&lt;/code&gt; is for the entire file and &lt;code&gt;g&lt;/code&gt; would be all occurrences.
-The &lt;code&gt;/&lt;/code&gt; can be replaced with any non-alphanumeric single-byte character as a
-delimiter.
-This is useful if you are replacing &lt;code&gt;/&lt;/code&gt;.&lt;/p&gt;
-&lt;h2&gt;Case Sensitivity&lt;/h2&gt;
-&lt;p&gt;By default the search is case sensitive so include &lt;code&gt;i&lt;/code&gt; to make it ignore the
-case.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;:s/Foo/bar/gi
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;h2&gt;Search Range&lt;/h2&gt;
-&lt;p&gt;To search for certain line ranges, include the line numbers:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;:3,10s/foo/bar/g
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;This will be for lines 3 to 10 (this is inclusive).&lt;/p&gt;
-&lt;p&gt;To make changes from the current line to the end of the file using &lt;code&gt;.&lt;/code&gt; and &lt;code&gt;$&lt;/code&gt;.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;:.,$/foo/bar/
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;Finally you can use &lt;code&gt;+&lt;/code&gt; and &lt;code&gt;-&lt;/code&gt; to denote the number of rows above or below a
-certain linIf no &lt;code&gt;[range]&lt;/code&gt; and &lt;code&gt;[count]&lt;/code&gt; are given, only the pattern found in
-the current line is replace.&lt;/p&gt;
-&lt;p&gt;If you want to replace all occurrences of foo with bar:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;:%s/foo/bar/g
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;The &lt;code&gt;%&lt;/code&gt; is for the entire file and &lt;code&gt;g&lt;/code&gt; would be all occurrences.
-The &lt;code&gt;/&lt;/code&gt; can be replaced with any non-alphanumeric single-byte character as a
-delimiter.
-This is useful if you are replacing &lt;code&gt;/&lt;/code&gt;.&lt;/p&gt;
-&lt;h2&gt;Case Sensitivity&lt;/h2&gt;
-&lt;p&gt;By default the search is case sensitive so include &lt;code&gt;i&lt;/code&gt; to make it ignore the
-case.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;:s/Foo/bar/gi
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;h2&gt;Search Range&lt;/h2&gt;
-&lt;p&gt;To search for certain line ranges, include the line numbers:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;:3,10s/foo/bar/g
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;This will be for lines 3 to 10 (this is inclusive).&lt;/p&gt;
-&lt;p&gt;To make changes from the current line to the end of the file using &lt;code&gt;.&lt;/code&gt; and &lt;code&gt;$&lt;/code&gt;.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;:.,$/foo/bar/
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;Finally you can use &lt;code&gt;+&lt;/code&gt; and &lt;code&gt;-&lt;/code&gt; to denote the number of rows above or below a
-certain line.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;:.,+4s/foo/bar/g
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;h2&gt;Substituting Whole Word&lt;/h2&gt;
-&lt;p&gt;To only replace the whole word and not portions, type &lt;code&gt;\&amp;lt;&lt;/code&gt; to mark the
-beginning of a word and &lt;code&gt;\&amp;gt;&lt;/code&gt; to mark the end of a word.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;:s/\&amp;lt;foo\&amp;gt;/bar/
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</content><category term="TIL"></category><category term="til"></category><category term="vim"></category><category term="find"></category><category term="replace"></category><category term="substitute"></category></entry><entry><title>Calculate the Distance between two Latitudes and Longitudes</title><link href="https://cetyler.github.io/calculate-the-distance-between-two-latitudes-and-longitudes.html" rel="alternate"></link><published>2023-03-17T00:00:00-05:00</published><updated>2023-03-17T00:00:00-05:00</updated><author><name>Christoper</name></author><id>tag:cetyler.github.io,2023-03-17:/calculate-the-distance-between-two-latitudes-and-longitudes.html</id><summary type="html">&lt;p&gt;Calculation using SQL.&lt;/p&gt;</summary><content type="html">&lt;p&gt;From Renee's 
-&lt;a href="https://sqlfordatascientists.com/"&gt;SQL for Data Scientists&lt;/a&gt; found the
-calculation https://daynebatten.com/2015/latitude-longitude-distance-sql which
-can be useful for my weather data.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;ROUND(2 * 3961 * ASIN(SQRT(POWER(SIN(RADIANS((latitude - 38.4463) / 2)),2) +
-COS(RADIANS(38.4463)) * COS(RADIANS(latitude)) * POWER((SIN(RADIANS((longitude
-- -78.8712) / 2))), 2))))
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</content><category term="TIL"></category><category term="til"></category><category term="sql"></category><category term="SQL for Data Scientists"></category></entry><entry><title>Get Disk Size for Each Database</title><link href="https://cetyler.github.io/get-disk-size-for-each-database.html" rel="alternate"></link><published>2023-03-10T00:00:00-06:00</published><updated>2023-03-10T00:00:00-06:00</updated><author><name>Christopher</name></author><id>tag:cetyler.github.io,2023-03-10:/get-disk-size-for-each-database.html</id><summary type="html">&lt;p&gt;Get the disk size for each database in PostgreSQL.&lt;/p&gt;</summary><content type="html">&lt;p&gt;I learned this from Dimitri's
-&lt;a href="https://theartofpostgresql.com/"&gt;The Art of PostgreSQL&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;To get the size in megabytes&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="n"&gt;postgres&lt;/span&gt;&lt;span class="nv"&gt;@f1db&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="err"&gt;#&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;SELECT&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;datname&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
-&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;pg_database_size&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;datname&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;1024&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mi"&gt;1024&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;AS&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;megabytes&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
-&lt;span class="k"&gt;FROM&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;pg_database&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
-&lt;span class="k"&gt;ORDER&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;BY&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;megabytes&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;DESC&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
-
-&lt;span class="w"&gt;   &lt;/span&gt;&lt;span class="n"&gt;datname&lt;/span&gt;&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="err"&gt;│&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;megabytes&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;
-&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="err"&gt;═══════════╪═══════════&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
-&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="n"&gt;raw_data&lt;/span&gt;&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="err"&gt;│&lt;/span&gt;&lt;span class="w"&gt;       &lt;/span&gt;&lt;span class="mi"&gt;531&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
-&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="n"&gt;f1db&lt;/span&gt;&lt;span class="w"&gt;      &lt;/span&gt;&lt;span class="err"&gt;│&lt;/span&gt;&lt;span class="w"&gt;        &lt;/span&gt;&lt;span class="mi"&gt;73&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
-&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="n"&gt;chinook&lt;/span&gt;&lt;span class="w"&gt;   &lt;/span&gt;&lt;span class="err"&gt;│&lt;/span&gt;&lt;span class="w"&gt;         &lt;/span&gt;&lt;span class="mi"&gt;9&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
-&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="n"&gt;postgres&lt;/span&gt;&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="err"&gt;│&lt;/span&gt;&lt;span class="w"&gt;         &lt;/span&gt;&lt;span class="mi"&gt;7&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
-&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="n"&gt;template1&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="err"&gt;│&lt;/span&gt;&lt;span class="w"&gt;         &lt;/span&gt;&lt;span class="mi"&gt;7&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
-&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="n"&gt;template0&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="err"&gt;│&lt;/span&gt;&lt;span class="w"&gt;         &lt;/span&gt;&lt;span class="mi"&gt;7&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
-&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;6&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;rows&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</content><category term="TIL"></category><category term="til"></category><category term="taop"></category><category term="postgresql"></category><category term="psql"></category><category term="The Art of PostgreSQL"></category><category term="pg_database"></category></entry><entry><title>Include Schema in psycopg2 Connection String</title><link href="https://cetyler.github.io/include-schema-in-psycopg2-connection-string.html" rel="alternate"></link><published>2022-12-19T17:00:00-06:00</published><updated>2022-12-19T17:00:00-06:00</updated><author><name>Christopher</name></author><id>tag:cetyler.github.io,2022-12-19:/include-schema-in-psycopg2-connection-string.html</id><summary type="html">&lt;p&gt;Include schema in PostgreSQL connection string.&lt;/p&gt;</summary><content type="html">&lt;p&gt;Info from
-https://stackoverflow.com/questions/59298580/how-to-specify-schema-in-psycopg2-connection-method&lt;/p&gt;
-&lt;p&gt;If you are using the string form you need to URL escape the options argument:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="nl"&gt;postgresql&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="o"&gt;//&lt;/span&gt;&lt;span class="k"&gt;user&lt;/span&gt;&lt;span class="err"&gt;:&lt;/span&gt;&lt;span class="n"&gt;password&lt;/span&gt;&lt;span class="nv"&gt;@localhost&lt;/span&gt;&lt;span class="err"&gt;:&lt;/span&gt;&lt;span class="mi"&gt;5432&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;database_name&lt;/span&gt;&lt;span class="vm"&gt;?&lt;/span&gt;&lt;span class="n"&gt;options&lt;/span&gt;&lt;span class="o"&gt;=-&lt;/span&gt;&lt;span class="n"&gt;csearch_path&lt;/span&gt;&lt;span class="o"&gt;%&lt;/span&gt;&lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="n"&gt;Ddbo&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="k"&gt;public&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;This will connect to &lt;code&gt;localhost&lt;/code&gt; to database &lt;code&gt;database_name&lt;/code&gt; with &lt;code&gt;public&lt;/code&gt;
-schema.
-This can be useful to include the schema to reduce adding the schema to each
-query.
-For my use case, I am going through
-&lt;a href="https://theartofpostgresql.com/"&gt;The Art of PostgreSQL&lt;/a&gt; and I want to put the
-training data in a schema &lt;code&gt;taop&lt;/code&gt;.
-Instead of updating each Python file for each query, I can just update the
-connection string.&lt;/p&gt;</content><category term="TIL"></category><category term="til"></category><category term="postgresql"></category><category term="psycopg2"></category><category term="sqlalchemy"></category></entry><entry><title>Create Automatic Timestamps in PostgreSQL</title><link href="https://cetyler.github.io/create-automatic-timestamps-in-postgresql.html" rel="alternate"></link><published>2022-12-16T18:00:00-06:00</published><updated>2022-12-16T18:00:00-06:00</updated><author><name>Christopher</name></author><id>tag:cetyler.github.io,2022-12-16:/create-automatic-timestamps-in-postgresql.html</id><summary type="html">&lt;p&gt;Create automatic timestamps by default.&lt;/p&gt;</summary><content type="html">&lt;p&gt;Found this at
-&lt;a href="https://x-team.com/blog/automatic-timestamps-with-postgresql/"&gt;X-Team&lt;/a&gt;.&lt;/p&gt;
-&lt;h2&gt;Create Table with Default Timestamp&lt;/h2&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;CREATE TABLE todos (
- id SERIAL NOT NULL PRIMARY KEY,
- content TEXT,
- created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
- updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
- completed_at TIMESTAMPTZ
-);
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;In creating the &lt;code&gt;todos&lt;/code&gt; table, both &lt;code&gt;created_at&lt;/code&gt; and &lt;code&gt;updated_at&lt;/code&gt; will default
-with the current timestamp if one is not given.
-This is great for if you are adding items from a CSV and you want to know when
-the data is being created.&lt;/p&gt;
-&lt;h2&gt;Update Timestamp on Update&lt;/h2&gt;
-&lt;p&gt;The article also explains how to create a trigger function.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="n"&gt;CREATE&lt;/span&gt; &lt;span class="kr"&gt;OR&lt;/span&gt; &lt;span class="n"&gt;REPLACE&lt;/span&gt; &lt;span class="n"&gt;FUNCTION&lt;/span&gt; &lt;span class="n"&gt;trigger_set_timestamp&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
-&lt;span class="n"&gt;RETURNS&lt;/span&gt; &lt;span class="n"&gt;TRIGGER&lt;/span&gt; &lt;span class="n"&gt;AS&lt;/span&gt; &lt;span class="o"&gt;$$&lt;/span&gt;
-&lt;span class="kr"&gt;BEGIN&lt;/span&gt;
- &lt;span class="kr"&gt;NEW&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;updated_at&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;NOW&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
- &lt;span class="kr"&gt;RETURN&lt;/span&gt; &lt;span class="kr"&gt;NEW&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-&lt;span class="kr"&gt;END&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-&lt;span class="o"&gt;$$&lt;/span&gt; &lt;span class="n"&gt;LANGUAGE&lt;/span&gt; &lt;span class="n"&gt;plpgsql&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;With this function, when can update a table and automatically update column
-&lt;code&gt;updated_at&lt;/code&gt; with the current timestamp.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="n"&gt;CREATE&lt;/span&gt; &lt;span class="n"&gt;TRIGGER&lt;/span&gt; &lt;span class="n"&gt;set_timestamp&lt;/span&gt;
-&lt;span class="n"&gt;BEFORE&lt;/span&gt; &lt;span class="n"&gt;UPDATE&lt;/span&gt; &lt;span class="n"&gt;ON&lt;/span&gt; &lt;span class="n"&gt;todos&lt;/span&gt;
-&lt;span class="kr"&gt;FOR&lt;/span&gt; &lt;span class="mh"&gt;EACH&lt;/span&gt; &lt;span class="n"&gt;ROW&lt;/span&gt;
-&lt;span class="n"&gt;EXECUTE&lt;/span&gt; &lt;span class="kr"&gt;PROCEDURE&lt;/span&gt; &lt;span class="n"&gt;trigger_set_timestamp&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;This will execute anytime a row is updated in &lt;code&gt;todos&lt;/code&gt;.&lt;/p&gt;</content><category term="TIL"></category><category term="til"></category><category term="postgresql"></category><category term="timestamp"></category><category term="function"></category></entry><entry><title>Pasting Text in Vim</title><link href="https://cetyler.github.io/pasting-text-in-vim.html" rel="alternate"></link><published>2021-04-28T14:30:00-05:00</published><updated>2021-04-28T14:30:00-05:00</updated><author><name>Christopher</name></author><id>tag:cetyler.github.io,2021-04-28:/pasting-text-in-vim.html</id><summary type="html">&lt;p&gt;Pasting text into vim.&lt;/p&gt;</summary><content type="html">&lt;p&gt;I kept trying to paste text and getting weird indenting or so other odd issue.
-A) I forgot about using &lt;code&gt;:help&lt;/code&gt;. B) That I had &lt;code&gt;autoindent&lt;/code&gt; turned on.
-While looking at help for &lt;code&gt;autoindent&lt;/code&gt; I found out that I can instead use
-&lt;code&gt;:set paste&lt;/code&gt; to but vim into paste mode and pasting the data will look as
-intended.
-Then after pasting just use &lt;code&gt;:set nopaste&lt;/code&gt; to turn off.&lt;/p&gt;</content><category term="TIL"></category><category term="til"></category><category term="vim"></category><category term="paste"></category><category term="nopaste"></category><category term="autoindent"></category></entry></feed>
+any containers.&lt;/p&gt;</content><category term="TIL"></category><category term="til"></category><category term="docker"></category><category term="prune"></category><category term="images"></category></entry></feed>
