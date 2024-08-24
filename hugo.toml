@@ -1,0 +1,16 @@
+baseURL = 'https://cetyler.github.io/'
+languageCode = 'en-us'
+title = 'Christopher Tyler'
+
+theme = 'hextra'
+
+sectionPagesMenu = 'main'
+
+#enableRobotsTXT = true
+#enableGitInfo = true
+#hasCJKLanguage = true
+
+#[outputs]
+#home = ['HTML']
+#page = ['HTML']
+#section = ['HTML', 'RSS']
