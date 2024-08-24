@@ -9,7 +9,7 @@ sectionPagesMenu = 'main'
 enableRobotsTXT = true
 enableGitInfo = true
 
-[[menu.main]]
-	name = 'Search'
-	[params]
-		type = 'search'
+#[[menu.main]]
+#	name = 'Search'
+#	[params]
+#		type = 'search'
