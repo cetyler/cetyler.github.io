@@ -8,9 +8,8 @@ sectionPagesMenu = 'main'
 
 enableRobotsTXT = true
 enableGitInfo = true
-#hasCJKLanguage = true
 
-#[outputs]
-#home = ['HTML']
-#page = ['HTML']
-#section = ['HTML', 'RSS']
+[[menu.main]]
+	name = 'Search'
+	[params]
+		type = 'search'
