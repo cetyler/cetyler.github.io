@@ -6,8 +6,8 @@ theme = 'hextra'
 
 sectionPagesMenu = 'main'
 
-#enableRobotsTXT = true
-#enableGitInfo = true
+enableRobotsTXT = true
+enableGitInfo = true
 #hasCJKLanguage = true
 
 #[outputs]
