@@ -1,7 +1,7 @@
 +++
 title = 'Rebuild Pelican Source' 
 date = 2024-08-11T15:54:00-05:00
-draft = true
+draft = false
 +++
 
 ## Overview

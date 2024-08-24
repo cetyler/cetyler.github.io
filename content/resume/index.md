@@ -1,7 +1,7 @@
 +++
 menus = 'main'
 title = 'My Resume'
-draft = true
+draft = false
 +++
 
 ## Summary
