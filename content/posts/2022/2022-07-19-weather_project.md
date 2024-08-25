@@ -5,7 +5,7 @@ tags = ['python', 'project']
 author = "Christopher Tyler"
 summary = "Create a simple weather project to document how to add projects to PyPi and to aid with data analysis."
 series = ["Weather Project"]
-draft = true
+draft = false
 +++
 
 ## Series

@@ -5,7 +5,7 @@ tags = ["python", "project"]
 author = "Christopher Tyler"
 summary = "Setup PyPi with an empty project to lock in the project name."
 series = ["Weather Project"]
-draft = true
+draft = false
 +++
 
 ## Series
