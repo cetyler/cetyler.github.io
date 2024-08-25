@@ -1,3 +1,4 @@
++++
 title = "Weather Project"
 date = 2022-07-19T20:00:00-05:00
 tags = ['python', 'project']
@@ -6,6 +7,11 @@ summary = "Create a simple weather project to document how to add projects to Py
 series = ["Weather Project"]
 draft = true
 +++
+
+## Series
+
+{{< series "Weather Project" >}}
+
 
 ## Overview
 

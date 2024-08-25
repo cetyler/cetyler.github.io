@@ -8,6 +8,11 @@ series = ["Weather Project"]
 draft = true
 +++
 
+## Series
+
+{{< series "Weather Project" >}}
+
+
 ## Overview
 
 From the [previous article]({{< ref "/posts/2022/2022-07-19-weather_project.md" >}}),
