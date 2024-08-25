@@ -3,7 +3,7 @@ title = "Reuven Lerner's Weekly Python Exercise A3"
 date = 2022-01-14T00:00:00-05:00
 tags = ['training', 'Reuven Lerner', 'oop', 'python', 'review']
 author = 'Christopher Tyler'
-summary = "Review of Reuven's Weekly Python Exercise A3.""
+summary = "Review of Reuven's Weekly Python Exercise A3."
 draft = false
 +++
 
