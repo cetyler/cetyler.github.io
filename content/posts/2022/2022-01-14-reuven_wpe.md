@@ -13,7 +13,7 @@ I recently completed Reuven Lerner's
 [Weekly Python Exercise](https://store.lerner.co.il/wpe) A3 which focused on
 Object-oriented Python.
 I took this course around the same time as
-[Reuven's OOP self pace course]({{ < ref "/posts/2022/2022-01-08-reuven_oop.md" > }}).
+[Reuven's OOP self pace course]({{< ref "/posts/2022/2022-01-08-reuven_oop.md" >}}).
 I wasn't sure which course would click more with me, so I took both.
 
 Weekly Python Exercise (WPE) is a 15 week course where Reuven provides an
