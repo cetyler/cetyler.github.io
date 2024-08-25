@@ -3,7 +3,7 @@ title = "Reuven Lerner's Object-orient Python"
 date = 2022-01-08T00:00:00-05:00
 tags = ['training', 'Reuven Lerner', 'oop', 'python', 'review']
 author = 'Christopher Tyler'
-summary = 'Review of Reuven's OOP Python self pace course.'
+summary = "Review of Reuven's OOP Python self pace course.""
 draft = true
 +++
 
