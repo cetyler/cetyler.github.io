@@ -11,21 +11,21 @@ enableGitInfo = true
 
 
 [[menu.main]]
-	name = 'Search'
-	[menu.main.params]
-		type = "search"
+  name = 'Search'
+  [menu.main.params]
+    type = "search"
 
 [params.footer]
-    enable = true
-    displayCopyright = true
-    displayPoweredBy = true
-    width = 'normal'
+  enable = true
+  displayCopyright = true
+  displayPoweredBy = true
+  width = 'normal'
 
 [params.blog.list]
-    displayTags = true
-    # date | lastmod | publishDate | title | weight
-    sortBy = 'date'
-    sortOrder = 'desc' # or "asc"
+  displayTags = true
+  # date | lastmod | publishDate | title | weight
+  sortBy = 'date'
+  sortOrder = 'desc' # or "asc"
 
 [related]
   includeNewer = true
@@ -36,3 +36,7 @@ enableGitInfo = true
     name = 'fragmentrefs'
     type = 'fragments'
     weight = 80
+
+[taxonomies]
+  tag = "tags"
+  series = "series"
