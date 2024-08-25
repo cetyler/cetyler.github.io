@@ -3,7 +3,7 @@ title = 'Database'
 date = 2021-04-10T00:00:00-05:00
 author = 'Christopher Tyler'
 summary = 'Resources on databases.'
-draft = true
+draft = false
 +++
 
 Any resources below that I have done a more thorough review, I will link to the
@@ -68,4 +68,4 @@ Anton does an excellent job going over window functions in SQL.
 I knew very little about window functions and after reading a little bit of his
 book, I was able to start applying what I learn to queries I used at work.
 I used PostgreSQL but he wrote it to support multiple DBMSs.
-You can read my [review]({filename}/sql/20230610-window_functions.md).
+You can read my [review]({{< ref "/posts/2023/20230610-window_functions.md" >}}).

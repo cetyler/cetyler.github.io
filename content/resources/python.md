@@ -2,7 +2,7 @@
 title = 'Python'
 date = 2021-04-10T00:00:00-05:00
 author = 'Christopher Tyler'
-draft = true
+draft = false
 summary = 'Resources on Python.'
 +++
 
@@ -61,8 +61,8 @@ level training.
 So far I have taken his Python courses but I also his Practice Makes Regexp and
 his [Pandas Workout](https://www.manning.com/books/pandas-workout) books.
 I did a review on
-[Object-Orient Python]({filename}/python/2022-01-08-reuven_oop.md)
-and [Weekly Python Exercise A3]({filename}/python/2022-01-14-reuven_wpe.md).
+[Object-Orient Python]({{< ref "/posts/2022/2022-01-08-reuven_oop.md" >}})
+and [Weekly Python Exercise A3]({{< ref "/posts/2022/2022-01-14-reuven_wpe.md" >}}).
 
 ## [Talk Python to Me](https://talkpython.fm/)
 

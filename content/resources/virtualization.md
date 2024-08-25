@@ -3,7 +3,7 @@ title = 'Virtualization'
 date = 2021-04-10T00:00:00-05:00
 author = 'Christopher Tyler'
 summary = 'Resources on databases.'
-draft = true
+draft = false
 +++
 
 Any resources below that I have done a more thorough review, I will link to the
