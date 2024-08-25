@@ -9,7 +9,20 @@ sectionPagesMenu = 'main'
 enableRobotsTXT = true
 enableGitInfo = true
 
+
 [[menu.main]]
 	name = 'Search'
-	[params]
-		type = 'search'
+	[menu.main.params]
+		type = "search"
+
+[footer]
+    enable = true
+    displayCopyright = true
+    displayPoweredBy = true
+    width = 'normal'
+
+[[blog.list]]
+    displayTags = true
+    # date | lastmod | publishDate | title | weight
+    sortBy = 'date'
+    sortOrder = 'desc' # or "asc"

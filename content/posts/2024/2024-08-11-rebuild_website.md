@@ -2,6 +2,8 @@
 title = 'Rebuild Pelican Source' 
 date = 2024-08-11T15:54:00-05:00
 draft = false
+author = 'Christopher Tyler'
+tags = ['pelican','python','hugo','git','git submodules','pyenv','pelican-jupyter']
 +++
 
 ## Overview
