@@ -15,14 +15,24 @@ enableGitInfo = true
 	[menu.main.params]
 		type = "search"
 
-[footer]
+[params.footer]
     enable = true
     displayCopyright = true
     displayPoweredBy = true
     width = 'normal'
 
-[[blog.list]]
+[params.blog.list]
     displayTags = true
     # date | lastmod | publishDate | title | weight
     sortBy = 'date'
     sortOrder = 'desc' # or "asc"
+
+[related]
+  includeNewer = true
+  threshold = 20
+  toLower = false
+  [[related.indices]]
+    applyFilter = true
+    name = 'fragmentrefs'
+    type = 'fragments'
+    weight = 80

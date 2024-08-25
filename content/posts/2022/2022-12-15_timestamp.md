@@ -4,6 +4,7 @@ date = 2022-12-16T18:00:00-05:00
 tags = ['til', 'postgresql', 'timestamp', 'function']
 author = 'Christopher Tyler'
 draft = false
+summary = 'Create automatic timestamps by default.'
 +++
 
 Found this at
