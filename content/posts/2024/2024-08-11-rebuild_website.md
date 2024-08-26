@@ -1,6 +1,7 @@
 +++
 title = 'Rebuild Pelican Source' 
 date = 2024-08-11T15:54:00-05:00
+lastmod = 2024-08-26T01:00:00-05:00
 draft = false
 author = 'Christopher Tyler'
 tags = ['pelican','python','hugo','git','git submodules','pyenv','pelican-jupyter']
@@ -34,6 +35,14 @@ However, [Pelican Jupyter](https://github.com/danielfrg/pelican-jupyter) has
 been archived in 2023.
 I had to guess the version by looking at when I created this website (3.9).
 After that I was able to get it to work.
+
+## Lack of Documentation
+
+Most of the problems above are related to a lack of documentation.
+I did have a simple `README.md` that wasn't updated and didn't include some of
+the tooling that I updated to make my life easier to post.
+I ended up looking through my commits and reading some of the scripts before I
+remembered the process to updating my website.
 
 ## Next Steps
 
