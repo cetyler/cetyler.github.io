@@ -27,6 +27,19 @@ enableGitInfo = true
   sortBy = 'date'
   sortOrder = 'desc' # or "asc"
 
+[params.giscus]
+  repo = "cetyler/cetyler.github.io"
+  repoID = "R_kgDOMn2Qrg"
+  category = "Articles"
+  categoryID = "DIC_kwDOMn2Qrs4CiBEe"
+  mapping = "pathname"
+  reactionsEnabled = "1"
+  emitMetadata = "0"
+  inputPosition = "top"
+  theme = "preferred_color_scheme"
+  lang = "en"
+  loading = "lazy"
+
 [related]
   includeNewer = true
   threshold = 20
