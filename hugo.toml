@@ -27,6 +27,10 @@ enableGitInfo = true
   sortBy = 'date'
   sortOrder = 'desc' # or "asc"
 
+[params.comments]
+  enable = false
+  type = "giscus"
+
 [params.giscus]
   repo = "cetyler/cetyler.github.io"
   repoID = "R_kgDOMn2Qrg"
