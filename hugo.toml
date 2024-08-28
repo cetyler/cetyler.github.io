@@ -37,12 +37,12 @@ enableGitInfo = true
   category = "Articles"
   categoryID = "DIC_kwDOMn2Qrs4CiBEe"
   mapping = "pathname"
-  reactionsEnabled = "1"
-  emitMetadata = "0"
-  inputPosition = "bottom"
-  theme = "preferred_color_scheme"
-  lang = "en"
-  loading = "lazy"
+#  reactionsEnabled = "1"
+#  emitMetadata = "0"
+#  inputPosition = "bottom"
+#  theme = "preferred_color_scheme"
+#  lang = "en"
+#  loading = "lazy"
 
 [related]
   includeNewer = true
