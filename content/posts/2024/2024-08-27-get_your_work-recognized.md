@@ -5,6 +5,7 @@ tags = ['brag document', 'smart goals', 'career','performance review']
 draft = false
 summary = 'Make sure that you document your work to get recognized at work.'
 authors = ['Christopher Tyler', 'Julia Evans']
+comments = true
 +++
 
 Reading [Julia Evans' article](https://jvns.ca/blog/brag-documents) was a good
