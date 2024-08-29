@@ -8,7 +8,7 @@ sectionPagesMenu = 'main'
 
 enableRobotsTXT = true
 enableGitInfo = true
-
+defaultContentLanguage = "en"
 
 [[menu.main]]
   name = 'Search'
@@ -37,12 +37,12 @@ enableGitInfo = true
     category = "Articles"
     categoryID = "DIC_kwDOMn2Qrs4CiBEe"
     mapping = "pathname"
-#  reactionsEnabled = "1"
-#  emitMetadata = "0"
-#  inputPosition = "bottom"
-#  theme = "preferred_color_scheme"
-#  lang = "en"
-#  loading = "lazy"
+    reactionsEnabled = "1"
+    emitMetadata = "0"
+    inputPosition = "bottom"
+    theme = "preferred_color_scheme"
+    lang = "en"
+    loading = "lazy"
 
 [related]
   includeNewer = true
@@ -57,3 +57,8 @@ enableGitInfo = true
 [taxonomies]
   tag = "tags"
   series = "series"
+
+[languages.en]
+  languageName = "English"
+  weight = 1
+  title = "Hextra"
