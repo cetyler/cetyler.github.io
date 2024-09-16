@@ -2,7 +2,7 @@
 title = 'Setup Apt-Mirror on Ubuntu'
 date = 2024-09-13T21:43:02-05:00
 draft = false
-authors = ['Christopher Tyler','Pradeep Kumar'
+authors = ['Christopher Tyler','Pradeep Kumar']
 tags = ['apt-mirror','apache','ubuntu','python']
 summary = 'Notes on how to setup apt-mirror with Ubuntu 24.04'
 comments = true
