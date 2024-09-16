@@ -6,6 +6,7 @@ draft = false
 author = 'Christopher Tyler'
 tags = ['pelican','python','hugo','git','git submodules','pyenv','pelican-jupyter']
 summary = 'More work than expected to get my development system to work with Pelican.'
+comments = true
 +++
 
 ## Overview

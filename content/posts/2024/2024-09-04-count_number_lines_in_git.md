@@ -5,6 +5,7 @@ draft = false
 author = 'Christopher Tyler'
 tags = ['git','xargs','cat','wc','til']
 summary = 'If you were ever curious how many lines of code you have in a repo.'
+comments = true
 +++
 
 Saw this at [StackOverFlow](https://stackoverflow.com/questions/4822471/count-number-of-lines-in-a-git-repository),
