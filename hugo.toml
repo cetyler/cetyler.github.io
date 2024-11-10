@@ -15,6 +15,17 @@ defaultContentLanguage = "en"
   [menu.main.params]
     type = "search"
 
+[params]
+  #CODE für den Online Service, der bei Registrierung zum Tracking angegeben wurde (leer = deaktiviert, auch leer für self-hosted!)
+  GoatCounter_ID = "badc0unter45"
+  #
+  # nur bei self-hosted die folgenden Werte setzen (sonst leer lassen!)
+  # es ist möglich nur GountCounter_SRC zu setzten, wenn das count.js selbst gehostet wird.
+  #URL des Endpoints wo das Script /count aufruft (bsp: "https://count.example.com", /count wird immer angehängt!)
+  GoatCounter_URL = ""
+  #Source für das Script Tag von dem count.js geladen wird (ohne http/https, mit Dateiname, bsp: "count.example.com/count.js", default = GoatCount_URL, /count.js wird immer angehängt!)
+  GoatCounter_SRC = ""
+
 [params.footer]
   enable = true
   displayCopyright = true
@@ -62,3 +73,4 @@ defaultContentLanguage = "en"
   languageName = "English"
   weight = 1
   title = "Christopher Tyler"
+
