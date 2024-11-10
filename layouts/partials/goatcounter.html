@@ -1,0 +1,7 @@
+{{- $GoatSRC := .Site.Params.GoatCounter_SRC -}}
+{{- with .Site.Params.GoatCounter_ID }}
+    <script data-goatcounter="https://{{.}}.goatcounter.com/count" async src="//{{ $GoatSRC | default "gc.zgo.at/count.js" }}"></script>
+{{- end }}
+{{- with .Site.Params.GoatCounter_URL }}
+    <script data-goatcounter="{{.}}/count" async src="//{{ $GoatSRC | default (urls.Parse .).Host }}/count.js"></script>
+{{- end }}
