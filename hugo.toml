@@ -16,7 +16,7 @@ defaultContentLanguage = "en"
     type = "search"
 
 [params]
-  goatcounter = "badc0unter45"
+  goatcounter = "badc0unt45"
 
 [params.footer]
   enable = true
