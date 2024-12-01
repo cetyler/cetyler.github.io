@@ -36,6 +36,11 @@
   {{ partial "google-analytics.html" . }}
 {{- end }}
 
+{{- if .Site.Params.goatcounter }}
+  {{ partial "goatcounter.html" . -}}
+{{- end}}
+
+
   <script>
     /* Initialize light/dark mode */
     const defaultTheme = '{{ site.Params.theme.default | default `system`}}';

@@ -4,9 +4,7 @@
   <body dir="{{ .Site.Language.LanguageDirection | default `ltr` }}">
     {{- partial "navbar.html" . -}}
     {{- block "main" . }}{{ end -}}
-    {{- if .Site.Params.goatcounter }}
-        {{ partial "goatcounter.html" . -}}
-    {{- end}}
+
     {{- if or (eq .Site.Params.footer.enable nil) (.Site.Params.footer.enable) }}
       {{ partial "footer.html" . }}
     {{ end }}
