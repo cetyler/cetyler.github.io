@@ -34,6 +34,7 @@ Six Sigma trained and well-versed in UL, ISO 17025 and ISO 9001:2001.
 #### Dynamic Manufacturing
 
 Nov 2018 - Present
+
 Hillside, IL
 
 Dynamic Manufacturing is a premier supplier of world class OEM new and
@@ -57,6 +58,7 @@ Internal auditor to ensure compliance to IATF16949:2016.
 #### Inventus Power
 
 Mar 2014 – Nov 2018
+
 Woodridge, IL
 
 Inventus Power engineers and delivers advanced technology for battery packs, 
@@ -88,6 +90,7 @@ Internal auditor to ensure compliance to ISO 9001 and ISO 14001.
 #### IMI Cornelius
 
 Apr 2006 – Sep 2013
+
 Glendale Heights, IL
 
 The world's leading supplier of beverage dispense and cooling equipment with 
@@ -148,7 +151,7 @@ determine which one would be the most cost effective and quickest to fix.
 
 ### Professional Development
 
-- IATF Training: 2019 Internal auditor training to ensure compliance to IATF16949:2016
+- **IATF Training:** 2019 Internal auditor training to ensure compliance to IATF16949:2016
 - **TI Deep Dive:** 2015 focused on battery management and new technologies seminars
 - **Six Sigma Training:** 8-D, DOE, Measurement System Analysis, SPC
 - **ISO Training:** ISO 9001:2015, ISO 14001:2015, ISO Management Systems Internal
