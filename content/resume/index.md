@@ -6,22 +6,23 @@ draft = false
 
 ## Summary
 
-Proven team leader and experienced Mechanical Engineer with strengths in process
+Proven team leader and experienced **Mechanical Engineer** with strengths in process
 creation and automation. 
 Six Sigma trained and well-versed in UL, ISO 17025 and ISO 9001:2001.
  
 ### Core Competences
 
 - Identifies and streamlines procedures and processes
+- Using a mixture of Python and PostgreSQL to create highly functional dashboards
+  and reports
 - Analyzes firmware source code to create robust test plans
 - Improving team performs through superior training and mentoring
 
 ### Technical Skills
   
-- Operating Systems: Microsoft Windows, Linux, UNIX
-- Software: Microsoft Office, Project Link
-- Computer Languages: Python
-- Engineering Software: BqStudio, Roadrunner, BenchVue, PLC Directsoft
+- Computer Languages: Python, SQL
+- Engineering Software: BqStudio, Roadrunner, BenchVue, PLC Directsoft, MS SQL
+  Server, PostgreSQL
 - Equipment: Picoscope, MACCOR, GW Instek Programmable Load, Chamber with Watlow
   Controller
 - Machinery: Basic use of standard powered shop tools
@@ -78,6 +79,7 @@ Internal auditor to ensure compliance to ISO 9001 and ISO 14001.
 - Updated NI DAQ by expanding number of channels from 12 to 64 and adjust scan
   rate
 - Used Python to reduce data manipulation of MACCOR and DAQ data by 70%
+- Used Python to add data to SQLite database
 - Performed MIL-STD 461 and MIL-STD 810G
 - Internal Auditor to ISO 9001 & ISO 14001
 
@@ -143,3 +145,17 @@ determine which one would be the most cost effective and quickest to fix.
   exhibited over-steer
 - Shower Temperature Regulator: Analyzed fluid flow and water mixing properties
   with Mathcad and designed user interface
+
+### Professional Development
+
+- IATF Training: 2019 Internal auditor training to ensure compliance to IATF16949:2016
+- **TI Deep Dive:** 2015 focused on battery management and new technologies seminars
+- **Six Sigma Training:** 8-D, DOE, Measurement System Analysis, SPC
+- **ISO Training:** ISO 9001:2015, ISO 14001:2015, ISO Management Systems Internal
+  Auditor, Understanding and Implementing ISO/IEC 17025
+- **UL Training:** Basics of Global Hazardous Locations and Intrinsic Safety Design
+  Fundamentals 
+- **ASME Training:** Material Fatigue Course
+- Python Training: Data Analysis with Pandas and Python, Building Python Web Apps
+  with MongoDB 
+- **IATA Training:** IATA DGR 58th Edition Class 9 Shipping Hazmat by Air
