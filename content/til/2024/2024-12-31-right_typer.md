@@ -4,7 +4,7 @@ date = 2024-12-31T21:37:26-05:00
 draft = false
 author = 'Christopher Tyler'
 tags = ['python','types','til']
-summary = 'If you were ever curious how many lines of code you have in a repo.'
+summary = 'Get a helper with typing.'
 comments = true
 +++
 
