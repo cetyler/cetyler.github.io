@@ -47,11 +47,12 @@ Internal auditor to ensure compliance to IATF16949:2016.
 
 - Design, implement daily/weekly/monthly Production line status reports by
   email to provide summaries to Plant Managers, Quality and Engineering using
-  Python and PostgreSQL.
+  Python and PostgreSQL
 - Design, implement interactive Dashboards for team members to get Production
   line status, Root Cause, etc.
 - Perform ad-hoc data analysis for Quality, Production and Engineering using
-  Python, PostgreSQL and Excel.
+  Python, PostgreSQL and Excel
+- Internal Auditor
 
 ### R&D Test Engineer
 
@@ -159,6 +160,6 @@ determine which one would be the most cost effective and quickest to fix.
 - **UL Training:** Basics of Global Hazardous Locations and Intrinsic Safety Design
   Fundamentals 
 - **ASME Training:** Material Fatigue Course
-- Python Training: Data Analysis with Pandas and Python, Building Python Web Apps
-  with MongoDB 
+- **Python Training:** Data Analysis with Pandas and Python, Building Python Web Apps
+  with MongoDB, Object-Orient Python, Using and Mastering Cookiecutter
 - **IATA Training:** IATA DGR 58th Edition Class 9 Shipping Hazmat by Air
