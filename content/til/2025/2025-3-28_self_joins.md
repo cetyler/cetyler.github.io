@@ -1,7 +1,7 @@
 +++
-title = '2025 3 28_self_joins'
+title = 'Self Joins'
 date = 2025-03-28T20:32:30-05:00
-draft = true
+draft = false
 tags = ['self joins','sql']
 summary = 'How to do a self join.'
 comments = true

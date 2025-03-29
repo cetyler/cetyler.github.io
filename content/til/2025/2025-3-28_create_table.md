@@ -1,7 +1,7 @@
 +++
 title = 'Create Table with Existing Table with No Data'
 date = 2025-03-28T21:12:09-05:00
-draft = true
+draft = false
 tags = ['Haki Benita','postgresql','sql']
 summary = 'Another Haki tip.'
 comments = true

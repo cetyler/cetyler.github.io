@@ -1,7 +1,7 @@
 +++
 title = 'Recursive CTEs'
 date = 2025-03-28T20:28:05-05:00
-draft = true
+draft = false
 tags = ['cte','sql','recursive']
 summary = 'How to do a recursive CTE.'
 comments = true
