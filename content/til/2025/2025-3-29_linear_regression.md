@@ -7,7 +7,7 @@ summary = 'How to do linear regression with SQL.'
 comments = true
 +++
 
-Another tip from [Haki](https://hakibenita.com/sql-for-data-analysis)
+Another tip from [Haki](https://hakibenita.com/sql-for-data-analysis).
 
 Another common tool for analyzing data is linear regression.
 For example, performing linear regression using Pandas and Scipy: 
