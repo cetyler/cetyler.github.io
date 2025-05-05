@@ -22,15 +22,13 @@ technologies.
 ## Requirements
 
 While I could directly use an API such as from
-[Open-Mateo](https://open-meteo.com), since this will be a public app, I don't
+[Open-Mateo](https://open-meteo.com) since this will be a public app, I don't
 want to inadvertently hammer their free API.
 Instead, the requirement will be to make use of a file based database, probably
 [DuckDB](https://duckdb.org) so that I can put that in my GitHub repository.
 Initially this data doesn't not need to be up to date.
-
 Another requirement would be to have a least one page that will utilize charts
 and widgets. I have not used either of these elements before.
-
 Final requirement is to have test coverage for critical areas of the program.
 
 Optional requirement would be to see if there is a way to provide logging and
@@ -50,7 +48,7 @@ I have some F1 data that is current to 2018.
 
 I can also use the opportunity to get some data from Open-Mateo.
 Open-Mateo provides more information than OpenWeatherMap.
-I do a page comparing the differences.
+I could do a page comparing the differences.
 Finally I could also use [OpenLibrary](https://openlibrary.org/developers/api).
 Probably would also download some of the data.
 
