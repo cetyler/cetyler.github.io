@@ -2,7 +2,7 @@
 title = 'A PostgreSQL planner gotcha with CTEs DELETE and LIMIT'
 date = 2025-05-03T16:30:33-05:00
 draft = false
-tags = ['postgresql','cte','planner']
+tags = ['postgresql','cte','planner','Shayon Mukherjee']
 summary = 'Good article from Shayon about CTEs and planner interactions.'
 comments = true
 +++

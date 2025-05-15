@@ -1,5 +1,5 @@
 +++
-title = 'pre-commit: install with uv'
+title = 'Install pre-commit with uv'
 date = 2025-05-14T07:50:59-05:00
 draft = false
 tags = ['python','pre-commit','uv','Adam Johnson']
