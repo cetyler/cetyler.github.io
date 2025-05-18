@@ -52,7 +52,7 @@ def main(
     subprocess.call(f"hugo new content {article_folder}",
                     shell=True,
                     )
-    subprocess.call(f"/usr/bin/micro {article_folder}", shell=True)
+    subprocess.call(f"/snap/bin/nvim {article_folder}", shell=True)
 
 if __name__ == "__main__":
     main()    
