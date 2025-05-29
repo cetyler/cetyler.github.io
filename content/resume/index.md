@@ -29,7 +29,7 @@ Six Sigma trained and well-versed in UL, ISO 17025 and ISO 9001:2001.
 
 ## Experience
 
-### Test Stand Engineer II
+### Test Engineer II
 
 #### Dynamic Manufacturing
 
