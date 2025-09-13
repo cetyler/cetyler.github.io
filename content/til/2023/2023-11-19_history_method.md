@@ -1,5 +1,5 @@
 +++
-title = 'See the History of a MEthod with git log -L'
+title = 'See the History of a Method with git log -L'
 date = 2023-11-19T23:56:35-05:00
 draft = false
 tags = ['Caleb Hearth','Simon Willison','git']
