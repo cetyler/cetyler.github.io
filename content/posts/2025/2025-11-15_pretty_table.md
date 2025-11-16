@@ -3,7 +3,7 @@ title = 'How to Select Python Libraries'
 date = 2025-11-15T23:21:16-06:00
 draft = false
 tags = ['python','pretty_html_table','Renaud Viot']
-summary = 'Found a library that suits my needs but may also be abandon.'
+summary = 'Found a library that suits my needs but may also be abandoned.'
 comments = true
 +++
 
@@ -27,10 +27,8 @@ However in New Outlook, it doesn't crash but if you want to forward those
 emails with basic formatted tables, Outlook would automatically change the
 format and remove the lines around the rows and columns making it harder to
 read.
-
-    Not sure why [Microsoft](https://support.microsoft.com/en-us/office/feature-comparison-between-new-outlook-and-classic-outlook-de453583-1e76-48bf-975a-2e9cd2ee16dd)
-    have so many problems naming their software)
-
+Not sure why [Microsoft](https://support.microsoft.com/en-us/office/feature-comparison-between-new-outlook-and-classic-outlook-de453583-1e76-48bf-975a-2e9cd2ee16dd)
+have so many problems naming their software.
 Based on this information, I manually creating tables that were
 formatted in Excel and noticed that the format would not change if I forward
 the email in New Outlook.
