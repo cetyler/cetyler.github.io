@@ -10,6 +10,11 @@ import click
 from pathlib import Path
 import subprocess
 from datetime import date
+import warnings
+
+warnings.simplefilter("default", DeprecationWarning)
+
+EDITOR = "/usr/bin/gnome-text-editor" # /snap/bin/nvim
 
 POST_TYPES = [
     "til",
@@ -52,7 +57,7 @@ def main(
     subprocess.call(f"hugo new content {article_folder}",
                     shell=True,
                     )
-    subprocess.call(f"/snap/bin/nvim {article_folder}", shell=True)
+    subprocess.call(f"{EDITOR} {article_folder}", shell=True)
 
 if __name__ == "__main__":
     main()    
