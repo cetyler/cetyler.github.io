@@ -2,7 +2,6 @@ baseURL = 'https://cetyler.github.io/'
 languageCode = 'en-us'
 title = 'Christopher Tyler'
 
-#theme = 'hextra'
 theme = 'hugo-bearblog'
 
 sectionPagesMenu = 'main'
