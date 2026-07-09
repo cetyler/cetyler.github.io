@@ -10,10 +10,10 @@ enableRobotsTXT = true
 enableGitInfo = true
 defaultContentLanguage = "en"
 
-[[menu.main]]
-  name = 'Search'
-  [menu.main.params]
-    type = "search"
+#[[menu.main]]
+#  name = 'Search'
+#  [menu.main.params]
+#    type = "search"
 
 [params]
   goatcounter = "badc0unt45"
