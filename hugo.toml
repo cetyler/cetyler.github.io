@@ -1,6 +1,8 @@
 baseURL = 'https://cetyler.github.io/'
 languageCode = 'en-us'
 title = 'Christopher Tyler'
+author = "Christopher Tyler"
+copyright = "Copyright © 2026, Christopher Tyler."
 
 theme = 'hugo-bearblog'
 
@@ -10,13 +12,10 @@ enableRobotsTXT = true
 enableGitInfo = true
 defaultContentLanguage = "en"
 
-#[[menu.main]]
-#  name = 'Search'
-#  [menu.main.params]
-#    type = "search"
-
 [params]
   goatcounter = "badc0unt45"
+  # By enabling this feature each blog post will have at the end a navigator
+  enablePostNavigator = true
 
 [params.footer]
   enable = true
@@ -26,26 +25,8 @@ defaultContentLanguage = "en"
 
 [params.blog.list]
   displayTags = true
-  # date | lastmod | publishDate | title | weight
   sortBy = 'date'
   sortOrder = 'desc' # or "asc"
-
-[params.comments]
-  enable = false
-  type = "giscus"
-
-  [params.comments.giscus]
-    repo = "cetyler/cetyler.github.io"
-    repoID = "R_kgDOMn2Qrg"
-    category = "Articles"
-    categoryID = "DIC_kwDOMn2Qrs4CiBFr"
-    mapping = "title"
-    reactionsEnabled = "1"
-    emitMetadata = "0"
-    inputPosition = "top"
-    theme = "preferred_color_scheme"
-    lang = "en"
-    loading = "lazy"
 
 [related]
   includeNewer = true
@@ -66,7 +47,13 @@ defaultContentLanguage = "en"
   weight = 1
   title = "Christopher Tyler"
 
-
 [security]
   [security.exec]
   allow = ['^micro$','^vim','^nano','^git']
+
+[markup]
+  [markup.highlight]
+#    style = 'friendly'
+    lineNos = true
+#    lineNumbersInTable = false
+    codeFences = true
